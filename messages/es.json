@@ -42,7 +42,12 @@
         "title": "Contact",
         "text": "Reach out through a contact layout with editable sample fields."
       }
-    }
+    },
+    "taglineShort": "Soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "ctaShop": "Visit the shop",
+    "ctaMailClub": "Mail Club",
+    "exploreTitle": "Wander a little",
+    "exploreIntro": "Pick a door — shop, letters, or a quiet hello."
   },
   "shop": {
     "eyebrow": "pequeños tesoros",

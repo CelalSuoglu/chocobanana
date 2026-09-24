@@ -177,6 +177,28 @@ body {
   }
 }
 
+/* Unlocked home hero — separate from coming-soon countdown stage */
+.home-hero {
+  background-image:
+    radial-gradient(ellipse at 20% 15%, rgba(232, 180, 188, 0.28), transparent 48%),
+    radial-gradient(ellipse at 82% 22%, rgba(212, 168, 75, 0.14), transparent 44%),
+    linear-gradient(180deg, rgba(250, 246, 239, 0.35) 0%, transparent 42%, rgba(235, 224, 208, 0.55) 100%);
+}
+
+.home-hero-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 8% 12% auto;
+  height: 46%;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(243, 212, 216, 0.55),
+    transparent 70%
+  );
+  filter: blur(8px);
+}
+
 .coming-soon-stage {
   min-height: 100dvh;
   background-image:

@@ -42,7 +42,12 @@
         "title": "Contact",
         "text": "Une mise en page contact avec des champs d'exemple modifiables."
       }
-    }
+    },
+    "taglineShort": "Papeterie douce, moments manuscrits, et colis comme un câlin dans le courrier.",
+    "ctaShop": "Voir la boutique",
+    "ctaMailClub": "Mail Club",
+    "exploreTitle": "Flâner un peu",
+    "exploreIntro": "Choisis une porte — boutique, lettres, ou un doux bonjour."
   },
   "shop": {
     "eyebrow": "petits trésors",

@@ -42,7 +42,12 @@
         "title": "İletişim",
         "text": "Düzenlenebilir örnek alanlarla iletişim düzeni."
       }
-    }
+    },
+    "taglineShort": "Yumuşak kırtasiye, el yazısı anlar ve postada bir sarılmaya benzeyen paketler.",
+    "ctaShop": "Dükkana git",
+    "ctaMailClub": "Mail Club",
+    "exploreTitle": "Biraz gez",
+    "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba."
   },
   "shop": {
     "eyebrow": "küçük hazineler",
