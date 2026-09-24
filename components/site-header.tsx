@@ -6,6 +6,7 @@ import { useEffect, useId, useState } from "react";
 import { AccountNav } from "@/components/account-nav";
 import { CartIconLink } from "@/components/cart-icon-link";
 import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
+import { logoutCustomerAction } from "@/lib/auth/actions";
 import type { CurrencyCode } from "@/lib/currency/config";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
@@ -72,6 +73,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
               signInLabel={dict.auth.signIn}
               signUpLabel={dict.auth.signUp}
               signOutLabel={dict.account.signOut}
+              accountIconLabel={dict.a11y.accountMenu}
             />
             <button
               type="button"
@@ -128,6 +130,45 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
                 </Link>
               </li>
             ))}
+            <li className="mt-2 border-t border-pink/20 pt-2">
+              {signedIn ? (
+                <>
+                  <Link
+                    href={hrefFor(locale, "/account")}
+                    className="block rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] text-chocolate-soft hover:bg-paper/80 hover:text-pink-deep"
+                    onClick={() => setOpen(false)}
+                  >
+                    {dict.nav.account}
+                  </Link>
+                  <form action={logoutCustomerAction} className="px-2 pb-1">
+                    <input type="hidden" name="locale" value={locale} />
+                    <button
+                      type="submit"
+                      className="mt-1 w-full rounded-2xl border border-pink/40 bg-paper/90 px-4 py-3 text-start font-serif text-base tracking-[0.08em] text-chocolate hover:border-pink-deep hover:text-pink-deep"
+                    >
+                      {dict.account.signOut}
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href={hrefFor(locale, "/login")}
+                    className="block rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] text-chocolate-soft hover:bg-paper/80 hover:text-pink-deep"
+                    onClick={() => setOpen(false)}
+                  >
+                    {dict.auth.signIn}
+                  </Link>
+                  <Link
+                    href={hrefFor(locale, "/register")}
+                    className="mt-1 block rounded-2xl bg-pink-soft/50 px-4 py-3 font-serif text-base tracking-[0.08em] text-pink-deep"
+                    onClick={() => setOpen(false)}
+                  >
+                    {dict.auth.signUp}
+                  </Link>
+                </>
+              )}
+            </li>
           </ul>
         </nav>
       </div>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ComingSoonPage } from "@/components/coming-soon-page";
 import { Star } from "@/components/star";
+import { getOptionalSession } from "@/lib/auth/session";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
@@ -26,6 +27,10 @@ export default async function HomePage({
       />
     );
   }
+
+  const session = await getOptionalSession();
+  const signedIn =
+    Boolean(session?.user?.id) && session?.user?.role !== "OWNER";
 
   const destinations = [
     { path: "/shop", ...dict.home.cards.shop },
@@ -129,6 +134,42 @@ export default async function HomePage({
           ))}
         </ul>
       </section>
+
+      {!signedIn ? (
+        <section className="section-pad border-t border-pink/25 py-14 md:py-16">
+          <div className="mx-auto max-w-md text-center">
+            <div className="relative mx-auto inline-block">
+              <Star
+                className="absolute -start-5 -top-1 text-sm text-gold"
+                style={{ animationDelay: "0.4s" }}
+              />
+              <Star
+                className="absolute -end-4 top-2 text-xs text-pink-deep"
+                style={{ animationDelay: "1.2s" }}
+              />
+              <Image
+                src="/logo.jpg"
+                alt=""
+                width={72}
+                height={72}
+                className="mx-auto h-16 w-16 rounded-full object-cover ring-1 ring-pink/40"
+              />
+            </div>
+            <h2 className="mt-5 font-serif text-2xl text-chocolate md:text-3xl">
+              {dict.home.joinTitle}
+            </h2>
+            <p className="mt-2 font-serif text-sm leading-relaxed text-chocolate-soft md:text-base">
+              {dict.home.joinIntro}
+            </p>
+            <Link
+              href={hrefFor(raw, "/register")}
+              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full border border-pink-deep/70 bg-pink-soft/50 px-6 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-pink-deep transition-colors hover:border-pink-deep hover:bg-pink-soft"
+            >
+              {dict.home.joinCta}
+            </Link>
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }

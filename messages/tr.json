@@ -47,7 +47,10 @@
     "ctaShop": "Dükkana git",
     "ctaMailClub": "Mail Club",
     "exploreTitle": "Biraz gez",
-    "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba."
+    "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba.",
+    "joinTitle": "Chocobanana’ya katıl",
+    "joinIntro": "Bilgilerini kaydetmek ve paketlerini takip etmek için üye hesabı oluştur.",
+    "joinCta": "Hesap oluştur"
   },
   "shop": {
     "eyebrow": "küçük hazineler",
@@ -178,7 +181,8 @@
   "a11y": {
     "logoAlt": "Altın yıldız takan yavru kedili Chocobanana mail club logosu",
     "selectLanguage": "Dil seç",
-    "selectCurrency": "Para birimi seç"
+    "selectCurrency": "Para birimi seç",
+    "accountMenu": "Hesap"
   },
   "cart": {
     "eyebrow": "sepetin",

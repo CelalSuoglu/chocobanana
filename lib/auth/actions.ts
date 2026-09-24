@@ -148,6 +148,9 @@ export async function registerCustomer(
     };
   }
 
+  revalidatePath("/owner");
+  revalidatePath("/owner/members");
+
   return {
     ok: true,
     message: "Account created. Check your email to verify before signing in.",

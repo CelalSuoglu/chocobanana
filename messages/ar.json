@@ -47,7 +47,10 @@
     "ctaShop": "Visit the shop",
     "ctaMailClub": "Mail Club",
     "exploreTitle": "Wander a little",
-    "exploreIntro": "Pick a door — shop, letters, or a quiet hello."
+    "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
+    "joinTitle": "انضم إلى Chocobanana",
+    "joinIntro": "أنشئ حساب عضوية لحفظ بياناتك ومتابعة طرودك.",
+    "joinCta": "إنشاء حساب"
   },
   "shop": {
     "eyebrow": "كنوز صغيرة",
@@ -178,7 +181,8 @@
   "a11y": {
     "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
     "selectLanguage": "Select language",
-    "selectCurrency": "Select currency"
+    "selectCurrency": "Select currency",
+    "accountMenu": "الحساب"
   },
   "cart": {
     "eyebrow": "سلتك",
