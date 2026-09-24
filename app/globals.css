@@ -214,8 +214,50 @@ body {
 
 .countdown-unit {
   border-radius: 1.35rem;
-  background: color-mix(in srgb, var(--paper) 88%, white);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pink) 55%, transparent);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--paper) 70%, white),
+      color-mix(in srgb, var(--pink-soft) 35%, var(--paper))
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, var(--pink)),
+    0 8px 24px rgba(212, 168, 75, 0.12);
+  animation: countdown-glow 3.6s ease-in-out infinite;
+}
+
+.countdown-unit-shine {
+  pointer-events: none;
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.55) 48%,
+    rgba(232, 201, 120, 0.35) 52%,
+    transparent 65%
+  );
+  animation: countdown-shimmer 3.2s ease-in-out infinite;
+}
+
+.countdown-unit-star {
+  animation: sparkle-drift 3.4s ease-in-out infinite;
+  line-height: 1;
+}
+
+.countdown-glitter-dust {
+  pointer-events: none;
+  position: absolute;
+  inset: -18% -8%;
+  background-image:
+    radial-gradient(circle at 12% 30%, rgba(212, 168, 75, 0.55) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 28% 72%, rgba(232, 180, 188, 0.7) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 18%, rgba(255, 255, 255, 0.8) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 66% 58%, rgba(212, 168, 75, 0.65) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 24%, rgba(232, 180, 188, 0.6) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 90% 78%, rgba(255, 255, 255, 0.75) 0 1px, transparent 2px);
+  animation: glitter-twinkle 2.8s ease-in-out infinite;
+  opacity: 0.85;
 }
 
 @keyframes sparkle-drift {
@@ -234,6 +276,46 @@ body {
   }
 }
 
+@keyframes countdown-shimmer {
+  0% {
+    transform: translateX(-30%) rotate(8deg);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateX(30%) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+@keyframes countdown-glow {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--gold) 40%, var(--pink)),
+      0 8px 22px rgba(212, 168, 75, 0.1);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--gold) 70%, var(--pink)),
+      0 10px 28px rgba(232, 180, 188, 0.28);
+  }
+}
+
+@keyframes glitter-twinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -242,11 +324,20 @@ body {
   .animate-twinkle,
   .animate-float,
   .animate-rise,
-  .coming-soon-sparkle {
+  .coming-soon-sparkle,
+  .countdown-unit,
+  .countdown-unit-shine,
+  .countdown-unit-star,
+  .countdown-glitter-dust {
     animation: none;
   }
 
-  .coming-soon-sparkle {
+  .coming-soon-sparkle,
+  .countdown-glitter-dust {
     opacity: 0.45;
+  }
+
+  .countdown-unit-shine {
+    opacity: 0.15;
   }
 }

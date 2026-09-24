@@ -97,24 +97,43 @@ export function CountdownTimer({
 
   return (
     <div
-      className="mx-auto grid w-full max-w-xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4"
+      className="countdown-glitter relative mx-auto w-full max-w-xl px-1"
       role="timer"
       aria-live="polite"
       aria-atomic="true"
     >
-      {units.map((unit) => (
-        <div
-          key={unit.key}
-          className="countdown-unit flex flex-col items-center justify-center px-3 py-4 sm:py-5"
-        >
-          <span className="font-serif text-3xl tabular-nums tracking-wide text-chocolate sm:text-4xl md:text-5xl">
-            {unit.value}
-          </span>
-          <span className="mt-1.5 font-serif text-[0.65rem] tracking-[0.18em] uppercase text-chocolate-soft/85 sm:text-xs">
-            {unit.label}
-          </span>
-        </div>
-      ))}
+      <span aria-hidden="true" className="countdown-glitter-dust" />
+      <div className="relative z-10 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+        {units.map((unit, index) => (
+          <div
+            key={unit.key}
+            className="countdown-unit relative flex flex-col items-center justify-center overflow-hidden px-3 py-4 sm:py-5"
+            style={{ animationDelay: `${index * 0.12}s` }}
+          >
+            <span aria-hidden="true" className="countdown-unit-shine" />
+            <span
+              aria-hidden="true"
+              className="countdown-unit-star absolute start-2 top-2 text-[0.55rem] text-gold"
+              style={{ animationDelay: `${0.4 + index * 0.2}s` }}
+            >
+              ✦
+            </span>
+            <span
+              aria-hidden="true"
+              className="countdown-unit-star absolute end-2.5 bottom-2 text-[0.45rem] text-pink-deep"
+              style={{ animationDelay: `${1.1 + index * 0.25}s` }}
+            >
+              ✦
+            </span>
+            <span className="relative font-serif text-3xl tabular-nums tracking-wide text-chocolate sm:text-4xl md:text-5xl">
+              {unit.value}
+            </span>
+            <span className="relative mt-1.5 font-serif text-[0.65rem] tracking-[0.18em] uppercase text-chocolate-soft/85 sm:text-xs">
+              {unit.label}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

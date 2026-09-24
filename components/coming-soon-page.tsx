@@ -17,6 +17,8 @@ const SPARKLES = [
   { top: "62%", left: "82%", delay: "1.8s", size: "text-sm" },
   { top: "78%", left: "40%", delay: "0.5s", size: "text-xs" },
   { top: "22%", left: "48%", delay: "2.1s", size: "text-sm" },
+  { top: "48%", left: "8%", delay: "2.4s", size: "text-xs" },
+  { top: "52%", left: "92%", delay: "1.6s", size: "text-sm" },
 ] as const;
 
 export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
@@ -63,17 +65,11 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
           </div>
         </div>
 
-        <p className="animate-rise delay-1 mt-7 font-script text-2xl text-pink-deep md:text-3xl">
+        <h1 className="animate-rise delay-1 mt-8 font-script text-3xl text-pink-deep sm:text-4xl md:text-[2.75rem]">
           {c.eyebrow}
-        </p>
-        <h1 className="animate-rise delay-2 mt-2 font-serif text-4xl tracking-[0.04em] text-chocolate sm:text-5xl md:text-6xl">
-          {c.brand}
         </h1>
-        <p className="animate-rise delay-3 mx-auto mt-4 max-w-md font-serif text-base leading-relaxed text-chocolate-soft md:text-lg">
-          {c.tagline}
-        </p>
 
-        <div className="animate-rise delay-3 mt-10 w-full">
+        <div className="animate-rise delay-2 mt-10 w-full">
           <CountdownTimer
             endsAtIso={endsAtIso}
             labels={{
