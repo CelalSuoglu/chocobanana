@@ -21,7 +21,11 @@ export default async function HomePage({
 
   if (await isComingSoonGateActive()) {
     return (
-      <ComingSoonPage dict={dict} endsAtIso={getComingSoonEndsAtIso()} />
+      <ComingSoonPage
+        dict={dict}
+        locale={raw}
+        endsAtIso={getComingSoonEndsAtIso()}
+      />
     );
   }
 

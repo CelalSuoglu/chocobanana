@@ -56,6 +56,20 @@ function stripSecretQueryParams(request: NextRequest): NextResponse | null {
   return NextResponse.redirect(url);
 }
 
+function isMembershipAuthPath(pathname: string): boolean {
+  return (
+    pathname.startsWith("/api/auth") ||
+    pathname.includes("/login") ||
+    pathname.includes("/register") ||
+    pathname.includes("/sign-in") ||
+    pathname.includes("/sign-up") ||
+    pathname.includes("/forgot-password") ||
+    pathname.includes("/reset-password") ||
+    pathname.includes("/verify-email") ||
+    pathname.includes("/account")
+  );
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -81,18 +95,8 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Auth endpoints needed after owner-panel unlock while the public site stays gated.
-  if (
-    gateActive &&
-    ownerPanelUnlocked &&
-    (pathname.startsWith("/api/auth") ||
-      pathname.includes("/sign-") ||
-      pathname.includes("/login") ||
-      pathname.includes("/register") ||
-      pathname.includes("/forgot-password") ||
-      pathname.includes("/reset-password") ||
-      pathname.includes("/verify-email"))
-  ) {
+  // Membership auth stays reachable while the shop is gated (countdown).
+  if (gateActive && isMembershipAuthPath(pathname)) {
     return NextResponse.next();
   }
 
@@ -127,7 +131,7 @@ export function proxy(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Public coming-soon: only the locale home is reachable.
+    // Public coming-soon: home + membership auth only (auth handled above).
     if (gateActive && pathname !== `/${pathnameLocale}`) {
       return redirectToLocaleHome(request, pathnameLocale);
     }

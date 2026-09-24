@@ -22,6 +22,7 @@ type SiteShellProps = {
 };
 
 export async function SiteShell({ locale, dict, children }: SiteShellProps) {
+  // Countdown page keeps its own full-bleed layout (no shop chrome).
   if (await isComingSoonGateActive()) {
     return <>{children}</>;
   }

@@ -1,10 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { Star } from "@/components/star";
+import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import { hrefFor } from "@/lib/nav";
 
 type ComingSoonPageProps = {
   dict: Dictionary;
+  locale: Locale;
   endsAtIso: string | null;
 };
 
@@ -31,7 +35,11 @@ const SPARKLES = [
   { top: "16%", left: "34%", delay: "2.6s", size: "text-xs", tone: "gold" },
 ] as const;
 
-export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
+export function ComingSoonPage({
+  dict,
+  locale,
+  endsAtIso,
+}: ComingSoonPageProps) {
   const c = dict.comingSoon;
 
   return (
@@ -115,12 +123,34 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
         </div>
       </div>
 
-      <footer className="relative z-10 flex items-center justify-center gap-2 pb-8 pt-2 text-center">
-        <Star className="text-xs" style={{ animationDelay: "0.5s" }} />
-        <p className="font-script text-sm text-chocolate-soft/75 md:text-base">
-          by Didem Keskin
-        </p>
-        <Star className="text-xs" style={{ animationDelay: "1.1s" }} />
+      <footer className="relative z-10 flex flex-col items-center gap-4 pb-8 pt-2 text-center">
+        <div className="flex items-center justify-center gap-2">
+          <Star className="text-xs" style={{ animationDelay: "0.5s" }} />
+          <p className="font-script text-sm text-chocolate-soft/75 md:text-base">
+            by Didem Keskin
+          </p>
+          <Star className="text-xs" style={{ animationDelay: "1.1s" }} />
+        </div>
+        <nav
+          aria-label={dict.nav.account}
+          className="flex flex-wrap items-center justify-center gap-3 font-serif text-sm tracking-[0.1em] text-chocolate-soft"
+        >
+          <Link
+            href={hrefFor(locale, "/login")}
+            className="transition-colors hover:text-pink-deep"
+          >
+            {dict.auth.signIn}
+          </Link>
+          <span aria-hidden="true" className="text-pink/50">
+            ·
+          </span>
+          <Link
+            href={hrefFor(locale, "/register")}
+            className="transition-colors hover:text-pink-deep"
+          >
+            {dict.auth.signUp}
+          </Link>
+        </nav>
       </footer>
     </main>
   );
