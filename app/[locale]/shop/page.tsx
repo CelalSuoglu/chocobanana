@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/add-to-cart-button";
@@ -17,6 +18,7 @@ import {
 } from "@/lib/currency/config";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
+import { hrefFor } from "@/lib/nav";
 
 export async function generateMetadata({
   params,
@@ -77,27 +79,32 @@ export default async function ShopPage({
               key={product.id}
               className="rounded-3xl bg-paper/90 px-5 py-6 ring-1 ring-pink/35 sm:px-6 sm:py-7"
             >
-              <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full ring-1 ring-pink/35">
-                <Image
-                  src={product.imageSrc}
-                  alt={copy.name}
-                  fill
-                  className="object-cover"
-                  sizes="112px"
-                />
-              </div>
-              <div className="flex items-start justify-between gap-3">
-                <h2 className="font-serif text-2xl font-medium text-chocolate">
-                  {copy.name}
-                </h2>
-                <Star className="shrink-0 text-sm" />
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-                {copy.note}
-              </p>
-              <p className="mt-4 font-serif text-lg text-chocolate">
-                {priced.primary}
-              </p>
+              <Link
+                href={hrefFor(raw, `/shop/${product.id}`)}
+                className="block transition-opacity hover:opacity-90"
+              >
+                <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full ring-1 ring-pink/35">
+                  <Image
+                    src={product.imageSrc}
+                    alt={copy.name}
+                    fill
+                    className="object-cover"
+                    sizes="112px"
+                  />
+                </div>
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="font-serif text-2xl font-medium text-chocolate">
+                    {copy.name}
+                  </h2>
+                  <Star className="shrink-0 text-sm" />
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
+                  {copy.note}
+                </p>
+                <p className="mt-4 font-serif text-lg text-chocolate">
+                  {priced.primary}
+                </p>
+              </Link>
               {priced.isEstimateOnly ? (
                 <p className="mt-1 text-xs text-chocolate-soft/90">
                   {dict.checkout.preferredCurrencyHint.replace(

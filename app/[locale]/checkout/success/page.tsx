@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ClearCartOnSuccess } from "@/components/clear-cart-on-success";
-import { getOrderStore } from "@/lib/orders/store";
+import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getStripe } from "@/lib/stripe/client";
@@ -54,8 +54,15 @@ export default async function CheckoutSuccessPage({
 
   const stripe = getStripe();
   const session = await stripe.checkout.sessions.retrieve(sessionId);
-  const store = getOrderStore();
-  const order = await store.getByCheckoutSessionId(sessionId);
+
+  let dbOrder: { customerEmail: string } | null = null;
+  if (isDatabaseConfigured()) {
+    const prisma = requirePrisma();
+    dbOrder = await prisma.order.findUnique({
+      where: { stripeCheckoutSessionId: sessionId },
+      select: { customerEmail: true },
+    });
+  }
 
   const integrationAmount = formatMoney(
     session.amount_total,
@@ -69,9 +76,7 @@ export default async function CheckoutSuccessPage({
     rawLocale,
   );
 
-  const paidOnStripe =
-    session.payment_status === "paid" ||
-    session.status === "complete";
+  const paidOnStripe = session.payment_status === "paid";
 
   return (
     <main className="section-pad mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center py-16 text-center">
@@ -115,16 +120,16 @@ export default async function CheckoutSuccessPage({
           <span className="font-serif text-chocolate">
             {dict.checkout.orderRecord}:
           </span>{" "}
-          {order
+          {dbOrder
             ? dict.checkout.orderRecordReady
             : dict.checkout.orderRecordPendingWebhook}
         </p>
-        {order?.customerEmail ? (
+        {dbOrder?.customerEmail ? (
           <p className="mt-2 text-sm text-chocolate-soft">
             <span className="font-serif text-chocolate">
               {dict.checkout.contactEmail}:
             </span>{" "}
-            {order.customerEmail}
+            {dbOrder.customerEmail}
           </p>
         ) : null}
         <p className="mt-3 text-xs leading-relaxed text-chocolate-soft/90">

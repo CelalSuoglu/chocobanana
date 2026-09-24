@@ -93,6 +93,8 @@ export async function createCheckoutSession(options: {
   locale: string;
   productId?: string;
   items?: CheckoutItemInput[];
+  userId?: string | null;
+  customerEmail?: string | null;
 }): Promise<CreateCheckoutResult> {
   if (!paymentsCheckoutEnabled()) {
     return {
@@ -134,14 +136,6 @@ export async function createCheckoutSession(options: {
     };
   }
 
-  if (kind === "one_time") {
-    const ineligible = lineProducts.find(
-      (entry) => !entry.product.cartEligible && resolved.length > 1,
-    );
-    // single legacy productId checkout still allowed for any purchasable one_time
-    void ineligible;
-  }
-
   const locale: Locale = isLocale(options.locale) ? options.locale : "en";
   const baseUrl = getAppBaseUrl();
   const stripe = getStripe();
@@ -154,6 +148,13 @@ export async function createCheckoutSession(options: {
     0,
   );
 
+  const cartJson = JSON.stringify(
+    lineProducts.map((entry) => ({
+      productId: entry.product.id,
+      quantity: entry.quantity,
+    })),
+  );
+
   const params: Stripe.Checkout.SessionCreateParams = {
     mode,
     line_items: lineProducts.map((entry) =>
@@ -161,12 +162,20 @@ export async function createCheckoutSession(options: {
     ),
     success_url: `${baseUrl}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${baseUrl}/${locale}/cart`,
-    billing_address_collection: "auto",
+    billing_address_collection: "required",
+    shipping_address_collection: {
+      allowed_countries: ["CA", "US", "GB", "AU", "FR", "DE", "TR"],
+    },
+    client_reference_id: options.userId ?? undefined,
+    customer_email: options.customerEmail ?? undefined,
     metadata: {
       product_kind: kind,
       locale,
       amount_cad_cents: String(totalCadCents),
       cart_product_ids: lineProducts.map((e) => e.product.id).join(","),
+      cart_json: cartJson,
+      user_id: options.userId ?? "",
+      customer_email: options.customerEmail ?? "",
     },
   };
 
@@ -176,6 +185,7 @@ export async function createCheckoutSession(options: {
       metadata: {
         catalog_product_id: only.id,
         locale,
+        user_id: options.userId ?? "",
       },
     };
   } else {
@@ -183,6 +193,7 @@ export async function createCheckoutSession(options: {
       metadata: {
         locale,
         cart_product_ids: lineProducts.map((e) => e.product.id).join(","),
+        user_id: options.userId ?? "",
       },
     };
   }

@@ -1,24 +1,15 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { getOrderStore } from "@/lib/orders/store";
+import {
+  createPaidOrderFromCheckoutSession,
+  hasProcessedStripeEvent,
+  markStripeEventProcessed,
+} from "@/lib/orders/repository";
+import { isDatabaseConfigured } from "@/lib/db";
 import { getStripe } from "@/lib/stripe/client";
 import { getPaymentsMode } from "@/lib/stripe/config";
 
 export const runtime = "nodejs";
-
-function asId(value: unknown): string | null {
-  if (!value) return null;
-  if (typeof value === "string") return value;
-  if (
-    typeof value === "object" &&
-    value !== null &&
-    "id" in value &&
-    typeof (value as { id: unknown }).id === "string"
-  ) {
-    return (value as { id: string }).id;
-  }
-  return null;
-}
 
 export async function POST(request: Request) {
   if (getPaymentsMode() === "disabled") {
@@ -46,9 +37,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid signature." }, { status: 400 });
   }
 
-  const store = getOrderStore();
-
-  if (await store.hasProcessedEvent(event.id)) {
+  if (await hasProcessedStripeEvent(event.id)) {
     return NextResponse.json({ received: true, duplicate: true });
   }
 
@@ -56,41 +45,37 @@ export async function POST(request: Request) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object as Stripe.Checkout.Session;
 
-      // Prefer API retrieve for presentment_details freshness
-      const full = await stripe.checkout.sessions.retrieve(session.id);
+      // Only persist after Stripe confirms payment — never on redirect alone.
+      if (session.payment_status !== "paid") {
+        await markStripeEventProcessed(event.id);
+        return NextResponse.json({ received: true, ignored: "not_paid" });
+      }
 
-      await store.upsertFromCheckoutSession({
+      if (!isDatabaseConfigured()) {
+        console.warn("webhook.order_skipped_no_database", session.id);
+        await markStripeEventProcessed(event.id);
+        return NextResponse.json({
+          received: true,
+          skipped: "database_not_configured",
+        });
+      }
+
+      const full = await stripe.checkout.sessions.retrieve(session.id, {
+        expand: ["line_items", "total_details"],
+      });
+
+      if (full.payment_status !== "paid") {
+        await markStripeEventProcessed(event.id);
+        return NextResponse.json({ received: true, ignored: "not_paid" });
+      }
+
+      await createPaidOrderFromCheckoutSession({
         eventId: event.id,
-        session: {
-          id: full.id,
-          payment_intent: asId(full.payment_intent),
-          subscription: asId(full.subscription),
-          customer: asId(full.customer),
-          customer_email: full.customer_email,
-          customer_details: full.customer_details
-            ? {
-                email: full.customer_details.email,
-                name: full.customer_details.name,
-              }
-            : null,
-          amount_total: full.amount_total,
-          currency: full.currency,
-          metadata: (full.metadata ?? null) as Record<string, string> | null,
-          presentment_details: full.presentment_details
-            ? {
-                presentment_amount:
-                  full.presentment_details.presentment_amount ?? null,
-                presentment_currency:
-                  full.presentment_details.presentment_currency ?? null,
-              }
-            : null,
-          mode: full.mode,
-        },
+        session: full,
       });
     }
 
-    // Mark processed after successful handling so retries re-run on failure
-    await store.markEventProcessed(event.id);
+    await markStripeEventProcessed(event.id);
   } catch (error) {
     console.error("webhook.handler_failed", event.id, error);
     return NextResponse.json({ error: "Handler failed." }, { status: 500 });

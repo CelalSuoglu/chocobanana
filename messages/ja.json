@@ -13,7 +13,8 @@
     "language": "言語",
     "currency": "通貨",
     "openMenu": "メニューを開く",
-    "closeMenu": "メニューを閉じる"
+    "closeMenu": "メニューを閉じる",
+    "account": "Account"
   },
   "home": {
     "greeting": "hello, sweet friend",
@@ -65,7 +66,8 @@
         "name": "キープセイクノート",
         "note": "手紙に挟んだり机に置いたりする小さなカード。"
       }
-    }
+    },
+    "backToShop": "Back to shop"
   },
   "mailClub": {
     "eyebrow": "the heart of it all",
@@ -154,10 +156,10 @@
     "integrationAmount": "Amount in CAD (integration currency)",
     "presentmentAmount": "Amount charged in presentment currency",
     "orderRecord": "Order record",
-    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordReady": "Webhook recorded this paid order in the database",
     "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
     "contactEmail": "Contact email",
-    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment."
   },
   "footer": {
     "tagline": "mail club",
@@ -211,5 +213,45 @@
     "title": "やさしいものがやってくる",
     "opensSoon": "メールクラブはもうすぐオープン",
     "eyebrow": "やさしいものがもうすぐ"
+  },
+  "auth": {
+    "eyebrow": "your account",
+    "signInTitle": "Sign in",
+    "signInIntro": "Sign in to see your profile and orders that belong to this account.",
+    "signUpTitle": "Create account",
+    "signUpIntro": "Register as a customer. Owner access is never granted from this form.",
+    "forgotTitle": "Forgot password",
+    "forgotIntro": "We will email a reset link if an account exists for that address.",
+    "resetTitle": "Reset password",
+    "resetIntro": "Choose a new password for your account.",
+    "verifyTitle": "Verify email",
+    "verifySuccess": "Your email is verified. You can sign in now.",
+    "verifyFailed": "This verification link is invalid or expired.",
+    "verifyMissing": "Open the link from your verification email.",
+    "notConfigured": "Accounts are not configured in this environment yet.",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create an account",
+    "haveAccount": "Already have an account? Sign in",
+    "sendReset": "Send reset link",
+    "updatePassword": "Update password"
+  },
+  "account": {
+    "eyebrow": "welcome back",
+    "title": "Account",
+    "intro": "Your profile and paid orders linked to this login.",
+    "profile": "Profile",
+    "name": "Name",
+    "email": "Email",
+    "signOut": "Sign out",
+    "orders": "Your orders",
+    "noOrders": "No paid orders yet.",
+    "browseShop": "Browse the shop",
+    "ordersUnavailable": "Order history needs a configured database in this environment.",
+    "openOwner": "Open owner panel"
   }
 }

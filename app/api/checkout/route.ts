@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import type Stripe from "stripe";
+import { auth } from "@/auth";
 import { isComingSoonGateActiveForRequest } from "@/lib/site-access";
 import { createCheckoutSession } from "@/lib/stripe/checkout";
 
@@ -55,8 +57,16 @@ export async function POST(request: Request) {
     );
   }
 
+  const session = await auth();
+
   try {
-    const result = await createCheckoutSession({ productId, locale, items });
+    const result = await createCheckoutSession({
+      productId,
+      locale,
+      items,
+      userId: session?.user?.id ?? null,
+      customerEmail: session?.user?.email ?? null,
+    });
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: result.status });
     }

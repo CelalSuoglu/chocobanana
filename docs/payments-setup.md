@@ -27,22 +27,11 @@ Do not assume the whole shop is only one model — each catalog row chooses its 
 
 ---
 
-## Order storage (no fake permanent DB)
+## Order storage
 
-Implemented now:
+Paid orders persist in **Postgres via Prisma** (`Order`, `OrderItem`, `ProcessedStripeEvent`) after Stripe webhook confirmation. See `docs/accounts-and-owner.md`.
 
-- `OrderRecord` + `OrderStore` interfaces (`lib/orders/types.ts`)
-- Ephemeral **in-memory** store for local/preview testing only (`lib/orders/store.ts`)
-- Webhook upserts order status + customer email/name; duplicate `event.id` is ignored
-- Success page re-fetches the Checkout Session from Stripe and separately checks whether the webhook already wrote a record
-
-**Not** claimed as production persistence. Pick one before going live:
-
-1. **Neon / Vercel Postgres** — relational orders, webhook idempotency table (`stripe_event_id` unique)
-2. **Supabase Postgres** — same idea + optional auth later
-3. **PlanetScale / other MySQL** — fine if you prefer MySQL
-
-Minimum tables: `orders`, `stripe_webhook_events` (unique event id).
+The old in-memory store is no longer used for checkout success.
 
 ---
 

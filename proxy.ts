@@ -92,8 +92,28 @@ export function proxy(request: NextRequest) {
 
   const gateActive = isGateActive(request);
 
+  // Stripe webhooks have no preview cookie — always allow signature-verified handler.
+  if (
+    pathname === "/api/webhooks/stripe" ||
+    pathname.startsWith("/api/webhooks/stripe/")
+  ) {
+    return NextResponse.next();
+  }
+
   if (gateActive && pathname.startsWith("/api/")) {
     return comingSoonApiResponse();
+  }
+
+  // Owner panel lives outside the locale site shell.
+  if (pathname === "/owner" || pathname.startsWith("/owner/")) {
+    if (gateActive) {
+      const locale = resolvePreferredLocale({
+        cookieValue: request.cookies.get(localeCookieName)?.value,
+        acceptLanguage: request.headers.get("accept-language"),
+      });
+      return redirectToLocaleHome(request, locale);
+    }
+    return NextResponse.next();
   }
 
   const pathnameLocale = locales.find(
