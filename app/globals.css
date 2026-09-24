@@ -1,26 +1,166 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #f6efe4;
+  --cream-deep: #ebe0d0;
+  --chocolate: #3c2a22;
+  --chocolate-soft: #5c4336;
+  --pink: #e8b4bc;
+  --pink-soft: #f3d4d8;
+  --pink-deep: #c98b96;
+  --gold: #d4a84b;
+  --gold-soft: #e8c978;
+  --paper: #faf6ef;
+  --background: var(--cream);
+  --foreground: var(--chocolate);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-chocolate: var(--chocolate);
+  --color-chocolate-soft: var(--chocolate-soft);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-pink-deep: var(--pink-deep);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-paper: var(--paper);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-serif);
+  --font-script: var(--font-script);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(232, 180, 188, 0.22), transparent 42%),
+    radial-gradient(ellipse at 88% 18%, rgba(212, 168, 75, 0.12), transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(235, 224, 208, 0.9), transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(60, 42, 34, 0.015) 3px,
+      rgba(60, 42, 34, 0.015) 4px
+    );
+  color: var(--chocolate);
+  font-family: var(--font-body), Georgia, serif;
+}
+
+::selection {
+  background: var(--pink-soft);
+  color: var(--chocolate);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.85) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(12deg);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2.8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float-soft 5s ease-in-out infinite;
+}
+
+.animate-rise {
+  animation: rise-in 0.9s ease-out both;
+}
+
+.delay-1 {
+  animation-delay: 0.12s;
+}
+
+.delay-2 {
+  animation-delay: 0.24s;
+}
+
+.delay-3 {
+  animation-delay: 0.36s;
+}
+
+.star {
+  color: var(--gold);
+  display: inline-block;
+  line-height: 1;
+}
+
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--pink-deep);
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: "";
+  height: 1px;
+  width: min(28vw, 7rem);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--pink),
+    transparent
+  );
+}
+
+.section-pad {
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-inline: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-twinkle,
+  .animate-float,
+  .animate-rise {
+    animation: none;
+  }
 }
