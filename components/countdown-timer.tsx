@@ -125,10 +125,8 @@ export function CountdownTimer({
             >
               ✦
             </span>
-            <span className="relative font-serif text-3xl tabular-nums tracking-wide text-chocolate sm:text-4xl md:text-5xl">
-              {unit.value}
-            </span>
-            <span className="relative mt-1.5 font-serif text-[0.65rem] tracking-[0.18em] uppercase text-chocolate-soft/85 sm:text-xs">
+            <span className="countdown-digit">{unit.value}</span>
+            <span className="relative mt-2 font-serif text-[0.65rem] tracking-[0.2em] uppercase text-chocolate-soft/80 sm:text-xs">
               {unit.label}
             </span>
           </div>

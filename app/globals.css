@@ -216,14 +216,59 @@ body {
   border-radius: 1.35rem;
   background:
     linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--paper) 70%, white),
-      color-mix(in srgb, var(--pink-soft) 35%, var(--paper))
+      160deg,
+      color-mix(in srgb, var(--paper) 75%, white),
+      color-mix(in srgb, var(--gold-soft) 18%, var(--paper))
     );
   box-shadow:
-    inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, var(--pink)),
-    0 8px 24px rgba(212, 168, 75, 0.12);
+    inset 0 0 0 1px color-mix(in srgb, var(--gold) 55%, transparent),
+    0 10px 28px rgba(212, 168, 75, 0.16);
   animation: countdown-glow 3.6s ease-in-out infinite;
+  padding-block: 1.15rem;
+}
+
+.countdown-digit {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.75rem, 9vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  background-image:
+    linear-gradient(
+      180deg,
+      #fff6d6 0%,
+      var(--gold-soft) 28%,
+      var(--gold) 55%,
+      #a67a22 100%
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(166, 122, 34, 0.35))
+    drop-shadow(0 0 10px rgba(232, 201, 120, 0.45));
+  animation: gold-digit-shimmer 2.8s ease-in-out infinite;
+  background-size: 100% 220%;
+}
+
+.countdown-digit::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -12% -8%;
+  background-image:
+    radial-gradient(circle at 18% 30%, rgba(255, 255, 255, 0.95) 0 1.2px, transparent 2.2px),
+    radial-gradient(circle at 42% 70%, rgba(255, 236, 170, 0.95) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 22%, rgba(255, 255, 255, 0.9) 0 1.4px, transparent 2.4px),
+    radial-gradient(circle at 82% 58%, rgba(232, 201, 120, 1) 0 1.1px, transparent 2.1px),
+    radial-gradient(circle at 30% 82%, rgba(255, 255, 255, 0.85) 0 0.9px, transparent 1.8px),
+    radial-gradient(circle at 55% 45%, rgba(255, 248, 210, 0.9) 0 1.2px, transparent 2.2px);
+  mix-blend-mode: screen;
+  animation: digit-glitter 1.8s ease-in-out infinite;
+  opacity: 0.9;
 }
 
 .countdown-unit-shine {
@@ -234,7 +279,7 @@ body {
     115deg,
     transparent 35%,
     rgba(255, 255, 255, 0.55) 48%,
-    rgba(232, 201, 120, 0.35) 52%,
+    rgba(232, 201, 120, 0.4) 52%,
     transparent 65%
   );
   animation: countdown-shimmer 3.2s ease-in-out infinite;
@@ -243,6 +288,7 @@ body {
 .countdown-unit-star {
   animation: sparkle-drift 3.4s ease-in-out infinite;
   line-height: 1;
+  color: var(--gold);
 }
 
 .countdown-glitter-dust {
@@ -250,14 +296,14 @@ body {
   position: absolute;
   inset: -18% -8%;
   background-image:
-    radial-gradient(circle at 12% 30%, rgba(212, 168, 75, 0.55) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 28% 72%, rgba(232, 180, 188, 0.7) 0 1px, transparent 2px),
-    radial-gradient(circle at 48% 18%, rgba(255, 255, 255, 0.8) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 66% 58%, rgba(212, 168, 75, 0.65) 0 1px, transparent 2px),
-    radial-gradient(circle at 82% 24%, rgba(232, 180, 188, 0.6) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle at 90% 78%, rgba(255, 255, 255, 0.75) 0 1px, transparent 2px);
+    radial-gradient(circle at 12% 30%, rgba(212, 168, 75, 0.65) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 28% 72%, rgba(255, 236, 170, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 48% 18%, rgba(255, 255, 255, 0.85) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 66% 58%, rgba(212, 168, 75, 0.75) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 24%, rgba(232, 201, 120, 0.7) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 90% 78%, rgba(255, 255, 255, 0.8) 0 1px, transparent 2px);
   animation: glitter-twinkle 2.8s ease-in-out infinite;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 @keyframes sparkle-drift {
@@ -294,13 +340,13 @@ body {
   0%,
   100% {
     box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--gold) 40%, var(--pink)),
-      0 8px 22px rgba(212, 168, 75, 0.1);
+      inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent),
+      0 8px 22px rgba(212, 168, 75, 0.12);
   }
   50% {
     box-shadow:
-      inset 0 0 0 1px color-mix(in srgb, var(--gold) 70%, var(--pink)),
-      0 10px 28px rgba(232, 180, 188, 0.28);
+      inset 0 0 0 1px color-mix(in srgb, var(--gold) 80%, transparent),
+      0 12px 30px rgba(212, 168, 75, 0.28);
   }
 }
 
@@ -316,6 +362,32 @@ body {
   }
 }
 
+@keyframes gold-digit-shimmer {
+  0%,
+  100% {
+    background-position: 50% 0%;
+    filter: drop-shadow(0 1px 0 rgba(166, 122, 34, 0.35))
+      drop-shadow(0 0 8px rgba(232, 201, 120, 0.35));
+  }
+  50% {
+    background-position: 50% 100%;
+    filter: drop-shadow(0 1px 0 rgba(166, 122, 34, 0.4))
+      drop-shadow(0 0 16px rgba(255, 236, 170, 0.7));
+  }
+}
+
+@keyframes digit-glitter {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.04);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -328,12 +400,15 @@ body {
   .countdown-unit,
   .countdown-unit-shine,
   .countdown-unit-star,
-  .countdown-glitter-dust {
+  .countdown-glitter-dust,
+  .countdown-digit,
+  .countdown-digit::after {
     animation: none;
   }
 
   .coming-soon-sparkle,
-  .countdown-glitter-dust {
+  .countdown-glitter-dust,
+  .countdown-digit::after {
     opacity: 0.45;
   }
 
