@@ -228,13 +228,13 @@ body {
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
   background-image:
-    url("/gold-glitter.svg"),
+    url("/pink-glitter.svg"),
     linear-gradient(
       180deg,
-      #fff8d6 0%,
-      #f0d078 28%,
-      #d4a84b 58%,
-      #a67a22 100%
+      #fff5f7 0%,
+      #f3d4d8 28%,
+      #e8b4bc 58%,
+      #c98b96 100%
     );
   background-size: 140px 140px, 100% 100%;
   background-position: center, center;
@@ -242,13 +242,9 @@ body {
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 0 rgba(90, 55, 10, 0.28))
-    drop-shadow(0 0 18px rgba(232, 201, 120, 0.45));
-  animation: gold-glitter-shift 4s linear infinite;
-}
-
-.countdown-subtitle {
-  color: color-mix(in srgb, var(--gold) 82%, #8a6218);
+  filter: drop-shadow(0 2px 0 rgba(140, 70, 85, 0.22))
+    drop-shadow(0 0 18px rgba(232, 180, 188, 0.55));
+  animation: pink-glitter-shift 4s linear infinite;
 }
 
 @keyframes sparkle-drift {
@@ -267,7 +263,7 @@ body {
   }
 }
 
-@keyframes gold-glitter-shift {
+@keyframes pink-glitter-shift {
   0% {
     background-position: 0 0, center;
   }

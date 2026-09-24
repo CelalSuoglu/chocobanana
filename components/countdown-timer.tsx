@@ -27,7 +27,6 @@ type CountdownTimerProps = {
   awaitingDate: string;
   almostHereTitle: string;
   almostHereBody: string;
-  subtitle: string;
 };
 
 export function CountdownTimer({
@@ -35,7 +34,6 @@ export function CountdownTimer({
   awaitingDate,
   almostHereTitle,
   almostHereBody,
-  subtitle,
 }: CountdownTimerProps) {
   const endsAtMs = endsAtIso ? Date.parse(endsAtIso) : NaN;
   const hasEnd = Number.isFinite(endsAtMs);
@@ -90,9 +88,6 @@ export function CountdownTimer({
         aria-atomic="true"
       >
         {display}
-      </p>
-      <p className="countdown-subtitle mt-5 font-serif text-sm tracking-[0.18em] uppercase text-gold sm:text-base md:tracking-[0.22em]">
-        {subtitle}
       </p>
     </div>
   );
