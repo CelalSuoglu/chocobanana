@@ -60,27 +60,18 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
               width={168}
               height={168}
               priority
-              className="h-28 w-28 rounded-full object-cover sm:h-36 sm:w-36 md:h-40 md:w-40"
+              className="h-24 w-24 rounded-full object-cover sm:h-28 sm:w-28 md:h-32 md:w-32"
             />
           </div>
         </div>
 
-        <h1 className="animate-rise delay-1 mt-8 font-script text-3xl text-pink-deep sm:text-4xl md:text-[2.75rem]">
-          {c.eyebrow}
-        </h1>
-
-        <div className="animate-rise delay-2 mt-10 w-full">
+        <div className="animate-rise delay-1 mt-10 w-full sm:mt-12">
           <CountdownTimer
             endsAtIso={endsAtIso}
-            labels={{
-              days: c.days,
-              hours: c.hours,
-              minutes: c.minutes,
-              seconds: c.seconds,
-            }}
             awaitingDate={c.awaitingDate}
             almostHereTitle={c.almostHereTitle}
             almostHereBody={c.almostHereBody}
+            subtitle={c.eyebrow}
           />
         </div>
       </div>

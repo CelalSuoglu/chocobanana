@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  Bebas_Neue,
   Caveat,
   Cormorant_Garamond,
   Lora,
@@ -34,6 +35,12 @@ const body = Lora({
   variable: "--font-body",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
+});
+
+const display = Bebas_Neue({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const arabic = Noto_Naskh_Arabic({
@@ -101,7 +108,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={direction}
-      className={`${serif.variable} ${script.variable} ${body.variable} ${arabic.variable} ${japanese.variable} ${chinese.variable} ${localeFontClass(locale)} h-full antialiased`}
+      className={`${serif.variable} ${script.variable} ${body.variable} ${display.variable} ${arabic.variable} ${japanese.variable} ${chinese.variable} ${localeFontClass(locale)} h-full antialiased`}
     >
       <body
         className={`flex min-h-full flex-col font-sans text-chocolate ${
