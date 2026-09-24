@@ -188,6 +188,18 @@
     "tagline": "mail club",
     "credit": "Made with soft paper & golden stars."
   },
+  "comingSoon": {
+    "eyebrow": "something sweet is almost here",
+    "brand": "Chocobanana",
+    "tagline": "A cozy mail club for soft stationery and handwritten moments — opening its doors soon.",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "awaitingDate": "The countdown date will appear here once the launch day is set.",
+    "almostHereTitle": "We're almost here",
+    "almostHereBody": "The wait is nearly over. The full site will open when we’re ready — thank you for holding this soft little space with us."
+  },
   "currency": {
     "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
     "baseNote": "Catalog prices are set in CAD.",

@@ -7,11 +7,31 @@ import {
   locales,
 } from "./lib/i18n/config";
 import { resolvePreferredLocale } from "./lib/i18n/resolve-locale";
+import { isComingSoonEnabled } from "./lib/site-access";
 
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
 
+function comingSoonApiResponse() {
+  return NextResponse.json(
+    { error: "Chocobanana is in coming-soon mode. APIs are unavailable." },
+    { status: 503 },
+  );
+}
+
+function redirectToLocaleHome(request: NextRequest, locale: string) {
+  const url = request.nextUrl.clone();
+  url.pathname = `/${locale}`;
+  url.search = "";
+  return NextResponse.redirect(url);
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const comingSoon = isComingSoonEnabled();
+
+  if (comingSoon && pathname.startsWith("/api/")) {
+    return comingSoonApiResponse();
+  }
 
   const pathnameLocale = locales.find(
     (locale) =>
@@ -23,6 +43,11 @@ export function proxy(request: NextRequest) {
       const url = request.nextUrl.clone();
       url.pathname = pathname.replace(`/${pathnameLocale}`, `/${defaultLocale}`);
       return NextResponse.redirect(url);
+    }
+
+    // Production coming-soon: only the locale home is reachable.
+    if (comingSoon && pathname !== `/${pathnameLocale}`) {
+      return redirectToLocaleHome(request, pathnameLocale);
     }
 
     const response = NextResponse.next();
@@ -46,6 +71,10 @@ export function proxy(request: NextRequest) {
   ) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace(`/${maybeFake}`, `/${defaultLocale}`);
+    if (comingSoon) {
+      url.pathname = `/${defaultLocale}`;
+      url.search = "";
+    }
     const response = NextResponse.redirect(url);
     response.cookies.set(localeCookieName, defaultLocale, {
       path: "/",
@@ -61,7 +90,12 @@ export function proxy(request: NextRequest) {
   });
 
   const url = request.nextUrl.clone();
-  url.pathname = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+  if (comingSoon) {
+    url.pathname = `/${locale}`;
+    url.search = "";
+  } else {
+    url.pathname = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+  }
   const response = NextResponse.redirect(url);
   response.cookies.set(localeCookieName, locale, {
     path: "/",
@@ -73,6 +107,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/api/:path*",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

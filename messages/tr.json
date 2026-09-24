@@ -197,5 +197,17 @@
     "checkoutUnavailable": "Ödeme bu ortamda henüz yok. Sepetin yine de saklanır.",
     "checkoutError": "Ödeme başlatılamadı. Tekrar dene.",
     "loading": "Sepet yükleniyor…"
+  },
+  "comingSoon": {
+    "eyebrow": "tatlı bir şey yakında geliyor",
+    "brand": "Chocobanana",
+    "tagline": "Yumuşak kırtasiye ve elle yazılmış anlar için sıcacık bir posta kulübü — yakında kapılarını açıyor.",
+    "days": "Gün",
+    "hours": "Saat",
+    "minutes": "Dakika",
+    "seconds": "Saniye",
+    "awaitingDate": "Açılış günü belirlendiğinde geri sayım tarihi burada görünecek.",
+    "almostHereTitle": "Neredeyse buradayız",
+    "almostHereBody": "Bekleyiş bitmek üzere. Tam site hazır olduğumuzda açılacak — bu yumuşak köşeyi bizimle tuttuğun için teşekkürler."
   }
 }

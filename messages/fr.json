@@ -197,5 +197,17 @@
     "checkoutUnavailable": "Le paiement n'est pas encore disponible ici. Votre panier est conservé.",
     "checkoutError": "Impossible de démarrer le paiement. Réessayez.",
     "loading": "Chargement du panier…"
+  },
+  "comingSoon": {
+    "eyebrow": "quelque chose de doux arrive bientôt",
+    "brand": "Chocobanana",
+    "tagline": "Un club de courrier douillet pour la papeterie tendre et les moments écrits à la main — bientôt ouvert.",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes",
+    "seconds": "Secondes",
+    "awaitingDate": "La date du compte à rebours apparaîtra ici dès que le jour de lancement sera fixé.",
+    "almostHereTitle": "On y est presque",
+    "almostHereBody": "L'attente touche à sa fin. Le site complet s'ouvrira quand nous serons prêts — merci de garder ce petit espace avec nous."
   }
 }

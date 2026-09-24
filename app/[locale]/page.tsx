@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ComingSoonPage } from "@/components/coming-soon-page";
 import { Star } from "@/components/star";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
+import {
+  getComingSoonEndsAtIso,
+  isComingSoonEnabled,
+} from "@/lib/site-access";
 
 export default async function HomePage({
   params,
@@ -13,6 +18,12 @@ export default async function HomePage({
   if (!isLocale(raw)) notFound();
 
   const dict = await getDictionary(raw);
+
+  if (isComingSoonEnabled()) {
+    return (
+      <ComingSoonPage dict={dict} endsAtIso={getComingSoonEndsAtIso()} />
+    );
+  }
 
   const cards = [
     { path: "/shop", ...dict.home.cards.shop },

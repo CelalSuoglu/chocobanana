@@ -176,6 +176,64 @@ body {
   }
 }
 
+.coming-soon-stage {
+  min-height: 100dvh;
+  background-image:
+    radial-gradient(ellipse at 18% 12%, rgba(232, 180, 188, 0.34), transparent 46%),
+    radial-gradient(ellipse at 86% 18%, rgba(212, 168, 75, 0.2), transparent 42%),
+    radial-gradient(ellipse at 50% 100%, rgba(235, 224, 208, 0.95), transparent 58%);
+}
+
+.coming-soon-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 18% 10% auto;
+  height: 42%;
+  border-radius: 999px;
+  background: radial-gradient(
+    circle,
+    rgba(232, 201, 120, 0.18),
+    transparent 70%
+  );
+  filter: blur(8px);
+}
+
+.coming-soon-sparkles {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+.coming-soon-sparkle {
+  position: absolute;
+  color: var(--gold);
+  opacity: 0.35;
+  animation: sparkle-drift 4.5s ease-in-out infinite;
+  line-height: 1;
+}
+
+.countdown-unit {
+  border-radius: 1.35rem;
+  background: color-mix(in srgb, var(--paper) 88%, white);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--pink) 55%, transparent);
+}
+
+@keyframes sparkle-drift {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: translateY(0) scale(0.85) rotate(0deg);
+  }
+  40% {
+    opacity: 0.95;
+    transform: translateY(-10px) scale(1.15) rotate(14deg);
+  }
+  70% {
+    opacity: 0.45;
+    transform: translateY(-4px) scale(1) rotate(-6deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -183,7 +241,12 @@ body {
 
   .animate-twinkle,
   .animate-float,
-  .animate-rise {
+  .animate-rise,
+  .coming-soon-sparkle {
     animation: none;
+  }
+
+  .coming-soon-sparkle {
+    opacity: 0.45;
   }
 }

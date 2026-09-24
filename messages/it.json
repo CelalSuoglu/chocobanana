@@ -197,5 +197,17 @@
     "checkoutUnavailable": "Il checkout non è ancora disponibile qui. Il carrello resta salvato.",
     "checkoutError": "Impossibile avviare il checkout. Riprova.",
     "loading": "Caricamento carrello…"
+  },
+  "comingSoon": {
+    "eyebrow": "qualcosa di dolce sta arrivando",
+    "brand": "Chocobanana",
+    "tagline": "Un cosy mail club per cancelleria morbida e momenti scritti a mano — apre presto.",
+    "days": "Giorni",
+    "hours": "Ore",
+    "minutes": "Minuti",
+    "seconds": "Secondi",
+    "awaitingDate": "La data del conto alla rovescia comparirà qui quando sarà fissato il giorno del lancio.",
+    "almostHereTitle": "Ci siamo quasi",
+    "almostHereBody": "L'attesa sta finendo. Il sito completo aprirà quando saremo pronti — grazie per tenere questo piccolo spazio con noi."
   }
 }

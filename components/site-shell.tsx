@@ -12,6 +12,7 @@ import {
 } from "@/lib/currency/config";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import { isComingSoonEnabled } from "@/lib/site-access";
 
 type SiteShellProps = {
   locale: Locale;
@@ -20,6 +21,10 @@ type SiteShellProps = {
 };
 
 export async function SiteShell({ locale, dict, children }: SiteShellProps) {
+  if (isComingSoonEnabled()) {
+    return <>{children}</>;
+  }
+
   const cookieStore = await cookies();
   const rawCurrency = cookieStore.get(currencyCookieName)?.value;
   const currency: CurrencyCode =
