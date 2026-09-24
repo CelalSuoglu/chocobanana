@@ -231,30 +231,26 @@ body {
 
 .coming-soon-timer-digit,
 .coming-soon-timer-colon {
-  font-family: var(--font-display), Impact, Haettenschweiler, sans-serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(2rem, 9vw, 3.75rem);
   font-style: italic;
+  font-weight: 400;
   line-height: 0.95;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
-  background-image:
-    url("/gold-glitter.svg"),
-    linear-gradient(180deg, #fff6d0 0%, #f0d078 32%, #d4a84b 62%, #9a6f1c 100%);
-  background-size: 80px 80px, 100% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 0 rgba(166, 122, 34, 0.3))
-    drop-shadow(0 0 10px rgba(232, 201, 120, 0.35));
-  animation: coming-soon-glitter 3.2s linear infinite;
+  color: var(--chocolate);
+  -webkit-text-fill-color: var(--chocolate);
+  background: none;
+  filter: none;
+  animation: none;
 }
 
 .coming-soon-timer-colon {
   flex: 0 0 auto;
   padding-top: 0.08em;
-  font-style: normal;
   font-size: clamp(1.5rem, 7vw, 2.8rem);
+  color: var(--chocolate-soft);
+  -webkit-text-fill-color: var(--chocolate-soft);
 }
 
 .coming-soon-timer-label {
@@ -278,15 +274,6 @@ body {
   }
 }
 
-@keyframes coming-soon-glitter {
-  0% {
-    background-position: 0 0, center;
-  }
-  100% {
-    background-position: 80px 50px, center;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -295,9 +282,7 @@ body {
   .animate-twinkle,
   .animate-float,
   .animate-rise,
-  .coming-soon-sparkle,
-  .coming-soon-timer-digit,
-  .coming-soon-timer-colon {
+  .coming-soon-sparkle {
     animation: none;
   }
 
