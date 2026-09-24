@@ -199,7 +199,8 @@
     "almostHereTitle": "We're almost here",
     "almostHereBody": "The wait is nearly over. The full site will open when we're ready — thank you for holding this soft little space with us.",
     "title": "Something sweet is coming",
-    "opensSoon": "The mail club opens soon"
+    "opensSoon": "The mail club opens soon",
+    "eyebrow": "something sweet is almost here"
   },
   "currency": {
     "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
