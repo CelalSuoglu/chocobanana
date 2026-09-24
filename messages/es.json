@@ -239,7 +239,15 @@
     "haveAccount": "Already have an account? Sign in",
     "sendReset": "Send reset link",
     "updatePassword": "Update password",
-    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy."
+    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
+    "phone": "Phone",
+    "addressLine1": "Address",
+    "addressLine2": "Apartment, suite (optional)",
+    "city": "City",
+    "region": "Province / state (optional)",
+    "postalCode": "Postal code",
+    "country": "Country",
+    "countryPlaceholder": "Select a country"
   },
   "account": {
     "eyebrow": "welcome back",
@@ -253,6 +261,8 @@
     "noOrders": "No paid orders yet.",
     "browseShop": "Browse the shop",
     "ordersUnavailable": "Order history needs a configured database in this environment.",
-    "openOwner": "Open owner panel"
+    "openOwner": "Open owner panel",
+    "phone": "Phone",
+    "address": "Address"
   }
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
+import { AccountIconLink } from "@/components/account-icon-link";
 import { CartIconLink } from "@/components/cart-icon-link";
 import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
 import type { CurrencyCode } from "@/lib/currency/config";
@@ -63,12 +64,7 @@ export function SiteHeader({ locale, currency, dict }: SiteHeaderProps) {
               }}
             />
             <CartIconLink locale={locale} label={dict.cart.openCart} />
-            <Link
-              href={hrefFor(locale, "/account")}
-              className="hidden min-h-10 items-center rounded-full border border-pink/45 bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep sm:inline-flex"
-            >
-              {dict.nav.account}
-            </Link>
+            <AccountIconLink locale={locale} label={dict.nav.account} />
             <button
               type="button"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate md:hidden"
@@ -124,15 +120,6 @@ export function SiteHeader({ locale, currency, dict }: SiteHeaderProps) {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href={hrefFor(locale, "/account")}
-                className="block rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] text-chocolate-soft transition-colors hover:bg-paper/80 hover:text-pink-deep"
-                onClick={() => setOpen(false)}
-              >
-                {dict.nav.account}
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>

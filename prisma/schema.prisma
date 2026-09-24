@@ -32,6 +32,13 @@ model User {
   email             String    @unique
   emailVerified     DateTime?
   passwordHash      String
+  phone             String?
+  addressLine1      String?
+  addressLine2      String?
+  city              String?
+  region            String?
+  postalCode        String?
+  country           String?
   role              Role      @default(CUSTOMER)
   preferredLocale   String?   @default("en")
   image             String?

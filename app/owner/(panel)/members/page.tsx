@@ -57,6 +57,16 @@ export default async function OwnerMembersPage({
                   {member.name ?? "—"} · {member.email}
                 </p>
                 <p className="text-xs text-[#c9a27a]">
+                  {[member.phone, member.city, member.country]
+                    .filter(Boolean)
+                    .join(" · ") || "No address on file"}
+                </p>
+                <p className="text-xs text-[#c9a27a]">
+                  {[member.addressLine1, member.region, member.postalCode]
+                    .filter(Boolean)
+                    .join(", ")}
+                </p>
+                <p className="text-xs text-[#c9a27a]">
                   Joined {new Date(member.createdAt).toLocaleString("en-CA")} ·
                   locale {member.preferredLocale ?? "en"} ·{" "}
                   {member.emailVerified ? "email verified" : "email pending"}

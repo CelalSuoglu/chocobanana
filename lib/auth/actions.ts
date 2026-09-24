@@ -6,12 +6,20 @@ import { signIn, signOut } from "@/auth";
 import { sendAppEmail } from "@/lib/auth/email";
 import { createToken, hashPassword, hashToken } from "@/lib/auth/password";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
+import { isSignupCountryCode } from "@/lib/auth/countries";
 import { getAppBaseUrl } from "@/lib/stripe/config";
 
 const registerSchema = z.object({
   name: z.string().trim().min(1).max(80),
   email: z.string().email(),
+  phone: z.string().trim().min(7).max(32),
   password: z.string().min(8).max(128),
+  addressLine1: z.string().trim().min(1).max(120),
+  addressLine2: z.string().trim().max(120).optional(),
+  city: z.string().trim().min(1).max(80),
+  region: z.string().trim().max(80).optional(),
+  postalCode: z.string().trim().min(2).max(24),
+  country: z.string().trim().min(2).max(2),
   locale: z.string().min(2).max(5).optional(),
 });
 
@@ -29,14 +37,28 @@ export async function registerCustomer(
     return { ok: false, error: "Accounts are not configured in this environment yet." };
   }
 
+  const addressLine2Raw = String(formData.get("addressLine2") ?? "").trim();
+  const regionRaw = String(formData.get("region") ?? "").trim();
+
   const parsed = registerSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
+    phone: formData.get("phone"),
     password: formData.get("password"),
+    addressLine1: formData.get("addressLine1"),
+    addressLine2: addressLine2Raw || undefined,
+    city: formData.get("city"),
+    region: regionRaw || undefined,
+    postalCode: formData.get("postalCode"),
+    country: formData.get("country"),
     locale: formData.get("locale") || "en",
   });
-  if (!parsed.success) {
-    return { ok: false, error: "Please check your name, email, and password (8+ characters)." };
+  if (!parsed.success || !isSignupCountryCode(parsed.data.country)) {
+    return {
+      ok: false,
+      error:
+        "Please check your details (name, email, phone, password 8+, address, city, postal code, country).",
+    };
   }
 
   const prisma = requirePrisma();
@@ -52,6 +74,13 @@ export async function registerCustomer(
     data: {
       name: parsed.data.name,
       email,
+      phone: parsed.data.phone,
+      addressLine1: parsed.data.addressLine1,
+      addressLine2: parsed.data.addressLine2 ?? null,
+      city: parsed.data.city,
+      region: parsed.data.region ?? null,
+      postalCode: parsed.data.postalCode,
+      country: parsed.data.country,
       passwordHash,
       role: "CUSTOMER",
       preferredLocale: parsed.data.locale ?? "en",

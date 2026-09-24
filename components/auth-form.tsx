@@ -24,7 +24,7 @@ export function AuthForm({
   const [state, formAction, pending] = useActionState(action, initial);
 
   return (
-    <form action={formAction} className="mx-auto flex w-full max-w-md flex-col gap-4">
+    <form action={formAction} className="mx-auto flex w-full max-w-lg flex-col gap-4">
       {hiddenFields
         ? Object.entries(hiddenFields).map(([name, value]) => (
             <input key={name} type="hidden" name={name} value={value} />
@@ -75,6 +75,44 @@ export function AuthField({
         autoComplete={autoComplete}
         className="min-h-11 rounded-2xl border border-pink/40 bg-paper/80 px-4 text-chocolate outline-none ring-pink/30 focus:ring-2"
       />
+    </label>
+  );
+}
+
+export function AuthSelect({
+  label,
+  name,
+  required = true,
+  autoComplete,
+  options,
+  placeholder,
+}: {
+  label: string;
+  name: string;
+  required?: boolean;
+  autoComplete?: string;
+  options: { value: string; label: string }[];
+  placeholder: string;
+}) {
+  return (
+    <label className="flex flex-col gap-1.5 text-start text-sm text-chocolate-soft">
+      <span className="font-serif tracking-wide text-chocolate">{label}</span>
+      <select
+        name={name}
+        required={required}
+        autoComplete={autoComplete}
+        defaultValue=""
+        className="min-h-11 rounded-2xl border border-pink/40 bg-paper/80 px-4 text-chocolate outline-none ring-pink/30 focus:ring-2"
+      >
+        <option value="" disabled>
+          {placeholder}
+        </option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </label>
   );
 }

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { logoutCustomerAction } from "@/lib/auth/actions";
+import { signupCountries } from "@/lib/auth/countries";
 import { getOptionalSession } from "@/lib/auth/session";
 import { PageHero } from "@/components/page-hero";
-import { isDatabaseConfigured } from "@/lib/db";
+import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
@@ -14,6 +15,11 @@ function formatMoney(cents: number, currency: string, locale: string) {
     style: "currency",
     currency: currency.toUpperCase(),
   }).format(cents / 100);
+}
+
+function countryLabel(code: string | null | undefined) {
+  if (!code) return "—";
+  return signupCountries.find((c) => c.code === code)?.name ?? code;
 }
 
 export default async function AccountPage({
@@ -34,6 +40,23 @@ export default async function AccountPage({
     redirect("/owner");
   }
 
+  const profile = isDatabaseConfigured()
+    ? await requirePrisma().user.findUnique({
+        where: { id: session.user.id },
+        select: {
+          name: true,
+          email: true,
+          phone: true,
+          addressLine1: true,
+          addressLine2: true,
+          city: true,
+          region: true,
+          postalCode: true,
+          country: true,
+        },
+      })
+    : null;
+
   const orders = isDatabaseConfigured()
     ? await listOrdersForUser(session.user.id)
     : [];
@@ -53,11 +76,29 @@ export default async function AccountPage({
         <dl className="mt-4 space-y-2 text-sm text-chocolate-soft">
           <div>
             <dt className="font-serif text-chocolate">{dict.account.name}</dt>
-            <dd>{session.user.name ?? "—"}</dd>
+            <dd>{profile?.name ?? session.user.name ?? "—"}</dd>
           </div>
           <div>
             <dt className="font-serif text-chocolate">{dict.account.email}</dt>
-            <dd>{session.user.email}</dd>
+            <dd>{profile?.email ?? session.user.email}</dd>
+          </div>
+          <div>
+            <dt className="font-serif text-chocolate">{dict.account.phone}</dt>
+            <dd>{profile?.phone ?? "—"}</dd>
+          </div>
+          <div>
+            <dt className="font-serif text-chocolate">{dict.account.address}</dt>
+            <dd className="leading-relaxed">
+              {[profile?.addressLine1, profile?.addressLine2]
+                .filter(Boolean)
+                .join(", ") || "—"}
+              <br />
+              {[profile?.city, profile?.region, profile?.postalCode]
+                .filter(Boolean)
+                .join(", ")}
+              <br />
+              {countryLabel(profile?.country)}
+            </dd>
           </div>
         </dl>
         <form action={logoutCustomerAction} className="mt-6">
