@@ -27,6 +27,9 @@ export default async function SignInPage({
       {!isDatabaseConfigured() ? (
         <p className="mx-auto mt-8 max-w-md text-center text-sm text-chocolate-soft">
           {dict.auth.notConfigured}
+          <span className="mt-2 block text-xs text-chocolate-soft/80">
+            {dict.auth.needsDatabase}
+          </span>
         </p>
       ) : (
         <div className="mt-10">

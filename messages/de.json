@@ -238,7 +238,8 @@
     "createAccount": "Create an account",
     "haveAccount": "Already have an account? Sign in",
     "sendReset": "Send reset link",
-    "updatePassword": "Update password"
+    "updatePassword": "Update password",
+    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy."
   },
   "account": {
     "eyebrow": "welcome back",

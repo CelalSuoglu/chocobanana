@@ -229,6 +229,7 @@
     "verifyFailed": "This verification link is invalid or expired.",
     "verifyMissing": "Open the link from your verification email.",
     "notConfigured": "Accounts are not configured in this environment yet.",
+    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
     "email": "Email",
     "password": "Password",
     "name": "Name",
