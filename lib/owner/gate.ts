@@ -35,10 +35,12 @@ export async function unlockOwnerPanel(
   }
 
   const jar = await cookies();
+  const secure =
+    process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
   jar.set(ownerPanelCookieName, token, {
     path: "/",
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure,
     sameSite: "lax",
     maxAge: OWNER_PANEL_MAX_AGE,
   });

@@ -23,12 +23,12 @@ export default async function OwnerMembersPage({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-[#f3e6d8]">Members</h1>
-          <p className="mt-1 text-sm text-[#c9a27a]">
+          <h1 className="font-serif text-3xl text-[#faf6ef]">Members</h1>
+          <p className="mt-1 text-sm text-[#cbb3a0]">
             Customer accounts from the storefront. Owner accounts never appear
             here.
           </p>
-          <p className="mt-2 text-xs text-[#c9a27a]/80">
+          <p className="mt-2 text-xs text-[#cbb3a0]/80">
             {stats.memberTotal} total · {stats.membersNew} new in last 24h
           </p>
         </div>
@@ -40,23 +40,20 @@ export default async function OwnerMembersPage({
           name="q"
           defaultValue={q}
           placeholder="Search name, email, or phone…"
-          className="min-h-10 min-w-[220px] flex-1 rounded-md border border-white/15 bg-[#120e0b] px-3 text-sm text-[#f3e6d8]"
+          className="owner-input min-w-[220px] flex-1"
         />
-        <button
-          type="submit"
-          className="min-h-10 rounded-md border border-[#c9a27a]/50 px-4 text-sm hover:bg-white/5"
-        >
+        <button type="submit" className="owner-btn">
           Search
         </button>
       </form>
 
       {members.length === 0 ? (
-        <p className="mt-10 text-sm text-[#c9a27a]">
+        <p className="mt-10 text-sm text-[#cbb3a0]">
           No customer accounts yet. When shoppers register, they appear here
           automatically.
         </p>
       ) : (
-        <ul className="mt-8 divide-y divide-white/10 border-t border-white/10">
+        <ul className="mt-8 divide-y divide-[rgba(232,180,188,0.18)] border-t border-[rgba(232,180,188,0.22)]">
           {members.map((member) => {
             const fullName = displayName(
               member.firstName,
@@ -81,20 +78,20 @@ export default async function OwnerMembersPage({
               >
                 <div>
                   <p className="font-serif text-lg">{fullName}</p>
-                  <p className="text-sm text-[#c9a27a]">
+                  <p className="text-sm text-[#cbb3a0]">
                     {member.email}
                     {member.phone ? ` · ${member.phone}` : ""}
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-[#c9a27a]/90">
+                  <p className="mt-1 text-xs leading-relaxed text-[#cbb3a0]/90">
                     {address || "No address on file"}
                   </p>
-                  <p className="mt-1 text-xs text-[#c9a27a]/70">
+                  <p className="mt-1 text-xs text-[#cbb3a0]/70">
                     Joined {new Date(member.createdAt).toLocaleString("en-CA")} ·
                     locale {member.preferredLocale ?? "en"} ·{" "}
                     {member.emailVerified ? "email verified" : "email pending"}
                   </p>
                 </div>
-                <p className="text-sm text-[#c9a27a]">
+                <p className="text-sm text-[#cbb3a0]">
                   {member._count.orders} paid order
                   {member._count.orders === 1 ? "" : "s"}
                 </p>

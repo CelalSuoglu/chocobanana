@@ -41,8 +41,8 @@ export default async function OwnerDashboardPage() {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-[#f3e6d8]">Dashboard</h1>
-          <p className="mt-1 text-sm text-[#c9a27a]">
+          <h1 className="font-serif text-3xl text-[#faf6ef]">Dashboard</h1>
+          <p className="mt-1 text-sm text-[#cbb3a0]">
             New members and paid orders are counted separately.
           </p>
         </div>
@@ -72,28 +72,28 @@ export default async function OwnerDashboardPage() {
       <div className="mt-12 grid gap-10 lg:grid-cols-2">
         <section>
           <div className="flex items-baseline justify-between gap-3">
-            <h2 className="font-serif text-xl text-[#f3e6d8]">New members</h2>
+            <h2 className="font-serif text-xl text-[#faf6ef]">New members</h2>
             <Link
               href="/owner/members"
-              className="text-xs text-[#c9a27a] hover:text-[#f3e6d8]"
+              className="text-xs text-[#cbb3a0] hover:text-[#c98b96]"
             >
               View all
             </Link>
           </div>
           {newMembers.length === 0 ? (
-            <p className="mt-4 text-sm text-[#c9a27a]">No customer accounts yet.</p>
+            <p className="mt-4 text-sm text-[#cbb3a0]">No customer accounts yet.</p>
           ) : (
-            <ul className="mt-4 divide-y divide-white/10 border-t border-white/10">
+            <ul className="mt-4 divide-y divide-[rgba(232,180,188,0.18)] border-t border-[rgba(232,180,188,0.22)]">
               {newMembers.map((member) => (
                 <li key={member.id} className="py-3 text-sm">
-                  <p className="font-serif text-base text-[#f3e6d8]">
+                  <p className="font-serif text-base text-[#faf6ef]">
                     {displayName(member.firstName, member.lastName, member.name)}
                   </p>
-                  <p className="text-xs text-[#c9a27a]">
+                  <p className="text-xs text-[#cbb3a0]">
                     {member.email}
                     {member.phone ? ` · ${member.phone}` : ""}
                   </p>
-                  <p className="text-xs text-[#c9a27a]/80">
+                  <p className="text-xs text-[#cbb3a0]/80">
                     {new Date(member.createdAt).toLocaleString("en-CA")}
                   </p>
                 </li>
@@ -104,20 +104,20 @@ export default async function OwnerDashboardPage() {
 
         <section>
           <div className="flex items-baseline justify-between gap-3">
-            <h2 className="font-serif text-xl text-[#f3e6d8]">New orders</h2>
+            <h2 className="font-serif text-xl text-[#faf6ef]">New orders</h2>
             <Link
               href="/owner/orders"
-              className="text-xs text-[#c9a27a] hover:text-[#f3e6d8]"
+              className="text-xs text-[#cbb3a0] hover:text-[#faf6ef]"
             >
               View all
             </Link>
           </div>
           {newOrders.length === 0 ? (
-            <p className="mt-4 text-sm text-[#c9a27a]">
+            <p className="mt-4 text-sm text-[#cbb3a0]">
               No paid orders yet. They appear only after a verified Stripe webhook.
             </p>
           ) : (
-            <ul className="mt-4 divide-y divide-white/10 border-t border-white/10">
+            <ul className="mt-4 divide-y divide-[rgba(232,180,188,0.18)] border-t border-[rgba(232,180,188,0.22)]">
               {newOrders.map((order) => (
                 <li key={order.id} className="py-3">
                   <Link
@@ -128,10 +128,10 @@ export default async function OwnerDashboardPage() {
                       #{order.id.slice(-8)} ·{" "}
                       {formatMoney(order.amountTotalCadCents, order.currency)}
                     </p>
-                    <p className="text-xs text-[#c9a27a]">
+                    <p className="text-xs text-[#cbb3a0]">
                       {order.customerEmail} · {order.fulfillmentStatus}
                     </p>
-                    <p className="text-xs text-[#c9a27a]/80">
+                    <p className="text-xs text-[#cbb3a0]/80">
                       {new Date(order.createdAt).toLocaleString("en-CA")}
                     </p>
                   </Link>
@@ -155,12 +155,9 @@ function StatCard({
   href: string;
 }) {
   return (
-    <Link
-      href={href}
-      className="rounded-lg border border-white/10 bg-[#120e0b] px-4 py-4 transition-colors hover:border-[#c9a27a]/40"
-    >
-      <p className="text-xs uppercase tracking-wider text-[#c9a27a]">{label}</p>
-      <p className="mt-2 font-serif text-3xl text-[#f3e6d8]">{value}</p>
+    <Link href={href} className="owner-card block">
+      <p className="text-xs uppercase tracking-wider text-[#cbb3a0]">{label}</p>
+      <p className="mt-2 font-serif text-3xl text-[#faf6ef]">{value}</p>
     </Link>
   );
 }

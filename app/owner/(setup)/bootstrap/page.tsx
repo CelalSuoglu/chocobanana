@@ -1,5 +1,6 @@
 import { OwnerBootstrapForm } from "@/components/owner-bootstrap-form";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
+import Link from "next/link";
 
 export default async function OwnerBootstrapPage() {
   const ownerExists =
@@ -7,18 +8,26 @@ export default async function OwnerBootstrapPage() {
     (await requirePrisma().user.count({ where: { role: "OWNER" } })) > 0;
 
   return (
-    <div>
-      <h1 className="font-serif text-3xl">Owner bootstrap</h1>
-      <p className="mt-3 max-w-xl text-sm leading-relaxed text-[#c9a27a]">
+    <div className="mx-auto max-w-lg">
+      <p className="text-xs tracking-[0.18em] uppercase text-[#cbb3a0]">
+        First-time setup
+      </p>
+      <h1 className="mt-2 font-serif text-3xl text-[#faf6ef]">
+        Owner bootstrap
+      </h1>
+      <p className="mt-3 text-sm leading-relaxed text-[#cbb3a0]">
         Creates the first OWNER account. Customer registration can never grant
-        this role. After one owner exists, bootstrap stays closed. Set{" "}
-        <code className="text-[#f3e6d8]">OWNER_BOOTSTRAP_SECRET</code> in the
-        server environment only.
+        this role. After one owner exists, bootstrap stays closed.
       </p>
       {ownerExists ? (
-        <p className="mt-8 rounded-lg border border-amber-500/40 bg-amber-950/40 px-4 py-3 text-sm text-amber-100">
-          Bootstrap is closed — an owner account already exists. Sign in at{" "}
-          <code className="text-[#f3e6d8]">/owner/login</code>.
+        <p className="owner-alert mt-8">
+          Bootstrap is closed — an owner account already exists.{" "}
+          <Link
+            href="/owner/login"
+            className="text-[#c98b96] underline-offset-2 hover:underline"
+          >
+            Sign in
+          </Link>
         </p>
       ) : (
         <OwnerBootstrapForm />

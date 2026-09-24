@@ -24,15 +24,18 @@ export default async function OwnerOrderDetailPage({
 
   return (
     <div>
-      <Link href="/owner" className="text-sm text-[#c9a27a] hover:text-[#f3e6d8]">
+      <Link
+        href="/owner/orders"
+        className="text-sm text-[#cbb3a0] hover:text-[#faf6ef]"
+      >
         ← Orders
       </Link>
-      <h1 className="mt-4 font-serif text-3xl">Order detail</h1>
-      <p className="mt-1 text-xs text-[#c9a27a]">{order.id}</p>
+      <h1 className="mt-4 font-serif text-3xl text-[#faf6ef]">Order detail</h1>
+      <p className="mt-1 text-xs text-[#cbb3a0]">{order.id}</p>
 
       <dl className="mt-8 grid gap-4 sm:grid-cols-2">
         <div>
-          <dt className="text-xs uppercase tracking-wider text-[#c9a27a]">
+          <dt className="text-xs uppercase tracking-wider text-[#cbb3a0]">
             Customer
           </dt>
           <dd className="mt-1">
@@ -46,31 +49,31 @@ export default async function OwnerOrderDetailPage({
               </>
             ) : null}
             {order.user ? (
-              <span className="block text-xs text-[#c9a27a]">
+              <span className="block text-xs text-[#cbb3a0]">
                 Linked account: {order.user.id}
               </span>
             ) : null}
           </dd>
         </div>
         <div>
-          <dt className="text-xs uppercase tracking-wider text-[#c9a27a]">
+          <dt className="text-xs uppercase tracking-wider text-[#cbb3a0]">
             Payment
           </dt>
           <dd className="mt-1">
             {order.paymentStatus} ·{" "}
             {formatMoney(order.amountTotalCadCents, order.currency)}
-            <span className="block text-xs text-[#c9a27a]">
+            <span className="block text-xs text-[#cbb3a0]">
               Session: {order.stripeCheckoutSessionId}
             </span>
             {order.stripePaymentIntentId ? (
-              <span className="block text-xs text-[#c9a27a]">
+              <span className="block text-xs text-[#cbb3a0]">
                 Intent: {order.stripePaymentIntentId}
               </span>
             ) : null}
           </dd>
         </div>
         <div className="sm:col-span-2">
-          <dt className="text-xs uppercase tracking-wider text-[#c9a27a]">
+          <dt className="text-xs uppercase tracking-wider text-[#cbb3a0]">
             Shipping
           </dt>
           <dd className="mt-1 text-sm leading-relaxed">
@@ -90,8 +93,8 @@ export default async function OwnerOrderDetailPage({
       </dl>
 
       <div className="mt-8">
-        <h2 className="font-serif text-xl">Items</h2>
-        <ul className="mt-3 divide-y divide-white/10 border-t border-white/10">
+        <h2 className="font-serif text-xl text-[#faf6ef]">Items</h2>
+        <ul className="mt-3 divide-y divide-[rgba(232,180,188,0.18)] border-t border-[rgba(232,180,188,0.22)]">
           {order.items.map((item) => (
             <li
               key={item.id}
