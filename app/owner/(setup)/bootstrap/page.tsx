@@ -9,13 +9,13 @@ export default async function OwnerBootstrapPage() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <p className="text-xs tracking-[0.18em] uppercase text-[#cbb3a0]">
+      <p className="text-xs tracking-[0.18em] uppercase text-chocolate-soft">
         First-time setup
       </p>
-      <h1 className="mt-2 font-serif text-3xl text-[#faf6ef]">
+      <h1 className="mt-2 font-serif text-3xl text-chocolate">
         Owner bootstrap
       </h1>
-      <p className="mt-3 text-sm leading-relaxed text-[#cbb3a0]">
+      <p className="mt-3 text-sm leading-relaxed text-chocolate-soft">
         Creates the first OWNER account. Customer registration can never grant
         this role. After one owner exists, bootstrap stays closed.
       </p>
@@ -24,7 +24,7 @@ export default async function OwnerBootstrapPage() {
           Bootstrap is closed — an owner account already exists.{" "}
           <Link
             href="/owner/login"
-            className="text-[#c98b96] underline-offset-2 hover:underline"
+            className="text-pink-deep underline-offset-2 hover:underline"
           >
             Sign in
           </Link>

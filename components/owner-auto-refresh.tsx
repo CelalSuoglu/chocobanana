@@ -15,7 +15,7 @@ export function OwnerAutoRefresh({ intervalMs = 20000 }: { intervalMs?: number }
   }, [intervalMs, router]);
 
   return (
-    <p className="text-xs text-[#cbb3a0]/70">
+    <p className="text-xs text-chocolate-soft/70">
       Auto-refreshing every {Math.round(intervalMs / 1000)}s
     </p>
   );

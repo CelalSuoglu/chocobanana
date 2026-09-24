@@ -13,11 +13,11 @@ export function OwnerBootstrapForm() {
 
   return (
     <form action={action} className="mt-8 flex max-w-md flex-col gap-4">
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Name
         <input name="name" required className="owner-input" />
       </label>
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Email
         <input
           name="email"
@@ -27,7 +27,7 @@ export function OwnerBootstrapForm() {
           className="owner-input"
         />
       </label>
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Password (12+ characters)
         <input
           name="password"
@@ -38,7 +38,7 @@ export function OwnerBootstrapForm() {
           className="owner-input"
         />
       </label>
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Bootstrap secret
         <input
           name="bootstrapSecret"
@@ -48,12 +48,12 @@ export function OwnerBootstrapForm() {
         />
       </label>
       {state.error ? (
-        <p className="text-sm text-[#f0a8a8]" role="alert">
+        <p className="text-sm text-[var(--owner-danger)]" role="alert">
           {state.error}
         </p>
       ) : null}
       {state.message ? (
-        <p className="text-sm text-[#b8d4a8]" role="status">
+        <p className="text-sm text-[var(--owner-ok)]" role="status">
           {state.message}
         </p>
       ) : null}

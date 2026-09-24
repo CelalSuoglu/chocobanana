@@ -13,7 +13,7 @@ export function OwnerGateForm() {
 
   return (
     <form action={action} className="mt-8 flex flex-col gap-4">
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Panel password
         <input
           name="password"
@@ -24,7 +24,7 @@ export function OwnerGateForm() {
         />
       </label>
       {state.error ? (
-        <p className="text-sm text-[#f0a8a8]" role="alert">
+        <p className="text-sm text-[var(--owner-danger)]" role="alert">
           {state.error}
         </p>
       ) : null}

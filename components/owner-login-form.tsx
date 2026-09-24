@@ -13,7 +13,7 @@ export function OwnerLoginForm() {
 
   return (
     <form action={action} className="mt-8 flex flex-col gap-4">
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Email
         <input
           name="email"
@@ -23,7 +23,7 @@ export function OwnerLoginForm() {
           className="owner-input"
         />
       </label>
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         Password
         <input
           name="password"
@@ -34,7 +34,7 @@ export function OwnerLoginForm() {
         />
       </label>
       {state.error ? (
-        <p className="text-sm text-[#f0a8a8]" role="alert">
+        <p className="text-sm text-[var(--owner-danger)]" role="alert">
           {state.error}
         </p>
       ) : null}

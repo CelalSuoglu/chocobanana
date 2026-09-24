@@ -40,8 +40,8 @@ export default async function OwnerOrdersPage({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-[#faf6ef]">Orders</h1>
-          <p className="mt-1 text-sm text-[#cbb3a0]">
+          <h1 className="font-serif text-3xl text-chocolate">Orders</h1>
+          <p className="mt-1 text-sm text-chocolate-soft">
             Paid orders only — created after Stripe webhook confirmation. Payment
             status cannot be set to paid manually.
           </p>
@@ -73,34 +73,34 @@ export default async function OwnerOrdersPage({
       </form>
 
       {orders.length === 0 ? (
-        <p className="mt-10 text-sm text-[#cbb3a0]">
+        <p className="mt-10 text-sm text-chocolate-soft">
           No paid orders yet. Complete a test Checkout with webhook forwarding to
           see real orders here. Sample/demo orders are never listed.
         </p>
       ) : (
-        <ul className="mt-8 divide-y divide-[rgba(232,180,188,0.18)] border-t border-[rgba(232,180,188,0.22)]">
+        <ul className="mt-8 divide-y divide-pink/25 border-t border-pink/30">
           {orders.map((order) => (
             <li key={order.id} className="py-4">
               <Link
                 href={`/owner/orders/${order.id}`}
-                className="flex flex-wrap items-start justify-between gap-3 hover:text-[#fff0e0]"
+                className="flex flex-wrap items-start justify-between gap-3 hover:text-pink-deep"
               >
                 <div>
                   <p className="font-serif text-lg">
                     #{order.id.slice(-8)} · {order.customerEmail}
                   </p>
-                  <p className="text-xs text-[#cbb3a0]">
+                  <p className="text-xs text-chocolate-soft">
                     {new Date(order.createdAt).toLocaleString("en-CA")} ·{" "}
                     {order.fulfillmentStatus} · payment {order.paymentStatus}
                     {order.customerPhone ? ` · ${order.customerPhone}` : ""}
                   </p>
-                  <p className="mt-1 text-sm text-[#cbb3a0]">
+                  <p className="mt-1 text-sm text-chocolate-soft">
                     {order.items
                       .map((item) => `${item.name} ×${item.quantity}`)
                       .join(", ")}
                   </p>
                   {(order.shippingLine1 || order.shippingCity) && (
-                    <p className="mt-1 text-xs text-[#cbb3a0]/80">
+                    <p className="mt-1 text-xs text-chocolate-soft/80">
                       {[
                         order.shippingName,
                         order.shippingLine1,

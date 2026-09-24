@@ -33,7 +33,7 @@ export function FulfillmentStatusForm({
   return (
     <form action={action} className="flex flex-wrap items-end gap-3">
       <input type="hidden" name="orderId" value={orderId} />
-      <label className="flex flex-col gap-1.5 text-sm text-[#cbb3a0]">
+      <label className="flex flex-col gap-1.5 text-sm text-chocolate-soft">
         <span>Fulfillment status</span>
         <select name="status" defaultValue={current} className="owner-input">
           {statuses.map((status) => (
@@ -47,12 +47,12 @@ export function FulfillmentStatusForm({
         {pending ? "Saving…" : "Update"}
       </button>
       {state.error ? (
-        <p className="w-full text-sm text-[#f0a8a8]">{state.error}</p>
+        <p className="w-full text-sm text-[var(--owner-danger)]">{state.error}</p>
       ) : null}
       {state.message ? (
-        <p className="w-full text-sm text-[#b8d4a8]">{state.message}</p>
+        <p className="w-full text-sm text-[var(--owner-ok)]">{state.message}</p>
       ) : null}
-      <p className="w-full text-xs text-[#cbb3a0]/80">
+      <p className="w-full text-xs text-chocolate-soft/80">
         Payment status is set only by Stripe webhooks and cannot be edited here.
       </p>
     </form>
