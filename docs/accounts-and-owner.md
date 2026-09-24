@@ -24,16 +24,19 @@
 
 Without `DATABASE_URL`, checkout can still run in Stripe test mode, but **no order rows** are written and the owner panel stays empty (no fake sample orders).
 
-## Owner bootstrap (first OWNER only)
+## Owner panel (password-gated)
 
-1. Set `DATABASE_URL`, `AUTH_SECRET`, and a long random `OWNER_BOOTSTRAP_SECRET` in `.env.local` / Vercel Preview (never commit secrets).
-2. Run migrations: `npx prisma migrate dev --name init` (or `prisma db push` for a throwaway DB).
-3. Open **`/owner/bootstrap`** (Preview / unlocked local only while coming-soon gates Production).
-4. Submit name, email, password (12+), and the bootstrap secret.
-5. Sign in at `/en/sign-in`, then open `/owner`.
-6. After one OWNER exists, bootstrap refuses further creates. Remove or rotate `OWNER_BOOTSTRAP_SECRET` afterward.
+1. Set **Preview** env vars (not Production unless you want them there):
+   - `DATABASE_URL` — Neon/Postgres
+   - `AUTH_SECRET`
+   - `OWNER_BOOTSTRAP_SECRET`
+   - `OWNER_PANEL_SECRET` — unlocks only `/owner`
+2. `npx prisma migrate deploy`
+3. Open `/owner/gate` → enter panel password → `/owner/bootstrap` → create owner → `/owner/login`
+4. **Orders** and **Memberships** tabs list paid Stripe orders and customer accounts.
 
-Customer signup **never** accepts a role field.
+Production countdown stays public. Owner unlock does **not** open the shop for visitors.
+
 
 ## Owner panel
 

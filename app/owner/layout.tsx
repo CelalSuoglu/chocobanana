@@ -43,11 +43,17 @@ export default function OwnerRootLayout({ children }: { children: ReactNode }) {
               <Link href="/owner" className="hover:text-[#f3e6d8]">
                 Orders
               </Link>
+              <Link href="/owner/members" className="hover:text-[#f3e6d8]">
+                Memberships
+              </Link>
               <Link href="/owner/catalog" className="hover:text-[#f3e6d8]">
                 Catalog (soon)
               </Link>
-              <Link href="/owner/bootstrap" className="hover:text-[#f3e6d8]">
-                Bootstrap
+              <Link href="/owner/login" className="hover:text-[#f3e6d8]">
+                Sign in
+              </Link>
+              <Link href="/owner/gate" className="hover:text-[#f3e6d8]">
+                Unlock
               </Link>
               <Link href="/en" className="hover:text-[#f3e6d8]">
                 View site

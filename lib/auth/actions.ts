@@ -110,6 +110,41 @@ export async function loginCustomer(
   }
 }
 
+export async function loginOwner(
+  _prev: AuthActionState,
+  formData: FormData,
+): Promise<AuthActionState> {
+  if (!isDatabaseConfigured()) {
+    return { ok: false, error: "Accounts are not configured in this environment yet." };
+  }
+
+  const email = String(formData.get("email") ?? "").toLowerCase().trim();
+  const password = String(formData.get("password") ?? "");
+
+  const prisma = requirePrisma();
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user || user.role !== "OWNER") {
+    return { ok: false, error: "Owner account required." };
+  }
+
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: "/owner",
+    });
+    return { ok: true };
+  } catch (error) {
+    if (error instanceof AuthError) {
+      if (error.message.includes("EMAIL_NOT_VERIFIED")) {
+        return { ok: false, error: "Please verify your email before signing in." };
+      }
+      return { ok: false, error: "Invalid email or password." };
+    }
+    throw error;
+  }
+}
+
 export async function logoutCustomerAction(formData: FormData) {
   const locale = String(formData.get("locale") ?? "en");
   await signOut({ redirectTo: `/${locale}` });

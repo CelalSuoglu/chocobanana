@@ -30,6 +30,10 @@ export default async function AccountPage({
     redirect(hrefFor(raw, "/sign-in"));
   }
 
+  if (session.user.role === "OWNER") {
+    redirect("/owner");
+  }
+
   const orders = isDatabaseConfigured()
     ? await listOrdersForUser(session.user.id)
     : [];
@@ -65,13 +69,6 @@ export default async function AccountPage({
             {dict.account.signOut}
           </button>
         </form>
-        {session.user.role === "OWNER" ? (
-          <p className="mt-4 text-sm">
-            <Link href="/owner" className="text-pink-deep">
-              {dict.account.openOwner}
-            </Link>
-          </p>
-        ) : null}
       </section>
 
       <section className="mx-auto mt-10 max-w-2xl">

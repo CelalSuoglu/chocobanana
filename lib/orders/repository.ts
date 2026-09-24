@@ -236,6 +236,35 @@ export async function getOwnerOrder(orderId: string) {
   });
 }
 
+export async function listOwnerCustomers(filters: { q?: string } = {}) {
+  const prisma = requirePrisma();
+  const q = filters.q?.trim();
+  return prisma.user.findMany({
+    where: {
+      role: "CUSTOMER",
+      ...(q
+        ? {
+            OR: [
+              { email: { contains: q, mode: "insensitive" } },
+              { name: { contains: q, mode: "insensitive" } },
+            ],
+          }
+        : {}),
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      emailVerified: true,
+      preferredLocale: true,
+      createdAt: true,
+      _count: { select: { orders: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: 200,
+  });
+}
+
 export async function updateFulfillmentStatus(
   orderId: string,
   status: FulfillmentStatus,
