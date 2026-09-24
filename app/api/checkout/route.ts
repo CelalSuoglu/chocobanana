@@ -6,7 +6,25 @@ export const runtime = "nodejs";
 type CheckoutBody = {
   productId?: unknown;
   locale?: unknown;
+  items?: unknown;
 };
+
+function parseItems(
+  value: unknown,
+): { productId: string; quantity: number }[] | null {
+  if (!Array.isArray(value)) return null;
+  const items: { productId: string; quantity: number }[] = [];
+  for (const entry of value) {
+    if (!entry || typeof entry !== "object") continue;
+    const productId = (entry as { productId?: unknown }).productId;
+    const quantity = (entry as { quantity?: unknown }).quantity;
+    if (typeof productId !== "string" || typeof quantity !== "number") {
+      continue;
+    }
+    items.push({ productId: productId.trim(), quantity });
+  }
+  return items;
+}
 
 export async function POST(request: Request) {
   let body: CheckoutBody;
@@ -18,15 +36,19 @@ export async function POST(request: Request) {
   }
 
   const productId =
-    typeof body.productId === "string" ? body.productId.trim() : "";
+    typeof body.productId === "string" ? body.productId.trim() : undefined;
   const locale = typeof body.locale === "string" ? body.locale.trim() : "en";
+  const items = parseItems(body.items) ?? undefined;
 
-  if (!productId) {
-    return NextResponse.json({ error: "productId is required." }, { status: 400 });
+  if (!productId && (!items || items.length === 0)) {
+    return NextResponse.json(
+      { error: "productId or items is required." },
+      { status: 400 },
+    );
   }
 
   try {
-    const result = await createCheckoutSession({ productId, locale });
+    const result = await createCheckoutSession({ productId, locale, items });
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: result.status });
     }

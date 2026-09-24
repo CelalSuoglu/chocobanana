@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Caveat, Cormorant_Garamond, Lora, Noto_Naskh_Arabic, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
+import {
+  Caveat,
+  Cormorant_Garamond,
+  Lora,
+  Noto_Naskh_Arabic,
+  Noto_Sans_JP,
+  Noto_Sans_SC,
+} from "next/font/google";
 import { notFound } from "next/navigation";
+import { SiteShell } from "@/components/site-shell";
 import {
   getDirection,
   isLocale,
@@ -60,7 +68,10 @@ export async function generateMetadata({
   const dict = await getDictionary(locale);
 
   return {
-    title: dict.meta.title,
+    title: {
+      default: dict.meta.title,
+      template: `%s · ${dict.meta.title}`,
+    },
     description: dict.meta.description,
   };
 }
@@ -84,6 +95,7 @@ export default async function LocaleLayout({
 
   const locale = raw;
   const direction = getDirection(locale);
+  const dict = await getDictionary(locale);
 
   return (
     <html
@@ -92,7 +104,7 @@ export default async function LocaleLayout({
       className={`${serif.variable} ${script.variable} ${body.variable} ${arabic.variable} ${japanese.variable} ${chinese.variable} ${localeFontClass(locale)} h-full antialiased`}
     >
       <body
-        className={`min-h-full flex flex-col font-sans text-chocolate ${
+        className={`flex min-h-full flex-col font-sans text-chocolate ${
           locale === "ar"
             ? "[font-family:var(--font-arabic),var(--font-body),serif]"
             : locale === "ja"
@@ -102,7 +114,9 @@ export default async function LocaleLayout({
                 : ""
         }`}
       >
-        {children}
+        <SiteShell locale={locale} dict={dict}>
+          {children}
+        </SiteShell>
       </body>
     </html>
   );

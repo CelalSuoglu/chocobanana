@@ -1,48 +1,53 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana, postayla küçük mutluluklar gönderen sıcak bir mail club."
+    "description": "Chocobanana, yumuşak kırtasiye için sıcak bir mail club."
   },
   "nav": {
+    "home": "Ana sayfa",
     "shop": "Mağaza",
     "mailClub": "Mail Club",
+    "pastLetters": "Geçmiş Mektuplar",
     "about": "Hakkında",
+    "contact": "İletişim",
     "language": "Dil",
-    "currency": "Para birimi"
+    "currency": "Para birimi",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat"
   },
-  "brand": {
+  "home": {
     "greeting": "merhaba, tatlı dostum",
     "name": "Chocobanana",
-    "tagline": "Yumuşak kırtasiye, elle yazılmış anlar ve postada bir sarılmayı andıran paketler için sıcak bir mail club."
-  },
-  "mailClub": {
-    "eyebrow": "her şeyin kalbi",
-    "title": "Mail Club",
-    "body": "Chocobanana basit bir dilekle başladı: postayı yeniden büyülü hissettirmek. Mail Club bu dileğin yaşadığı yer — özenli kırtasiye, oyuncu detaylar ve yavaşça açmak için yapılmış bir şeyin sessiz sevinci.",
-    "cta": "Mail Club'ı Keşfet"
-  },
-  "howItWorks": {
-    "eyebrow": "nazik bir ritim",
-    "title": "Nasıl çalışır",
-    "steps": [
-      {
-        "title": "Kulübü Gez",
-        "text": "Mail Club'da dolaş ve hayal ettiğimiz tatlı paketlere göz at."
+    "tagline": "Yumuşak kırtasiye ve elle yazılmış anlar için sıcak bir mail club.",
+    "explore": "Keşfet",
+    "cards": {
+      "shop": {
+        "title": "Mağaza",
+        "text": "Gerçek ürünlerle değiştirmeye hazır örnek ürün alanlarına göz at."
       },
-      {
-        "title": "Favorilerini Seç",
-        "text": "Sana en çok uyan kırtasiye ve hatıralıkları seç — yumuşak, oyuncu ve biraz nostaljik."
+      "mailClub": {
+        "title": "Mail Club",
+        "text": "Kulübün hissini öğren — üyelik koşulları uydurulmadan."
       },
-      {
-        "title": "Postayı Aç",
-        "text": "Bir şey geldiğinde sıcak bir içecek al ve postayı açmanın küçük ritüelinin tadını çıkar."
+      "pastLetters": {
+        "title": "Geçmiş Mektuplar",
+        "text": "Sonra doldurulacak örnek mektup kartları."
+      },
+      "about": {
+        "title": "Hakkında",
+        "text": "Marka hikâyesini yazmaya hazır olduğunda burası."
+      },
+      "contact": {
+        "title": "İletişim",
+        "text": "Düzenlenebilir örnek alanlarla iletişim düzeni."
       }
-    ]
+    }
   },
   "shop": {
     "eyebrow": "küçük hazineler",
-    "title": "Mağazadan",
-    "intro": "Kırtasiye ürünleri ve aylık Mail Club seçeneği. Katalog fiyatları sunucuda CAD olarak tutulur; ödeme Stripe'da açılır.",
+    "title": "Mağaza",
+    "intro": "Sunucu kataloğundaki kırtasiye ürünleri. Fiyatlar CAD; istediğin zaman sepete ekle.",
+    "currencyNote": "Katalog fiyatları sunucuda CAD olarak tutulur.",
     "products": {
       "letterSets": {
         "name": "Mektup Setleri",
@@ -50,62 +55,147 @@
       },
       "stickerSheets": {
         "name": "Sticker Sayfaları",
-        "note": "Küçük yıldızlar, pembe kalpler ve zarfı süslemeye hazır doodle'lar."
+        "note": "Küçük yıldızlar, pembe kalpler ve zarf süslemeleri."
       },
       "sealingTouches": {
         "name": "Mühür Dokunuşları",
-        "note": "El yapımı hissi veren paketler için mum mühürler ve kurdele detayları."
+        "note": "El yapımı hisli paketler için mum mühür ve kurdele."
       },
       "keepsakeNotes": {
         "name": "Hatıra Notları",
-        "note": "Bir mektuba sıkıştırılacak veya masaya bırakılacak küçük kartlar."
+        "note": "Mektuba sıkıştırılacak veya masaya bırakılacak küçük kartlar."
       }
     }
   },
+  "mailClub": {
+    "eyebrow": "her şeyin kalbi",
+    "title": "Mail Club",
+    "intro": "Mail Club'ın nasıl hissettirmesi gerektiğine dair nazik bir özet. Üyelik ayrıntıları siz karar verene kadar boş kalır.",
+    "stepsTitle": "Nasıl çalışır",
+    "steps": [
+      {
+        "title": "Özenle gez",
+        "text": "Kulüp sayfalarında dolaş ve paylaşmak istediğin paketleri hayal et."
+      },
+      {
+        "title": "Sana uyanı seç",
+        "text": "Yumuşak, oyuncu ve biraz nostaljik kırtasiye ruhlarını seç."
+      },
+      {
+        "title": "Postayı aç",
+        "text": "Bir şey geldiğinde yavaşça ve keyifle aç."
+      }
+    ],
+    "detailsTitle": "Sonra doldurulacak ayrıntılar",
+    "detailsBody": "[Üyelik ritmi, nelerin dahil olduğu ve kurallar hazır olunca buraya ekleyin.]"
+  },
+  "pastLetters": {
+    "eyebrow": "arşivden",
+    "title": "Geçmiş Mektuplar",
+    "intro": "Bu kartlar yer tutucudur. Başlık, tarih ve önizlemeleri gerçek mektuplarla değiştirin.",
+    "items": [
+      {
+        "title": "[Mektup başlığı]",
+        "date": "[Ay Yıl]",
+        "preview": "[Kısa önizleme — sonra düzenleyin.]"
+      },
+      {
+        "title": "[Mektup başlığı]",
+        "date": "[Ay Yıl]",
+        "preview": "[Kısa önizleme — sonra düzenleyin.]"
+      },
+      {
+        "title": "[Mektup başlığı]",
+        "date": "[Ay Yıl]",
+        "preview": "[Kısa önizleme — sonra düzenleyin.]"
+      }
+    ]
+  },
   "about": {
     "eyebrow": "hikâyemiz",
-    "title": "Chocobanana Hakkında",
-    "p1": "Chocobanana gece geç saatlerde yazılan mektuplardan, scrapbook kırıntılarından ve el yapımı her şeye duyulan zaaftan büyüdü. Postanın hâlâ sıcaklık taşıyabileceğine inanıyoruz — bir sticker, bir not, özenle seçilmiş bir kâğıt.",
-    "p2": "Altın yıldızlı yavru kedi, sıcak posta günlerinin küçük koruyucusu. Yaptığımız her şey aynı hissi hedefler: tatlı, biraz nostaljik ve nazikçe oyuncu."
+    "title": "Hakkında",
+    "intro": "Aşağıdaki alanlar yer tutucudur. Hazır olduğunuzda gerçek Chocobanana hikâyesiyle değiştirin.",
+    "p1": "[Marka hikâyesi paragraf 1 — düzenleyin.]",
+    "p2": "[Marka hikâyesi paragraf 2 — düzenleyin.]",
+    "logoNote": "Altın yıldızlı yavru kedi, sitede görünen marka logosudur."
+  },
+  "contact": {
+    "eyebrow": "merhaba de",
+    "title": "İletişim",
+    "intro": "Yalnızca örnek alanlar. Yer tutucuları değiştirin ve formu sonra bağlayın.",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "[merhaba@ornek.com]",
+    "nameLabel": "Ad",
+    "namePlaceholder": "[Adınız]",
+    "messageLabel": "Mesaj",
+    "messagePlaceholder": "[Mesajınızı buraya yazın]",
+    "submit": "Gönder (örnek)",
+    "formNote": "Bu form henüz mesaj göndermiyor. Sonra bağlanacak bir düzen örneğidir.",
+    "submittedNote": "Yalnızca örnek — mesaj gönderilmedi."
+  },
+  "checkout": {
+    "buy": "Buy",
+    "subscribe": "Subscribe monthly",
+    "perMonth": "/ month",
+    "unavailable": "Checkout is not available in this environment yet.",
+    "error": "Something went wrong starting checkout. Please try again.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
+    "testModeNote": "Test mode: use Stripe test cards. No live charges.",
+    "successEyebrow": "almost there",
+    "successTitle": "Payment received by Stripe",
+    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successMissing": "We could not find a checkout session to display.",
+    "cancelEyebrow": "no worries",
+    "cancelTitle": "Checkout canceled",
+    "cancelBody": "Nothing was charged. You can return to the shop whenever you like.",
+    "backToShop": "Back to shop",
+    "stripeStatus": "Stripe payment status",
+    "statusPaidOnStripe": "paid",
+    "integrationAmount": "Amount in CAD (integration currency)",
+    "presentmentAmount": "Amount charged in presentment currency",
+    "orderRecord": "Order record",
+    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "contactEmail": "Contact email",
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
   },
   "footer": {
     "tagline": "mail club",
     "credit": "Yumuşak kâğıt ve altın yıldızlarla yapıldı."
   },
   "currency": {
-    "estimatedNote": "Gördüğün dönüştürülmüş tutar yalnızca gezinme tahminidir. Tahsil edilecek tutar ödeme sırasında onaylanır.",
-    "baseNote": "Katalog fiyatları CAD cinsinden belirlenir.",
-    "preferenceHint": "Para birimi tercihin, ödeme hazır olduğunda kullanılmak üzere kaydedilir."
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Para birimi tercihin sayfalar arasında korunur."
   },
   "a11y": {
     "logoAlt": "Altın yıldız takan yavru kedili Chocobanana mail club logosu",
     "selectLanguage": "Dil seç",
     "selectCurrency": "Para birimi seç"
   },
-  "checkout": {
-    "buy": "Satın al",
-    "subscribe": "Aylık abone ol",
-    "perMonth": "/ ay",
-    "unavailable": "Ödeme bu ortamda henüz kullanılamıyor.",
-    "error": "Ödeme başlatılamadı. Lütfen tekrar deneyin.",
-    "preferredCurrencyHint": "Tercih edilen para birimi {currency}, Adaptive Pricing uygulanırsa Stripe Checkout için kaydedilir. Yukarıdaki CAD fiyatı dönüştürülmüş tahsilat değildir.",
-    "testModeNote": "Test modu: Stripe test kartlarını kullanın. Gerçek tahsilat yok.",
-    "successEyebrow": "neredeyse",
-    "successTitle": "Ödeme Stripe tarafından alındı",
-    "successBody": "Siparişiniz için teşekkürler. Onayı yalnızca bu sayfaya değil, Stripe webhook'larına göre yapıyoruz.",
-    "successMissing": "Gösterilecek bir ödeme oturumu bulunamadı.",
-    "cancelEyebrow": "sorun değil",
-    "cancelTitle": "Ödeme iptal edildi",
-    "cancelBody": "Herhangi bir ücret alınmadı. İstediğiniz zaman mağazaya dönebilirsiniz.",
-    "backToShop": "Mağazaya dön",
-    "stripeStatus": "Stripe ödeme durumu",
-    "statusPaidOnStripe": "ödendi",
-    "integrationAmount": "CAD tutarı (entegrasyon para birimi)",
-    "presentmentAmount": "Sunulan para biriminde tahsil edilen tutar",
-    "orderRecord": "Sipariş kaydı",
-    "orderRecordReady": "Webhook bu siparişi geçici depoya kaydetti",
-    "orderRecordPendingWebhook": "Webhook onayı bekleniyor (yalnızca yönlendirmeye güvenilmez)",
-    "contactEmail": "İletişim e-postası",
-    "webhookTrustNote": "Bu sayfa Checkout Session'ı Stripe'dan okur. Kalıcı sipariş için gerçek bir veritabanı gerekir."
+  "cart": {
+    "eyebrow": "sepetin",
+    "title": "Sepet",
+    "intro": "Ödemeden önce ürünlerini gözden geçir. Adetler bu cihazda saklanır.",
+    "openCart": "Sepeti aç",
+    "addToCart": "Sepete ekle",
+    "added": "Eklendi",
+    "empty": "Sepetin boş.",
+    "continueShopping": "Alışverişe devam et",
+    "unitPrice": "Birim fiyat",
+    "lineTotal": "Satır toplamı",
+    "increase": "Adedi artır",
+    "decrease": "Adedi azalt",
+    "remove": "Kaldır",
+    "clear": "Sepeti temizle",
+    "subtotal": "Ara toplam",
+    "cadBasisNote": "Tüm sepet hesabı sunucudaki CAD katalog fiyatlarını kullanır.",
+    "estimateNote": "Tercih edilen görüntüleme para birimi {currency}. CAD tutarlar dönüştürülmüş yerel tahsilat değildir.",
+    "checkoutFinalNote": "Ödeyeceğin tutar Stripe Checkout sayfasında kesinleşir.",
+    "checkout": "Ödeme",
+    "checkoutPending": "Ödeme başlatılıyor…",
+    "checkoutUnavailable": "Ödeme bu ortamda henüz yok. Sepetin yine de saklanır.",
+    "checkoutError": "Ödeme başlatılamadı. Tekrar dene.",
+    "loading": "Sepet yükleniyor…"
   }
 }

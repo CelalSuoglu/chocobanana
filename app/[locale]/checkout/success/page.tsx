@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ClearCartOnSuccess } from "@/components/clear-cart-on-success";
 import { getOrderStore } from "@/lib/orders/store";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
@@ -42,7 +43,7 @@ export default async function CheckoutSuccessPage({
         </h1>
         <p className="mt-4 text-chocolate-soft">{dict.checkout.successMissing}</p>
         <Link
-          href={`/${rawLocale}#shop`}
+          href={`/${rawLocale}/shop`}
           className="mt-8 font-serif text-sm tracking-[0.12em] uppercase text-pink-deep"
         >
           {dict.checkout.backToShop}
@@ -74,6 +75,7 @@ export default async function CheckoutSuccessPage({
 
   return (
     <main className="section-pad mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center py-16 text-center">
+      <ClearCartOnSuccess active={paidOnStripe} />
       <p className="font-script text-2xl text-pink-deep">
         {dict.checkout.successEyebrow}
       </p>
@@ -134,7 +136,7 @@ export default async function CheckoutSuccessPage({
       </div>
 
       <Link
-        href={`/${rawLocale}#shop`}
+        href={`/${rawLocale}/shop`}
         className="mt-8 font-serif text-sm tracking-[0.12em] uppercase text-pink-deep"
       >
         {dict.checkout.backToShop}

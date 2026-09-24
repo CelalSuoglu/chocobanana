@@ -33,10 +33,14 @@ export type CatalogProduct = {
   /** Source of truth for Checkout `unit_amount` */
   amountCadCents: number;
   currency: typeof baseCurrency;
+  /** Public image path under /public */
+  imageSrc: string;
   /** Only for kind === "subscription" */
   interval?: "month";
   /** Offered in checkout when payments mode allows */
   purchasable: boolean;
+  /** Allowed in the shopping cart (one-time items only for multi-item Checkout) */
+  cartEligible: boolean;
 };
 
 /**
@@ -52,7 +56,9 @@ export const catalogProducts: readonly CatalogProduct[] = [
     kind: "one_time",
     amountCadCents: 1800,
     currency: baseCurrency,
+    imageSrc: "/logo.jpg",
     purchasable: true,
+    cartEligible: true,
   },
   {
     id: "sticker-sheets",
@@ -62,7 +68,9 @@ export const catalogProducts: readonly CatalogProduct[] = [
     kind: "one_time",
     amountCadCents: 1200,
     currency: baseCurrency,
+    imageSrc: "/logo.jpg",
     purchasable: true,
+    cartEligible: true,
   },
   {
     id: "sealing-touches",
@@ -72,7 +80,9 @@ export const catalogProducts: readonly CatalogProduct[] = [
     kind: "one_time",
     amountCadCents: 2200,
     currency: baseCurrency,
+    imageSrc: "/logo.jpg",
     purchasable: true,
+    cartEligible: true,
   },
   {
     id: "keepsake-notes",
@@ -82,7 +92,9 @@ export const catalogProducts: readonly CatalogProduct[] = [
     kind: "one_time",
     amountCadCents: 1000,
     currency: baseCurrency,
+    imageSrc: "/logo.jpg",
     purchasable: true,
+    cartEligible: true,
   },
   {
     id: "mail-club-monthly",
@@ -92,7 +104,9 @@ export const catalogProducts: readonly CatalogProduct[] = [
     amountCadCents: 2800,
     currency: baseCurrency,
     interval: "month",
+    imageSrc: "/logo.jpg",
     purchasable: true,
+    cartEligible: false,
   },
 ] as const;
 
@@ -102,4 +116,10 @@ export function getCatalogProduct(id: string): CatalogProduct | undefined {
 
 export function getPurchasableProducts(): CatalogProduct[] {
   return catalogProducts.filter((product) => product.purchasable);
+}
+
+export function getCartEligibleProducts(): CatalogProduct[] {
+  return catalogProducts.filter(
+    (product) => product.purchasable && product.cartEligible,
+  );
 }

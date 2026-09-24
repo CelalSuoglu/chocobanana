@@ -1,111 +1,201 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana es un mail club acogedor que envía pequeñas dulzuras por correo."
+    "description": "Chocobanana is a cozy mail club for soft stationery and handwritten moments."
   },
   "nav": {
+    "home": "Inicio",
     "shop": "Tienda",
     "mailClub": "Mail Club",
+    "pastLetters": "Cartas anteriores",
     "about": "Acerca de",
+    "contact": "Contacto",
     "language": "Idioma",
-    "currency": "Moneda"
+    "currency": "Moneda",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
-  "brand": {
-    "greeting": "hola, dulce amiga",
+  "home": {
+    "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "Un pequeño mail club acogedor para papelería suave, momentos manuscritos y paquetes que se sienten como un abrazo en el correo."
-  },
-  "mailClub": {
-    "eyebrow": "el corazón de todo",
-    "title": "El Mail Club",
-    "body": "Chocobanana nació de un deseo sencillo: hacer que recibir correo vuelva a sentirse mágico. El Mail Club es donde vive ese deseo — papelería cuidadosa, detalles juguetones y la quieta alegría de abrir algo hecho con cariño.",
-    "cta": "Explorar el Mail Club"
-  },
-  "howItWorks": {
-    "eyebrow": "un ritmo suave",
-    "title": "Cómo funciona",
-    "steps": [
-      {
-        "title": "Explora el Club",
-        "text": "Recorre el Mail Club y mira qué tipo de dulces paquetes imaginamos."
+    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "explore": "Explore",
+    "cards": {
+      "shop": {
+        "title": "Shop",
+        "text": "Browse sample product slots ready to replace with your real listings."
       },
-      {
-        "title": "Elige tus favoritos",
-        "text": "Escoge la papelería y los recuerdos que más te representen — suaves, juguetones y un poco nostálgicos."
+      "mailClub": {
+        "title": "Mail Club",
+        "text": "Learn how the club is meant to feel — gentle steps, no inventing of membership terms."
       },
-      {
-        "title": "Abre el correo",
-        "text": "Cuando algo llegue, siéntate con algo caliente y disfruta el pequeño ritual de abrir el correo."
-      }
-    ]
-  },
-  "shop": {
-    "eyebrow": "pequeños tesoros",
-    "title": "De la tienda",
-    "intro": "Papelería y una opción mensual de Mail Club. Los precios del catálogo están en CAD en el servidor; el pago se abre en Stripe.",
-    "products": {
-      "letterSets": {
-        "name": "Sets de cartas",
-        "note": "Papel suave, líneas gentiles y espacio para escribir algo amable."
+      "pastLetters": {
+        "title": "Past Letters",
+        "text": "A gallery of placeholder letter cards you can fill with real archives later."
       },
-      "stickerSheets": {
-        "name": "Hojas de stickers",
-        "note": "Estrellitas, corazones rosados y garabatos listos para adornar un sobre."
+      "about": {
+        "title": "About",
+        "text": "Space for the brand story once you are ready to write it."
       },
-      "sealingTouches": {
-        "name": "Toques de sello",
-        "note": "Sellos de lacre y cintas para paquetes con sensación artesanal."
-      },
-      "keepsakeNotes": {
-        "name": "Notas de recuerdo",
-        "note": "Tarjetitas para meter en una carta o dejar sobre un escritorio."
+      "contact": {
+        "title": "Contact",
+        "text": "Reach out through a contact layout with editable sample fields."
       }
     }
   },
+  "shop": {
+    "eyebrow": "pequeños tesoros",
+    "title": "Tienda",
+    "intro": "Piezas de papelería del catálogo del servidor. Precios en CAD; añádelas al carrito cuando quieras.",
+    "currencyNote": "Los precios del catálogo se guardan en CAD en el servidor.",
+    "products": {
+      "letterSets": {
+        "name": "Sets de cartas",
+        "note": "Papel suave, líneas delicadas y espacio para escribir algo amable."
+      },
+      "stickerSheets": {
+        "name": "Hojas de pegatinas",
+        "note": "Estrellitas, corazones rosa y doodles para vestir un sobre."
+      },
+      "sealingTouches": {
+        "name": "Toques de sello",
+        "note": "Sellos de cera y cintas para paquetes con aire artesanal."
+      },
+      "keepsakeNotes": {
+        "name": "Notas recuerdo",
+        "note": "Tarjetitas para meter en una carta o dejar en el escritorio."
+      }
+    }
+  },
+  "mailClub": {
+    "eyebrow": "the heart of it all",
+    "title": "Mail Club",
+    "intro": "A gentle outline of how the Mail Club is meant to work. Membership details and schedules stay blank until you decide them.",
+    "stepsTitle": "How it works",
+    "steps": [
+      {
+        "title": "Browse with care",
+        "text": "Wander through the club pages and see the kinds of parcels you hope to share."
+      },
+      {
+        "title": "Choose what fits",
+        "text": "Pick stationery moods and keepsakes that feel soft, playful, and a little nostalgic."
+      },
+      {
+        "title": "Open the mail",
+        "text": "When something arrives, settle in and enjoy the ritual of opening a thoughtful letter."
+      }
+    ],
+    "detailsTitle": "Details to fill in later",
+    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]"
+  },
+  "pastLetters": {
+    "eyebrow": "from the archive",
+    "title": "Past Letters",
+    "intro": "These cards are placeholders for past mailings. Replace titles, dates, and previews with real letter stories when you have them.",
+    "items": [
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      }
+    ]
+  },
   "about": {
-    "eyebrow": "nuestra historia",
-    "title": "Acerca de Chocobanana",
-    "p1": "Chocobanana creció de cartas escritas de madrugada, recortes de scrapbook y un cariño por todo lo hecho a mano. Creemos que el correo aún puede llevar calidez — un sticker, una nota, un papel elegido con cuidado.",
-    "p2": "El gatito con la estrella dorada es nuestro pequeño guardián de los días de correo acogedores. Todo lo que hacemos busca esa misma sensación: dulce, un poco nostálgica y suavemente juguetona."
+    "eyebrow": "our story",
+    "title": "About",
+    "intro": "Brand story fields below are editable placeholders. Replace them with the real Chocobanana story when you are ready.",
+    "p1": "[Brand story paragraph 1 — edit in messages files.]",
+    "p2": "[Brand story paragraph 2 — edit in messages files.]",
+    "logoNote": "The kitten with the golden star is the brand mark shown on this site."
+  },
+  "contact": {
+    "eyebrow": "say hello",
+    "title": "Contact",
+    "intro": "Sample contact fields only. Replace placeholders with real details and wire the form when your inbox is ready.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "[hello@example.com]",
+    "nameLabel": "Name",
+    "namePlaceholder": "[Your name]",
+    "messageLabel": "Message",
+    "messagePlaceholder": "[Write your message here]",
+    "submit": "Send (placeholder)",
+    "formNote": "This form does not send messages yet. It is a layout sample you can connect later.",
+    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready."
+  },
+  "checkout": {
+    "buy": "Buy",
+    "subscribe": "Subscribe monthly",
+    "perMonth": "/ month",
+    "unavailable": "Checkout is not available in this environment yet.",
+    "error": "Something went wrong starting checkout. Please try again.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
+    "testModeNote": "Test mode: use Stripe test cards. No live charges.",
+    "successEyebrow": "almost there",
+    "successTitle": "Payment received by Stripe",
+    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successMissing": "We could not find a checkout session to display.",
+    "cancelEyebrow": "no worries",
+    "cancelTitle": "Checkout canceled",
+    "cancelBody": "Nothing was charged. You can return to the shop whenever you like.",
+    "backToShop": "Back to shop",
+    "stripeStatus": "Stripe payment status",
+    "statusPaidOnStripe": "paid",
+    "integrationAmount": "Amount in CAD (integration currency)",
+    "presentmentAmount": "Amount charged in presentment currency",
+    "orderRecord": "Order record",
+    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "contactEmail": "Contact email",
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
   },
   "footer": {
     "tagline": "mail club",
-    "credit": "Hecho con papel suave y estrellas doradas."
+    "credit": "Made with soft paper & golden stars."
   },
   "currency": {
-    "estimatedNote": "Cualquier importe convertido que veas es solo una estimación para navegar. El importe cobrado se confirma en el pago.",
-    "baseNote": "Los precios del catálogo están fijados en CAD.",
-    "preferenceHint": "Tu preferencia de moneda se guarda para cuando el pago esté disponible."
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Your currency preference is saved across pages."
   },
   "a11y": {
-    "logoAlt": "Logo de Chocobanana mail club con un gatito que lleva una estrella dorada",
-    "selectLanguage": "Seleccionar idioma",
-    "selectCurrency": "Seleccionar moneda"
+    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
+    "selectLanguage": "Select language",
+    "selectCurrency": "Select currency"
   },
-  "checkout": {
-    "buy": "Comprar",
-    "subscribe": "Suscribirse mensualmente",
-    "perMonth": "/ mes",
-    "unavailable": "El pago aún no está disponible en este entorno.",
-    "error": "No se pudo iniciar el pago. Inténtalo de nuevo.",
-    "preferredCurrencyHint": "La moneda preferida {currency} se guarda para Stripe Checkout cuando aplica Adaptive Pricing. El precio en CAD no es un cargo convertido.",
-    "testModeNote": "Modo de prueba: usa tarjetas de prueba de Stripe. Sin cargos reales.",
-    "successEyebrow": "casi",
-    "successTitle": "Pago recibido por Stripe",
-    "successBody": "Gracias por tu pedido. Confirmamos con webhooks de Stripe, no solo con esta página.",
-    "successMissing": "No encontramos una sesión de pago para mostrar.",
-    "cancelEyebrow": "no pasa nada",
-    "cancelTitle": "Pago cancelado",
-    "cancelBody": "No se cobró nada. Puedes volver a la tienda cuando quieras.",
-    "backToShop": "Volver a la tienda",
-    "stripeStatus": "Estado del pago en Stripe",
-    "statusPaidOnStripe": "pagado",
-    "integrationAmount": "Importe en CAD (moneda de integración)",
-    "presentmentAmount": "Importe cobrado en moneda de presentación",
-    "orderRecord": "Registro del pedido",
-    "orderRecordReady": "El webhook registró este pedido en el almacén temporal",
-    "orderRecordPendingWebhook": "Esperando confirmación del webhook (no fiamos solo la redirección)",
-    "contactEmail": "Correo de contacto",
-    "webhookTrustNote": "Esta página lee la sesión de Checkout en Stripe. Aún hace falta una base de datos real para pedidos duraderos."
+  "cart": {
+    "eyebrow": "tu cesta",
+    "title": "Carrito",
+    "intro": "Revisa tus artículos antes de pagar. Las cantidades se guardan en este dispositivo.",
+    "openCart": "Abrir carrito",
+    "addToCart": "Añadir al carrito",
+    "added": "Añadido",
+    "empty": "Tu carrito está vacío.",
+    "continueShopping": "Seguir comprando",
+    "unitPrice": "Precio unitario",
+    "lineTotal": "Total de línea",
+    "increase": "Aumentar cantidad",
+    "decrease": "Reducir cantidad",
+    "remove": "Eliminar",
+    "clear": "Vaciar carrito",
+    "subtotal": "Subtotal",
+    "cadBasisNote": "Todos los cálculos del carrito usan precios CAD del servidor.",
+    "estimateNote": "La moneda de visualización preferida es {currency}. Los importes en CAD no son un cargo local convertido.",
+    "checkoutFinalNote": "El importe a pagar se confirma en Stripe Checkout.",
+    "checkout": "Pagar",
+    "checkoutPending": "Iniciando pago…",
+    "checkoutUnavailable": "El pago aún no está disponible aquí. Tu carrito se conserva.",
+    "checkoutError": "No se pudo iniciar el pago. Inténtalo de nuevo.",
+    "loading": "Cargando carrito…"
   }
 }

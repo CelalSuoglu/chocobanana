@@ -1,48 +1,53 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana is a cozy mail club sending little sweets of joy through the post."
+    "description": "Chocobanana is a cozy mail club for soft stationery and handwritten moments."
   },
   "nav": {
+    "home": "Home",
     "shop": "Shop",
     "mailClub": "Mail Club",
+    "pastLetters": "Past Letters",
     "about": "About",
+    "contact": "Contact",
     "language": "Language",
-    "currency": "Currency"
+    "currency": "Currency",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
-  "brand": {
+  "home": {
     "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post."
-  },
-  "mailClub": {
-    "eyebrow": "the heart of it all",
-    "title": "The Mail Club",
-    "body": "Chocobanana began with a simple wish: to make getting mail feel magical again. The Mail Club is where that wish lives — thoughtful stationery, playful details, and the quiet joy of something made just for opening slowly.",
-    "cta": "Explore the Mail Club"
-  },
-  "howItWorks": {
-    "eyebrow": "a gentle rhythm",
-    "title": "How it works",
-    "steps": [
-      {
-        "title": "Browse the Club",
-        "text": "Wander through the Mail Club and see what kinds of sweet parcels we dream up."
+    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "explore": "Explore",
+    "cards": {
+      "shop": {
+        "title": "Shop",
+        "text": "Browse sample product slots ready to replace with your real listings."
       },
-      {
-        "title": "Choose Your Favorites",
-        "text": "Pick the stationery and keepsakes that feel most like you — soft, playful, and a little nostalgic."
+      "mailClub": {
+        "title": "Mail Club",
+        "text": "Learn how the club is meant to feel — gentle steps, no inventing of membership terms."
       },
-      {
-        "title": "Open the Mail",
-        "text": "When something arrives, settle in with a cup of something warm and enjoy the little ritual of opening mail."
+      "pastLetters": {
+        "title": "Past Letters",
+        "text": "A gallery of placeholder letter cards you can fill with real archives later."
+      },
+      "about": {
+        "title": "About",
+        "text": "Space for the brand story once you are ready to write it."
+      },
+      "contact": {
+        "title": "Contact",
+        "text": "Reach out through a contact layout with editable sample fields."
       }
-    ]
+    }
   },
   "shop": {
     "eyebrow": "little treasures",
-    "title": "From the Shop",
-    "intro": "Stationery pieces and a monthly Mail Club option. Catalog prices are set in CAD on the server; checkout opens on Stripe.",
+    "title": "Shop",
+    "intro": "Stationery pieces from the server catalog. Prices are set in CAD; add items to your cart anytime.",
+    "currencyNote": "Catalog prices are stored in CAD on the server.",
     "products": {
       "letterSets": {
         "name": "Letter Sets",
@@ -62,13 +67,104 @@
       }
     }
   },
+  "cart": {
+    "eyebrow": "your basket",
+    "title": "Cart",
+    "intro": "Review your items before checkout. Quantities and removals update instantly and stay saved on this device.",
+    "openCart": "Open cart",
+    "addToCart": "Add to Cart",
+    "added": "Added",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "unitPrice": "Unit price",
+    "lineTotal": "Line total",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "remove": "Remove",
+    "clear": "Clear cart",
+    "subtotal": "Subtotal",
+    "cadBasisNote": "All cart math uses CAD catalog prices from the server.",
+    "estimateNote": "Preferred display currency is {currency}. Amounts shown in CAD are not a converted local charge.",
+    "checkoutFinalNote": "The amount you pay is confirmed on the Stripe Checkout page.",
+    "checkout": "Checkout",
+    "checkoutPending": "Starting checkout…",
+    "checkoutUnavailable": "Checkout is not available in this environment yet. Your cart is still saved.",
+    "checkoutError": "Unable to start checkout. Please try again.",
+    "loading": "Loading cart…"
+  },
+  "mailClub": {
+    "eyebrow": "the heart of it all",
+    "title": "Mail Club",
+    "intro": "A gentle outline of how the Mail Club is meant to work. Membership details and schedules stay blank until you decide them.",
+    "stepsTitle": "How it works",
+    "steps": [
+      {
+        "title": "Browse with care",
+        "text": "Wander through the club pages and see the kinds of parcels you hope to share."
+      },
+      {
+        "title": "Choose what fits",
+        "text": "Pick stationery moods and keepsakes that feel soft, playful, and a little nostalgic."
+      },
+      {
+        "title": "Open the mail",
+        "text": "When something arrives, settle in and enjoy the ritual of opening a thoughtful letter."
+      }
+    ],
+    "detailsTitle": "Details to fill in later",
+    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]"
+  },
+  "pastLetters": {
+    "eyebrow": "from the archive",
+    "title": "Past Letters",
+    "intro": "These cards are placeholders for past mailings. Replace titles, dates, and previews with real letter stories when you have them.",
+    "items": [
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      }
+    ]
+  },
+  "about": {
+    "eyebrow": "our story",
+    "title": "About",
+    "intro": "Brand story fields below are editable placeholders. Replace them with the real Chocobanana story when you are ready.",
+    "p1": "[Brand story paragraph 1 — edit in messages files.]",
+    "p2": "[Brand story paragraph 2 — edit in messages files.]",
+    "logoNote": "The kitten with the golden star is the brand mark shown on this site."
+  },
+  "contact": {
+    "eyebrow": "say hello",
+    "title": "Contact",
+    "intro": "Sample contact fields only. Replace placeholders with real details and wire the form when your inbox is ready.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "[hello@example.com]",
+    "nameLabel": "Name",
+    "namePlaceholder": "[Your name]",
+    "messageLabel": "Message",
+    "messagePlaceholder": "[Write your message here]",
+    "submit": "Send (placeholder)",
+    "formNote": "This form does not send messages yet. It is a layout sample you can connect later.",
+    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready."
+  },
   "checkout": {
     "buy": "Buy",
     "subscribe": "Subscribe monthly",
     "perMonth": "/ month",
     "unavailable": "Checkout is not available in this environment yet.",
     "error": "Something went wrong starting checkout. Please try again.",
-    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies. The CAD catalog price above is not a converted charge.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
     "testModeNote": "Test mode: use Stripe test cards. No live charges.",
     "successEyebrow": "almost there",
     "successTitle": "Payment received by Stripe",
@@ -88,12 +184,6 @@
     "contactEmail": "Contact email",
     "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
   },
-  "about": {
-    "eyebrow": "our story",
-    "title": "About Chocobanana",
-    "p1": "Chocobanana grew from late-night letter writing, scrapbook scraps, and a soft spot for anything that feels handmade. We believe the post can still carry warmth — a sticker, a note, a carefully chosen paper — reminders that someone thought of you.",
-    "p2": "The kitten with the golden star is our little guardian of cozy mail days. Everything we make aims for that same feeling: sweet, a bit nostalgic, and gently playful."
-  },
   "footer": {
     "tagline": "mail club",
     "credit": "Made with soft paper & golden stars."
@@ -101,7 +191,7 @@
   "currency": {
     "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
     "baseNote": "Catalog prices are set in CAD.",
-    "preferenceHint": "Your currency preference is saved for when checkout is available."
+    "preferenceHint": "Your currency preference is saved across pages."
   },
   "a11y": {
     "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",

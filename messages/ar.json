@@ -1,111 +1,201 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "تشوكوبنانا نادي بريد دافئ يرسل لحظات لطيفة عبر البريد."
+    "description": "Chocobanana is a cozy mail club for soft stationery and handwritten moments."
   },
   "nav": {
+    "home": "الرئيسية",
     "shop": "المتجر",
     "mailClub": "نادي البريد",
+    "pastLetters": "رسائل سابقة",
     "about": "من نحن",
+    "contact": "تواصل",
     "language": "اللغة",
-    "currency": "العملة"
+    "currency": "العملة",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
   },
-  "brand": {
-    "greeting": "مرحباً، يا صديقتي اللطيفة",
+  "home": {
+    "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "نادي بريد دافئ للقرطاسية الناعمة واللحظات المكتوبة بخط اليد والطرود التي تشبه حضنًا في صندوق البريد."
-  },
-  "mailClub": {
-    "eyebrow": "قلب كل شيء",
-    "title": "نادي البريد",
-    "body": "بدأت تشوكوبنانا برغبة بسيطة: أن يعود البريد ساحرًا من جديد. نادي البريد هو المكان الذي تعيش فيه تلك الرغبة — قرطاسية بعناية، تفاصيل مرحة، وفرحة هادئة بفتح شيء صُنع ببطء وحب.",
-    "cta": "استكشف نادي البريد"
-  },
-  "howItWorks": {
-    "eyebrow": "إيقاع لطيف",
-    "title": "كيف يعمل",
-    "steps": [
-      {
-        "title": "تصفّح النادي",
-        "text": "تجوّلي في نادي البريد واكتشفي أنواع الطرود اللطيفة التي نتخيّلها."
+    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "explore": "Explore",
+    "cards": {
+      "shop": {
+        "title": "Shop",
+        "text": "Browse sample product slots ready to replace with your real listings."
       },
-      {
-        "title": "اختاري المفضّلات",
-        "text": "اختاري القرطاسية والذكريات الأقرب إليك — ناعمة ومرحة وقليلة الحنين."
+      "mailClub": {
+        "title": "Mail Club",
+        "text": "Learn how the club is meant to feel — gentle steps, no inventing of membership terms."
       },
-      {
-        "title": "افتحي البريد",
-        "text": "عندما يصل شيء ما، اجلسي مع مشروب دافئ واستمتعي بطقوس فتح البريد الصغيرة."
+      "pastLetters": {
+        "title": "Past Letters",
+        "text": "A gallery of placeholder letter cards you can fill with real archives later."
+      },
+      "about": {
+        "title": "About",
+        "text": "Space for the brand story once you are ready to write it."
+      },
+      "contact": {
+        "title": "Contact",
+        "text": "Reach out through a contact layout with editable sample fields."
       }
-    ]
+    }
   },
   "shop": {
     "eyebrow": "كنوز صغيرة",
-    "title": "من المتجر",
-    "intro": "قرطاسية وخيار نادي بريد شهري. أسعار الكتالوج بالدولار الكندي على الخادم؛ الدفع يفتح على Stripe.",
+    "title": "المتجر",
+    "intro": "قطع قرطاسية من كتالوج الخادم. الأسعار بـ CAD؛ أضيفيها إلى السلة متى شئت.",
+    "currencyNote": "أسعار الكتالوج محفوظة بـ CAD على الخادم.",
     "products": {
       "letterSets": {
-        "name": "مجموعات الرسائل",
-        "note": "ورق ناعم وخطوط لطيفة ومساحة لكتابة شيء طيب."
+        "name": "مجموعات رسائل",
+        "note": "ورق ناعم وخطوط لطيفة ومساحة لكتابة شيء رقيق."
       },
       "stickerSheets": {
-        "name": "ملصقات",
-        "note": "نجوم صغيرة وقلوب وردية ورسومات جاهزة لتزيين الظرف."
+        "name": "صفائح ملصقات",
+        "note": "نجوم صغيرة وقلوب وردية ورسومات لزخرفة الظرف."
       },
       "sealingTouches": {
         "name": "لمسات الختم",
         "note": "أختام شمع وشرائط لطرد يبدو مصنوعًا يدويًا."
       },
       "keepsakeNotes": {
-        "name": "بطاقات للتذكار",
-        "note": "بطاقات صغيرة لتوضع في رسالة أو تُترك على المكتب."
+        "name": "ملاحظات تذكارية",
+        "note": "بطاقات صغيرة تُدخل في رسالة أو تُترك على المكتب."
       }
     }
   },
+  "mailClub": {
+    "eyebrow": "the heart of it all",
+    "title": "Mail Club",
+    "intro": "A gentle outline of how the Mail Club is meant to work. Membership details and schedules stay blank until you decide them.",
+    "stepsTitle": "How it works",
+    "steps": [
+      {
+        "title": "Browse with care",
+        "text": "Wander through the club pages and see the kinds of parcels you hope to share."
+      },
+      {
+        "title": "Choose what fits",
+        "text": "Pick stationery moods and keepsakes that feel soft, playful, and a little nostalgic."
+      },
+      {
+        "title": "Open the mail",
+        "text": "When something arrives, settle in and enjoy the ritual of opening a thoughtful letter."
+      }
+    ],
+    "detailsTitle": "Details to fill in later",
+    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]"
+  },
+  "pastLetters": {
+    "eyebrow": "from the archive",
+    "title": "Past Letters",
+    "intro": "These cards are placeholders for past mailings. Replace titles, dates, and previews with real letter stories when you have them.",
+    "items": [
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      }
+    ]
+  },
   "about": {
-    "eyebrow": "قصتنا",
-    "title": "عن تشوكوبنانا",
-    "p1": "نمت تشوكوبنانا من كتابة الرسائل في ساعات متأخرة، وقصاصات الدفاتر، ومن حبّ كل ما يبدو مصنوعًا يدويًا. نؤمن أن البريد ما زال يستطيع حمل الدفء — ملصق، ملاحظة، ورقة مختارة بعناية.",
-    "p2": "القطة الصغيرة ذات النجمة الذهبية هي حارستنا اللطيفة لأيام البريد الدافئة. كل ما نصنعه يسعى إلى الشعور نفسه: حلو، قليل الحنين، ومرح بلطف."
+    "eyebrow": "our story",
+    "title": "About",
+    "intro": "Brand story fields below are editable placeholders. Replace them with the real Chocobanana story when you are ready.",
+    "p1": "[Brand story paragraph 1 — edit in messages files.]",
+    "p2": "[Brand story paragraph 2 — edit in messages files.]",
+    "logoNote": "The kitten with the golden star is the brand mark shown on this site."
   },
-  "footer": {
-    "tagline": "نادي البريد",
-    "credit": "صُنع بورق ناعم ونجوم ذهبية."
-  },
-  "currency": {
-    "estimatedNote": "أي مبلغ محوَّل ترينه هو تقدير للتصفح فقط. يتم تأكيد المبلغ المستحق عند الدفع.",
-    "baseNote": "أسعار الكتالوج محددة بالدولار الكندي (CAD).",
-    "preferenceHint": "يتم حفظ تفضيل العملة لديك لوقت توفّر الدفع."
-  },
-  "a11y": {
-    "logoAlt": "شعار تشوكوبنانا لنادي البريد مع قطة صغيرة ترتدي نجمة ذهبية",
-    "selectLanguage": "اختر اللغة",
-    "selectCurrency": "اختر العملة"
+  "contact": {
+    "eyebrow": "say hello",
+    "title": "Contact",
+    "intro": "Sample contact fields only. Replace placeholders with real details and wire the form when your inbox is ready.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "[hello@example.com]",
+    "nameLabel": "Name",
+    "namePlaceholder": "[Your name]",
+    "messageLabel": "Message",
+    "messagePlaceholder": "[Write your message here]",
+    "submit": "Send (placeholder)",
+    "formNote": "This form does not send messages yet. It is a layout sample you can connect later.",
+    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready."
   },
   "checkout": {
-    "buy": "شراء",
-    "subscribe": "اشتراك شهري",
-    "perMonth": "/ شهر",
-    "unavailable": "الدفع غير متاح بعد في هذه البيئة.",
-    "error": "تعذّر بدء الدفع. حاول مرة أخرى.",
-    "preferredCurrencyHint": "تُحفظ العملة المفضّلة {currency} لصفحة Stripe عندما ينطبق Adaptive Pricing. سعر CAD أعلاه ليس مبلغًا محوَّلاً للتحصيل.",
-    "testModeNote": "وضع الاختبار: استخدم بطاقات اختبار Stripe. لا توجد رسوم حقيقية.",
-    "successEyebrow": "أوشكتِ",
-    "successTitle": "استلم Stripe الدفعة",
-    "successBody": "شكرًا على طلبك. نؤكد عبر webhooks Stripe وليس عبر هذه الصفحة وحدها.",
-    "successMissing": "لم نعثر على جلسة دفع للعرض.",
-    "cancelEyebrow": "لا بأس",
-    "cancelTitle": "أُلغي الدفع",
-    "cancelBody": "لم يُحصَّل أي مبلغ. يمكنك العودة إلى المتجر في أي وقت.",
-    "backToShop": "العودة إلى المتجر",
-    "stripeStatus": "حالة الدفع في Stripe",
-    "statusPaidOnStripe": "مدفوع",
-    "integrationAmount": "المبلغ بالدولار الكندي (عملة التكامل)",
-    "presentmentAmount": "المبلغ المحصَّل بعملة العرض",
-    "orderRecord": "سجل الطلب",
-    "orderRecordReady": "سجّل الـ webhook هذا الطلب في التخزين المؤقت",
-    "orderRecordPendingWebhook": "بانتظار تأكيد الـ webhook (لا نعتمد على التحويل وحده)",
-    "contactEmail": "بريد التواصل",
-    "webhookTrustNote": "تقرأ هذه الصفحة جلسة Checkout من Stripe. ما زلنا بحاجة إلى قاعدة بيانات حقيقية للطلبات الدائمة."
+    "buy": "Buy",
+    "subscribe": "Subscribe monthly",
+    "perMonth": "/ month",
+    "unavailable": "Checkout is not available in this environment yet.",
+    "error": "Something went wrong starting checkout. Please try again.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
+    "testModeNote": "Test mode: use Stripe test cards. No live charges.",
+    "successEyebrow": "almost there",
+    "successTitle": "Payment received by Stripe",
+    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successMissing": "We could not find a checkout session to display.",
+    "cancelEyebrow": "no worries",
+    "cancelTitle": "Checkout canceled",
+    "cancelBody": "Nothing was charged. You can return to the shop whenever you like.",
+    "backToShop": "Back to shop",
+    "stripeStatus": "Stripe payment status",
+    "statusPaidOnStripe": "paid",
+    "integrationAmount": "Amount in CAD (integration currency)",
+    "presentmentAmount": "Amount charged in presentment currency",
+    "orderRecord": "Order record",
+    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "contactEmail": "Contact email",
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Made with soft paper & golden stars."
+  },
+  "currency": {
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Your currency preference is saved across pages."
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
+    "selectLanguage": "Select language",
+    "selectCurrency": "Select currency"
+  },
+  "cart": {
+    "eyebrow": "سلتك",
+    "title": "السلة",
+    "intro": "راجعي منتجاتك قبل الدفع. تُحفظ الكميات على هذا الجهاز.",
+    "openCart": "فتح السلة",
+    "addToCart": "أضف إلى السلة",
+    "added": "تمت الإضافة",
+    "empty": "سلتك فارغة.",
+    "continueShopping": "متابعة التسوق",
+    "unitPrice": "سعر الوحدة",
+    "lineTotal": "إجمالي السطر",
+    "increase": "زيادة الكمية",
+    "decrease": "إنقاص الكمية",
+    "remove": "إزالة",
+    "clear": "تفريغ السلة",
+    "subtotal": "المجموع الفرعي",
+    "cadBasisNote": "كل حسابات السلة تستخدم أسعار CAD من الخادم.",
+    "estimateNote": "عملة العرض المفضّلة هي {currency}. مبالغ CAD ليست تحصيلًا محليًا محوَّلًا.",
+    "checkoutFinalNote": "المبلغ المستحق يُؤكد في صفحة Stripe Checkout.",
+    "checkout": "إتمام الشراء",
+    "checkoutPending": "جارٍ بدء الدفع…",
+    "checkoutUnavailable": "الدفع غير متاح بعد هنا. سلتك ما زالت محفوظة.",
+    "checkoutError": "تعذّر بدء الدفع. حاولي مرة أخرى.",
+    "loading": "جارٍ تحميل السلة…"
   }
 }

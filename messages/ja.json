@@ -1,111 +1,201 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobananaは、やさしい気持ちを郵便で届ける居心地のよいメールクラブです。"
+    "description": "Chocobanana is a cozy mail club for soft stationery and handwritten moments."
   },
   "nav": {
+    "home": "ホーム",
     "shop": "ショップ",
     "mailClub": "メールクラブ",
+    "pastLetters": "これまでの手紙",
     "about": "私たちについて",
+    "contact": "お問い合わせ",
     "language": "言語",
-    "currency": "通貨"
+    "currency": "通貨",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる"
   },
-  "brand": {
-    "greeting": "こんにちは、やさしい友だち",
+  "home": {
+    "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "やわらかい文房具、手書きのひととき、郵便受けに届くハグのような小包のための、居心地のよいメールクラブ。"
-  },
-  "mailClub": {
-    "eyebrow": "すべての中心",
-    "title": "メールクラブ",
-    "body": "Chocobananaは、郵便をもう一度魔法のように感じてもらいたいというシンプルな願いから始まりました。メールクラブは、その願いが生きる場所です。思いやりのある文房具、遊び心のあるディテール、ゆっくり開けるための小さな喜び。",
-    "cta": "メールクラブを見る"
-  },
-  "howItWorks": {
-    "eyebrow": "やさしいリズム",
-    "title": "ご利用の流れ",
-    "steps": [
-      {
-        "title": "クラブを見る",
-        "text": "メールクラブをのぞいて、どんなやさしい小包を思い描いているか見てみましょう。"
+    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "explore": "Explore",
+    "cards": {
+      "shop": {
+        "title": "Shop",
+        "text": "Browse sample product slots ready to replace with your real listings."
       },
-      {
-        "title": "お気に入りを選ぶ",
-        "text": "あなたらしい文房具や記念の品を選びましょう。やわらかく、遊び心があって、少しノスタルジックなもの。"
+      "mailClub": {
+        "title": "Mail Club",
+        "text": "Learn how the club is meant to feel — gentle steps, no inventing of membership terms."
       },
-      {
-        "title": "郵便を開ける",
-        "text": "届いたら、あたたかい飲み物と一緒に、郵便を開ける小さな儀式を楽しんでください。"
-      }
-    ]
-  },
-  "shop": {
-    "eyebrow": "小さな宝物",
-    "title": "ショップより",
-    "intro": "文房具と毎月のメールクラブ。カタログ価格はサーバー側で CAD。チェックアウトは Stripe で開きます。",
-    "products": {
-      "letterSets": {
-        "name": "レターセット",
-        "note": "やわらかい紙、やさしい罫線、やさしい言葉を書くための余白。"
+      "pastLetters": {
+        "title": "Past Letters",
+        "text": "A gallery of placeholder letter cards you can fill with real archives later."
       },
-      "stickerSheets": {
-        "name": "ステッカーシート",
-        "note": "小さな星、ピンクのハート、封筒を飾るための落書きモチーフ。"
+      "about": {
+        "title": "About",
+        "text": "Space for the brand story once you are ready to write it."
       },
-      "sealingTouches": {
-        "name": "シーリングのアクセント",
-        "note": "手作り感のある小包のためのシーリングワックスとリボン。"
-      },
-      "keepsakeNotes": {
-        "name": "記念のミニカード",
-        "note": "手紙に挟んだり、机に置いたりできる小さなカード。"
+      "contact": {
+        "title": "Contact",
+        "text": "Reach out through a contact layout with editable sample fields."
       }
     }
   },
+  "shop": {
+    "eyebrow": "小さな宝物",
+    "title": "ショップ",
+    "intro": "サーバーカタログのステーショナリー。価格は CAD。いつでもカートに追加できます。",
+    "currencyNote": "カタログ価格はサーバー上で CAD として保存されています。",
+    "products": {
+      "letterSets": {
+        "name": "レターセット",
+        "note": "やわらかい紙と優しい線、やさしい言葉を書くための余白。"
+      },
+      "stickerSheets": {
+        "name": "ステッカーシート",
+        "note": "小さな星やピンクのハート、封筒を飾る落書き。"
+      },
+      "sealingTouches": {
+        "name": "シーリングタッチ",
+        "note": "手作り感のある小包のためのワックスシールとリボン。"
+      },
+      "keepsakeNotes": {
+        "name": "キープセイクノート",
+        "note": "手紙に挟んだり机に置いたりする小さなカード。"
+      }
+    }
+  },
+  "mailClub": {
+    "eyebrow": "the heart of it all",
+    "title": "Mail Club",
+    "intro": "A gentle outline of how the Mail Club is meant to work. Membership details and schedules stay blank until you decide them.",
+    "stepsTitle": "How it works",
+    "steps": [
+      {
+        "title": "Browse with care",
+        "text": "Wander through the club pages and see the kinds of parcels you hope to share."
+      },
+      {
+        "title": "Choose what fits",
+        "text": "Pick stationery moods and keepsakes that feel soft, playful, and a little nostalgic."
+      },
+      {
+        "title": "Open the mail",
+        "text": "When something arrives, settle in and enjoy the ritual of opening a thoughtful letter."
+      }
+    ],
+    "detailsTitle": "Details to fill in later",
+    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]"
+  },
+  "pastLetters": {
+    "eyebrow": "from the archive",
+    "title": "Past Letters",
+    "intro": "These cards are placeholders for past mailings. Replace titles, dates, and previews with real letter stories when you have them.",
+    "items": [
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      },
+      {
+        "title": "[Letter title]",
+        "date": "[Month Year]",
+        "preview": "[A short preview of this past letter — edit later.]"
+      }
+    ]
+  },
   "about": {
-    "eyebrow": "私たちの物語",
-    "title": "Chocobananaについて",
-    "p1": "Chocobananaは、夜更けの手紙、スクラップブックの切れ端、手作りのものへの愛情から育ちました。郵便は今もあたたかさを運べると信じています。ステッカー、メモ、丁寧に選んだ紙。",
-    "p2": "金色の星をつけた子猫は、居心地のよい郵便の日々の小さな守りです。私たちがつくるものはすべて、甘く、少し懐かしく、やさしく遊び心のある同じ気持ちをめざしています。"
+    "eyebrow": "our story",
+    "title": "About",
+    "intro": "Brand story fields below are editable placeholders. Replace them with the real Chocobanana story when you are ready.",
+    "p1": "[Brand story paragraph 1 — edit in messages files.]",
+    "p2": "[Brand story paragraph 2 — edit in messages files.]",
+    "logoNote": "The kitten with the golden star is the brand mark shown on this site."
   },
-  "footer": {
-    "tagline": "メールクラブ",
-    "credit": "やわらかい紙と金色の星でつくりました。"
-  },
-  "currency": {
-    "estimatedNote": "表示される換算金額は閲覧用の目安です。実際の請求額はチェックアウト時に確定します。",
-    "baseNote": "カタログ価格はCADで設定されています。",
-    "preferenceHint": "通貨の設定は、チェックアウト準備ができ次第使えるよう保存されます。"
-  },
-  "a11y": {
-    "logoAlt": "金色の星をつけた子猫のChocobananaメールクラブのロゴ",
-    "selectLanguage": "言語を選択",
-    "selectCurrency": "通貨を選択"
+  "contact": {
+    "eyebrow": "say hello",
+    "title": "Contact",
+    "intro": "Sample contact fields only. Replace placeholders with real details and wire the form when your inbox is ready.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "[hello@example.com]",
+    "nameLabel": "Name",
+    "namePlaceholder": "[Your name]",
+    "messageLabel": "Message",
+    "messagePlaceholder": "[Write your message here]",
+    "submit": "Send (placeholder)",
+    "formNote": "This form does not send messages yet. It is a layout sample you can connect later.",
+    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready."
   },
   "checkout": {
-    "buy": "購入する",
-    "subscribe": "月額で登録",
-    "perMonth": "/ 月",
-    "unavailable": "この環境ではまだチェックアウトを利用できません。",
-    "error": "チェックアウトを開始できませんでした。もう一度お試しください。",
-    "preferredCurrencyHint": "優先通貨 {currency} は Adaptive Pricing 適用時に Stripe Checkout 用に保存されます。上の CAD 価格は換算後の請求額ではありません。",
-    "testModeNote": "テストモード：Stripe のテストカードをご利用ください。本番請求はありません。",
-    "successEyebrow": "もうすぐ",
-    "successTitle": "Stripe が支払いを受け取りました",
-    "successBody": "ご注文ありがとうございます。確認はこのページだけでなく Stripe の webhook で行います。",
-    "successMissing": "表示できるチェックアウトセッションが見つかりません。",
-    "cancelEyebrow": "大丈夫",
-    "cancelTitle": "チェックアウトをキャンセルしました",
-    "cancelBody": "請求は発生していません。いつでもショップに戻れます。",
-    "backToShop": "ショップに戻る",
-    "stripeStatus": "Stripe の支払い状況",
-    "statusPaidOnStripe": "支払い済み",
-    "integrationAmount": "CAD 金額（連携通貨）",
-    "presentmentAmount": "提示通貨で請求された金額",
-    "orderRecord": "注文記録",
-    "orderRecordReady": "webhook がこの注文を一時ストアに記録しました",
-    "orderRecordPendingWebhook": "webhook 確認待ち（リダイレクトだけでは確定しません）",
-    "contactEmail": "連絡先メール",
-    "webhookTrustNote": "このページは Stripe の Checkout Session を読みます。永続的な注文にはまだ本番データベースが必要です。"
+    "buy": "Buy",
+    "subscribe": "Subscribe monthly",
+    "perMonth": "/ month",
+    "unavailable": "Checkout is not available in this environment yet.",
+    "error": "Something went wrong starting checkout. Please try again.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
+    "testModeNote": "Test mode: use Stripe test cards. No live charges.",
+    "successEyebrow": "almost there",
+    "successTitle": "Payment received by Stripe",
+    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successMissing": "We could not find a checkout session to display.",
+    "cancelEyebrow": "no worries",
+    "cancelTitle": "Checkout canceled",
+    "cancelBody": "Nothing was charged. You can return to the shop whenever you like.",
+    "backToShop": "Back to shop",
+    "stripeStatus": "Stripe payment status",
+    "statusPaidOnStripe": "paid",
+    "integrationAmount": "Amount in CAD (integration currency)",
+    "presentmentAmount": "Amount charged in presentment currency",
+    "orderRecord": "Order record",
+    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "contactEmail": "Contact email",
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Made with soft paper & golden stars."
+  },
+  "currency": {
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Your currency preference is saved across pages."
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
+    "selectLanguage": "Select language",
+    "selectCurrency": "Select currency"
+  },
+  "cart": {
+    "eyebrow": "カート",
+    "title": "カート",
+    "intro": "チェックアウト前に内容を確認してください。数量はこの端末に保存されます。",
+    "openCart": "カートを開く",
+    "addToCart": "カートに追加",
+    "added": "追加しました",
+    "empty": "カートは空です。",
+    "continueShopping": "買い物を続ける",
+    "unitPrice": "単価",
+    "lineTotal": "小計（行）",
+    "increase": "数量を増やす",
+    "decrease": "数量を減らす",
+    "remove": "削除",
+    "clear": "カートを空にする",
+    "subtotal": "小計",
+    "cadBasisNote": "カートの計算はすべてサーバー上の CAD カタログ価格を使います。",
+    "estimateNote": "表示希望通貨は {currency} です。CAD 金額は換算後の現地請求ではありません。",
+    "checkoutFinalNote": "お支払い金額は Stripe Checkout で確定します。",
+    "checkout": "チェックアウト",
+    "checkoutPending": "チェックアウトを開始中…",
+    "checkoutUnavailable": "この環境ではまだチェックアウトできません。カートは保存されています。",
+    "checkoutError": "チェックアウトを開始できませんでした。もう一度お試しください。",
+    "loading": "カートを読み込み中…"
   }
 }

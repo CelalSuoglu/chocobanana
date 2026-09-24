@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
 import {
   localeCookieName,
@@ -31,12 +31,23 @@ function setCookie(name: string, value: string) {
   document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
 }
 
+function swapLocaleInPath(pathname: string, nextLocale: Locale): string {
+  const parts = pathname.split("/");
+  // ["", "en", "shop", ...]
+  if (parts.length >= 2 && locales.includes(parts[1] as Locale)) {
+    parts[1] = nextLocale;
+    return parts.join("/") || `/${nextLocale}`;
+  }
+  return `/${nextLocale}`;
+}
+
 export function LocaleCurrencySwitcher({
   locale,
   currency,
   labels,
 }: LocaleCurrencySwitcherProps) {
   const router = useRouter();
+  const pathname = usePathname() || `/${locale}`;
   const [isPending, startTransition] = useTransition();
 
   function onLocaleChange(nextLocale: string) {
@@ -45,8 +56,9 @@ export function LocaleCurrencySwitcher({
     }
 
     setCookie(localeCookieName, nextLocale);
+    const nextPath = swapLocaleInPath(pathname, nextLocale as Locale);
     startTransition(() => {
-      router.push(`/${nextLocale}`);
+      router.push(nextPath);
       router.refresh();
     });
   }
@@ -60,11 +72,11 @@ export function LocaleCurrencySwitcher({
   }
 
   const selectClass =
-    "min-h-10 min-w-[7.5rem] max-w-[46vw] rounded-full border border-pink/45 bg-paper/90 px-3 py-2 font-serif text-sm text-chocolate shadow-sm outline-none transition-colors hover:border-pink-deep focus-visible:ring-2 focus-visible:ring-pink md:max-w-none md:min-w-[9rem]";
+    "min-h-10 min-w-[6.5rem] max-w-[42vw] rounded-full border border-pink/45 bg-paper/90 px-2.5 py-2 font-serif text-xs text-chocolate shadow-sm outline-none transition-colors hover:border-pink-deep focus-visible:ring-2 focus-visible:ring-pink sm:text-sm md:max-w-none md:min-w-[8.5rem] md:px-3";
 
   return (
     <div
-      className={`flex flex-wrap items-center justify-center gap-2 md:justify-end ${isPending ? "opacity-70" : ""}`}
+      className={`flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 ${isPending ? "opacity-70" : ""}`}
     >
       <label className="sr-only" htmlFor="language-select">
         {labels.selectLanguage}
