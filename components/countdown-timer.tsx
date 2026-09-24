@@ -1,12 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 type Remaining = {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
+};
+
+export type CountdownLabels = {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
 };
 
 function splitRemaining(ms: number): Remaining {
@@ -18,12 +25,13 @@ function splitRemaining(ms: number): Remaining {
   return { days, hours, minutes, seconds };
 }
 
-function pad(value: number, width = 2): string {
-  return String(value).padStart(width, "0");
+function pad(value: number): string {
+  return String(value).padStart(2, "0");
 }
 
 type CountdownTimerProps = {
   endsAtIso: string | null;
+  labels: CountdownLabels;
   awaitingDate: string;
   almostHereTitle: string;
   almostHereBody: string;
@@ -31,6 +39,7 @@ type CountdownTimerProps = {
 
 export function CountdownTimer({
   endsAtIso,
+  labels,
   awaitingDate,
   almostHereTitle,
   almostHereBody,
@@ -51,7 +60,7 @@ export function CountdownTimer({
 
   if (!hasEnd) {
     return (
-      <p className="mx-auto max-w-md font-serif text-lg leading-relaxed text-chocolate-soft md:text-xl">
+      <p className="coming-soon-awaiting mx-auto max-w-md text-base leading-relaxed md:text-lg">
         {awaitingDate}
       </p>
     );
@@ -62,11 +71,11 @@ export function CountdownTimer({
 
   if (expired) {
     return (
-      <div className="mx-auto max-w-lg animate-rise text-center">
-        <p className="font-script text-3xl text-pink-deep md:text-4xl">
+      <div className="mx-auto max-w-lg text-center">
+        <p className="coming-soon-headline text-3xl md:text-4xl">
           {almostHereTitle}
         </p>
-        <p className="mt-3 font-serif text-base leading-relaxed text-chocolate-soft md:text-lg">
+        <p className="coming-soon-opens mt-3 text-base md:text-lg">
           {almostHereBody}
         </p>
       </div>
@@ -77,19 +86,35 @@ export function CountdownTimer({
     mounted ? remainingMs : Math.max(0, endsAtMs - Date.now()),
   );
 
-  const display = `${pad(remaining.days)}:${pad(remaining.hours)}:${pad(remaining.minutes)}:${pad(remaining.seconds)}`;
+  const units: { key: keyof Remaining; label: string; value: string }[] = [
+    { key: "days", label: labels.days, value: pad(remaining.days) },
+    { key: "hours", label: labels.hours, value: pad(remaining.hours) },
+    { key: "minutes", label: labels.minutes, value: pad(remaining.minutes) },
+    { key: "seconds", label: labels.seconds, value: pad(remaining.seconds) },
+  ];
 
   return (
-    <div className="countdown-hero relative mx-auto w-full max-w-4xl px-1 text-center">
-      <span aria-hidden="true" className="countdown-sparkle-layer" />
-      <p
-        className="countdown-glitter-line"
-        role="timer"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {display}
-      </p>
+    <div
+      className="coming-soon-timer mx-auto w-full max-w-3xl"
+      role="timer"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <div className="coming-soon-timer-row">
+        {units.map((unit, index) => (
+          <Fragment key={unit.key}>
+            <div className="coming-soon-timer-unit">
+              <span className="coming-soon-timer-digit">{unit.value}</span>
+              <span className="coming-soon-timer-label">{unit.label}</span>
+            </div>
+            {index < units.length - 1 ? (
+              <span className="coming-soon-timer-colon" aria-hidden="true">
+                :
+              </span>
+            ) : null}
+          </Fragment>
+        ))}
+      </div>
     </div>
   );
 }

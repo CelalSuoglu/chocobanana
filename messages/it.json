@@ -199,15 +199,16 @@
     "loading": "Caricamento carrello…"
   },
   "comingSoon": {
-    "eyebrow": "qualcosa di dolce sta arrivando",
     "brand": "Chocobanana",
     "tagline": "Un cosy mail club per cancelleria morbida e momenti scritti a mano — apre presto.",
     "days": "Giorni",
     "hours": "Ore",
     "minutes": "Minuti",
     "seconds": "Secondi",
-    "awaitingDate": "La data del conto alla rovescia comparirà qui quando sarà fissato il giorno del lancio.",
-    "almostHereTitle": "Ci siamo quasi",
-    "almostHereBody": "L'attesa sta finendo. Il sito completo aprirà quando saremo pronti — grazie per tenere questo piccolo spazio con noi."
+    "awaitingDate": "The countdown date will appear here once the launch day is set.",
+    "almostHereTitle": "We're almost here",
+    "almostHereBody": "The wait is nearly over. The full site will open when we're ready — thank you for holding this soft little space with us.",
+    "title": "Sta arrivando qualcosa di dolce",
+    "opensSoon": "Il mail club apre presto"
   }
 }

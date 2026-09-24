@@ -199,15 +199,16 @@
     "loading": "正在加载购物车…"
   },
   "comingSoon": {
-    "eyebrow": "甜蜜的东西就要来了",
     "brand": "Chocobanana",
     "tagline": "一个温暖的邮件俱乐部，为柔软文具与手写时刻而设——即将开放。",
     "days": "天",
     "hours": "小时",
     "minutes": "分钟",
     "seconds": "秒",
-    "awaitingDate": "确定开放日后，倒计时日期会显示在这里。",
-    "almostHereTitle": "我们快到了",
-    "almostHereBody": "等待即将结束。完整站点会在我们准备好时开放——谢谢你和我们一起守着这个柔软的角落。"
+    "awaitingDate": "The countdown date will appear here once the launch day is set.",
+    "almostHereTitle": "We're almost here",
+    "almostHereBody": "The wait is nearly over. The full site will open when we're ready — thank you for holding this soft little space with us.",
+    "title": "甜蜜即将来临",
+    "opensSoon": "邮件俱乐部即将开放"
   }
 }

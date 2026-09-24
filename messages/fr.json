@@ -199,15 +199,16 @@
     "loading": "Chargement du panier…"
   },
   "comingSoon": {
-    "eyebrow": "quelque chose de doux arrive bientôt",
     "brand": "Chocobanana",
     "tagline": "Un club de courrier douillet pour la papeterie tendre et les moments écrits à la main — bientôt ouvert.",
     "days": "Jours",
     "hours": "Heures",
     "minutes": "Minutes",
     "seconds": "Secondes",
-    "awaitingDate": "La date du compte à rebours apparaîtra ici dès que le jour de lancement sera fixé.",
-    "almostHereTitle": "On y est presque",
-    "almostHereBody": "L'attente touche à sa fin. Le site complet s'ouvrira quand nous serons prêts — merci de garder ce petit espace avec nous."
+    "awaitingDate": "The countdown date will appear here once the launch day is set.",
+    "almostHereTitle": "We're almost here",
+    "almostHereBody": "The wait is nearly over. The full site will open when we're ready — thank you for holding this soft little space with us.",
+    "title": "Quelque chose de doux arrive",
+    "opensSoon": "Le mail club ouvre bientôt"
   }
 }

@@ -199,15 +199,16 @@
     "loading": "جارٍ تحميل السلة…"
   },
   "comingSoon": {
-    "eyebrow": "شيء حلو يقترب",
     "brand": "Chocobanana",
     "tagline": "نادي بريد دافئ للقرطاسية الناعمة واللحظات المكتوبة بخط اليد — يفتح قريبًا.",
     "days": "أيام",
     "hours": "ساعات",
     "minutes": "دقائق",
     "seconds": "ثوانٍ",
-    "awaitingDate": "سيظهر تاريخ العدّ التنازلي هنا عندما يُحدَّد يوم الإطلاق.",
-    "almostHereTitle": "نحن على وشك الوصول",
-    "almostHereBody": "الانتظار أوشك على الانتهاء. سيفتح الموقع الكامل عندما نكون جاهزات — شكرًا على الاحتفاظ بهذا الركن الدافئ معنا."
+    "awaitingDate": "The countdown date will appear here once the launch day is set.",
+    "almostHereTitle": "We're almost here",
+    "almostHereBody": "The wait is nearly over. The full site will open when we're ready — thank you for holding this soft little space with us.",
+    "title": "شيء حلو قادم",
+    "opensSoon": "نادي البريد يفتح قريبًا"
   }
 }
