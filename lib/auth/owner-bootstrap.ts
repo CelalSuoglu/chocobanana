@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { hashPassword } from "@/lib/auth/password";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
+import { secretsEqual } from "@/lib/security/secrets";
 
 const bootstrapSchema = z.object({
   email: z.string().email(),
@@ -47,16 +48,17 @@ export async function bootstrapOwner(
     };
   }
 
-  if (parsed.data.bootstrapSecret !== expected) {
+  if (!secretsEqual(parsed.data.bootstrapSecret, expected)) {
     return { ok: false, error: "Invalid bootstrap secret." };
   }
 
   const prisma = requirePrisma();
+  // Re-check inside the create path — only the first owner may ever be bootstrapped.
   const owners = await prisma.user.count({ where: { role: "OWNER" } });
   if (owners > 0) {
     return {
       ok: false,
-      error: "An owner already exists. Bootstrap is disabled.",
+      error: "An owner already exists. Bootstrap is closed permanently.",
     };
   }
 
@@ -78,6 +80,6 @@ export async function bootstrapOwner(
 
   return {
     ok: true,
-    message: "Owner account created. Sign in at /en/sign-in, then open /owner.",
+    message: "Owner account created. Sign in at /owner/login, then open /owner.",
   };
 }

@@ -244,10 +244,13 @@
     "addressLine1": "Address",
     "addressLine2": "Apartment, suite (optional)",
     "city": "City",
-    "region": "Province / state (optional)",
+    "region": "州 / 都道府県",
     "postalCode": "Postal code",
     "country": "Country",
-    "countryPlaceholder": "Select a country"
+    "countryPlaceholder": "Select a country",
+    "firstName": "名",
+    "lastName": "姓",
+    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then."
   },
   "account": {
     "eyebrow": "welcome back",
@@ -263,6 +266,7 @@
     "ordersUnavailable": "Order history needs a configured database in this environment.",
     "openOwner": "Open owner panel",
     "phone": "Phone",
-    "address": "Address"
+    "address": "Address",
+    "saveProfile": "プロフィールを保存"
   }
 }

@@ -29,6 +29,8 @@ enum FulfillmentStatus {
 model User {
   id                String    @id @default(cuid())
   name              String?
+  firstName         String?
+  lastName          String?
   email             String    @unique
   emailVerified     DateTime?
   passwordHash      String
@@ -110,6 +112,7 @@ model Order {
   presentmentCurrency    String?
   customerEmail          String
   customerName           String?
+  customerPhone          String?
   shippingName           String?
   shippingLine1          String?
   shippingLine2          String?

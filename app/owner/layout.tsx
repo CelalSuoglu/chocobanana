@@ -41,10 +41,13 @@ export default function OwnerRootLayout({ children }: { children: ReactNode }) {
             </div>
             <nav className="flex flex-wrap gap-4 text-sm text-[#c9a27a]">
               <Link href="/owner" className="hover:text-[#f3e6d8]">
+                Dashboard
+              </Link>
+              <Link href="/owner/orders" className="hover:text-[#f3e6d8]">
                 Orders
               </Link>
               <Link href="/owner/members" className="hover:text-[#f3e6d8]">
-                Memberships
+                Members
               </Link>
               <Link href="/owner/catalog" className="hover:text-[#f3e6d8]">
                 Catalog (soon)

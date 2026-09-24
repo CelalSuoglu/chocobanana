@@ -8,20 +8,16 @@ import {
 } from "./lib/i18n/config";
 import { resolvePreferredLocale } from "./lib/i18n/resolve-locale";
 import {
-  getComingSoonPreviewSecret,
   hasValidPreviewAccess,
   isComingSoonEnabled,
   previewCookieName,
 } from "./lib/site-access";
 import {
-  getOwnerPanelSecret,
   hasValidOwnerPanelAccess,
   ownerPanelCookieName,
 } from "./lib/owner-access";
 
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
-const PREVIEW_MAX_AGE = 60 * 60 * 24 * 60; // 60 days — covers the 40-day wait
-const OWNER_PANEL_MAX_AGE = 60 * 60 * 24 * 60;
 
 function comingSoonApiResponse() {
   return NextResponse.json(
@@ -44,108 +40,28 @@ function isGateActive(request: NextRequest): boolean {
   );
 }
 
-function applyPreviewUnlock(
-  request: NextRequest,
-  response: NextResponse,
-): NextResponse {
-  const secret = getComingSoonPreviewSecret();
-  const preview = request.nextUrl.searchParams.get("preview");
-
-  if (!secret || !preview) return response;
-
-  if (preview === "off") {
-    response.cookies.delete(previewCookieName);
-    return response;
-  }
-
-  if (preview === secret) {
-    response.cookies.set(previewCookieName, secret, {
-      path: "/",
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: PREVIEW_MAX_AGE,
-    });
-  }
-
-  return response;
-}
-
-function stripPreviewParam(request: NextRequest) {
+/** Strip legacy secret query params without granting access. */
+function stripSecretQueryParams(request: NextRequest): NextResponse | null {
   const url = request.nextUrl.clone();
-  if (!url.searchParams.has("preview")) return null;
-  url.searchParams.delete("preview");
-  return url;
-}
-
-function applyOwnerPanelUnlock(
-  request: NextRequest,
-  response: NextResponse,
-): NextResponse {
-  const secret = getOwnerPanelSecret();
-  const owner = request.nextUrl.searchParams.get("owner");
-
-  if (!secret || !owner) return response;
-
-  if (owner === "off") {
-    response.cookies.delete(ownerPanelCookieName);
-    return response;
+  let dirty = false;
+  if (url.searchParams.has("preview")) {
+    url.searchParams.delete("preview");
+    dirty = true;
   }
-
-  if (owner === secret) {
-    response.cookies.set(ownerPanelCookieName, secret, {
-      path: "/",
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: OWNER_PANEL_MAX_AGE,
-    });
+  if (url.searchParams.has("owner")) {
+    url.searchParams.delete("owner");
+    dirty = true;
   }
-
-  return response;
-}
-
-function stripOwnerParam(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  if (!url.searchParams.has("owner")) return null;
-  url.searchParams.delete("owner");
-  return url;
+  if (!dirty) return null;
+  return NextResponse.redirect(url);
 }
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const secret = getComingSoonPreviewSecret();
-  const previewParam = request.nextUrl.searchParams.get("preview");
-  const ownerSecret = getOwnerPanelSecret();
-  const ownerParam = request.nextUrl.searchParams.get("owner");
 
-  // Unlock / lock preview access, then continue without the secret in the URL.
-  if (
-    isComingSoonEnabled() &&
-    secret &&
-    previewParam &&
-    (previewParam === secret || previewParam === "off")
-  ) {
-    const clean = stripPreviewParam(request) ?? request.nextUrl.clone();
-    let response = NextResponse.redirect(clean);
-    response = applyPreviewUnlock(request, response);
-    return response;
-  }
-
-  // Owner-panel-only unlock (does not open the public storefront).
-  if (
-    ownerSecret &&
-    ownerParam &&
-    (ownerParam === ownerSecret || ownerParam === "off")
-  ) {
-    const clean = stripOwnerParam(request) ?? request.nextUrl.clone();
-    if (!clean.pathname.startsWith("/owner")) {
-      clean.pathname = "/owner/gate";
-    }
-    let response = NextResponse.redirect(clean);
-    response = applyOwnerPanelUnlock(request, response);
-    return response;
-  }
+  // Never accept secrets via URL — drop ?preview= / ?owner= without unlocking.
+  const stripped = stripSecretQueryParams(request);
+  if (stripped) return stripped;
 
   const gateActive = isGateActive(request);
   const ownerPanelUnlocked = hasValidOwnerPanelAccess(
@@ -160,11 +76,22 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Form-based site unlock while the public countdown is showing.
+  if (pathname === "/site-unlock" || pathname.startsWith("/site-unlock/")) {
+    return NextResponse.next();
+  }
+
   // Auth endpoints needed after owner-panel unlock while the public site stays gated.
   if (
     gateActive &&
     ownerPanelUnlocked &&
-    (pathname.startsWith("/api/auth") || pathname.startsWith("/en/sign-"))
+    (pathname.startsWith("/api/auth") ||
+      pathname.includes("/sign-") ||
+      pathname.includes("/login") ||
+      pathname.includes("/register") ||
+      pathname.includes("/forgot-password") ||
+      pathname.includes("/reset-password") ||
+      pathname.includes("/verify-email"))
   ) {
     return NextResponse.next();
   }

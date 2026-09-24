@@ -244,10 +244,13 @@
     "addressLine1": "Address",
     "addressLine2": "Apartment, suite (optional)",
     "city": "City",
-    "region": "Province / state (optional)",
+    "region": "Eyalet / il",
     "postalCode": "Postal code",
     "country": "Country",
-    "countryPlaceholder": "Select a country"
+    "countryPlaceholder": "Select a country",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "emailSetupRequired": "E-posta gönderimi henüz kurulmadı. RESEND_API_KEY ve EMAIL_FROM (Resend’te doğrulanmış alan adı) ayarlayın. O zamana kadar kayıt ve şifre sıfırlama kullanılamaz."
   },
   "account": {
     "eyebrow": "welcome back",
@@ -263,6 +266,7 @@
     "ordersUnavailable": "Order history needs a configured database in this environment.",
     "openOwner": "Open owner panel",
     "phone": "Phone",
-    "address": "Address"
+    "address": "Address",
+    "saveProfile": "Profili kaydet"
   }
 }

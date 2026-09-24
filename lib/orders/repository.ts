@@ -148,11 +148,32 @@ export async function createPaidOrderFromCheckoutSession(options: {
           where: { email: email.toLowerCase() },
         });
 
-  const shipping = shippingFromSession(session);
+  const shippingFromStripe = shippingFromSession(session);
+  // Snapshot: prefer Stripe shipping, else freeze the customer's profile address at purchase time.
+  const shipping = {
+    shippingName:
+      shippingFromStripe.shippingName ||
+      [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+      user?.name ||
+      null,
+    shippingLine1: shippingFromStripe.shippingLine1 || user?.addressLine1 || null,
+    shippingLine2: shippingFromStripe.shippingLine2 || user?.addressLine2 || null,
+    shippingCity: shippingFromStripe.shippingCity || user?.city || null,
+    shippingState: shippingFromStripe.shippingState || user?.region || null,
+    shippingPostalCode:
+      shippingFromStripe.shippingPostalCode || user?.postalCode || null,
+    shippingCountry: shippingFromStripe.shippingCountry || user?.country || null,
+  };
   const paymentIntent =
     typeof session.payment_intent === "string"
       ? session.payment_intent
       : session.payment_intent?.id ?? null;
+
+  const customerName =
+    session.customer_details?.name ||
+    [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+    user?.name ||
+    null;
 
   const order = await prisma.order.create({
     data: {
@@ -170,7 +191,8 @@ export async function createPaidOrderFromCheckoutSession(options: {
         session.presentment_details?.presentment_currency?.toLowerCase() ??
         null,
       customerEmail: email.toLowerCase(),
-      customerName: session.customer_details?.name ?? null,
+      customerName,
+      customerPhone: user?.phone ?? null,
       ...shipping,
       locale: metadata.locale ?? null,
       items: { create: itemsData },
@@ -247,6 +269,9 @@ export async function listOwnerCustomers(filters: { q?: string } = {}) {
             OR: [
               { email: { contains: q, mode: "insensitive" } },
               { name: { contains: q, mode: "insensitive" } },
+              { firstName: { contains: q, mode: "insensitive" } },
+              { lastName: { contains: q, mode: "insensitive" } },
+              { phone: { contains: q, mode: "insensitive" } },
             ],
           }
         : {}),
@@ -254,9 +279,12 @@ export async function listOwnerCustomers(filters: { q?: string } = {}) {
     select: {
       id: true,
       name: true,
+      firstName: true,
+      lastName: true,
       email: true,
       phone: true,
       addressLine1: true,
+      addressLine2: true,
       city: true,
       region: true,
       postalCode: true,
@@ -269,6 +297,35 @@ export async function listOwnerCustomers(filters: { q?: string } = {}) {
     orderBy: { createdAt: "desc" },
     take: 200,
   });
+}
+
+/** Separate counters for the owner dashboard (not mixed into one list). */
+export async function getOwnerDashboardStats() {
+  const prisma = requirePrisma();
+  const dayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
+  const [
+    memberTotal,
+    membersNew,
+    orderTotal,
+    ordersNew,
+    ordersPreparing,
+  ] = await Promise.all([
+    prisma.user.count({ where: { role: "CUSTOMER" } }),
+    prisma.user.count({
+      where: { role: "CUSTOMER", createdAt: { gte: dayAgo } },
+    }),
+    prisma.order.count({ where: { paymentStatus: "PAID" } }),
+    prisma.order.count({
+      where: { paymentStatus: "PAID", createdAt: { gte: dayAgo } },
+    }),
+    prisma.order.count({
+      where: {
+        paymentStatus: "PAID",
+        fulfillmentStatus: { in: ["NEW", "PREPARING"] },
+      },
+    }),
+  ]);
+  return { memberTotal, membersNew, orderTotal, ordersNew, ordersPreparing };
 }
 
 export async function updateFulfillmentStatus(

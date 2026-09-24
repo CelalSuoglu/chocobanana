@@ -237,7 +237,7 @@
     "addressLine1": "Address",
     "addressLine2": "Apartment, suite (optional)",
     "city": "City",
-    "region": "Province / state (optional)",
+    "region": "Province / state",
     "postalCode": "Postal code",
     "country": "Country",
     "countryPlaceholder": "Select a country",
@@ -247,7 +247,10 @@
     "createAccount": "Create an account",
     "haveAccount": "Already have an account? Sign in",
     "sendReset": "Send reset link",
-    "updatePassword": "Update password"
+    "updatePassword": "Update password",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then."
   },
   "account": {
     "eyebrow": "welcome back",
@@ -263,6 +266,7 @@
     "noOrders": "No paid orders yet.",
     "browseShop": "Browse the shop",
     "ordersUnavailable": "Order history needs a configured database in this environment.",
-    "openOwner": "Open owner panel"
+    "openOwner": "Open owner panel",
+    "saveProfile": "Save profile"
   }
 }

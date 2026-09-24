@@ -4,6 +4,7 @@ import { CartProvider } from "@/components/cart-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Star } from "@/components/star";
+import { getOptionalSession } from "@/lib/auth/session";
 import {
   baseCurrency,
   currencyCookieName,
@@ -29,6 +30,8 @@ export async function SiteShell({ locale, dict, children }: SiteShellProps) {
   const rawCurrency = cookieStore.get(currencyCookieName)?.value;
   const currency: CurrencyCode =
     rawCurrency && isCurrencyCode(rawCurrency) ? rawCurrency : baseCurrency;
+  const session = await getOptionalSession();
+  const signedIn = Boolean(session?.user?.id);
 
   return (
     <CartProvider>
@@ -43,7 +46,12 @@ export async function SiteShell({ locale, dict, children }: SiteShellProps) {
             style={{ animationDelay: "1.1s" }}
           />
         </div>
-        <SiteHeader locale={locale} currency={currency} dict={dict} />
+        <SiteHeader
+          locale={locale}
+          currency={currency}
+          dict={dict}
+          signedIn={signedIn}
+        />
         <div className="relative z-10 flex flex-1 flex-col">{children}</div>
         <SiteFooter locale={locale} dict={dict} />
       </div>

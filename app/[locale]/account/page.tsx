@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
+import { AccountProfileForm } from "@/components/account-profile-form";
 import { logoutCustomerAction } from "@/lib/auth/actions";
-import { signupCountries } from "@/lib/auth/countries";
 import { getOptionalSession } from "@/lib/auth/session";
 import { PageHero } from "@/components/page-hero";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
@@ -17,11 +17,6 @@ function formatMoney(cents: number, currency: string, locale: string) {
   }).format(cents / 100);
 }
 
-function countryLabel(code: string | null | undefined) {
-  if (!code) return "—";
-  return signupCountries.find((c) => c.code === code)?.name ?? code;
-}
-
 export default async function AccountPage({
   params,
 }: {
@@ -33,7 +28,7 @@ export default async function AccountPage({
   const session = await getOptionalSession();
 
   if (!session?.user?.id) {
-    redirect(hrefFor(raw, "/sign-in"));
+    redirect(hrefFor(raw, "/login"));
   }
 
   if (session.user.role === "OWNER") {
@@ -44,7 +39,8 @@ export default async function AccountPage({
     ? await requirePrisma().user.findUnique({
         where: { id: session.user.id },
         select: {
-          name: true,
+          firstName: true,
+          lastName: true,
           email: true,
           phone: true,
           addressLine1: true,
@@ -73,39 +69,21 @@ export default async function AccountPage({
         <h2 className="font-serif text-2xl text-chocolate">
           {dict.account.profile}
         </h2>
-        <dl className="mt-4 space-y-2 text-sm text-chocolate-soft">
-          <div>
-            <dt className="font-serif text-chocolate">{dict.account.name}</dt>
-            <dd>{profile?.name ?? session.user.name ?? "—"}</dd>
-          </div>
-          <div>
-            <dt className="font-serif text-chocolate">{dict.account.email}</dt>
-            <dd>{profile?.email ?? session.user.email}</dd>
-          </div>
-          <div>
-            <dt className="font-serif text-chocolate">{dict.account.phone}</dt>
-            <dd>{profile?.phone ?? "—"}</dd>
-          </div>
-          <div>
-            <dt className="font-serif text-chocolate">{dict.account.address}</dt>
-            <dd className="leading-relaxed">
-              {[profile?.addressLine1, profile?.addressLine2]
-                .filter(Boolean)
-                .join(", ") || "—"}
-              <br />
-              {[profile?.city, profile?.region, profile?.postalCode]
-                .filter(Boolean)
-                .join(", ")}
-              <br />
-              {countryLabel(profile?.country)}
-            </dd>
-          </div>
-        </dl>
+        <p className="mt-1 text-sm text-chocolate-soft">
+          {dict.account.email}: {profile?.email ?? session.user.email}
+        </p>
+        {profile ? (
+          <AccountProfileForm dict={dict} locale={raw} profile={profile} />
+        ) : (
+          <p className="mt-4 text-sm text-chocolate-soft">
+            {dict.account.ordersUnavailable}
+          </p>
+        )}
         <form action={logoutCustomerAction} className="mt-6">
           <input type="hidden" name="locale" value={raw} />
           <button
             type="submit"
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-chocolate/80 px-5 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-chocolate transition-colors hover:border-pink-deep hover:bg-pink-soft/60"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-chocolate/50 px-5 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-chocolate-soft transition-colors hover:border-pink-deep hover:text-pink-deep"
           >
             {dict.account.signOut}
           </button>
@@ -144,9 +122,24 @@ export default async function AccountPage({
                       )}
                     </p>
                     <p className="text-xs text-chocolate-soft">
+                      #{order.id.slice(-8)} ·{" "}
                       {new Date(order.createdAt).toLocaleString(raw)} ·{" "}
                       {order.fulfillmentStatus}
                     </p>
+                    {(order.shippingLine1 || order.shippingCity) && (
+                      <p className="mt-2 text-xs leading-relaxed text-chocolate-soft">
+                        {[
+                          order.shippingLine1,
+                          order.shippingLine2,
+                          order.shippingCity,
+                          order.shippingState,
+                          order.shippingPostalCode,
+                          order.shippingCountry,
+                        ]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </p>
+                    )}
                   </div>
                   <p className="text-xs uppercase tracking-wider text-pink-deep">
                     {order.paymentStatus}

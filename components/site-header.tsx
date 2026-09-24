@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { AccountIconLink } from "@/components/account-icon-link";
+import { AccountNav } from "@/components/account-nav";
 import { CartIconLink } from "@/components/cart-icon-link";
 import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
 import type { CurrencyCode } from "@/lib/currency/config";
@@ -15,6 +15,7 @@ type SiteHeaderProps = {
   locale: Locale;
   currency: CurrencyCode;
   dict: Dictionary;
+  signedIn: boolean;
 };
 
 function pathMatches(pathname: string, locale: Locale, itemPath: string) {
@@ -25,7 +26,7 @@ function pathMatches(pathname: string, locale: Locale, itemPath: string) {
   return pathname === target || pathname.startsWith(`${target}/`);
 }
 
-export function SiteHeader({ locale, currency, dict }: SiteHeaderProps) {
+export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps) {
   const pathname = usePathname() || `/${locale}`;
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -64,7 +65,13 @@ export function SiteHeader({ locale, currency, dict }: SiteHeaderProps) {
               }}
             />
             <CartIconLink locale={locale} label={dict.cart.openCart} />
-            <AccountIconLink locale={locale} label={dict.nav.account} />
+            <AccountNav
+              locale={locale}
+              signedIn={signedIn}
+              accountLabel={dict.nav.account}
+              signInLabel={dict.auth.signIn}
+              signUpLabel={dict.auth.signUp}
+            />
             <button
               type="button"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate md:hidden"

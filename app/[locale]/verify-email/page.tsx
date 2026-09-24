@@ -45,7 +45,7 @@ export default async function VerifyEmailPage({
       />
       {status === "ok" ? (
         <p className="mt-8 text-center text-sm">
-          <Link href={hrefFor(raw, "/sign-in")} className="text-pink-deep">
+          <Link href={hrefFor(raw, "/login")} className="text-pink-deep">
             {dict.auth.signIn}
           </Link>
         </p>

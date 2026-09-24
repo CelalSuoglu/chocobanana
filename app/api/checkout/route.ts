@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import type Stripe from "stripe";
 import { auth } from "@/auth";
+import { isDatabaseConfigured } from "@/lib/db";
 import { isComingSoonGateActiveForRequest } from "@/lib/site-access";
 import { createCheckoutSession } from "@/lib/stripe/checkout";
 
@@ -33,6 +33,17 @@ export async function POST(request: Request) {
   if (isComingSoonGateActiveForRequest(request)) {
     return NextResponse.json(
       { error: "Checkout is unavailable while coming soon is active." },
+      { status: 503 },
+    );
+  }
+
+  // Never charge when orders cannot be persisted after webhook confirmation.
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      {
+        error:
+          "Checkout is unavailable until the database is configured. Your card was not charged.",
+      },
       { status: 503 },
     );
   }

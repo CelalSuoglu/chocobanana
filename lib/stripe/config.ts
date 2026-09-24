@@ -24,6 +24,8 @@ export function getPaymentsMode(): PaymentsMode {
 }
 
 export function paymentsCheckoutEnabled(): boolean {
+  // Stripe alone is not enough — paid orders require Postgres persistence.
+  if (!process.env.DATABASE_URL?.trim()) return false;
   return getPaymentsMode() !== "disabled";
 }
 

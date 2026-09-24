@@ -39,6 +39,12 @@ export default async function OwnerOrderDetailPage({
             {order.customerName ?? "—"}
             <br />
             {order.customerEmail}
+            {order.customerPhone ? (
+              <>
+                <br />
+                {order.customerPhone}
+              </>
+            ) : null}
             {order.user ? (
               <span className="block text-xs text-[#c9a27a]">
                 Linked account: {order.user.id}

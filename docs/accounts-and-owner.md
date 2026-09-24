@@ -3,56 +3,54 @@
 ## Stack choice
 
 - **Postgres (Neon / Vercel Postgres)** via Prisma — durable users, paid orders, webhook idempotency.
-- **Auth.js (NextAuth v5) Credentials + JWT** — email/password with server-hashed passwords (`bcryptjs`), email verification, password reset. Role (`CUSTOMER` | `OWNER`) lives on the user row and is copied into the signed JWT; clients cannot elevate themselves.
+- **Auth.js (NextAuth v5) Credentials + JWT** — email/password with server-hashed passwords (`bcryptjs`), email verification, password reset. Role (`CUSTOMER` | `OWNER`) lives on the user row; sensitive owner routes re-check the live DB role (JWT alone is not enough).
+- Passwords are stored only as `passwordHash` (bcrypt) — never plaintext.
 
 ## Customer auth flows
 
 | Path | Purpose |
 | --- | --- |
-| `/{locale}/sign-up` | Always creates `CUSTOMER` only |
+| `/{locale}/register` (alias: `/sign-up`) | Full signup. Always `CUSTOMER` only. Requires `RESEND_API_KEY`. |
 | `/{locale}/verify-email?token=` | Marks email verified |
-| `/{locale}/sign-in` | Requires verified email |
-| `/{locale}/forgot-password` / `reset-password` | Tokenized reset |
-| `/{locale}/account` | Profile + **own** paid orders (`where: { userId }`) |
+| `/{locale}/login` (alias: `/sign-in`) | Requires verified email |
+| `/{locale}/forgot-password` / `reset-password` | Tokenized reset (requires email service) |
+| `/{locale}/account` | Edit own profile/address + **own** paid orders (`where: { userId }`) |
+
+Country is stored as ISO-3166 alpha-2. Phone is normalized toward E.164 (`+` + digits). Address line 2 is optional; province/state is required.
 
 ## Checkout → paid order
 
-1. Cart → `POST /api/checkout` (Stripe Checkout Session; CAD amounts from server catalog).
+1. Cart → `POST /api/checkout` — **refuses** if `DATABASE_URL` is missing (no Stripe session, no charge).
 2. Customer pays on Stripe.
 3. `POST /api/webhooks/stripe` verifies signature, requires `payment_status === "paid"`, then `createPaidOrderFromCheckoutSession`.
-4. Idempotency: unique `stripeCheckoutSessionId` + `ProcessedStripeEvent` ids — retries do not create a second order.
+4. Shipping on the order is a **snapshot** at purchase time.
+5. Idempotency: unique `stripeCheckoutSessionId` + `ProcessedStripeEvent` ids.
 
-Without `DATABASE_URL`, checkout can still run in Stripe test mode, but **no order rows** are written and the owner panel stays empty (no fake sample orders).
+## Owner panel (form unlock + role-gated)
 
-## Owner panel (password-gated)
-
-1. Set **Preview** env vars (not Production unless you want them there):
-   - `DATABASE_URL` — Neon/Postgres
-   - `AUTH_SECRET`
-   - `OWNER_BOOTSTRAP_SECRET`
-   - `OWNER_PANEL_SECRET` — unlocks only `/owner`
+1. Preview env: `DATABASE_URL`, `AUTH_SECRET`, `OWNER_BOOTSTRAP_SECRET`, `OWNER_PANEL_SECRET`.
 2. `npx prisma migrate deploy`
-3. Open `/owner/gate` → enter panel password → `/owner/bootstrap` → create owner → `/owner/login`
-4. **Orders** and **Memberships** tabs list paid Stripe orders and customer accounts.
-
-Production countdown stays public. Owner unlock does **not** open the shop for visitors.
-
-
-## Owner panel
-
-- URL: `/owner` — separate dark operations chrome (not the customer site shell).
-- Access: `requireOwner()` on the server (session role from JWT ↔ DB). Knowing the URL or editing browser storage does not grant access.
-- Lists paid orders; search/filter by fulfillment status; update NEW → PREPARING → SHIPPED → COMPLETED / CANCELED.
-- Payment status is **read-only** (webhook-owned).
-- Soft auto-refresh (~20s) so newly paid webhook orders appear.
-- `/owner/catalog` is a placeholder for future CAD product/price edits.
+3. `/owner/gate` → enter panel password (form POST → httpOnly derived cookie) → `/owner/bootstrap` (first owner only) → `/owner/login`
+4. **Never** put secrets in the URL (`?owner=` / `?preview=` are stripped and ignored).
+5. Dashboard / Members / Orders — fulfillment updates only; payment status is webhook-owned.
 
 ## Coming soon vs Preview
 
-- **Production**: `COMING_SOON_ENABLED=true` + countdown — public sees coming soon; full shop/account/owner need `?preview=SECRET` unlock cookie (or wait until you turn the gate off).
-- **Preview / local**: leave `COMING_SOON_ENABLED` unset/false so the full stack is testable.
-- Stripe webhooks are always allowed through the gate (no preview cookie on Stripe’s requests).
+- **Production**: `COMING_SOON_ENABLED=true` + countdown.
+- Unlock full site while gated: open **`/site-unlock`**, enter `COMING_SOON_PREVIEW_SECRET` in the form.
+- Unlock owner-only: **`/owner/gate`** with `OWNER_PANEL_SECRET`.
+- Stripe webhooks always bypass the public gate.
 
-## Email in test
+## Email
 
-Without `EMAIL_FROM` / provider SMTP vars, verification and reset links are **logged to the server console** (`lib/auth/email.ts`) so Preview/local can complete the flow.
+- Requires `RESEND_API_KEY` **and** `EMAIL_FROM` on a Resend-verified domain.
+- Without both, register / forgot-password show **setup required**. Links are never logged.
+- Failed sends roll back the account and show codes like `EMAIL_DOMAIN_UNVERIFIED` (no secret values in UI).
+
+## Manual checklist
+
+1. Preview env: `DATABASE_URL`, `AUTH_SECRET`, `OWNER_PANEL_SECRET`, `OWNER_BOOTSTRAP_SECRET`, `RESEND_API_KEY`.
+2. `npx prisma migrate deploy`
+3. `/en/register` → verify email → `/en/login` → `/en/account`
+4. Bootstrap first owner once → `/owner`
+5. Never commit `.env.local`
