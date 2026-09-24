@@ -60,9 +60,7 @@ export function CountdownTimer({
 
   if (!hasEnd) {
     return (
-      <p className="coming-soon-awaiting mx-auto max-w-md text-base leading-relaxed md:text-lg">
-        {awaitingDate}
-      </p>
+      <p className="coming-soon-awaiting">{awaitingDate}</p>
     );
   }
 
@@ -71,13 +69,9 @@ export function CountdownTimer({
 
   if (expired) {
     return (
-      <div className="mx-auto max-w-lg text-center">
-        <p className="coming-soon-headline text-3xl md:text-4xl">
-          {almostHereTitle}
-        </p>
-        <p className="coming-soon-opens mt-3 text-base md:text-lg">
-          {almostHereBody}
-        </p>
+      <div className="coming-soon-expired">
+        <p className="coming-soon-expired-title">{almostHereTitle}</p>
+        <p className="coming-soon-expired-body">{almostHereBody}</p>
       </div>
     );
   }
@@ -95,7 +89,7 @@ export function CountdownTimer({
 
   return (
     <div
-      className="coming-soon-timer mx-auto w-full max-w-3xl"
+      className="coming-soon-timer"
       role="timer"
       aria-live="polite"
       aria-atomic="true"
