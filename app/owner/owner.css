@@ -39,6 +39,10 @@ html.owner-shell .font-serif {
   font-family: var(--font-serif), Georgia, serif;
 }
 
+html.owner-shell .font-script {
+  font-family: var(--font-script), var(--font-body), cursive;
+}
+
 .owner-glow {
   pointer-events: none;
   position: fixed;

@@ -281,6 +281,11 @@ export async function logoutCustomerAction(formData: FormData) {
   await signOut({ redirectTo: `/${locale}` });
 }
 
+/** Ends the Auth.js session and returns to owner login (not the customer shop). */
+export async function logoutOwnerAction() {
+  await signOut({ redirectTo: "/owner/login" });
+}
+
 export async function requestPasswordReset(
   _prev: AuthActionState,
   formData: FormData,

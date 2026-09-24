@@ -71,6 +71,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
               accountLabel={dict.nav.account}
               signInLabel={dict.auth.signIn}
               signUpLabel={dict.auth.signUp}
+              signOutLabel={dict.account.signOut}
             />
             <button
               type="button"
