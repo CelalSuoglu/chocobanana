@@ -371,6 +371,9 @@ export async function HomePage({ locale, dict }: HomePageProps) {
           <p className="mt-2 text-xs tracking-wide text-chocolate-soft/80">
             {dict.footer.credit}
           </p>
+          <p className="mt-1 font-script text-sm text-chocolate-soft/70 md:text-[0.95rem]">
+            by Didem Keskin
+          </p>
         </div>
       </footer>
     </div>
