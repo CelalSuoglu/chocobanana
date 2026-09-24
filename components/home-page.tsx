@@ -1,5 +1,25 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
+import Image from "next/image";
+import { cookies } from "next/headers";
+import { BuyButton } from "@/components/buy-button";
+import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
+import {
+  catalogProducts,
+  type CatalogProduct,
+} from "@/lib/catalog/products";
+import {
+  baseCurrency,
+  currencyCookieName,
+  formatCatalogPrice,
+  isCurrencyCode,
+  type CurrencyCode,
+} from "@/lib/currency/config";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/get-dictionary";
+import {
+  getPaymentsMode,
+  paymentsCheckoutEnabled,
+} from "@/lib/stripe/config";
 
 function Star({
   className = "",
@@ -19,65 +39,70 @@ function Star({
   );
 }
 
-const navLinks = [
-  { href: "#shop", label: "Shop" },
-  { href: "#mail-club", label: "Mail Club" },
-  { href: "#about", label: "About" },
-] as const;
+function localizedProductCopy(dict: Dictionary, product: CatalogProduct) {
+  if (product.shopKey) {
+    return dict.shop.products[product.shopKey];
+  }
+  return {
+    name: product.nameEn,
+    note: product.descriptionEn,
+  };
+}
 
-const steps = [
-  {
-    title: "Browse the Club",
-    text: "Wander through the Mail Club and see what kinds of sweet parcels we dream up.",
-  },
-  {
-    title: "Choose Your Favorites",
-    text: "Pick the stationery and keepsakes that feel most like you — soft, playful, and a little nostalgic.",
-  },
-  {
-    title: "Open the Mail",
-    text: "When something arrives, settle in with a cup of something warm and enjoy the little ritual of opening mail.",
-  },
-] as const;
+type HomePageProps = {
+  locale: Locale;
+  dict: Dictionary;
+};
 
-const products = [
-  {
-    name: "Letter Sets",
-    note: "Soft paper, gentle lines, and room to write something kind.",
-  },
-  {
-    name: "Sticker Sheets",
-    note: "Tiny stars, pink hearts, and doodles ready to dress up an envelope.",
-  },
-  {
-    name: "Sealing Touches",
-    note: "Wax seals and ribbon details for parcels that feel handmade.",
-  },
-  {
-    name: "Keepsake Notes",
-    note: "Small cards meant to tuck into a letter or leave on a desk.",
-  },
-] as const;
+export async function HomePage({ locale, dict }: HomePageProps) {
+  const cookieStore = await cookies();
+  const rawCurrency = cookieStore.get(currencyCookieName)?.value;
+  const currency: CurrencyCode =
+    rawCurrency && isCurrencyCode(rawCurrency) ? rawCurrency : baseCurrency;
+  const checkoutEnabled = paymentsCheckoutEnabled();
+  const paymentsMode = getPaymentsMode();
 
-export default function Home() {
+  const navLinks = [
+    { href: "#shop", label: dict.nav.shop },
+    { href: "#mail-club", label: dict.nav.mailClub },
+    { href: "#about", label: dict.nav.about },
+  ] as const;
+
+  const shopProducts = catalogProducts.filter((product) => product.purchasable);
+
   return (
     <div className="relative flex min-h-full flex-col overflow-x-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-24 z-0 flex justify-between px-6 md:px-16">
         <Star className="text-lg md:text-xl" style={{ animationDelay: "0.2s" }} />
-        <Star className="mt-16 text-sm md:text-base" style={{ animationDelay: "1.1s" }} />
+        <Star
+          className="mt-16 text-sm md:text-base"
+          style={{ animationDelay: "1.1s" }}
+        />
       </div>
 
       <header className="sticky top-0 z-40 border-b border-pink/30 bg-cream/85 backdrop-blur-md">
-        <div className="section-pad mx-auto flex max-w-5xl items-center justify-center py-3.5 md:justify-between md:py-4">
-          <a
-            href="#top"
-            className="font-serif text-lg tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep md:text-xl"
-          >
-            Chocobanana
-          </a>
+        <div className="section-pad mx-auto flex max-w-5xl flex-col gap-3 py-3 md:gap-3 md:py-4">
+          <div className="flex items-center justify-between gap-3">
+            <a
+              href="#top"
+              className="font-serif text-lg tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep md:text-xl"
+            >
+              Chocobanana
+            </a>
+            <LocaleCurrencySwitcher
+              locale={locale}
+              currency={currency}
+              labels={{
+                language: dict.nav.language,
+                currency: dict.nav.currency,
+                selectLanguage: dict.a11y.selectLanguage,
+                selectCurrency: dict.a11y.selectCurrency,
+              }}
+            />
+          </div>
           <nav
             aria-label="Primary"
-            className="absolute inset-x-0 top-full flex justify-center gap-7 border-b border-pink/20 bg-cream/90 py-2.5 font-serif text-[0.95rem] tracking-[0.14em] text-chocolate-soft md:static md:inset-auto md:top-auto md:border-0 md:bg-transparent md:py-0 md:text-base"
+            className="flex justify-center gap-6 border-t border-pink/20 pt-2.5 font-serif text-[0.95rem] tracking-[0.14em] text-chocolate-soft md:gap-8 md:text-base"
           >
             {navLinks.map((link) => (
               <a
@@ -90,29 +115,26 @@ export default function Home() {
             ))}
           </nav>
         </div>
-        {/* Spacer for the absolute mobile nav row */}
-        <div className="h-10 md:hidden" aria-hidden="true" />
       </header>
 
       <main id="top" className="relative z-10 flex-1">
-        {/* Brand intro */}
         <section
           aria-labelledby="brand-heading"
           className="section-pad mx-auto flex max-w-3xl flex-col items-center pb-10 pt-8 text-center md:pb-14 md:pt-14"
         >
           <div className="animate-rise relative">
             <Star
-              className="absolute -left-5 -top-2 text-base md:-left-8 md:text-lg"
+              className="absolute -start-5 -top-2 text-base md:-start-8 md:text-lg"
               style={{ animationDelay: "0.4s" }}
             />
             <Star
-              className="absolute -right-4 top-6 text-sm md:-right-7"
+              className="absolute -end-4 top-6 text-sm md:-end-7"
               style={{ animationDelay: "1.4s" }}
             />
             <div className="animate-float overflow-hidden rounded-full bg-paper/60 p-2 shadow-[0_12px_40px_rgba(60,42,34,0.08)] ring-1 ring-pink/35">
               <Image
                 src="/logo.jpg"
-                alt="Chocobanana mail club logo with a kitten wearing a golden star"
+                alt={dict.a11y.logoAlt}
                 width={320}
                 height={320}
                 priority
@@ -122,84 +144,78 @@ export default function Home() {
           </div>
 
           <p className="animate-rise delay-1 mt-6 font-script text-3xl text-pink-deep md:text-4xl">
-            hello, sweet friend
+            {dict.brand.greeting}
           </p>
           <h1
             id="brand-heading"
             className="animate-rise delay-2 mt-2 font-serif text-4xl font-semibold tracking-tight text-chocolate sm:text-5xl md:text-6xl"
           >
-            Chocobanana
+            {dict.brand.name}
           </h1>
           <p className="animate-rise delay-3 mt-4 max-w-md font-serif text-lg leading-relaxed text-chocolate-soft md:text-xl">
-            A cozy little mail club for soft stationery, handwritten moments,
-            and parcels that feel like a hug in the post.
+            {dict.brand.tagline}
           </p>
           <div className="divider-ornament mt-7">
             <Star className="text-sm" style={{ animationDelay: "0.8s" }} />
           </div>
         </section>
 
-        {/* Mail Club hero */}
         <section
           id="mail-club"
           aria-labelledby="mail-club-heading"
-          className="section-pad scroll-mt-28 py-12 md:scroll-mt-24 md:py-20"
+          className="section-pad scroll-mt-36 py-12 md:scroll-mt-28 md:py-20"
         >
           <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[2rem] bg-paper/80 px-6 py-12 text-center shadow-[0_18px_50px_rgba(60,42,34,0.07)] ring-1 ring-pink/40 md:px-14 md:py-16">
             <Star
-              className="absolute left-6 top-6 text-lg"
+              className="absolute start-6 top-6 text-lg"
               style={{ animationDelay: "0.3s" }}
             />
             <Star
-              className="absolute bottom-8 right-8 text-base"
+              className="absolute bottom-8 end-8 text-base"
               style={{ animationDelay: "1.6s" }}
             />
             <p className="font-script text-2xl text-pink-deep md:text-3xl">
-              the heart of it all
+              {dict.mailClub.eyebrow}
             </p>
             <h2
               id="mail-club-heading"
               className="mt-2 font-serif text-3xl font-semibold text-chocolate md:text-5xl"
             >
-              The Mail Club
+              {dict.mailClub.title}
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-chocolate-soft md:text-lg">
-              Chocobanana began with a simple wish: to make getting mail feel
-              magical again. The Mail Club is where that wish lives — thoughtful
-              stationery, playful details, and the quiet joy of something made
-              just for opening slowly.
+              {dict.mailClub.body}
             </p>
             <a
               href="#how-it-works"
               className="mt-8 inline-flex items-center justify-center rounded-full border border-chocolate/80 bg-transparent px-7 py-3 font-serif text-sm tracking-[0.16em] uppercase text-chocolate transition-all duration-300 hover:border-pink-deep hover:bg-pink-soft/60 hover:text-chocolate md:text-base"
             >
-              Explore the Mail Club
+              {dict.mailClub.cta}
             </a>
           </div>
         </section>
 
-        {/* How it works */}
         <section
           id="how-it-works"
           aria-labelledby="how-heading"
-          className="section-pad scroll-mt-28 py-14 md:scroll-mt-24 md:py-20"
+          className="section-pad scroll-mt-36 py-14 md:scroll-mt-28 md:py-20"
         >
           <div className="mx-auto max-w-4xl text-center">
             <p className="font-script text-2xl text-pink-deep md:text-3xl">
-              a gentle rhythm
+              {dict.howItWorks.eyebrow}
             </p>
             <h2
               id="how-heading"
               className="mt-1 font-serif text-3xl font-semibold text-chocolate md:text-4xl"
             >
-              How it works
+              {dict.howItWorks.title}
             </h2>
             <div className="divider-ornament mt-5">
               <Star className="text-sm" />
             </div>
 
-            <ol className="mt-10 grid gap-8 text-left md:grid-cols-3 md:gap-6">
-              {steps.map((step, index) => (
+            <ol className="mt-10 grid gap-8 text-start md:grid-cols-3 md:gap-6">
+              {dict.howItWorks.steps.map((step, index) => (
                 <li key={step.title} className="relative px-1 md:px-2">
                   <span className="font-script text-4xl text-gold">
                     {String(index + 1).padStart(2, "0")}
@@ -216,77 +232,117 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Shop / products */}
         <section
           id="shop"
           aria-labelledby="shop-heading"
-          className="section-pad scroll-mt-28 bg-cream-deep/45 py-14 md:scroll-mt-24 md:py-20"
+          className="section-pad scroll-mt-36 bg-cream-deep/45 py-14 md:scroll-mt-28 md:py-20"
         >
           <div className="mx-auto max-w-4xl text-center">
             <p className="font-script text-2xl text-pink-deep md:text-3xl">
-              little treasures
+              {dict.shop.eyebrow}
             </p>
             <h2
               id="shop-heading"
               className="mt-1 font-serif text-3xl font-semibold text-chocolate md:text-4xl"
             >
-              From the Shop
+              {dict.shop.title}
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-chocolate-soft">
-              A peek at the kinds of pieces we love to make and share. The shop
-              is still being prepared — browse the ideas for now.
+              {dict.shop.intro}
             </p>
+            <p className="mx-auto mt-3 max-w-lg text-xs leading-relaxed text-chocolate-soft/90">
+              {dict.currency.baseNote} {dict.currency.preferenceHint}
+            </p>
+            {currency !== baseCurrency ? (
+              <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-pink-deep">
+                {dict.currency.estimatedNote}
+              </p>
+            ) : null}
+            {paymentsMode === "test" ? (
+              <p className="mx-auto mt-2 max-w-lg text-xs leading-relaxed text-pink-deep">
+                {dict.checkout.testModeNote}
+              </p>
+            ) : null}
 
-            <ul className="mt-10 grid gap-5 text-left sm:grid-cols-2">
-              {products.map((product) => (
-                <li
-                  key={product.name}
-                  className="rounded-3xl bg-paper/90 px-6 py-7 ring-1 ring-pink/35 transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-serif text-2xl font-medium text-chocolate">
-                      {product.name}
-                    </h3>
-                    <Star className="shrink-0 text-sm" />
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-chocolate-soft md:text-[0.95rem]">
-                    {product.note}
-                  </p>
-                </li>
-              ))}
+            <ul className="mt-10 grid gap-5 text-start sm:grid-cols-2">
+              {shopProducts.map((product) => {
+                const copy = localizedProductCopy(dict, product);
+                const priced = formatCatalogPrice({
+                  amountCadCents: product.amountCadCents,
+                  locale,
+                  preferredCurrency: currency,
+                });
+                const buyLabel =
+                  product.kind === "subscription"
+                    ? dict.checkout.subscribe
+                    : dict.checkout.buy;
+
+                return (
+                  <li
+                    key={product.id}
+                    className="rounded-3xl bg-paper/90 px-6 py-7 ring-1 ring-pink/35 transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="font-serif text-2xl font-medium text-chocolate">
+                        {copy.name}
+                      </h3>
+                      <Star className="shrink-0 text-sm" />
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-chocolate-soft md:text-[0.95rem]">
+                      {copy.note}
+                    </p>
+                    <p className="mt-3 font-serif text-lg text-chocolate">
+                      {priced.primary}
+                      {product.kind === "subscription"
+                        ? ` ${dict.checkout.perMonth}`
+                        : ""}
+                    </p>
+                    {priced.isEstimateOnly ? (
+                      <p className="mt-1 text-xs text-chocolate-soft/90">
+                        {dict.checkout.preferredCurrencyHint.replace(
+                          "{currency}",
+                          priced.preferredCurrency,
+                        )}
+                      </p>
+                    ) : null}
+                    <BuyButton
+                      productId={product.id}
+                      locale={locale}
+                      label={buyLabel}
+                      unavailableLabel={dict.checkout.unavailable}
+                      errorLabel={dict.checkout.error}
+                      enabled={checkoutEnabled}
+                    />
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
 
-        {/* About / story */}
         <section
           id="about"
           aria-labelledby="about-heading"
-          className="section-pad scroll-mt-28 py-14 md:scroll-mt-24 md:py-20"
+          className="section-pad scroll-mt-36 py-14 md:scroll-mt-28 md:py-20"
         >
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-script text-2xl text-pink-deep md:text-3xl">
-              our story
+              {dict.about.eyebrow}
             </p>
             <h2
               id="about-heading"
               className="mt-1 font-serif text-3xl font-semibold text-chocolate md:text-4xl"
             >
-              About Chocobanana
+              {dict.about.title}
             </h2>
             <div className="divider-ornament mt-5">
               <Star className="text-sm" />
             </div>
             <p className="mt-8 text-base leading-relaxed text-chocolate-soft md:text-lg">
-              Chocobanana grew from late-night letter writing, scrapbook scraps,
-              and a soft spot for anything that feels handmade. We believe the
-              post can still carry warmth — a sticker, a note, a carefully chosen
-              paper — reminders that someone thought of you.
+              {dict.about.p1}
             </p>
             <p className="mt-4 text-base leading-relaxed text-chocolate-soft md:text-lg">
-              The kitten with the golden star is our little guardian of cozy
-              mail days. Everything we make aims for that same feeling: sweet,
-              a bit nostalgic, and gently playful.
+              {dict.about.p2}
             </p>
           </div>
         </section>
@@ -297,7 +353,7 @@ export default function Home() {
           <p className="font-serif text-xl tracking-[0.12em] text-chocolate">
             Chocobanana
           </p>
-          <p className="font-script text-xl text-pink-deep">mail club</p>
+          <p className="font-script text-xl text-pink-deep">{dict.footer.tagline}</p>
           <nav
             aria-label="Footer"
             className="flex flex-wrap justify-center gap-5 font-serif text-sm tracking-[0.12em] text-chocolate-soft"
@@ -313,7 +369,7 @@ export default function Home() {
             ))}
           </nav>
           <p className="mt-2 text-xs tracking-wide text-chocolate-soft/80">
-            Made with soft paper &amp; golden stars.
+            {dict.footer.credit}
           </p>
         </div>
       </footer>

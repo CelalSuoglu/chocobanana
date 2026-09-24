@@ -54,6 +54,29 @@ body {
   font-family: var(--font-body), Georgia, serif;
 }
 
+.font-script {
+  font-family: var(--font-script), var(--font-body), cursive;
+}
+
+.font-serif {
+  font-family: var(--font-serif), var(--font-body), Georgia, serif;
+}
+
+[lang="ar"] .font-script,
+[lang="ar"] .font-serif {
+  font-family: var(--font-arabic), var(--font-body), serif;
+}
+
+[lang="ja"] .font-script,
+[lang="ja"] .font-serif {
+  font-family: var(--font-japanese), var(--font-body), sans-serif;
+}
+
+[lang="zh"] .font-script,
+[lang="zh"] .font-serif {
+  font-family: var(--font-chinese), var(--font-body), sans-serif;
+}
+
 ::selection {
   background: var(--pink-soft);
   color: var(--chocolate);

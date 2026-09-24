@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobanana est un mail club douillet qui envoie de petites douceurs par la poste."
+  },
+  "nav": {
+    "shop": "Boutique",
+    "mailClub": "Mail Club",
+    "about": "À propos",
+    "language": "Langue",
+    "currency": "Devise"
+  },
+  "brand": {
+    "greeting": "bonjour, douce amie",
+    "name": "Chocobanana",
+    "tagline": "Un petit mail club chaleureux pour la papeterie douce, les moments manuscrits et les colis qui ressemblent à une étreinte dans la boîte aux lettres."
+  },
+  "mailClub": {
+    "eyebrow": "le cœur de tout",
+    "title": "Le Mail Club",
+    "body": "Chocobanana est né d'un simple souhait : rendre le courrier magique à nouveau. Le Mail Club est l'endroit où vit ce souhait — une papeterie attentionnée, des détails ludiques et la joie tranquille d'ouvrir quelque chose fait avec soin.",
+    "cta": "Découvrir le Mail Club"
+  },
+  "howItWorks": {
+    "eyebrow": "un doux rythme",
+    "title": "Comment ça marche",
+    "steps": [
+      {
+        "title": "Parcourir le Club",
+        "text": "Explorez le Mail Club et découvrez les douceurs que nous imaginons."
+      },
+      {
+        "title": "Choisir vos favoris",
+        "text": "Sélectionnez la papeterie et les souvenirs qui vous ressemblent — doux, ludiques et un peu nostalgiques."
+      },
+      {
+        "title": "Ouvrir le courrier",
+        "text": "Quand quelque chose arrive, prenez une boisson chaude et savourez le petit rituel d'ouvrir le courrier."
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "petits trésors",
+    "title": "Dans la boutique",
+    "intro": "Papeterie et option Mail Club mensuelle. Les prix catalogue sont en CAD côté serveur ; le paiement s'ouvre sur Stripe.",
+    "products": {
+      "letterSets": {
+        "name": "Sets de lettres",
+        "note": "Papier doux, lignes légères, et de la place pour écrire quelque chose de tendre."
+      },
+      "stickerSheets": {
+        "name": "Planches d'autocollants",
+        "note": "Petites étoiles, cœurs roses et doodles pour habiller une enveloppe."
+      },
+      "sealingTouches": {
+        "name": "Touches de cachet",
+        "note": "Cachets de cire et rubans pour des colis qui ont l'air faits main."
+      },
+      "keepsakeNotes": {
+        "name": "Petites notes",
+        "note": "Petites cartes à glisser dans une lettre ou à laisser sur un bureau."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "notre histoire",
+    "title": "À propos de Chocobanana",
+    "p1": "Chocobanana est né des lettres écrites tard le soir, des collages de scrapbook et d'un faible pour tout ce qui semble fait main. Nous croyons que le courrier peut encore porter de la chaleur — un autocollant, une note, un papier choisi avec soin.",
+    "p2": "Le chaton à l'étoile dorée est notre petit gardien des jours de courrier douillets. Tout ce que nous créons vise ce même sentiment : sucré, un peu nostalgique et doucement ludique."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Fait avec du papier doux et des étoiles dorées."
+  },
+  "currency": {
+    "estimatedNote": "Tout montant converti affiché n'est qu'une estimation pour la navigation. Le montant facturé est confirmé au paiement.",
+    "baseNote": "Les prix du catalogue sont fixés en CAD.",
+    "preferenceHint": "Votre préférence de devise est enregistrée pour le futur paiement."
+  },
+  "a11y": {
+    "logoAlt": "Logo Chocobanana mail club avec un chaton portant une étoile dorée",
+    "selectLanguage": "Choisir la langue",
+    "selectCurrency": "Choisir la devise"
+  },
+  "checkout": {
+    "buy": "Acheter",
+    "subscribe": "S'abonner chaque mois",
+    "perMonth": "/ mois",
+    "unavailable": "Le paiement n'est pas encore disponible dans cet environnement.",
+    "error": "Impossible de démarrer le paiement. Réessayez.",
+    "preferredCurrencyHint": "La devise préférée {currency} est enregistrée pour Stripe Checkout lorsque Adaptive Pricing s'applique. Le prix CAD ci-dessus n'est pas un montant converti facturé.",
+    "testModeNote": "Mode test : utilisez les cartes de test Stripe. Aucun débit réel.",
+    "successEyebrow": "presque",
+    "successTitle": "Paiement reçu par Stripe",
+    "successBody": "Merci pour votre commande. Nous confirmons avec les webhooks Stripe, pas seulement cette page.",
+    "successMissing": "Session de paiement introuvable.",
+    "cancelEyebrow": "pas de souci",
+    "cancelTitle": "Paiement annulé",
+    "cancelBody": "Aucun montant n'a été débité. Vous pouvez revenir à la boutique quand vous voulez.",
+    "backToShop": "Retour à la boutique",
+    "stripeStatus": "Statut Stripe",
+    "statusPaidOnStripe": "payé",
+    "integrationAmount": "Montant en CAD (devise d'intégration)",
+    "presentmentAmount": "Montant débité en devise de présentation",
+    "orderRecord": "Enregistrement de commande",
+    "orderRecordReady": "Le webhook a enregistré cette commande dans le stockage temporaire",
+    "orderRecordPendingWebhook": "En attente de confirmation webhook (la redirection seule ne suffit pas)",
+    "contactEmail": "E-mail de contact",
+    "webhookTrustNote": "Cette page lit la session Checkout chez Stripe. Un vrai stockage de commandes nécessite encore une base de données."
+  }
+}

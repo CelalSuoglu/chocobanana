@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobanana is a cozy mail club sending little sweets of joy through the post."
+  },
+  "nav": {
+    "shop": "Shop",
+    "mailClub": "Mail Club",
+    "about": "About",
+    "language": "Language",
+    "currency": "Currency"
+  },
+  "brand": {
+    "greeting": "hello, sweet friend",
+    "name": "Chocobanana",
+    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post."
+  },
+  "mailClub": {
+    "eyebrow": "the heart of it all",
+    "title": "The Mail Club",
+    "body": "Chocobanana began with a simple wish: to make getting mail feel magical again. The Mail Club is where that wish lives — thoughtful stationery, playful details, and the quiet joy of something made just for opening slowly.",
+    "cta": "Explore the Mail Club"
+  },
+  "howItWorks": {
+    "eyebrow": "a gentle rhythm",
+    "title": "How it works",
+    "steps": [
+      {
+        "title": "Browse the Club",
+        "text": "Wander through the Mail Club and see what kinds of sweet parcels we dream up."
+      },
+      {
+        "title": "Choose Your Favorites",
+        "text": "Pick the stationery and keepsakes that feel most like you — soft, playful, and a little nostalgic."
+      },
+      {
+        "title": "Open the Mail",
+        "text": "When something arrives, settle in with a cup of something warm and enjoy the little ritual of opening mail."
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "little treasures",
+    "title": "From the Shop",
+    "intro": "Stationery pieces and a monthly Mail Club option. Catalog prices are set in CAD on the server; checkout opens on Stripe.",
+    "products": {
+      "letterSets": {
+        "name": "Letter Sets",
+        "note": "Soft paper, gentle lines, and room to write something kind."
+      },
+      "stickerSheets": {
+        "name": "Sticker Sheets",
+        "note": "Tiny stars, pink hearts, and doodles ready to dress up an envelope."
+      },
+      "sealingTouches": {
+        "name": "Sealing Touches",
+        "note": "Wax seals and ribbon details for parcels that feel handmade."
+      },
+      "keepsakeNotes": {
+        "name": "Keepsake Notes",
+        "note": "Small cards meant to tuck into a letter or leave on a desk."
+      }
+    }
+  },
+  "checkout": {
+    "buy": "Buy",
+    "subscribe": "Subscribe monthly",
+    "perMonth": "/ month",
+    "unavailable": "Checkout is not available in this environment yet.",
+    "error": "Something went wrong starting checkout. Please try again.",
+    "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies. The CAD catalog price above is not a converted charge.",
+    "testModeNote": "Test mode: use Stripe test cards. No live charges.",
+    "successEyebrow": "almost there",
+    "successTitle": "Payment received by Stripe",
+    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successMissing": "We could not find a checkout session to display.",
+    "cancelEyebrow": "no worries",
+    "cancelTitle": "Checkout canceled",
+    "cancelBody": "Nothing was charged. You can return to the shop whenever you like.",
+    "backToShop": "Back to shop",
+    "stripeStatus": "Stripe payment status",
+    "statusPaidOnStripe": "paid",
+    "integrationAmount": "Amount in CAD (integration currency)",
+    "presentmentAmount": "Amount charged in presentment currency",
+    "orderRecord": "Order record",
+    "orderRecordReady": "Webhook recorded this order in the temporary store",
+    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "contactEmail": "Contact email",
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Durable order storage still needs a real database."
+  },
+  "about": {
+    "eyebrow": "our story",
+    "title": "About Chocobanana",
+    "p1": "Chocobanana grew from late-night letter writing, scrapbook scraps, and a soft spot for anything that feels handmade. We believe the post can still carry warmth — a sticker, a note, a carefully chosen paper — reminders that someone thought of you.",
+    "p2": "The kitten with the golden star is our little guardian of cozy mail days. Everything we make aims for that same feeling: sweet, a bit nostalgic, and gently playful."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Made with soft paper & golden stars."
+  },
+  "currency": {
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Your currency preference is saved for when checkout is available."
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
+    "selectLanguage": "Select language",
+    "selectCurrency": "Select currency"
+  }
+}

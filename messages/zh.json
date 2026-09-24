@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobanana 是一个温馨的邮件俱乐部，用邮寄送出小小的甜蜜。"
+  },
+  "nav": {
+    "shop": "商店",
+    "mailClub": "邮件俱乐部",
+    "about": "关于我们",
+    "language": "语言",
+    "currency": "货币"
+  },
+  "brand": {
+    "greeting": "你好，亲爱的朋友",
+    "name": "Chocobanana",
+    "tagline": "一个温馨的小邮件俱乐部，专注柔软文具、手写时刻，以及像拥抱一样抵达信箱的包裹。"
+  },
+  "mailClub": {
+    "eyebrow": "一切的核心",
+    "title": "邮件俱乐部",
+    "body": "Chocobanana 始于一个简单的愿望：让收信再次变得神奇。邮件俱乐部就是这个愿望生长的地方——用心的文具、俏皮的细节，以及慢慢拆开一件精心之物时的安静喜悦。",
+    "cta": "探索邮件俱乐部"
+  },
+  "howItWorks": {
+    "eyebrow": "温柔的节奏",
+    "title": "如何运作",
+    "steps": [
+      {
+        "title": "浏览俱乐部",
+        "text": "逛逛邮件俱乐部，看看我们构想的各种甜蜜包裹。"
+      },
+      {
+        "title": "选择心仪之物",
+        "text": "挑选最像你的文具与小物——柔软、俏皮，又带着一点怀旧。"
+      },
+      {
+        "title": "打开邮件",
+        "text": "当有东西寄到时，泡一杯热饮，享受拆信的小小仪式。"
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "小小宝藏",
+    "title": "来自商店",
+    "intro": "文具与每月邮件俱乐部选项。目录价格在服务器端以 CAD 设定；结账在 Stripe 打开。",
+    "products": {
+      "letterSets": {
+        "name": "信笺套装",
+        "note": "柔软的纸张、温柔的线条，以及写下善意的空间。"
+      },
+      "stickerSheets": {
+        "name": "贴纸页",
+        "note": "小星星、粉色爱心，以及装饰信封的涂鸦。"
+      },
+      "sealingTouches": {
+        "name": "封印点缀",
+        "note": "火漆与丝带，让包裹更有手作感。"
+      },
+      "keepsakeNotes": {
+        "name": "纪念小卡",
+        "note": "可夹进信里，或放在桌上的小卡片。"
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "我们的故事",
+    "title": "关于 Chocobanana",
+    "p1": "Chocobanana 从深夜写信、剪贴簿碎屑，以及对一切手作之物的偏爱中生长出来。我们相信邮寄仍能传递温暖——一张贴纸、一张纸条、一张精心挑选的纸。",
+    "p2": "戴着金色星星的小猫，是我们温馨邮寄日子的小小守护者。我们所做的一切，都朝着同一种感觉：甜蜜、略带怀旧，又轻轻俏皮。"
+  },
+  "footer": {
+    "tagline": "邮件俱乐部",
+    "credit": "用柔软的纸与金色的星星做成。"
+  },
+  "currency": {
+    "estimatedNote": "你看到的任何换算金额仅供浏览参考。实际扣款金额将在结账时确认。",
+    "baseNote": "目录价格以加元（CAD）设定。",
+    "preferenceHint": "你的货币偏好已保存，待结账可用时生效。"
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana 邮件俱乐部标志：一只戴着金色星星的小猫",
+    "selectLanguage": "选择语言",
+    "selectCurrency": "选择货币"
+  },
+  "checkout": {
+    "buy": "购买",
+    "subscribe": "按月订阅",
+    "perMonth": "/ 月",
+    "unavailable": "当前环境尚未开放结账。",
+    "error": "无法开始结账，请重试。",
+    "preferredCurrencyHint": "偏好货币 {currency} 会在 Adaptive Pricing 适用时用于 Stripe Checkout。上方 CAD 价格不是已换算的扣款金额。",
+    "testModeNote": "测试模式：请使用 Stripe 测试卡。不会产生真实扣款。",
+    "successEyebrow": "就快好了",
+    "successTitle": "Stripe 已收到付款",
+    "successBody": "感谢你的订单。我们通过 Stripe webhook 确认，而不是仅凭本页。",
+    "successMissing": "找不到可显示的结账会话。",
+    "cancelEyebrow": "没关系",
+    "cancelTitle": "已取消结账",
+    "cancelBody": "未产生任何扣款。你可以随时返回商店。",
+    "backToShop": "返回商店",
+    "stripeStatus": "Stripe 付款状态",
+    "statusPaidOnStripe": "已支付",
+    "integrationAmount": "CAD 金额（集成货币）",
+    "presentmentAmount": "以展示货币收取的金额",
+    "orderRecord": "订单记录",
+    "orderRecordReady": "Webhook 已将此订单记入临时存储",
+    "orderRecordPendingWebhook": "等待 webhook 确认（不能仅凭跳转认定成功）",
+    "contactEmail": "联系邮箱",
+    "webhookTrustNote": "本页从 Stripe 读取 Checkout Session。持久订单仍需真实数据库。"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobananaは、やさしい気持ちを郵便で届ける居心地のよいメールクラブです。"
+  },
+  "nav": {
+    "shop": "ショップ",
+    "mailClub": "メールクラブ",
+    "about": "私たちについて",
+    "language": "言語",
+    "currency": "通貨"
+  },
+  "brand": {
+    "greeting": "こんにちは、やさしい友だち",
+    "name": "Chocobanana",
+    "tagline": "やわらかい文房具、手書きのひととき、郵便受けに届くハグのような小包のための、居心地のよいメールクラブ。"
+  },
+  "mailClub": {
+    "eyebrow": "すべての中心",
+    "title": "メールクラブ",
+    "body": "Chocobananaは、郵便をもう一度魔法のように感じてもらいたいというシンプルな願いから始まりました。メールクラブは、その願いが生きる場所です。思いやりのある文房具、遊び心のあるディテール、ゆっくり開けるための小さな喜び。",
+    "cta": "メールクラブを見る"
+  },
+  "howItWorks": {
+    "eyebrow": "やさしいリズム",
+    "title": "ご利用の流れ",
+    "steps": [
+      {
+        "title": "クラブを見る",
+        "text": "メールクラブをのぞいて、どんなやさしい小包を思い描いているか見てみましょう。"
+      },
+      {
+        "title": "お気に入りを選ぶ",
+        "text": "あなたらしい文房具や記念の品を選びましょう。やわらかく、遊び心があって、少しノスタルジックなもの。"
+      },
+      {
+        "title": "郵便を開ける",
+        "text": "届いたら、あたたかい飲み物と一緒に、郵便を開ける小さな儀式を楽しんでください。"
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "小さな宝物",
+    "title": "ショップより",
+    "intro": "文房具と毎月のメールクラブ。カタログ価格はサーバー側で CAD。チェックアウトは Stripe で開きます。",
+    "products": {
+      "letterSets": {
+        "name": "レターセット",
+        "note": "やわらかい紙、やさしい罫線、やさしい言葉を書くための余白。"
+      },
+      "stickerSheets": {
+        "name": "ステッカーシート",
+        "note": "小さな星、ピンクのハート、封筒を飾るための落書きモチーフ。"
+      },
+      "sealingTouches": {
+        "name": "シーリングのアクセント",
+        "note": "手作り感のある小包のためのシーリングワックスとリボン。"
+      },
+      "keepsakeNotes": {
+        "name": "記念のミニカード",
+        "note": "手紙に挟んだり、机に置いたりできる小さなカード。"
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "私たちの物語",
+    "title": "Chocobananaについて",
+    "p1": "Chocobananaは、夜更けの手紙、スクラップブックの切れ端、手作りのものへの愛情から育ちました。郵便は今もあたたかさを運べると信じています。ステッカー、メモ、丁寧に選んだ紙。",
+    "p2": "金色の星をつけた子猫は、居心地のよい郵便の日々の小さな守りです。私たちがつくるものはすべて、甘く、少し懐かしく、やさしく遊び心のある同じ気持ちをめざしています。"
+  },
+  "footer": {
+    "tagline": "メールクラブ",
+    "credit": "やわらかい紙と金色の星でつくりました。"
+  },
+  "currency": {
+    "estimatedNote": "表示される換算金額は閲覧用の目安です。実際の請求額はチェックアウト時に確定します。",
+    "baseNote": "カタログ価格はCADで設定されています。",
+    "preferenceHint": "通貨の設定は、チェックアウト準備ができ次第使えるよう保存されます。"
+  },
+  "a11y": {
+    "logoAlt": "金色の星をつけた子猫のChocobananaメールクラブのロゴ",
+    "selectLanguage": "言語を選択",
+    "selectCurrency": "通貨を選択"
+  },
+  "checkout": {
+    "buy": "購入する",
+    "subscribe": "月額で登録",
+    "perMonth": "/ 月",
+    "unavailable": "この環境ではまだチェックアウトを利用できません。",
+    "error": "チェックアウトを開始できませんでした。もう一度お試しください。",
+    "preferredCurrencyHint": "優先通貨 {currency} は Adaptive Pricing 適用時に Stripe Checkout 用に保存されます。上の CAD 価格は換算後の請求額ではありません。",
+    "testModeNote": "テストモード：Stripe のテストカードをご利用ください。本番請求はありません。",
+    "successEyebrow": "もうすぐ",
+    "successTitle": "Stripe が支払いを受け取りました",
+    "successBody": "ご注文ありがとうございます。確認はこのページだけでなく Stripe の webhook で行います。",
+    "successMissing": "表示できるチェックアウトセッションが見つかりません。",
+    "cancelEyebrow": "大丈夫",
+    "cancelTitle": "チェックアウトをキャンセルしました",
+    "cancelBody": "請求は発生していません。いつでもショップに戻れます。",
+    "backToShop": "ショップに戻る",
+    "stripeStatus": "Stripe の支払い状況",
+    "statusPaidOnStripe": "支払い済み",
+    "integrationAmount": "CAD 金額（連携通貨）",
+    "presentmentAmount": "提示通貨で請求された金額",
+    "orderRecord": "注文記録",
+    "orderRecordReady": "webhook がこの注文を一時ストアに記録しました",
+    "orderRecordPendingWebhook": "webhook 確認待ち（リダイレクトだけでは確定しません）",
+    "contactEmail": "連絡先メール",
+    "webhookTrustNote": "このページは Stripe の Checkout Session を読みます。永続的な注文にはまだ本番データベースが必要です。"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobanana ist ein gemütlicher Mail Club, der kleine Freuden per Post verschickt."
+  },
+  "nav": {
+    "shop": "Shop",
+    "mailClub": "Mail Club",
+    "about": "Über uns",
+    "language": "Sprache",
+    "currency": "Währung"
+  },
+  "brand": {
+    "greeting": "hallo, süßer Freund",
+    "name": "Chocobanana",
+    "tagline": "Ein gemütlicher kleiner Mail Club für weiche Papeterie, handgeschriebene Momente und Pakete, die sich wie eine Umarmung im Briefkasten anfühlen."
+  },
+  "mailClub": {
+    "eyebrow": "das Herzstück",
+    "title": "Der Mail Club",
+    "body": "Chocobanana begann mit einem einfachen Wunsch: Post wieder magisch wirken zu lassen. Der Mail Club ist der Ort, an dem dieser Wunsch lebt — durchdachte Papeterie, verspielte Details und die stille Freude, etwas langsam zu öffnen.",
+    "cta": "Den Mail Club entdecken"
+  },
+  "howItWorks": {
+    "eyebrow": "ein sanfter Rhythmus",
+    "title": "So funktioniert's",
+    "steps": [
+      {
+        "title": "Club entdecken",
+        "text": "Stöbere durch den Mail Club und sieh, welche süßen Pakete wir uns ausdenken."
+      },
+      {
+        "title": "Favoriten wählen",
+        "text": "Wähle Papeterie und Andenken, die sich nach dir anfühlen — weich, verspielt und ein wenig nostalgisch."
+      },
+      {
+        "title": "Post öffnen",
+        "text": "Wenn etwas ankommt, nimm dir etwas Warmes und genieße das kleine Ritual, Post zu öffnen."
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "kleine Schätze",
+    "title": "Aus dem Shop",
+    "intro": "Papeterie und eine monatliche Mail-Club-Option. Katalogpreise sind serverseitig in CAD; Checkout öffnet bei Stripe.",
+    "products": {
+      "letterSets": {
+        "name": "Briefsets",
+        "note": "Weiches Papier, sanfte Linien und Platz, um etwas Liebesvolles zu schreiben."
+      },
+      "stickerSheets": {
+        "name": "Stickerbögen",
+        "note": "Kleine Sterne, rosa Herzen und Doodles zum Verzieren eines Umschlags."
+      },
+      "sealingTouches": {
+        "name": "Siegel-Details",
+        "note": "Wachssiegel und Bänder für Pakete mit handgemachtem Gefühl."
+      },
+      "keepsakeNotes": {
+        "name": "Erinnerungsnotizen",
+        "note": "Kleine Karten zum Beilegen in einen Brief oder zum Ablegen auf dem Schreibtisch."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "unsere Geschichte",
+    "title": "Über Chocobanana",
+    "p1": "Chocobanana wuchs aus spätabendlichem Briefeschreiben, Scrapbook-Schnipseln und einer Vorliebe für alles Handgemachte. Wir glauben, dass Post noch Wärme tragen kann — ein Sticker, eine Notiz, sorgfältig gewähltes Papier.",
+    "p2": "Das Kätzchen mit dem goldenen Stern ist unser kleiner Wächter gemütlicher Posttage. Alles, was wir machen, zielt auf dasselbe Gefühl: süß, etwas nostalgisch und sanft verspielt."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Gemacht mit weichem Papier und goldenen Sternen."
+  },
+  "currency": {
+    "estimatedNote": "Jeder umgerechnete Betrag ist nur eine Schätzung zum Stöbern. Der tatsächlich berechnete Betrag wird beim Checkout bestätigt.",
+    "baseNote": "Katalogpreise sind in CAD festgelegt.",
+    "preferenceHint": "Deine Währungspräferenz wird für den späteren Checkout gespeichert."
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana-Mail-Club-Logo mit einem Kätzchen, das einen goldenen Stern trägt",
+    "selectLanguage": "Sprache wählen",
+    "selectCurrency": "Währung wählen"
+  },
+  "checkout": {
+    "buy": "Kaufen",
+    "subscribe": "Monatlich abonnieren",
+    "perMonth": "/ Monat",
+    "unavailable": "Checkout ist in dieser Umgebung noch nicht verfügbar.",
+    "error": "Checkout konnte nicht gestartet werden. Bitte erneut versuchen.",
+    "preferredCurrencyHint": "Bevorzugte Währung {currency} wird für Stripe Checkout gespeichert, wenn Adaptive Pricing greift. Der CAD-Preis ist kein umgerechneter Abbuchungsbetrag.",
+    "testModeNote": "Testmodus: Stripe-Testkarten verwenden. Keine echten Belastungen.",
+    "successEyebrow": "fast geschafft",
+    "successTitle": "Zahlung bei Stripe eingegangen",
+    "successBody": "Danke für deine Bestellung. Wir bestätigen per Stripe-Webhooks, nicht nur über diese Seite.",
+    "successMissing": "Keine Checkout-Session gefunden.",
+    "cancelEyebrow": "kein Problem",
+    "cancelTitle": "Checkout abgebrochen",
+    "cancelBody": "Es wurde nichts berechnet. Du kannst jederzeit zum Shop zurückkehren.",
+    "backToShop": "Zurück zum Shop",
+    "stripeStatus": "Stripe-Zahlungsstatus",
+    "statusPaidOnStripe": "bezahlt",
+    "integrationAmount": "Betrag in CAD (Integrationswährung)",
+    "presentmentAmount": "Abgebuchter Betrag in Präsentationswährung",
+    "orderRecord": "Bestelldatensatz",
+    "orderRecordReady": "Webhook hat diese Bestellung im temporären Speicher erfasst",
+    "orderRecordPendingWebhook": "Warte auf Webhook-Bestätigung (Weiterleitung allein reicht nicht)",
+    "contactEmail": "Kontakt-E-Mail",
+    "webhookTrustNote": "Diese Seite liest die Checkout Session bei Stripe. Dauerhafte Bestellungen brauchen noch eine echte Datenbank."
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "title": "Chocobanana Mail Club",
+    "description": "Chocobanana, postayla küçük mutluluklar gönderen sıcak bir mail club."
+  },
+  "nav": {
+    "shop": "Mağaza",
+    "mailClub": "Mail Club",
+    "about": "Hakkında",
+    "language": "Dil",
+    "currency": "Para birimi"
+  },
+  "brand": {
+    "greeting": "merhaba, tatlı dostum",
+    "name": "Chocobanana",
+    "tagline": "Yumuşak kırtasiye, elle yazılmış anlar ve postada bir sarılmayı andıran paketler için sıcak bir mail club."
+  },
+  "mailClub": {
+    "eyebrow": "her şeyin kalbi",
+    "title": "Mail Club",
+    "body": "Chocobanana basit bir dilekle başladı: postayı yeniden büyülü hissettirmek. Mail Club bu dileğin yaşadığı yer — özenli kırtasiye, oyuncu detaylar ve yavaşça açmak için yapılmış bir şeyin sessiz sevinci.",
+    "cta": "Mail Club'ı Keşfet"
+  },
+  "howItWorks": {
+    "eyebrow": "nazik bir ritim",
+    "title": "Nasıl çalışır",
+    "steps": [
+      {
+        "title": "Kulübü Gez",
+        "text": "Mail Club'da dolaş ve hayal ettiğimiz tatlı paketlere göz at."
+      },
+      {
+        "title": "Favorilerini Seç",
+        "text": "Sana en çok uyan kırtasiye ve hatıralıkları seç — yumuşak, oyuncu ve biraz nostaljik."
+      },
+      {
+        "title": "Postayı Aç",
+        "text": "Bir şey geldiğinde sıcak bir içecek al ve postayı açmanın küçük ritüelinin tadını çıkar."
+      }
+    ]
+  },
+  "shop": {
+    "eyebrow": "küçük hazineler",
+    "title": "Mağazadan",
+    "intro": "Kırtasiye ürünleri ve aylık Mail Club seçeneği. Katalog fiyatları sunucuda CAD olarak tutulur; ödeme Stripe'da açılır.",
+    "products": {
+      "letterSets": {
+        "name": "Mektup Setleri",
+        "note": "Yumuşak kâğıt, nazik çizgiler ve güzel bir şey yazmak için alan."
+      },
+      "stickerSheets": {
+        "name": "Sticker Sayfaları",
+        "note": "Küçük yıldızlar, pembe kalpler ve zarfı süslemeye hazır doodle'lar."
+      },
+      "sealingTouches": {
+        "name": "Mühür Dokunuşları",
+        "note": "El yapımı hissi veren paketler için mum mühürler ve kurdele detayları."
+      },
+      "keepsakeNotes": {
+        "name": "Hatıra Notları",
+        "note": "Bir mektuba sıkıştırılacak veya masaya bırakılacak küçük kartlar."
+      }
+    }
+  },
+  "about": {
+    "eyebrow": "hikâyemiz",
+    "title": "Chocobanana Hakkında",
+    "p1": "Chocobanana gece geç saatlerde yazılan mektuplardan, scrapbook kırıntılarından ve el yapımı her şeye duyulan zaaftan büyüdü. Postanın hâlâ sıcaklık taşıyabileceğine inanıyoruz — bir sticker, bir not, özenle seçilmiş bir kâğıt.",
+    "p2": "Altın yıldızlı yavru kedi, sıcak posta günlerinin küçük koruyucusu. Yaptığımız her şey aynı hissi hedefler: tatlı, biraz nostaljik ve nazikçe oyuncu."
+  },
+  "footer": {
+    "tagline": "mail club",
+    "credit": "Yumuşak kâğıt ve altın yıldızlarla yapıldı."
+  },
+  "currency": {
+    "estimatedNote": "Gördüğün dönüştürülmüş tutar yalnızca gezinme tahminidir. Tahsil edilecek tutar ödeme sırasında onaylanır.",
+    "baseNote": "Katalog fiyatları CAD cinsinden belirlenir.",
+    "preferenceHint": "Para birimi tercihin, ödeme hazır olduğunda kullanılmak üzere kaydedilir."
+  },
+  "a11y": {
+    "logoAlt": "Altın yıldız takan yavru kedili Chocobanana mail club logosu",
+    "selectLanguage": "Dil seç",
+    "selectCurrency": "Para birimi seç"
+  },
+  "checkout": {
+    "buy": "Satın al",
+    "subscribe": "Aylık abone ol",
+    "perMonth": "/ ay",
+    "unavailable": "Ödeme bu ortamda henüz kullanılamıyor.",
+    "error": "Ödeme başlatılamadı. Lütfen tekrar deneyin.",
+    "preferredCurrencyHint": "Tercih edilen para birimi {currency}, Adaptive Pricing uygulanırsa Stripe Checkout için kaydedilir. Yukarıdaki CAD fiyatı dönüştürülmüş tahsilat değildir.",
+    "testModeNote": "Test modu: Stripe test kartlarını kullanın. Gerçek tahsilat yok.",
+    "successEyebrow": "neredeyse",
+    "successTitle": "Ödeme Stripe tarafından alındı",
+    "successBody": "Siparişiniz için teşekkürler. Onayı yalnızca bu sayfaya değil, Stripe webhook'larına göre yapıyoruz.",
+    "successMissing": "Gösterilecek bir ödeme oturumu bulunamadı.",
+    "cancelEyebrow": "sorun değil",
+    "cancelTitle": "Ödeme iptal edildi",
+    "cancelBody": "Herhangi bir ücret alınmadı. İstediğiniz zaman mağazaya dönebilirsiniz.",
+    "backToShop": "Mağazaya dön",
+    "stripeStatus": "Stripe ödeme durumu",
+    "statusPaidOnStripe": "ödendi",
+    "integrationAmount": "CAD tutarı (entegrasyon para birimi)",
+    "presentmentAmount": "Sunulan para biriminde tahsil edilen tutar",
+    "orderRecord": "Sipariş kaydı",
+    "orderRecordReady": "Webhook bu siparişi geçici depoya kaydetti",
+    "orderRecordPendingWebhook": "Webhook onayı bekleniyor (yalnızca yönlendirmeye güvenilmez)",
+    "contactEmail": "İletişim e-postası",
+    "webhookTrustNote": "Bu sayfa Checkout Session'ı Stripe'dan okur. Kalıcı sipariş için gerçek bir veritabanı gerekir."
+  }
+}
