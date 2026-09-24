@@ -81,6 +81,7 @@ export function CountdownTimer({
 
   return (
     <div className="countdown-hero relative mx-auto w-full max-w-4xl px-1 text-center">
+      <span aria-hidden="true" className="countdown-sparkle-layer" />
       <p
         className="countdown-glitter-line"
         role="timer"
