@@ -207,10 +207,17 @@ body {
 
 .coming-soon-sparkle {
   position: absolute;
-  color: var(--gold);
-  opacity: 0.35;
+  opacity: 0.4;
   animation: coming-soon-twinkle 4.5s ease-in-out infinite;
   line-height: 1;
+}
+
+.coming-soon-sparkle--gold {
+  color: var(--gold);
+}
+
+.coming-soon-sparkle--pink {
+  color: var(--pink-deep);
 }
 
 .coming-soon-timer-row {
@@ -238,8 +245,8 @@ body {
   line-height: 0.95;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
-  color: var(--chocolate);
-  -webkit-text-fill-color: var(--chocolate);
+  color: var(--pink-deep);
+  -webkit-text-fill-color: var(--pink-deep);
   background: none;
   filter: none;
   animation: none;
@@ -249,8 +256,8 @@ body {
   flex: 0 0 auto;
   padding-top: 0.08em;
   font-size: clamp(1.5rem, 7vw, 2.8rem);
-  color: var(--chocolate-soft);
-  -webkit-text-fill-color: var(--chocolate-soft);
+  color: var(--pink);
+  -webkit-text-fill-color: var(--pink);
 }
 
 .coming-soon-timer-label {

@@ -9,14 +9,26 @@ type ComingSoonPageProps = {
 };
 
 const SPARKLES = [
-  { top: "8%", left: "12%", delay: "0s", size: "text-sm" },
-  { top: "14%", left: "78%", delay: "0.7s", size: "text-base" },
-  { top: "28%", left: "6%", delay: "1.4s", size: "text-xs" },
-  { top: "36%", left: "88%", delay: "0.3s", size: "text-sm" },
-  { top: "58%", left: "18%", delay: "1.1s", size: "text-xs" },
-  { top: "62%", left: "82%", delay: "1.8s", size: "text-sm" },
-  { top: "78%", left: "40%", delay: "0.5s", size: "text-xs" },
-  { top: "22%", left: "48%", delay: "2.1s", size: "text-sm" },
+  { top: "5%", left: "10%", delay: "0s", size: "text-sm", tone: "gold" },
+  { top: "9%", left: "28%", delay: "0.4s", size: "text-xs", tone: "pink" },
+  { top: "7%", left: "72%", delay: "1.1s", size: "text-sm", tone: "gold" },
+  { top: "12%", left: "88%", delay: "0.7s", size: "text-base", tone: "pink" },
+  { top: "18%", left: "6%", delay: "1.6s", size: "text-xs", tone: "gold" },
+  { top: "22%", left: "48%", delay: "2.1s", size: "text-sm", tone: "pink" },
+  { top: "26%", left: "82%", delay: "0.3s", size: "text-xs", tone: "gold" },
+  { top: "34%", left: "14%", delay: "1.4s", size: "text-sm", tone: "pink" },
+  { top: "38%", left: "92%", delay: "0.9s", size: "text-xs", tone: "gold" },
+  { top: "44%", left: "8%", delay: "2.4s", size: "text-sm", tone: "gold" },
+  { top: "48%", left: "58%", delay: "1.8s", size: "text-xs", tone: "pink" },
+  { top: "52%", left: "86%", delay: "0.5s", size: "text-sm", tone: "pink" },
+  { top: "58%", left: "22%", delay: "1.2s", size: "text-xs", tone: "gold" },
+  { top: "64%", left: "78%", delay: "2.0s", size: "text-sm", tone: "pink" },
+  { top: "70%", left: "12%", delay: "0.6s", size: "text-xs", tone: "pink" },
+  { top: "74%", left: "42%", delay: "1.5s", size: "text-sm", tone: "gold" },
+  { top: "78%", left: "68%", delay: "2.3s", size: "text-xs", tone: "gold" },
+  { top: "84%", left: "30%", delay: "0.8s", size: "text-sm", tone: "pink" },
+  { top: "88%", left: "90%", delay: "1.9s", size: "text-xs", tone: "gold" },
+  { top: "16%", left: "34%", delay: "2.6s", size: "text-xs", tone: "gold" },
 ] as const;
 
 export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
@@ -29,7 +41,7 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
         {SPARKLES.map((sparkle, index) => (
           <span
             key={index}
-            className={`coming-soon-sparkle ${sparkle.size}`}
+            className={`coming-soon-sparkle coming-soon-sparkle--${sparkle.tone} ${sparkle.size}`}
             style={{
               top: sparkle.top,
               left: sparkle.left,
@@ -51,6 +63,14 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
             className="absolute -end-5 top-8 text-sm md:-end-8"
             style={{ animationDelay: "1.2s" }}
           />
+          <Star
+            className="absolute -start-2 bottom-0 text-xs md:-start-4"
+            style={{ animationDelay: "0.9s" }}
+          />
+          <Star
+            className="absolute -end-1 -bottom-1 text-sm md:-end-3"
+            style={{ animationDelay: "1.7s" }}
+          />
           <div className="animate-float mx-auto overflow-hidden rounded-full bg-paper/70 p-2.5 shadow-[0_16px_48px_rgba(60,42,34,0.1)] ring-1 ring-pink/40">
             <Image
               src="/logo.jpg"
@@ -67,7 +87,19 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
           {c.eyebrow}
         </h1>
 
-        <div className="animate-rise delay-2 mt-10 w-full">
+        <div className="divider-ornament mt-4">
+          <Star className="text-sm" style={{ animationDelay: "0.6s" }} />
+        </div>
+
+        <div className="animate-rise delay-2 relative mt-8 w-full">
+          <Star
+            className="pointer-events-none absolute -top-3 start-[8%] text-xs"
+            style={{ animationDelay: "0.4s" }}
+          />
+          <Star
+            className="pointer-events-none absolute -top-2 end-[10%] text-sm"
+            style={{ animationDelay: "1.3s" }}
+          />
           <CountdownTimer
             endsAtIso={endsAtIso}
             labels={{
@@ -83,10 +115,12 @@ export function ComingSoonPage({ dict, endsAtIso }: ComingSoonPageProps) {
         </div>
       </div>
 
-      <footer className="relative z-10 pb-8 pt-2 text-center">
+      <footer className="relative z-10 flex items-center justify-center gap-2 pb-8 pt-2 text-center">
+        <Star className="text-xs" style={{ animationDelay: "0.5s" }} />
         <p className="font-script text-sm text-chocolate-soft/75 md:text-base">
           by Didem Keskin
         </p>
+        <Star className="text-xs" style={{ animationDelay: "1.1s" }} />
       </footer>
     </main>
   );
