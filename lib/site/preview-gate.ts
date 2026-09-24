@@ -35,10 +35,12 @@ export async function unlockSitePreview(
   }
 
   const jar = await cookies();
+  const secure =
+    process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL);
   jar.set(previewCookieName, token, {
     path: "/",
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure,
     sameSite: "lax",
     maxAge: PREVIEW_MAX_AGE,
   });

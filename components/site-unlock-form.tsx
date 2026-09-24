@@ -33,7 +33,7 @@ export function SiteUnlockForm() {
         disabled={pending}
         className="min-h-10 rounded-md border border-[#3c2a22]/40 px-4 text-sm text-[#3c2a22] hover:bg-[#f5ebe3] disabled:opacity-60"
       >
-        {pending ? "Unlocking…" : "Unlock site preview"}
+        {pending ? "Unlocking…" : "Unlock and open the site"}
       </button>
     </form>
   );
