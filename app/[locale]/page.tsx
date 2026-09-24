@@ -8,8 +8,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
 import {
   getComingSoonEndsAtIso,
-  isComingSoonEnabled,
 } from "@/lib/site-access";
+import { isComingSoonGateActive } from "@/lib/site-access-server";
 
 export default async function HomePage({
   params,
@@ -19,7 +19,7 @@ export default async function HomePage({
 
   const dict = await getDictionary(raw);
 
-  if (isComingSoonEnabled()) {
+  if (await isComingSoonGateActive()) {
     return (
       <ComingSoonPage dict={dict} endsAtIso={getComingSoonEndsAtIso()} />
     );

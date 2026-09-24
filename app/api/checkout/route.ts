@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isComingSoonEnabled } from "@/lib/site-access";
+import { isComingSoonGateActiveForRequest } from "@/lib/site-access";
 import { createCheckoutSession } from "@/lib/stripe/checkout";
 
 export const runtime = "nodejs";
@@ -28,7 +28,7 @@ function parseItems(
 }
 
 export async function POST(request: Request) {
-  if (isComingSoonEnabled()) {
+  if (isComingSoonGateActiveForRequest(request)) {
     return NextResponse.json(
       { error: "Checkout is unavailable while coming soon is active." },
       { status: 503 },

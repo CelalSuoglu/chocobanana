@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { getOrderStore } from "@/lib/orders/store";
-import { isComingSoonEnabled } from "@/lib/site-access";
 import { getStripe } from "@/lib/stripe/client";
 import { getPaymentsMode } from "@/lib/stripe/config";
 
@@ -22,13 +21,6 @@ function asId(value: unknown): string | null {
 }
 
 export async function POST(request: Request) {
-  if (isComingSoonEnabled()) {
-    return NextResponse.json(
-      { error: "Webhooks unavailable while coming soon is active." },
-      { status: 503 },
-    );
-  }
-
   if (getPaymentsMode() === "disabled") {
     return NextResponse.json({ error: "Payments disabled." }, { status: 503 });
   }

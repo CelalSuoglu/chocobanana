@@ -12,7 +12,7 @@ import {
 } from "@/lib/currency/config";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
-import { isComingSoonEnabled } from "@/lib/site-access";
+import { isComingSoonGateActive } from "@/lib/site-access-server";
 
 type SiteShellProps = {
   locale: Locale;
@@ -21,7 +21,7 @@ type SiteShellProps = {
 };
 
 export async function SiteShell({ locale, dict, children }: SiteShellProps) {
-  if (isComingSoonEnabled()) {
+  if (await isComingSoonGateActive()) {
     return <>{children}</>;
   }
 

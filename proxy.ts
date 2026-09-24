@@ -7,9 +7,15 @@ import {
   locales,
 } from "./lib/i18n/config";
 import { resolvePreferredLocale } from "./lib/i18n/resolve-locale";
-import { isComingSoonEnabled } from "./lib/site-access";
+import {
+  getComingSoonPreviewSecret,
+  hasValidPreviewAccess,
+  isComingSoonEnabled,
+  previewCookieName,
+} from "./lib/site-access";
 
 const LOCALE_MAX_AGE = 60 * 60 * 24 * 365;
+const PREVIEW_MAX_AGE = 60 * 60 * 24 * 60; // 60 days — covers the 40-day wait
 
 function comingSoonApiResponse() {
   return NextResponse.json(
@@ -25,11 +31,68 @@ function redirectToLocaleHome(request: NextRequest, locale: string) {
   return NextResponse.redirect(url);
 }
 
+function isGateActive(request: NextRequest): boolean {
+  if (!isComingSoonEnabled()) return false;
+  return !hasValidPreviewAccess(
+    request.cookies.get(previewCookieName)?.value,
+  );
+}
+
+function applyPreviewUnlock(
+  request: NextRequest,
+  response: NextResponse,
+): NextResponse {
+  const secret = getComingSoonPreviewSecret();
+  const preview = request.nextUrl.searchParams.get("preview");
+
+  if (!secret || !preview) return response;
+
+  if (preview === "off") {
+    response.cookies.delete(previewCookieName);
+    return response;
+  }
+
+  if (preview === secret) {
+    response.cookies.set(previewCookieName, secret, {
+      path: "/",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: PREVIEW_MAX_AGE,
+    });
+  }
+
+  return response;
+}
+
+function stripPreviewParam(request: NextRequest) {
+  const url = request.nextUrl.clone();
+  if (!url.searchParams.has("preview")) return null;
+  url.searchParams.delete("preview");
+  return url;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const comingSoon = isComingSoonEnabled();
+  const secret = getComingSoonPreviewSecret();
+  const previewParam = request.nextUrl.searchParams.get("preview");
 
-  if (comingSoon && pathname.startsWith("/api/")) {
+  // Unlock / lock preview access, then continue without the secret in the URL.
+  if (
+    isComingSoonEnabled() &&
+    secret &&
+    previewParam &&
+    (previewParam === secret || previewParam === "off")
+  ) {
+    const clean = stripPreviewParam(request) ?? request.nextUrl.clone();
+    let response = NextResponse.redirect(clean);
+    response = applyPreviewUnlock(request, response);
+    return response;
+  }
+
+  const gateActive = isGateActive(request);
+
+  if (gateActive && pathname.startsWith("/api/")) {
     return comingSoonApiResponse();
   }
 
@@ -45,8 +108,8 @@ export function proxy(request: NextRequest) {
       return NextResponse.redirect(url);
     }
 
-    // Production coming-soon: only the locale home is reachable.
-    if (comingSoon && pathname !== `/${pathnameLocale}`) {
+    // Public coming-soon: only the locale home is reachable.
+    if (gateActive && pathname !== `/${pathnameLocale}`) {
       return redirectToLocaleHome(request, pathnameLocale);
     }
 
@@ -71,7 +134,7 @@ export function proxy(request: NextRequest) {
   ) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace(`/${maybeFake}`, `/${defaultLocale}`);
-    if (comingSoon) {
+    if (gateActive) {
       url.pathname = `/${defaultLocale}`;
       url.search = "";
     }
@@ -90,7 +153,7 @@ export function proxy(request: NextRequest) {
   });
 
   const url = request.nextUrl.clone();
-  if (comingSoon) {
+  if (gateActive) {
     url.pathname = `/${locale}`;
     url.search = "";
   } else {
