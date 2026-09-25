@@ -262,7 +262,9 @@
     "updatePassword": "Update password",
     "firstName": "First name",
     "lastName": "Last name",
-    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then."
+    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then.",
+    "pleaseWait": "Please wait…",
+    "localDevSignupNotice": "Local development: email is not configured, so new accounts are created ready to sign in (no verification email)."
   },
   "account": {
     "eyebrow": "welcome back",

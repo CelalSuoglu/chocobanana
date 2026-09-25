@@ -3,7 +3,7 @@
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn, signOut } from "@/auth";
-import { sendAppEmail, isEmailConfigured, formatEmailErrorForUser } from "@/lib/auth/email";
+import { sendAppEmail, isEmailConfigured, allowsDevSignupWithoutEmail, formatEmailErrorForUser } from "@/lib/auth/email";
 import { createToken, hashPassword, hashToken } from "@/lib/auth/password";
 import {
   assertSignupCountry,
@@ -61,7 +61,9 @@ export async function registerCustomer(
     return { ok: false, error: "Accounts are not configured in this environment yet." };
   }
 
-  if (!isEmailConfigured()) {
+  const emailReady = isEmailConfigured();
+  const localDevBypass = allowsDevSignupWithoutEmail();
+  if (!emailReady && !localDevBypass) {
     return {
       ok: false,
       error:
@@ -120,8 +122,20 @@ export async function registerCustomer(
       passwordHash,
       role: "CUSTOMER",
       preferredLocale: parsed.data.locale ?? "en",
+      // Local next dev without Resend: mark verified so sign-in works for design tests.
+      emailVerified: localDevBypass ? new Date() : null,
     },
   });
+
+  if (localDevBypass) {
+    revalidatePath("/owner");
+    revalidatePath("/owner/members");
+    return {
+      ok: true,
+      message:
+        "Account created for local development (email skipped). You can sign in now.",
+    };
+  }
 
   const rawToken = createToken();
   await prisma.verificationToken.create({

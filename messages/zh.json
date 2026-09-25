@@ -262,7 +262,9 @@
     "countryPlaceholder": "Select a country",
     "firstName": "名",
     "lastName": "姓",
-    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then."
+    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then.",
+    "pleaseWait": "请稍候…",
+    "localDevSignupNotice": "本地开发：未配置邮件，新账户可立即登录（无验证邮件）。"
   },
   "account": {
     "eyebrow": "welcome back",

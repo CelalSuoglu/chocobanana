@@ -262,7 +262,9 @@
     "countryPlaceholder": "Select a country",
     "firstName": "Nome",
     "lastName": "Sobrenome",
-    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then."
+    "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then.",
+    "pleaseWait": "Aguarde…",
+    "localDevSignupNotice": "Desenvolvimento local: email não configurado; novas contas podem entrar de imediato (sem email de verificação)."
   },
   "account": {
     "eyebrow": "welcome back",

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuthField, AuthForm } from "@/components/auth-form";
-import { PageHero } from "@/components/page-hero";
+import { AuthPageShell } from "@/components/auth-page-shell";
 import { loginCustomer } from "@/lib/auth/actions";
 import { isDatabaseConfigured } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
@@ -18,24 +18,25 @@ export default async function LoginPage({
   const dict = await getDictionary(raw);
 
   return (
-    <main className="section-pad flex-1 pb-16 pt-8 md:pb-20 md:pt-12">
-      <PageHero
-        eyebrow={dict.auth.eyebrow}
-        title={dict.auth.signInTitle}
-        intro={dict.auth.signInIntro}
-      />
+    <AuthPageShell
+      eyebrow={dict.auth.eyebrow}
+      title={dict.auth.signInTitle}
+      intro={dict.auth.signInIntro}
+      logoAlt={dict.a11y.logoAlt}
+    >
       {!isDatabaseConfigured() ? (
-        <p className="mx-auto mt-8 max-w-md text-center text-sm text-chocolate-soft">
+        <p className="text-center text-sm text-chocolate-soft">
           {dict.auth.notConfigured}
           <span className="mt-2 block text-xs text-chocolate-soft/80">
             {dict.auth.needsDatabase}
           </span>
         </p>
       ) : (
-        <div className="mt-10">
+        <>
           <AuthForm
             action={loginCustomer}
             submitLabel={dict.auth.signIn}
+            pendingLabel={dict.auth.pleaseWait}
             hiddenFields={{ locale: raw }}
           >
             <AuthField
@@ -52,16 +53,22 @@ export default async function LoginPage({
             />
           </AuthForm>
           <p className="mt-6 text-center text-sm text-chocolate-soft">
-            <Link href={hrefFor(raw, "/forgot-password")} className="text-pink-deep">
+            <Link
+              href={hrefFor(raw, "/forgot-password")}
+              className="text-pink-deep underline-offset-2 hover:underline"
+            >
               {dict.auth.forgotPassword}
             </Link>
             {" · "}
-            <Link href={hrefFor(raw, "/register")} className="text-pink-deep">
+            <Link
+              href={hrefFor(raw, "/register")}
+              className="text-pink-deep underline-offset-2 hover:underline"
+            >
               {dict.auth.createAccount}
             </Link>
           </p>
-        </div>
+        </>
       )}
-    </main>
+    </AuthPageShell>
   );
 }

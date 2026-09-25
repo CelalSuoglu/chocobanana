@@ -9,6 +9,7 @@ type AuthFormProps = {
     formData: FormData,
   ) => Promise<AuthActionState>;
   submitLabel: string;
+  pendingLabel?: string;
   children: React.ReactNode;
   hiddenFields?: Record<string, string>;
 };
@@ -18,6 +19,7 @@ const initial: AuthActionState = { ok: false };
 export function AuthForm({
   action,
   submitLabel,
+  pendingLabel = "Please wait…",
   children,
   hiddenFields,
 }: AuthFormProps) {
@@ -26,7 +28,7 @@ export function AuthForm({
   const showError = !state.ok && Boolean(state.error);
 
   return (
-    <form action={formAction} className="mx-auto flex w-full max-w-lg flex-col gap-4">
+    <form action={formAction} className="mx-auto flex w-full flex-col gap-4">
       {hiddenFields
         ? Object.entries(hiddenFields).map(([name, value]) => (
             <input key={name} type="hidden" name={name} value={value} />
@@ -35,7 +37,7 @@ export function AuthForm({
       {!showSuccess ? children : null}
       {showError ? (
         <p
-          className="rounded-2xl border border-pink-deep/40 bg-pink-soft/40 px-4 py-3 text-sm text-pink-deep"
+          className="rounded-2xl border border-pink-deep/45 bg-pink-soft/50 px-4 py-3 text-sm text-pink-deep"
           role="alert"
         >
           {state.error}
@@ -43,7 +45,7 @@ export function AuthForm({
       ) : null}
       {showSuccess ? (
         <p
-          className="rounded-2xl border border-chocolate/20 bg-paper/90 px-4 py-3 text-sm text-chocolate"
+          className="rounded-2xl border border-gold/45 bg-gold-soft/35 px-4 py-3 text-sm text-chocolate"
           role="status"
         >
           {state.message}
@@ -53,9 +55,9 @@ export function AuthForm({
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-chocolate/80 px-5 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-chocolate transition-colors hover:border-pink-deep hover:bg-pink-soft/60 disabled:opacity-60"
+          className="mt-1 inline-flex min-h-12 items-center justify-center rounded-full border border-pink-deep bg-pink-deep px-5 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-paper transition-colors hover:border-chocolate hover:bg-chocolate disabled:opacity-60"
         >
-          {pending ? "Please wait…" : submitLabel}
+          {pending ? pendingLabel : submitLabel}
         </button>
       ) : null}
     </form>
@@ -86,7 +88,7 @@ export function AuthField({
         required={required}
         autoComplete={autoComplete}
         defaultValue={defaultValue}
-        className="min-h-11 rounded-2xl border border-pink/40 bg-paper/80 px-4 text-chocolate outline-none ring-pink/30 focus:ring-2"
+        className="min-h-12 rounded-2xl border border-pink/45 bg-cream/80 px-4 text-chocolate outline-none transition-[box-shadow,border-color] focus:border-pink-deep focus:ring-2 focus:ring-pink/35"
       />
     </label>
   );
@@ -117,7 +119,7 @@ export function AuthSelect({
         required={required}
         autoComplete={autoComplete}
         defaultValue={defaultValue ?? ""}
-        className="min-h-11 rounded-2xl border border-pink/40 bg-paper/80 px-4 text-chocolate outline-none ring-pink/30 focus:ring-2"
+        className="min-h-12 rounded-2xl border border-pink/45 bg-cream/80 px-4 text-chocolate outline-none transition-[box-shadow,border-color] focus:border-pink-deep focus:ring-2 focus:ring-pink/35"
       >
         <option value="" disabled>
           {placeholder}

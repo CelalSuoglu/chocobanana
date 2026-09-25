@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuthField, AuthForm, AuthSelect } from "@/components/auth-form";
-import { PageHero } from "@/components/page-hero";
+import { AuthPageShell } from "@/components/auth-page-shell";
 import { registerCustomer } from "@/lib/auth/actions";
-import { isEmailConfigured } from "@/lib/auth/email";
+import {
+  allowsDevSignupWithoutEmail,
+  isEmailConfigured,
+} from "@/lib/auth/email";
 import { signupCountries } from "@/lib/auth/countries";
 import { isDatabaseConfigured } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
@@ -18,42 +21,50 @@ export default async function RegisterPage({
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const dict = await getDictionary(raw);
+  const dbReady = isDatabaseConfigured();
+  const emailReady = isEmailConfigured();
+  const localDevBypass = allowsDevSignupWithoutEmail();
+  const canRegister = dbReady && (emailReady || localDevBypass);
 
   return (
-    <main className="section-pad flex-1 pb-16 pt-8 md:pb-20 md:pt-12">
-      <PageHero
-        eyebrow={dict.auth.eyebrow}
-        title={dict.auth.signUpTitle}
-        intro={dict.auth.signUpIntro}
-      />
-      {!isDatabaseConfigured() ? (
-        <p className="mx-auto mt-8 max-w-md text-center text-sm text-chocolate-soft">
+    <AuthPageShell
+      eyebrow={dict.auth.eyebrow}
+      title={dict.auth.signUpTitle}
+      intro={dict.auth.signUpIntro}
+      logoAlt={dict.a11y.logoAlt}
+      notice={localDevBypass ? dict.auth.localDevSignupNotice : undefined}
+    >
+      {!dbReady ? (
+        <p className="text-center text-sm text-chocolate-soft">
           {dict.auth.notConfigured}
           <span className="mt-2 block text-xs text-chocolate-soft/80">
             {dict.auth.needsDatabase}
           </span>
         </p>
-      ) : !isEmailConfigured() ? (
-        <p className="mx-auto mt-8 max-w-md text-center text-sm text-chocolate-soft">
+      ) : !canRegister ? (
+        <p className="text-center text-sm text-chocolate-soft">
           {dict.auth.emailSetupRequired}
         </p>
       ) : (
-        <div className="mt-10">
+        <>
           <AuthForm
             action={registerCustomer}
             submitLabel={dict.auth.signUp}
+            pendingLabel={dict.auth.pleaseWait}
             hiddenFields={{ locale: raw }}
           >
-            <AuthField
-              label={dict.auth.firstName}
-              name="firstName"
-              autoComplete="given-name"
-            />
-            <AuthField
-              label={dict.auth.lastName}
-              name="lastName"
-              autoComplete="family-name"
-            />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AuthField
+                label={dict.auth.firstName}
+                name="firstName"
+                autoComplete="given-name"
+              />
+              <AuthField
+                label={dict.auth.lastName}
+                name="lastName"
+                autoComplete="family-name"
+              />
+            </div>
             <AuthField
               label={dict.auth.email}
               name="email"
@@ -83,39 +94,46 @@ export default async function RegisterPage({
               required={false}
               autoComplete="address-line2"
             />
-            <AuthField
-              label={dict.auth.city}
-              name="city"
-              autoComplete="address-level2"
-            />
-            <AuthField
-              label={dict.auth.region}
-              name="region"
-              autoComplete="address-level1"
-            />
-            <AuthField
-              label={dict.auth.postalCode}
-              name="postalCode"
-              autoComplete="postal-code"
-            />
-            <AuthSelect
-              label={dict.auth.country}
-              name="country"
-              autoComplete="country"
-              placeholder={dict.auth.countryPlaceholder}
-              options={signupCountries.map((country) => ({
-                value: country.code,
-                label: country.name,
-              }))}
-            />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AuthField
+                label={dict.auth.city}
+                name="city"
+                autoComplete="address-level2"
+              />
+              <AuthField
+                label={dict.auth.region}
+                name="region"
+                autoComplete="address-level1"
+              />
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <AuthField
+                label={dict.auth.postalCode}
+                name="postalCode"
+                autoComplete="postal-code"
+              />
+              <AuthSelect
+                label={dict.auth.country}
+                name="country"
+                autoComplete="country"
+                placeholder={dict.auth.countryPlaceholder}
+                options={signupCountries.map((country) => ({
+                  value: country.code,
+                  label: country.name,
+                }))}
+              />
+            </div>
           </AuthForm>
           <p className="mt-6 text-center text-sm text-chocolate-soft">
-            <Link href={hrefFor(raw, "/login")} className="text-pink-deep">
+            <Link
+              href={hrefFor(raw, "/login")}
+              className="text-pink-deep underline-offset-2 hover:underline"
+            >
               {dict.auth.haveAccount}
             </Link>
           </p>
-        </div>
+        </>
       )}
-    </main>
+    </AuthPageShell>
   );
 }

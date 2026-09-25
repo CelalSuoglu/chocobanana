@@ -27,6 +27,14 @@ export function isEmailConfigured(): boolean {
   );
 }
 
+/**
+ * Local `next dev` only — never true on Vercel Production/Preview.
+ * Lets designers register without Resend while keeping Production strict.
+ */
+export function allowsDevSignupWithoutEmail(): boolean {
+  return process.env.NODE_ENV === "development" && !isEmailConfigured();
+}
+
 function parseFromAddress(raw: string): { email: string } | null {
   const trimmed = raw.trim();
   const angled = trimmed.match(/^(.+?)\s*<([^>]+)>$/);

@@ -262,7 +262,9 @@
     "countryPlaceholder": "Select a country",
     "firstName": "Ad",
     "lastName": "Soyad",
-    "emailSetupRequired": "E-posta gönderimi henüz kurulmadı. RESEND_API_KEY ve EMAIL_FROM (Resend’te doğrulanmış alan adı) ayarlayın. O zamana kadar kayıt ve şifre sıfırlama kullanılamaz."
+    "emailSetupRequired": "E-posta gönderimi henüz kurulmadı. RESEND_API_KEY ve EMAIL_FROM (Resend’te doğrulanmış alan adı) ayarlayın. O zamana kadar kayıt ve şifre sıfırlama kullanılamaz.",
+    "pleaseWait": "Lütfen bekleyin…",
+    "localDevSignupNotice": "Yerel geliştirme: e-posta ayarlı değil; yeni hesaplar doğrulama maili olmadan hemen giriş yapabilir."
   },
   "account": {
     "eyebrow": "welcome back",
