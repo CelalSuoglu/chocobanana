@@ -1,14 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import { ComingSoonPage } from "@/components/coming-soon-page";
 import { Star } from "@/components/star";
 import { getOptionalSession } from "@/lib/auth/session";
+import {
+  getCartEligibleProducts,
+  type CatalogProduct,
+} from "@/lib/catalog/products";
+import {
+  baseCurrency,
+  currencyCookieName,
+  formatCatalogPrice,
+  isCurrencyCode,
+} from "@/lib/currency/config";
 import { isLocale } from "@/lib/i18n/config";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
 import { getComingSoonEndsAtIso } from "@/lib/site-access";
 import { isComingSoonGateActive } from "@/lib/site-access-server";
+
+function productCopy(dict: Dictionary, product: CatalogProduct) {
+  if (product.shopKey) {
+    return dict.shop.products[product.shopKey];
+  }
+  return { name: product.nameEn, note: product.descriptionEn };
+}
 
 export default async function HomePage({
   params,
@@ -31,6 +50,12 @@ export default async function HomePage({
   const session = await getOptionalSession();
   const signedIn =
     Boolean(session?.user?.id) && session?.user?.role !== "OWNER";
+
+  const cookieStore = await cookies();
+  const rawCurrency = cookieStore.get(currencyCookieName)?.value;
+  const currency =
+    rawCurrency && isCurrencyCode(rawCurrency) ? rawCurrency : baseCurrency;
+  const products = getCartEligibleProducts().slice(0, 4);
 
   const destinations = [
     { path: "/shop", ...dict.home.cards.shop },
@@ -102,7 +127,78 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Second section: one job — choose a path */}
+      {/* Products — cart-ready catalog preview */}
+      <section className="section-pad border-t border-pink/25 py-14 md:py-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="font-serif text-3xl text-chocolate md:text-4xl">
+            {dict.home.productsTitle}
+          </h2>
+          <p className="mt-3 font-serif text-base leading-relaxed text-chocolate-soft md:text-lg">
+            {dict.home.productsIntro}
+          </p>
+        </div>
+
+        <ul className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2">
+          {products.map((product) => {
+            const copy = productCopy(dict, product);
+            const priced = formatCatalogPrice({
+              amountCadCents: product.amountCadCents,
+              locale: raw,
+              preferredCurrency: currency,
+            });
+
+            return (
+              <li
+                key={product.id}
+                className="rounded-3xl bg-paper/90 px-5 py-6 ring-1 ring-pink/35 sm:px-6 sm:py-7"
+              >
+                <Link
+                  href={hrefFor(raw, `/shop/${product.id}`)}
+                  className="block transition-opacity hover:opacity-90"
+                >
+                  <div className="relative mx-auto mb-4 h-24 w-24 overflow-hidden rounded-full ring-1 ring-pink/35">
+                    <Image
+                      src={product.imageSrc}
+                      alt={copy.name}
+                      fill
+                      className="object-cover"
+                      sizes="96px"
+                    />
+                  </div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-serif text-xl font-medium text-chocolate md:text-2xl">
+                      {copy.name}
+                    </h3>
+                    <Star className="shrink-0 text-sm" />
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
+                    {copy.note}
+                  </p>
+                  <p className="mt-4 font-serif text-lg text-chocolate">
+                    {priced.primary}
+                  </p>
+                </Link>
+                <AddToCartButton
+                  productId={product.id}
+                  label={dict.cart.addToCart}
+                  addedLabel={dict.cart.added}
+                />
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-8 text-center">
+          <Link
+            href={hrefFor(raw, "/shop")}
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-chocolate/50 px-6 py-2.5 font-serif text-sm tracking-[0.14em] uppercase text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
+          >
+            {dict.home.productsCta}
+          </Link>
+        </div>
+      </section>
+
+      {/* Explore paths */}
       <section className="section-pad border-t border-pink/25 bg-paper/40 py-16 md:py-20">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-serif text-3xl text-chocolate md:text-4xl">

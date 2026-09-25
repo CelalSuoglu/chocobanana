@@ -50,7 +50,10 @@
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
     "joinTitle": "انضم إلى Chocobanana",
     "joinIntro": "أنشئ حساب عضوية لحفظ بياناتك ومتابعة طرودك.",
-    "joinCta": "إنشاء حساب"
+    "joinCta": "إنشاء حساب",
+    "productsTitle": "تصفّح المجموعة",
+    "productsIntro": "قطع قرطاسية جاهزة لسلّتك.",
+    "productsCta": "عرض كل المنتجات"
   },
   "shop": {
     "eyebrow": "كنوز صغيرة",

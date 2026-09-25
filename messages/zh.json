@@ -50,7 +50,10 @@
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
     "joinTitle": "加入 Chocobanana",
     "joinIntro": "创建会员账户，保存你的资料并跟踪包裹。",
-    "joinCta": "创建账户"
+    "joinCta": "创建账户",
+    "productsTitle": "浏览系列",
+    "productsIntro": "可加入购物车的文具单品。",
+    "productsCta": "查看全部商品"
   },
   "shop": {
     "eyebrow": "小小宝藏",

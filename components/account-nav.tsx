@@ -62,11 +62,11 @@ export function AccountNav({
         <>
           <Link
             href={hrefFor(locale, "/account")}
-            className="hidden min-h-10 items-center rounded-full px-2 font-serif text-sm tracking-[0.08em] text-chocolate-soft transition-colors hover:text-pink-deep sm:inline-flex sm:px-3"
+            className="inline-flex min-h-10 max-w-[7.5rem] items-center truncate rounded-full px-2 font-serif text-xs tracking-[0.06em] text-chocolate-soft transition-colors hover:text-pink-deep sm:max-w-none sm:px-3 sm:text-sm sm:tracking-[0.08em]"
           >
             {accountLabel}
           </Link>
-          <form action={logoutCustomerAction} className="hidden sm:block">
+          <form action={logoutCustomerAction} className="hidden md:block">
             <input type="hidden" name="locale" value={locale} />
             <button
               type="submit"
@@ -80,13 +80,13 @@ export function AccountNav({
         <>
           <Link
             href={hrefFor(locale, "/login")}
-            className="hidden min-h-10 items-center rounded-full px-2 font-serif text-sm tracking-[0.08em] text-chocolate-soft transition-colors hover:text-pink-deep sm:inline-flex sm:px-3"
+            className="inline-flex min-h-10 items-center rounded-full px-1.5 font-serif text-xs tracking-[0.06em] text-chocolate-soft transition-colors hover:text-pink-deep sm:px-3 sm:text-sm sm:tracking-[0.08em]"
           >
             {signInLabel}
           </Link>
           <Link
             href={hrefFor(locale, "/register")}
-            className="hidden min-h-10 items-center rounded-full border border-pink/45 bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep sm:inline-flex"
+            className="inline-flex min-h-10 items-center rounded-full border border-pink/45 bg-paper/90 px-2 font-serif text-xs tracking-[0.06em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep sm:px-3 sm:text-sm sm:tracking-[0.08em]"
           >
             {signUpLabel}
           </Link>

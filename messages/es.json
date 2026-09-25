@@ -50,7 +50,10 @@
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
     "joinTitle": "Únete a Chocobanana",
     "joinIntro": "Crea una cuenta de miembro para guardar tus datos y seguir tus envíos.",
-    "joinCta": "Crear cuenta"
+    "joinCta": "Crear cuenta",
+    "productsTitle": "La colección",
+    "productsIntro": "Piezas de papelería listas para tu carrito.",
+    "productsCta": "Ver todos los productos"
   },
   "shop": {
     "eyebrow": "pequeños tesoros",

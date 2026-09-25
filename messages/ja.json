@@ -50,7 +50,10 @@
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
     "joinTitle": "Chocobananaに参加",
     "joinIntro": "会員アカウントを作成して、詳細を保存し荷物を追跡しましょう。",
-    "joinCta": "アカウント作成"
+    "joinCta": "アカウント作成",
+    "productsTitle": "コレクションを見る",
+    "productsIntro": "カートに入れられるステーショナリー。",
+    "productsCta": "すべての商品を見る"
   },
   "shop": {
     "eyebrow": "小さな宝物",

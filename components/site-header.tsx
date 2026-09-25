@@ -46,25 +46,45 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
   return (
     <header className="sticky top-0 z-40 border-b border-pink/30 bg-cream/90 backdrop-blur-md">
       <div className="section-pad mx-auto max-w-5xl py-3 md:py-4">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-2 sm:gap-3">
           <Link
             href={hrefFor(locale, "")}
-            className="font-serif text-lg tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep md:text-xl"
+            className="shrink-0 font-serif text-lg tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep md:text-xl"
           >
             Chocobanana
           </Link>
 
-          <div className="flex items-center gap-2">
-            <LocaleCurrencySwitcher
-              locale={locale}
-              currency={currency}
-              labels={{
-                language: dict.nav.language,
-                currency: dict.nav.currency,
-                selectLanguage: dict.a11y.selectLanguage,
-                selectCurrency: dict.a11y.selectCurrency,
-              }}
-            />
+          <nav
+            aria-label="Primary"
+            className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 overflow-x-auto whitespace-nowrap font-serif text-sm tracking-[0.1em] text-chocolate-soft md:flex lg:gap-x-5 lg:text-[0.95rem]"
+          >
+            {links.map((link) => (
+              <Link
+                key={link.id}
+                href={link.href}
+                className={`transition-colors hover:text-pink-deep ${
+                  link.active ? "text-pink-deep" : ""
+                }`}
+                aria-current={link.active ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <div className="hidden lg:block">
+              <LocaleCurrencySwitcher
+                locale={locale}
+                currency={currency}
+                labels={{
+                  language: dict.nav.language,
+                  currency: dict.nav.currency,
+                  selectLanguage: dict.a11y.selectLanguage,
+                  selectCurrency: dict.a11y.selectCurrency,
+                }}
+              />
+            </div>
             <CartIconLink locale={locale} label={dict.cart.openCart} />
             <AccountNav
               locale={locale}
@@ -91,24 +111,6 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
         </div>
 
         <nav
-          aria-label="Primary"
-          className="mt-3 hidden flex-wrap justify-center gap-x-6 gap-y-2 border-t border-pink/20 pt-3 font-serif text-[0.95rem] tracking-[0.12em] text-chocolate-soft md:flex md:text-base"
-        >
-          {links.map((link) => (
-            <Link
-              key={link.id}
-              href={link.href}
-              className={`transition-colors hover:text-pink-deep ${
-                link.active ? "text-pink-deep" : ""
-              }`}
-              aria-current={link.active ? "page" : undefined}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <nav
           id={panelId}
           aria-label="Mobile"
           className={`mt-3 border-t border-pink/20 pt-3 md:hidden ${open ? "block" : "hidden"}`}
@@ -130,6 +132,15 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href={hrefFor(locale, "/cart")}
+                className="block rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] text-chocolate-soft hover:bg-paper/80 hover:text-pink-deep"
+                onClick={() => setOpen(false)}
+              >
+                {dict.cart.title}
+              </Link>
+            </li>
             <li className="mt-2 border-t border-pink/20 pt-2">
               {signedIn ? (
                 <>
@@ -168,6 +179,18 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
                   </Link>
                 </>
               )}
+            </li>
+            <li className="border-t border-pink/20 pt-3 lg:hidden">
+              <LocaleCurrencySwitcher
+                locale={locale}
+                currency={currency}
+                labels={{
+                  language: dict.nav.language,
+                  currency: dict.nav.currency,
+                  selectLanguage: dict.a11y.selectLanguage,
+                  selectCurrency: dict.a11y.selectCurrency,
+                }}
+              />
             </li>
           </ul>
         </nav>

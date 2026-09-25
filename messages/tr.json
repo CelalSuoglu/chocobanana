@@ -50,7 +50,10 @@
     "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba.",
     "joinTitle": "Chocobanana’ya katıl",
     "joinIntro": "Bilgilerini kaydetmek ve paketlerini takip etmek için üye hesabı oluştur.",
-    "joinCta": "Hesap oluştur"
+    "joinCta": "Hesap oluştur",
+    "productsTitle": "Koleksiyonu keşfet",
+    "productsIntro": "Sepetine eklemeye hazır kırtasiye parçaları.",
+    "productsCta": "Tüm ürünleri gör"
   },
   "shop": {
     "eyebrow": "küçük hazineler",

@@ -50,7 +50,10 @@
     "exploreIntro": "Choisis une porte — boutique, lettres, ou un doux bonjour.",
     "joinTitle": "Rejoindre Chocobanana",
     "joinIntro": "Créez un compte membre pour enregistrer vos coordonnées et suivre vos colis.",
-    "joinCta": "Créer un compte"
+    "joinCta": "Créer un compte",
+    "productsTitle": "La collection",
+    "productsIntro": "Des articles de papeterie prêts pour votre panier.",
+    "productsCta": "Voir tous les produits"
   },
   "shop": {
     "eyebrow": "petits trésors",
