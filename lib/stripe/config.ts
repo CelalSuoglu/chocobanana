@@ -1,26 +1,60 @@
 export type PaymentsMode = "disabled" | "test" | "live";
 
-/**
- * Live checkout buttons stay off unless a live secret key is present
- * AND PAYMENTS_LIVE_ENABLED=true. Test keys (sk_test_*) enable buttons
- * for end-to-end sandbox trials.
- */
-export function getPaymentsMode(): PaymentsMode {
-  const secret = process.env.STRIPE_SECRET_KEY?.trim();
-  if (!secret) return "disabled";
+type StripeKeyMode = "test" | "live" | "missing" | "unknown";
 
-  if (secret.startsWith("sk_test_")) {
+/** Prefix only. Never log or return the key itself. */
+export function stripeKeyMode(value: string | undefined): StripeKeyMode {
+  const key = value?.trim() ?? "";
+  if (!key) return "missing";
+  if (
+    key.startsWith("sk_test_") ||
+    key.startsWith("rk_test_") ||
+    key.startsWith("pk_test_")
+  ) {
     return "test";
   }
-
   if (
-    secret.startsWith("sk_live_") &&
-    process.env.PAYMENTS_LIVE_ENABLED === "true"
+    key.startsWith("sk_live_") ||
+    key.startsWith("rk_live_") ||
+    key.startsWith("pk_live_")
   ) {
     return "live";
   }
+  return "unknown";
+}
 
-  return "disabled";
+function isVercelProduction(): boolean {
+  return process.env.VERCEL_ENV === "production";
+}
+
+/**
+ * Production accepts a live key only when PAYMENTS_LIVE_ENABLED=true,
+ * the publishable key is also live, and the webhook secret is set.
+ * A test key on Production stays disabled so the public site cannot
+ * open a Sandbox Checkout Session.
+ * Preview and local development accept test keys only.
+ */
+export function getPaymentsMode(): PaymentsMode {
+  const secretMode = stripeKeyMode(process.env.STRIPE_SECRET_KEY);
+  const publishableMode = stripeKeyMode(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  );
+  const liveFlag = process.env.PAYMENTS_LIVE_ENABLED === "true";
+  const webhookSet = Boolean(process.env.STRIPE_WEBHOOK_SECRET?.trim());
+
+  if (secretMode === "missing" || secretMode === "unknown") return "disabled";
+  if (publishableMode !== "missing" && publishableMode !== secretMode) {
+    return "disabled";
+  }
+
+  if (isVercelProduction()) {
+    if (secretMode !== "live" || publishableMode !== "live") return "disabled";
+    if (!liveFlag || !webhookSet) return "disabled";
+    return "live";
+  }
+
+  if (secretMode !== "test") return "disabled";
+  return "test";
 }
 
 export function paymentsCheckoutEnabled(): boolean {
@@ -29,8 +63,24 @@ export function paymentsCheckoutEnabled(): boolean {
   return getPaymentsMode() !== "disabled";
 }
 
+/**
+ * Mail Club Join CTA / subscription checkout.
+ * Requires PAYMENTS test mode (or explicitly enabled live) AND
+ * MAIL_CLUB_CHECKOUT_ENABLED=true. Default stays closed.
+ */
+export function mailClubCheckoutEnabled(): boolean {
+  if (process.env.MAIL_CLUB_CHECKOUT_ENABLED !== "true") return false;
+  return paymentsCheckoutEnabled() && getPaymentsMode() === "test";
+}
+
+/** Checkout sessions always disable Adaptive Pricing so the charge stays CAD. */
 export function isAdaptivePricingEnabled(): boolean {
-  return process.env.STRIPE_ADAPTIVE_PRICING === "true";
+  return false;
+}
+
+/** Stripe Tax — only when enabled in Dashboard and this flag is true. */
+export function isAutomaticTaxEnabled(): boolean {
+  return process.env.STRIPE_AUTOMATIC_TAX === "true";
 }
 
 export function getAppBaseUrl(): string {

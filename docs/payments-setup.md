@@ -66,20 +66,20 @@ Project → Settings → Environment Variables. Suggested mapping:
 | Variable | Preview | Production | Notes |
 | --- | --- | --- | --- |
 | `NEXT_PUBLIC_APP_URL` | Preview URL or custom | Production URL | Used for success/cancel URLs |
-| `STRIPE_SECRET_KEY` | `sk_test_…` | keep test until go-live; then `sk_live_…` | Server only |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_test_…` | matching mode | Public |
-| `STRIPE_WEBHOOK_SECRET` | Preview endpoint secret | Production endpoint secret | Separate endpoints recommended |
+| `STRIPE_SECRET_KEY` | `sk_test_…` or `rk_test_…` | `sk_live_…` or `rk_live_…` only | Server only. Production rejects test keys. |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | `pk_test_…` | `pk_live_…` only | Must match the secret key mode. |
+| `STRIPE_WEBHOOK_SECRET` | Test endpoint secret | Live endpoint secret | Different `whsec_` values. Required before Production checkout turns on. |
 | `STRIPE_ADAPTIVE_PRICING` | `true` / `false` | same when ready | Opt-in |
-| `PAYMENTS_LIVE_ENABLED` | `false` | `false` until intentional go-live | Live buttons require this **and** `sk_live_` |
+| `PAYMENTS_LIVE_ENABLED` | `false` | `true` only after the live keys and live webhook secret are saved | Live buttons require this **and** a live key pair **and** the webhook secret. |
 
 ### Go-live gate
 
 Checkout buttons activate only when:
 
-- `STRIPE_SECRET_KEY` starts with `sk_test_` → **test** mode (buttons on), or
-- `STRIPE_SECRET_KEY` starts with `sk_live_` **and** `PAYMENTS_LIVE_ENABLED=true` → **live**
+- Preview or local: secret key is test mode (`sk_test_` / `rk_test_`). A live key stays **off**.
+- Production: secret and publishable keys are both live, `STRIPE_WEBHOOK_SECRET` is set, and `PAYMENTS_LIVE_ENABLED=true`.
 
-A live key without `PAYMENTS_LIVE_ENABLED=true` keeps buttons **off**.
+A test key on Production keeps buttons **off** (no Sandbox Checkout). A live key without the flag, without `pk_live_`, or without the webhook secret keeps buttons **off**. Preview never accepts a live key.
 
 ---
 
