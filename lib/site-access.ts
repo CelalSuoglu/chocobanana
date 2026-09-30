@@ -6,11 +6,14 @@
  *
  * While gated, unlock via the POST form at `/site-unlock` (not a URL query).
  * That sets an httpOnly cookie derived from COMING_SOON_PREVIEW_SECRET.
- * Opening the site for everyone: set COMING_SOON_ENABLED=false and redeploy.
+ * A verified owner can also open the public site for 30 minutes. That window
+ * is stored in Postgres and checked on each request. It does not change
+ * COMING_SOON_ENDS_AT, so the countdown resumes from the same end instant.
  * The countdown never auto-unlocks when it hits zero.
  */
 
 import { unlockCookieToken } from "@/lib/security/secrets";
+import { isPublicSiteOpen } from "@/lib/site/public-opening";
 
 export const previewCookieName = "cb_site_preview";
 export const previewUnlockPurpose = "chocobanana-site-preview-v1";
@@ -52,14 +55,18 @@ export function readPreviewCookie(cookieHeader: string | null): string | undefin
 }
 
 /**
- * True when this request must be treated as public coming-soon
- * (gate on, no valid preview unlock cookie).
+ * True when this request must be treated as public coming-soon.
+ * Preview unlock still bypasses the gate. A database error keeps the
+ * countdown up. The 30-minute public window is the only other bypass.
  */
-export function isComingSoonGateActiveForRequest(request: Request): boolean {
+export async function isComingSoonGateActiveForRequest(
+  request: Request,
+): Promise<boolean> {
   if (!isComingSoonEnabled()) return false;
-  return !hasValidPreviewAccess(
-    readPreviewCookie(request.headers.get("cookie")),
-  );
+  if (hasValidPreviewAccess(readPreviewCookie(request.headers.get("cookie")))) {
+    return false;
+  }
+  return !(await isPublicSiteOpen());
 }
 
 /**

@@ -6,15 +6,17 @@
   "nav": {
     "home": "Ana sayfa",
     "shop": "Mağaza",
+    "stickerSheets": "Sticker Sheets",
+    "snailMailClub": "Snail Mail Club",
     "mailClub": "Mail Club",
     "pastLetters": "Geçmiş Mektuplar",
-    "about": "Hakkında",
+    "about": "Hikayemiz",
     "contact": "İletişim",
+    "account": "Account",
     "language": "Dil",
     "currency": "Para birimi",
     "openMenu": "Menüyü aç",
-    "closeMenu": "Menüyü kapat",
-    "account": "Account"
+    "closeMenu": "Menüyü kapat"
   },
   "home": {
     "greeting": "merhaba, tatlı dostum",
@@ -44,8 +46,14 @@
       }
     },
     "taglineShort": "Yumuşak kırtasiye, el yazısı anlar ve postada bir sarılmaya benzeyen paketler.",
-    "ctaShop": "Dükkana git",
+    "ctaShop": "Kırtasiyeye bak",
     "ctaMailClub": "Mail Club",
+    "stickerSectionTitle": "Sticker Sheets",
+    "stickerSectionBody": "Mail Club’dan ayrı, tek seferlik sticker sayfaları.",
+    "stickerSectionCta": "Sticker sayfalarını gör",
+    "clubSectionTitle": "Snail Mail Club",
+    "clubSectionBody": "Peşin ödenen paketler. Paket toplamını bir kez ödersin. Aylık zarflar ayrı sipariş sayılmaz.",
+    "clubSectionCta": "Paketleri gör",
     "exploreTitle": "Biraz gez",
     "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba.",
     "joinTitle": "Chocobanana’ya katıl",
@@ -53,13 +61,78 @@
     "joinCta": "Hesap oluştur",
     "productsTitle": "Koleksiyonu keşfet",
     "productsIntro": "Sepetine eklemeye hazır kırtasiye parçaları.",
-    "productsCta": "Tüm ürünleri gör"
+    "productsCta": "Tüm ürünleri gör",
+    "heroHeadline": "Saklamaya değer kırtasiye ve mektuplar.",
+    "ctaExploreMailClub": "Mail Club’u incele",
+    "visualTitle": "Letters & parcels",
+    "visualBody": "A place for real Chocobanana photos of letters, seals, and parcels. Owner can replace this image when ready.",
+    "visualSlot": "Photo slot — add a real image in /public when ready.",
+    "howTitle": "Mail Club nasıl işler",
+    "howSteps": [
+      {
+        "title": "Katıl",
+        "text": "Sipariş geçmişi için ücretsiz hesap açabilirsin. Snail Mail Club paketi ayrıdır: paket toplamını bir kez ödersin."
+      },
+      {
+        "title": "Mektubunu hazırlarız",
+        "text": "Gönderim planlandığında mektup hazırlanır. Tarih henüz yayınlanmadı."
+      },
+      {
+        "title": "Mutlu posta gelir",
+        "text": "Teslimat yalnızca Mail Club sayfasındaki ülkelere yapılır."
+      }
+    ],
+    "envelopeTitle": "Zarfın içinde",
+    "envelopeNote": "Bu alanlar gerçek içerik için duruyor. Burada yayınlanmış bir vaat yok.",
+    "envelopeSlots": [
+      "Henüz yayınlanmadı",
+      "Henüz yayınlanmadı",
+      "Henüz yayınlanmadı"
+    ],
+    "pastGalleryTitle": "Önceki zarflar",
+    "pastGalleryEmpty": "Henüz zarf fotoğrafı yok. Gerçek görseller eklenince galeri açılır.",
+    "letterListTitle": "Mektup listesi",
+    "letterListBody": "E-posta listesi henüz açık değil. Bize yaz, notunu e-posta olarak saklarız.",
+    "clubTitle": "Inside the Mail Club",
+    "clubBody": "Details about what’s in each parcel and who the club is for will live here. Owner fills this in before launch.",
+    "clubForTitle": "Who it’s for",
+    "clubForBody": "Owner note: describe the ideal member — no invented benefits.",
+    "pastTitle": "Past sendings",
+    "pastBody": "Browse earlier letter moods and archives.",
+    "pastCta": "See past letters",
+    "storyTitle": "Our story",
+    "storyBody": "Chocobanana is a mail club by Didem Keskin. The fuller brand story belongs in About — and can grow here as you write it.",
+    "faqTitle": "Questions",
+    "faq": [
+      {
+        "q": "Is a free account the same as Mail Club?",
+        "a": "No. A free account saves your profile. Paid Mail Club membership is separate and starts only after payment is confirmed."
+      },
+      {
+        "q": "When do parcels ship?",
+        "a": "Shipping dates will be published by the owner — we don’t invent dates here."
+      },
+      {
+        "q": "Can I shop without joining Mail Club?",
+        "a": "Evet. Sticker ve shop tek seferliktir. Snail Mail Club paketi bir kez ödenir; postası bu fiyata dahildir."
+      }
+    ]
+  },
+  "stickerSheets": {
+    "title": "Sticker Sheets",
+    "intro": "Tek seferlik sticker sayfaları. Bu bir Snail Mail Club üyeliği ya da aylık gönderim değildir.",
+    "emptyTitle": "Henüz sticker yok",
+    "emptyBody": "Gerçek sticker ürünleri ve fiyatları henüz yayınlanmadı. Sayfa hazır. Örnek fiyat ya da satın alma yok.",
+    "quantity": "Adet",
+    "decrease": "Adedi azalt",
+    "increase": "Adedi artır"
   },
   "shop": {
     "eyebrow": "küçük hazineler",
     "title": "Mağaza",
     "intro": "Sunucu kataloğundaki kırtasiye ürünleri. Fiyatlar CAD; istediğin zaman sepete ekle.",
-    "currencyNote": "Katalog fiyatları sunucuda CAD olarak tutulur.",
+    "currencyNote": "Fiyatlar ve ödeme Kanada doları (CAD) cinsindendir.",
+    "backToShop": "Back to shop",
     "products": {
       "letterSets": {
         "name": "Mektup Setleri",
@@ -77,30 +150,141 @@
         "name": "Hatıra Notları",
         "note": "Mektuba sıkıştırılacak veya masaya bırakılacak küçük kartlar."
       }
-    },
-    "backToShop": "Back to shop"
+    }
+  },
+  "cart": {
+    "eyebrow": "sepetin",
+    "title": "Sepet",
+    "intro": "Ödemeden önce ürünlerini gözden geçir. Adetler bu cihazda saklanır.",
+    "openCart": "Sepeti aç",
+    "addToCart": "Sepete ekle",
+    "added": "Eklendi",
+    "empty": "Sepetin boş.",
+    "continueShopping": "Alışverişe devam et",
+    "unitPrice": "Birim fiyat",
+    "lineTotal": "Satır toplamı",
+    "increase": "Adedi artır",
+    "decrease": "Adedi azalt",
+    "remove": "Kaldır",
+    "clear": "Sepeti temizle",
+    "subtotal": "Ara toplam",
+    "cadBasisNote": "Tüm sepet hesabı sunucudaki CAD katalog fiyatlarını kullanır.",
+    "estimateNote": "Tercih edilen görüntüleme para birimi {currency}. CAD tutarlar dönüştürülmüş yerel tahsilat değildir.",
+    "checkoutFinalNote": "Ödeme yalnızca CAD olarak alınır. Kargo ücretsiz.",
+    "checkout": "Ödeme",
+    "continueCheckout": "Ödemeye devam et",
+    "shipping": "Kargo",
+    "shippingAtCheckout": "Ücretsiz",
+    "lineSticker": "Sticker sayfası",
+    "lineClub": "Snail Mail Club paketi",
+    "lineShop": "Mağaza ürünü",
+    "stickerShipping": "Sticker kargosu",
+    "stickerShippingValue": "Ödemede netleşir",
+    "stickerShippingNote": "Sticker kargosu, Snail Mail Club postasından ayrıdır. Bir kargo fiyatı tanımlanana kadar ücret eklenmez ve kulüp postası yeniden yazılmaz.",
+    "mixedCheckout": "Kulüp postası yeniden eklenmesin diye sticker sayfaları ile Snail Mail Club paketlerini ayrı öde.",
+    "shippingIncluded": "Dahil",
+    "postageIncludedNote": "Standart posta ücreti Mail Club paket fiyatına dahildir.",
+    "rewardCode": "Ödül kodu",
+    "rewardApply": "Uygula",
+    "rewardRemove": "Kodu kaldır",
+    "rewardDiscount": "Ödül (%10)",
+    "rewardSignIn": "Ödül kodunu bu hesapta kullanmak için giriş yapın.",
+    "rewardInvalid": "Bu kod bu hesapta kullanılamaz.",
+    "rewardFirstOrder": "Bu kod yalnızca ilk siparişte kullanılabilir.",
+    "rewardBusy": "Bu kod açık bir ödemede tutuluyor.",
+    "rewardHint": "Bu hesapta sticker sayfaları, Snail Mail Club paketleri ve diğer tek seferlik ürünlerde %10. Sipariş başına bir kod. Kargo ve vergi indirime girmez.",
+    "total": "Toplam",
+    "totalAtCheckout": "Ödeme sayfasında kesinleşir",
+    "guestNote": "Hesap açmadan devam edebilirsin. Siparişin hesabında görünsün istiyorsan giriş yap.",
+    "checkoutPending": "Ödeme başlatılıyor…",
+    "checkoutUnavailable": "Ödeme bu ortamda henüz yok. Sepetin yine de saklanır.",
+    "checkoutError": "Ödeme başlatılamadı. Tekrar dene.",
+    "loading": "Sepet yükleniyor…"
   },
   "mailClub": {
     "eyebrow": "her şeyin kalbi",
-    "title": "Mail Club",
-    "intro": "Mail Club'ın nasıl hissettirmesi gerektiğine dair nazik bir özet. Üyelik ayrıntıları siz karar verene kadar boş kalır.",
+    "title": "Snail Mail Club",
+    "intro": "Peşin ödenen Snail Mail Club paketleri, Kanada doları. Paket toplamını bir kez ödersiniz.",
+    "productLead": "Paket ve teslimat bölgesi seçin. Her ay bir zarf gönderilir. Standart posta ücreti toplama dahildir.",
+    "listedPriceLabel": "Paket toplamı",
+    "priceClosedNote": "Bu ortamda ödeme henüz açık değil.",
+    "deliveryScope": "Ödeme yalnızca Kanada, Amerika Birleşik Devletleri, Birleşik Krallık, Avustralya, Fransa, Almanya ve Türkiye’ye gönderim yapabilir.",
+    "shippingNotIncluded": "Standart posta ücreti paket fiyatına dahildir. Ödemede ikinci bir kargo ücreti eklenmez.",
+    "nextSendUnset": "Sonraki gönderim tarihi yayınlanmadı.",
+    "insideEmpty": "Zarf içeriği henüz yayınlanmadı.",
+    "renewalClosed": "Bunlar peşin ödenen paketlerdir. Otomatik yenilenmez.",
+    "noSkipNote": "Otomatik yenileme ve ay atlama yoktur.",
     "stepsTitle": "Nasıl çalışır",
     "steps": [
       {
-        "title": "Özenle gez",
-        "text": "Kulüp sayfalarında dolaş ve paylaşmak istediğin paketleri hayal et."
+        "title": "Katıl",
+        "text": "Ücretsiz hesap bilgilerini saklar. Ücretli üyelik başlatmaz."
       },
       {
-        "title": "Sana uyanı seç",
-        "text": "Yumuşak, oyuncu ve biraz nostaljik kırtasiye ruhlarını seç."
+        "title": "Mektubunu hazırlarız",
+        "text": "Paketleme yalnızca gönderim planlandığında olur. Tarih belirlenmedi."
       },
       {
-        "title": "Postayı aç",
-        "text": "Bir şey geldiğinde yavaşça ve keyifle aç."
+        "title": "Mutlu posta gelir",
+        "text": "Yalnızca bu sayfada adı geçen ülkelere göndeririz."
       }
     ],
     "detailsTitle": "Sonra doldurulacak ayrıntılar",
-    "detailsBody": "[Üyelik ritmi, nelerin dahil olduğu ve kurallar hazır olunca buraya ekleyin.]"
+    "detailsBody": "[Üyelik ritmi, nelerin dahil olduğu ve kurallar hazır olunca buraya ekleyin.]",
+    "freeVsPaidTitle": "Free account vs paid Mail Club",
+    "freeVsPaidBody": "Ücretsiz hesap bilgilerinizi saklar. Snail Mail Club paketi ayrı, tek seferlik bir ödemedir ve ancak Stripe ödemeyi onayladıktan sonra başlar.",
+    "galleryTitle": "Parcel photos",
+    "gallerySlot": "Owner photo slots — add real parcel images before launch.",
+    "thisMonthTitle": "What’s in this month’s letter",
+    "thisMonthSlot": "Owner fills the monthly contents here. No invented items.",
+    "pastLettersTitle": "Past letters",
+    "pastLettersBody": "See the archive of previous sendings.",
+    "pastLettersCta": "Past Letters",
+    "shippingTitle": "Gönderim ve zamanlama",
+    "shippingSlot": "Owner lists supported countries. We won’t promise unsupported delivery.",
+    "shippingFeeTitle": "Shipping fee",
+    "shippingFeeSlot": "Owner sets shipping fees. Not shown as a made-up amount.",
+    "nextSendTitle": "Next send date",
+    "nextSendSlot": "Owner publishes the next send date when known.",
+    "priceTitle": "Membership price",
+    "priceSlot": "CAD base price and presentment currency will appear here once the owner confirms commercial terms.",
+    "renewalTitle": "Renewal & cancel",
+    "renewalSlot": "Owner documents renewal frequency, next charge date, pause/cancel rules before checkout opens.",
+    "faqTitle": "Mail Club FAQ",
+    "faq": [
+      {
+        "q": "Hesap gerekli mi?",
+        "a": "Ücretsiz hesap adresinizi saklar. Ücretli bir paket başlatmaz."
+      },
+      {
+        "q": "Nasıl katılırım?",
+        "a": "Bu sayfada paket ve bölge seçin, toplamı bir kez ödeyin. Paket otomatik yenilenmez."
+      }
+    ],
+    "termLabel": "Paket",
+    "regionLabel": "Bölge",
+    "term1": "1 ay",
+    "term3": "3 ay",
+    "term6": "6 ay",
+    "term12": "1 yıl",
+    "regionCanada": "Kanada",
+    "regionUsa": "ABD",
+    "regionInternational": "Uluslararası",
+    "oneEnvelope": "Paket süresi boyunca her ay bir zarf gönderilir.",
+    "paidOnce": "Paket toplamını bir kez ödersiniz. Otomatik yenilenmez.",
+    "internationalNote": "Uluslararası gönderim Birleşik Krallık, Avustralya, Fransa, Almanya ve Türkiye ile sınırlıdır.",
+    "addPackage": "Paketi sepete ekle",
+    "joinCta": "Ödemeye devam et",
+    "joinDisabled": "Bu ortamda ödeme henüz açık değil.",
+    "missingChecklistTitle": "Owner still needs to confirm",
+    "missingItems": [
+      "Monthly contents copy",
+      "CAD price & presentment currency",
+      "Shipping countries & fees",
+      "Next send date",
+      "Renewal, pause, and cancel rules",
+      "Enable MAIL_CLUB_CHECKOUT_ENABLED for test checkout"
+    ]
   },
   "pastLetters": {
     "eyebrow": "arşivden",
@@ -126,7 +310,7 @@
   },
   "about": {
     "eyebrow": "hikâyemiz",
-    "title": "Hakkında",
+    "title": "Hikayemiz",
     "intro": "Aşağıdaki alanlar yer tutucudur. Hazır olduğunuzda gerçek Chocobanana hikâyesiyle değiştirin.",
     "p1": "[Marka hikâyesi paragraf 1 — düzenleyin.]",
     "p2": "[Marka hikâyesi paragraf 2 — düzenleyin.]",
@@ -135,16 +319,17 @@
   "contact": {
     "eyebrow": "merhaba de",
     "title": "İletişim",
-    "intro": "Yalnızca örnek alanlar. Yer tutucuları değiştirin ve formu sonra bağlayın.",
+    "intro": "Bize e-posta yazın veya Instagram’dan merhaba deyin. Aşağıdaki formla da not bırakabilirsiniz.",
     "emailLabel": "E-posta",
-    "emailPlaceholder": "[merhaba@ornek.com]",
+    "emailPlaceholder": "siz@email.com",
     "nameLabel": "Ad",
     "namePlaceholder": "[Adınız]",
     "messageLabel": "Mesaj",
     "messagePlaceholder": "[Mesajınızı buraya yazın]",
     "submit": "Gönder (örnek)",
     "formNote": "Bu form henüz mesaj göndermiyor. Sonra bağlanacak bir düzen örneğidir.",
-    "submittedNote": "Yalnızca örnek — mesaj gönderilmedi."
+    "submittedNote": "Yalnızca örnek — mesaj gönderilmedi.",
+    "instagramLabel": "Instagram"
   },
   "checkout": {
     "buy": "Buy",
@@ -167,50 +352,27 @@
     "integrationAmount": "Amount in CAD (integration currency)",
     "presentmentAmount": "Amount charged in presentment currency",
     "orderRecord": "Order record",
+    "orderNumber": "Sipariş numarası",
+    "orderNumberPending": "Ödenen sipariş kaydolunca numara burada görünür. Aynı numara Hesabım → Siparişlerim bölümünde de yer alır.",
     "orderRecordReady": "Webhook recorded this paid order in the database",
     "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
     "contactEmail": "Contact email",
-    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment."
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment.",
+    "pendingEyebrow": "neredeyse",
+    "pendingTitle": "Ödeme bekleniyor",
+    "pendingBody": "Stripe bu ödemeyi henüz paid olarak işaretlemedi. Sipariş yalnızca webhook doğrulamasından sonra fulfillment’a düşer.",
+    "unpaidTitle": "Ödeme tamamlanmadı",
+    "unpaidBody": "Ödenmiş sipariş kaydı oluşmadı. Mağazaya dönüp yeniden deneyebilirsiniz.",
+    "unpaidHint": "Başarısız veya yarım ödemeler Owner → Orders’ta görünmez.",
+    "orderRecordNotPaid": "Veritabanında ödenmiş sipariş yok (ödeme doğrulanmadı)",
+    "shippingAmount": "Kargo",
+    "taxAmount": "Vergi",
+    "walletsNote": "Kart her zaman görünür. Apple Pay ve Google Pay yalnızca Stripe’da açık ve cihaz destekliyorsa çıkar."
   },
   "footer": {
     "tagline": "mail club",
-    "credit": "Yumuşak kâğıt ve altın yıldızlarla yapıldı."
-  },
-  "currency": {
-    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
-    "baseNote": "Catalog prices are set in CAD.",
-    "preferenceHint": "Para birimi tercihin sayfalar arasında korunur."
-  },
-  "a11y": {
-    "logoAlt": "Altın yıldız takan yavru kedili Chocobanana mail club logosu",
-    "selectLanguage": "Dil seç",
-    "selectCurrency": "Para birimi seç",
-    "accountMenu": "Hesap"
-  },
-  "cart": {
-    "eyebrow": "sepetin",
-    "title": "Sepet",
-    "intro": "Ödemeden önce ürünlerini gözden geçir. Adetler bu cihazda saklanır.",
-    "openCart": "Sepeti aç",
-    "addToCart": "Sepete ekle",
-    "added": "Eklendi",
-    "empty": "Sepetin boş.",
-    "continueShopping": "Alışverişe devam et",
-    "unitPrice": "Birim fiyat",
-    "lineTotal": "Satır toplamı",
-    "increase": "Adedi artır",
-    "decrease": "Adedi azalt",
-    "remove": "Kaldır",
-    "clear": "Sepeti temizle",
-    "subtotal": "Ara toplam",
-    "cadBasisNote": "Tüm sepet hesabı sunucudaki CAD katalog fiyatlarını kullanır.",
-    "estimateNote": "Tercih edilen görüntüleme para birimi {currency}. CAD tutarlar dönüştürülmüş yerel tahsilat değildir.",
-    "checkoutFinalNote": "Ödeyeceğin tutar Stripe Checkout sayfasında kesinleşir.",
-    "checkout": "Ödeme",
-    "checkoutPending": "Ödeme başlatılıyor…",
-    "checkoutUnavailable": "Ödeme bu ortamda henüz yok. Sepetin yine de saklanır.",
-    "checkoutError": "Ödeme başlatılamadı. Tekrar dene.",
-    "loading": "Sepet yükleniyor…"
+    "credit": "Yumuşak kâğıt ve altın yıldızlarla yapıldı.",
+    "instagram": "Instagram"
   },
   "comingSoon": {
     "brand": "Chocobanana",
@@ -225,6 +387,17 @@
     "title": "Tatlı bir şey geliyor",
     "opensSoon": "Mail club yakında açılıyor",
     "eyebrow": "tatlı bir şey yakında geliyor"
+  },
+  "currency": {
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Para birimi tercihin sayfalar arasında korunur."
+  },
+  "a11y": {
+    "logoAlt": "Altın yıldız takan yavru kedili Chocobanana mail club logosu",
+    "selectLanguage": "Dil seç",
+    "selectCurrency": "Para birimi seç",
+    "accountMenu": "Hesap"
   },
   "auth": {
     "eyebrow": "your account",
@@ -241,17 +414,10 @@
     "verifyFailed": "This verification link is invalid or expired.",
     "verifyMissing": "Open the link from your verification email.",
     "notConfigured": "Accounts are not configured in this environment yet.",
+    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
     "email": "Email",
     "password": "Password",
     "name": "Name",
-    "signIn": "Sign in",
-    "signUp": "Create account",
-    "forgotPassword": "Forgot password?",
-    "createAccount": "Create an account",
-    "haveAccount": "Already have an account? Sign in",
-    "sendReset": "Send reset link",
-    "updatePassword": "Update password",
-    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
     "phone": "Phone",
     "addressLine1": "Address",
     "addressLine2": "Apartment, suite (optional)",
@@ -260,11 +426,23 @@
     "postalCode": "Postal code",
     "country": "Country",
     "countryPlaceholder": "Select a country",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create an account",
+    "haveAccount": "Already have an account? Sign in",
+    "sendReset": "Send reset link",
+    "updatePassword": "Update password",
     "firstName": "Ad",
     "lastName": "Soyad",
     "emailSetupRequired": "E-posta gönderimi henüz kurulmadı. RESEND_API_KEY ve EMAIL_FROM (Resend’te doğrulanmış alan adı) ayarlayın. O zamana kadar kayıt ve şifre sıfırlama kullanılamaz.",
     "pleaseWait": "Lütfen bekleyin…",
-    "localDevSignupNotice": "Yerel geliştirme: e-posta ayarlı değil; yeni hesaplar doğrulama maili olmadan hemen giriş yapabilir."
+    "signUpWelcome": "Chocobanana’ya hoş geldin! Hesabın hazır — şimdi giriş yapabilirsin.",
+    "signUpCheckEmail": "Chocobanana’ya hoş geldin! Hesabını doğrulamak için e-postanı kontrol et, sonra giriş yap.",
+    "step1Title": "About you",
+    "step2Title": "Phone & address",
+    "nextStep": "Continue",
+    "backStep": "Back"
   },
   "account": {
     "eyebrow": "welcome back",
@@ -273,14 +451,48 @@
     "profile": "Profile",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
     "signOut": "Sign out",
     "orders": "Your orders",
     "noOrders": "No paid orders yet.",
     "browseShop": "Browse the shop",
     "ordersUnavailable": "Order history needs a configured database in this environment.",
     "openOwner": "Open owner panel",
-    "phone": "Phone",
-    "address": "Address",
-    "saveProfile": "Profili kaydet"
+    "saveProfile": "Profili kaydet",
+    "profileSection": "My profile",
+    "addressSection": "My addresses",
+    "ordersSection": "My orders",
+    "orderNumber": "Sipariş numarası",
+    "membershipSection": "My Mail Club membership",
+    "membershipNone": "Ödenen Mail Club paketleri siparişlerinizde görünür. Otomatik yenileme yoktur.",
+    "membershipExplore": "Explore Mail Club",
+    "membershipStatus": "Status",
+    "membershipNextBilling": "Next billing date",
+    "membershipManage": "Manage billing",
+    "membershipPortalUnavailable": "Billing portal opens after a paid subscription exists.",
+    "addressHint": "Updating your address changes future sendings and your profile. Past order address copies stay as they were at purchase.",
+    "saveAddress": "Save address",
+    "rewardSection": "Ödüller",
+    "rewardProgress": "Sonraki ödül: {current}/{target} ödenmiş sipariş",
+    "rewardHint": "Her 5 ödenmiş sipariş, sonraki alışverişte tek kullanımlık %10 kod kazandırır. Kod yalnızca bu hesapta geçerlidir.",
+    "rewardAvailable": "Kullanılabilir",
+    "rewardNone": "Henüz ödül kodu yok.",
+    "rewardFirstOrder": "İlk sipariş",
+    "rewardReserved": "Açık bir ödemede tutuluyor",
+    "rewardDiscount": "Ödül"
+  },
+  "owner": {
+    "subscriptionsTitle": "Mail Club subscriptions",
+    "subscriptionsIntro": "Paid members only. Free customer accounts never appear here.",
+    "subscriptionsEmpty": "No paid subscriptions yet.",
+    "fulfillmentTitle": "Fulfillment",
+    "fulfillmentIntro": "Export address lists for paid, eligible sendings. No sample data.",
+    "fulfillmentEmpty": "No paid orders need fulfillment right now.",
+    "fulfillmentExport": "Export CSV",
+    "statMembers": "Registered customers",
+    "statSubscribers": "Active paid subscribers",
+    "statOrdersNew": "New paid orders (24h)",
+    "statFulfillment": "To prepare this month"
   }
 }

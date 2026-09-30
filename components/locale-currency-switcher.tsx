@@ -8,22 +8,12 @@ import {
   locales,
   type Locale,
 } from "@/lib/i18n/config";
-import {
-  currencyCookieName,
-  currencyLabels,
-  displayCurrencies,
-  isCurrencyCode,
-  type CurrencyCode,
-} from "@/lib/currency/config";
 
 type LocaleCurrencySwitcherProps = {
   locale: Locale;
-  currency: CurrencyCode;
+  idSuffix?: string;
   labels: {
-    language: string;
-    currency: string;
     selectLanguage: string;
-    selectCurrency: string;
   };
 };
 
@@ -43,7 +33,7 @@ function swapLocaleInPath(pathname: string, nextLocale: Locale): string {
 
 export function LocaleCurrencySwitcher({
   locale,
-  currency,
+  idSuffix = "main",
   labels,
 }: LocaleCurrencySwitcherProps) {
   const router = useRouter();
@@ -63,14 +53,6 @@ export function LocaleCurrencySwitcher({
     });
   }
 
-  function onCurrencyChange(nextCurrency: string) {
-    if (!isCurrencyCode(nextCurrency) || nextCurrency === currency) return;
-    setCookie(currencyCookieName, nextCurrency);
-    startTransition(() => {
-      router.refresh();
-    });
-  }
-
   const selectClass =
     "min-h-10 min-w-[6.5rem] max-w-[42vw] rounded-full border border-pink/45 bg-paper/90 px-2.5 py-2 font-serif text-xs text-chocolate shadow-sm outline-none transition-colors hover:border-pink-deep focus-visible:ring-2 focus-visible:ring-pink sm:text-sm md:max-w-none md:min-w-[8.5rem] md:px-3";
 
@@ -78,11 +60,11 @@ export function LocaleCurrencySwitcher({
     <div
       className={`flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 ${isPending ? "opacity-70" : ""}`}
     >
-      <label className="sr-only" htmlFor="language-select">
+      <label className="sr-only" htmlFor={`language-select-${idSuffix}`}>
         {labels.selectLanguage}
       </label>
       <select
-        id="language-select"
+        id={`language-select-${idSuffix}`}
         className={selectClass}
         value={locale}
         aria-label={labels.selectLanguage}
@@ -91,23 +73,6 @@ export function LocaleCurrencySwitcher({
         {locales.map((code) => (
           <option key={code} value={code}>
             {localeLabels[code]}
-          </option>
-        ))}
-      </select>
-
-      <label className="sr-only" htmlFor="currency-select">
-        {labels.selectCurrency}
-      </label>
-      <select
-        id="currency-select"
-        className={selectClass}
-        value={currency}
-        aria-label={labels.selectCurrency}
-        onChange={(event) => onCurrencyChange(event.target.value)}
-      >
-        {displayCurrencies.map((code) => (
-          <option key={code} value={code}>
-            {currencyLabels[code]}
           </option>
         ))}
       </select>

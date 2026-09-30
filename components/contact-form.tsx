@@ -30,7 +30,7 @@ export function ContactForm({ dict }: ContactFormProps) {
           name="name"
           type="text"
           placeholder={dict.namePlaceholder}
-          className="mt-2 w-full rounded-2xl border border-pink/40 bg-paper/90 px-4 py-3 text-chocolate outline-none focus-visible:ring-2 focus-visible:ring-pink"
+          className="field mt-2"
         />
       </div>
       <div>
@@ -45,7 +45,7 @@ export function ContactForm({ dict }: ContactFormProps) {
           name="email"
           type="email"
           placeholder={dict.emailPlaceholder}
-          className="mt-2 w-full rounded-2xl border border-pink/40 bg-paper/90 px-4 py-3 text-chocolate outline-none focus-visible:ring-2 focus-visible:ring-pink"
+          className="field mt-2"
         />
       </div>
       <div>
@@ -60,12 +60,12 @@ export function ContactForm({ dict }: ContactFormProps) {
           name="message"
           rows={5}
           placeholder={dict.messagePlaceholder}
-          className="mt-2 w-full rounded-2xl border border-pink/40 bg-paper/90 px-4 py-3 text-chocolate outline-none focus-visible:ring-2 focus-visible:ring-pink"
+          className="field mt-2"
         />
       </div>
       <button
         type="submit"
-        className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-chocolate/80 px-5 py-2.5 font-serif text-sm tracking-[0.12em] uppercase text-chocolate transition-colors hover:border-pink-deep hover:bg-pink-soft/60"
+        className="btn-secondary"
       >
         {dict.submit}
       </button>

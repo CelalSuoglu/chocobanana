@@ -6,10 +6,32 @@ export function isDatabaseConfigured(): boolean {
   return Boolean(process.env.DATABASE_URL?.trim());
 }
 
+function createPrismaClient() {
+  return new PrismaClient();
+}
+
 export function getPrisma(): PrismaClient | null {
   if (!isDatabaseConfigured()) return null;
+
+  // Dev HMR can keep a PrismaClient from before schema changes (missing models).
+  const cached = globalForPrisma.prisma;
+  if (
+    cached &&
+    (typeof (cached as PrismaClient & { mailClubSubscription?: unknown })
+      .mailClubSubscription === "undefined" ||
+      typeof (cached as PrismaClient & { rewardCode?: unknown }).rewardCode ===
+        "undefined" ||
+      typeof (cached as PrismaClient & { publicSiteOpening?: unknown })
+        .publicSiteOpening === "undefined" ||
+      typeof (cached as PrismaClient & { rewardCodeRedemption?: unknown })
+        .rewardCodeRedemption === "undefined")
+  ) {
+    void cached.$disconnect().catch(() => undefined);
+    globalForPrisma.prisma = undefined;
+  }
+
   if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = new PrismaClient();
+    globalForPrisma.prisma = createPrismaClient();
   }
   return globalForPrisma.prisma;
 }

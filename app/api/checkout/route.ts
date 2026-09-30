@@ -10,6 +10,15 @@ type CheckoutBody = {
   productId?: unknown;
   locale?: unknown;
   items?: unknown;
+  /** Ignored. Amounts always come from the server catalog in CAD cents. */
+  amount?: unknown;
+  amountCadCents?: unknown;
+  unitAmount?: unknown;
+  currency?: unknown;
+  rewardCode?: unknown;
+  /** Ignored. Discount is calculated on the server from a valid reward code. */
+  discount?: unknown;
+  discountCadCents?: unknown;
 };
 
 function parseItems(
@@ -30,7 +39,7 @@ function parseItems(
 }
 
 export async function POST(request: Request) {
-  if (isComingSoonGateActiveForRequest(request)) {
+  if (await isComingSoonGateActiveForRequest(request)) {
     return NextResponse.json(
       { error: "Checkout is unavailable while coming soon is active." },
       { status: 503 },
@@ -56,6 +65,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
+  // Browser may display estimates; Checkout line amounts are catalog CAD cents only.
+  void body.amount;
+  void body.amountCadCents;
+  void body.unitAmount;
+  void body.currency;
+  void body.discount;
+  void body.discountCadCents;
+
   const productId =
     typeof body.productId === "string" ? body.productId.trim() : undefined;
   const locale = typeof body.locale === "string" ? body.locale.trim() : "en";
@@ -68,6 +85,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const rewardCode =
+    typeof body.rewardCode === "string" ? body.rewardCode.trim() : undefined;
+
   const session = await auth();
 
   try {
@@ -77,6 +97,7 @@ export async function POST(request: Request) {
       items,
       userId: session?.user?.id ?? null,
       customerEmail: session?.user?.email ?? null,
+      rewardCode,
     });
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: result.status });

@@ -18,13 +18,13 @@ export default async function CheckoutCancelPage({
       <p className="font-script text-2xl text-pink-deep">
         {dict.checkout.cancelEyebrow}
       </p>
-      <h1 className="mt-2 font-serif text-3xl text-chocolate md:text-4xl">
+      <h1 className="page-title mt-2">
         {dict.checkout.cancelTitle}
       </h1>
       <p className="mt-4 text-chocolate-soft">{dict.checkout.cancelBody}</p>
       <Link
         href={`/${rawLocale}/shop`}
-        className="mt-8 inline-flex items-center justify-center rounded-full border border-chocolate/80 px-7 py-3 font-serif text-sm tracking-[0.16em] uppercase text-chocolate transition-colors hover:border-pink-deep hover:bg-pink-soft/60"
+        className="btn-secondary btn-inline mx-auto mt-8"
       >
         {dict.checkout.backToShop}
       </Link>

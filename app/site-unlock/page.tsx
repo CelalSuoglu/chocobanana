@@ -15,13 +15,11 @@ export default function SiteUnlockPage() {
 
   return (
     <main className="mx-auto flex min-h-full max-w-lg flex-col justify-center px-6 py-16">
-      <p className="text-xs tracking-[0.18em] uppercase text-[#8a6a55]">
+      <p className="text-xs tracking-[0.18em] uppercase text-chocolate-soft">
         Private access
       </p>
-      <h1 className="mt-2 font-serif text-3xl text-[#3c2a22]">
-        Unlock the full site
-      </h1>
-      <p className="mt-3 text-sm leading-relaxed text-[#5c4033]">
+      <h1 className="page-title mt-2">Unlock the full site</h1>
+      <p className="page-lead">
         Visitors still see the countdown. After you unlock once, you can open
         Home, Shop, Mail Club, Register, Cart, and the rest without entering the
         password again. The password is never placed in the URL.

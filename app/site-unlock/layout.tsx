@@ -17,7 +17,7 @@ const body = Lora({
 export default function SiteUnlockLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${body.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#f7f0e8] font-sans text-[#3c2a22]">
+      <body className="flex min-h-full flex-col font-sans text-chocolate">
         {children}
       </body>
     </html>

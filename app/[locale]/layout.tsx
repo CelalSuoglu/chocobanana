@@ -61,6 +61,9 @@ const chinese = Noto_Sans_SC({
   weight: ["400", "500", "700"],
 });
 
+/** Public HTML must not stay cached after a 30-minute opening ends. */
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }

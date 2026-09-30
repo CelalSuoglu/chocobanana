@@ -3,7 +3,7 @@
 import { AuthError } from "next-auth";
 import { z } from "zod";
 import { signIn, signOut } from "@/auth";
-import { sendAppEmail, isEmailConfigured, allowsDevSignupWithoutEmail, formatEmailErrorForUser } from "@/lib/auth/email";
+import { sendAppEmail, isEmailConfigured, formatEmailErrorForUser } from "@/lib/auth/email";
 import { createToken, hashPassword, hashToken } from "@/lib/auth/password";
 import {
   assertSignupCountry,
@@ -14,6 +14,8 @@ import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { getAppBaseUrl } from "@/lib/stripe/config";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
+import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { isLocale } from "@/lib/i18n/config";
 
 const addressFields = {
   addressLine1: z.string().trim().min(1).max(120),
@@ -62,14 +64,6 @@ export async function registerCustomer(
   }
 
   const emailReady = isEmailConfigured();
-  const localDevBypass = allowsDevSignupWithoutEmail();
-  if (!emailReady && !localDevBypass) {
-    return {
-      ok: false,
-      error:
-        "[EMAIL_NOT_CONFIGURED] Email delivery needs RESEND_API_KEY and EMAIL_FROM (verified domain). Registration is unavailable until email is set up.",
-    };
-  }
 
   const parsed = registerSchema.safeParse({
     firstName: formData.get("firstName"),
@@ -122,18 +116,22 @@ export async function registerCustomer(
       passwordHash,
       role: "CUSTOMER",
       preferredLocale: parsed.data.locale ?? "en",
-      // Local next dev without Resend: mark verified so sign-in works for design tests.
-      emailVerified: localDevBypass ? new Date() : null,
+      // Without a mail provider, the account can sign in immediately.
+      // When email is configured, sign-in waits for the verification link.
+      emailVerified: emailReady ? null : new Date(),
     },
   });
 
-  if (localDevBypass) {
+  if (!emailReady) {
     revalidatePath("/owner");
     revalidatePath("/owner/members");
+    const locale = isLocale(parsed.data.locale ?? "")
+      ? parsed.data.locale!
+      : "en";
+    const dict = await getDictionary(locale);
     return {
       ok: true,
-      message:
-        "Account created for local development (email skipped). You can sign in now.",
+      message: dict.auth.signUpWelcome,
     };
   }
 
@@ -165,9 +163,13 @@ export async function registerCustomer(
   revalidatePath("/owner");
   revalidatePath("/owner/members");
 
+  const locale = isLocale(parsed.data.locale ?? "")
+    ? parsed.data.locale!
+    : "en";
+  const dict = await getDictionary(locale);
   return {
     ok: true,
-    message: "Account created. Check your email to verify before signing in.",
+    message: dict.auth.signUpCheckEmail,
   };
 }
 

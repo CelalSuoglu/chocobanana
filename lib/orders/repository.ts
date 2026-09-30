@@ -2,6 +2,10 @@ import "server-only";
 import type Stripe from "stripe";
 import type { FulfillmentStatus, Prisma } from "@prisma/client";
 import { getCatalogProduct } from "@/lib/catalog/products";
+import {
+  snailMailPriceCadCents,
+  snailMailRegionForCountry,
+} from "@/lib/catalog/snail-mail";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 
 export function parseCartMetadata(
@@ -115,9 +119,26 @@ export async function createPaidOrderFromCheckoutSession(options: {
   }
 
   const itemsData: Prisma.OrderItemCreateWithoutOrderInput[] = [];
+  let hasSnailMail = false;
   for (const line of cart) {
     const product = getCatalogProduct(line.productId);
-    if (!product) continue;
+    if (!product) {
+      throw new Error(
+        `Unknown catalog product ${line.productId} for session ${session.id}`,
+      );
+    }
+    if (product.snailMail) {
+      const expected = snailMailPriceCadCents(
+        product.snailMail.region,
+        product.snailMail.termMonths,
+      );
+      if (product.amountCadCents !== expected) {
+        throw new Error(
+          `Mail Club price for ${product.id} does not match the price table.`,
+        );
+      }
+      hasSnailMail = true;
+    }
     itemsData.push({
       catalogProductId: product.id,
       name: product.nameEn,
@@ -140,15 +161,60 @@ export async function createPaidOrderFromCheckoutSession(options: {
     throw new Error(`Missing customer email for session ${session.id}`);
   }
 
-  const userId = metadata.user_id || null;
+  const metadataUserId = metadata.user_id?.trim() || null;
+  const userById = metadataUserId
+    ? await prisma.user.findUnique({ where: { id: metadataUserId } })
+    : null;
   const user =
-    userId
-      ? await prisma.user.findUnique({ where: { id: userId } })
-      : await prisma.user.findUnique({
-          where: { email: email.toLowerCase() },
-        });
+    userById ??
+    (await prisma.user.findUnique({
+      where: { email: email.toLowerCase() },
+    }));
 
   const shippingFromStripe = shippingFromSession(session);
+  const totalDetails = session.total_details;
+  const shippingAmountCadCents = totalDetails?.amount_shipping ?? null;
+  const taxAmountCadCents = totalDetails?.amount_tax ?? null;
+
+  if ((session.currency ?? "cad").toLowerCase() !== "cad") {
+    throw new Error(`Session ${session.id} is not charged in CAD.`);
+  }
+
+  const expectedSubtotal = itemsData.reduce(
+    (sum, item) => sum + item.unitAmountCadCents * item.quantity,
+    0,
+  );
+  if (
+    session.amount_subtotal != null &&
+    session.amount_subtotal !== expectedSubtotal
+  ) {
+    throw new Error(
+      `Session ${session.id} subtotal does not match the catalog price.`,
+    );
+  }
+
+  if (hasSnailMail) {
+    if ((shippingAmountCadCents ?? 0) > 0) {
+      throw new Error(
+        `Session ${session.id} adds a shipping fee to a Mail Club package.`,
+      );
+    }
+    const region = snailMailRegionForCountry(shippingFromStripe.shippingCountry);
+    if (!region) {
+      throw new Error(
+        `Session ${session.id} shipping country is outside Mail Club regions.`,
+      );
+    }
+    for (const line of cart) {
+      const product = getCatalogProduct(line.productId);
+      if (product?.snailMail && product.snailMail.region !== region) {
+        throw new Error(
+          `Session ${session.id} shipping country does not match the Mail Club region.`,
+        );
+      }
+    }
+  }
+
   // Snapshot: prefer Stripe shipping, else freeze the customer's profile address at purchase time.
   const shipping = {
     shippingName:
@@ -169,6 +235,11 @@ export async function createPaidOrderFromCheckoutSession(options: {
       ? session.payment_intent
       : session.payment_intent?.id ?? null;
 
+  const subscriptionId =
+    typeof session.subscription === "string"
+      ? session.subscription
+      : session.subscription?.id ?? null;
+
   const customerName =
     session.customer_details?.name ||
     [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
@@ -180,11 +251,19 @@ export async function createPaidOrderFromCheckoutSession(options: {
       userId: user?.id ?? null,
       stripeCheckoutSessionId: session.id,
       stripePaymentIntentId: paymentIntent,
+      stripeSubscriptionId: subscriptionId,
+      billingReason: subscriptionId ? "subscription_create" : null,
       stripeEventIds: [eventId],
       paymentStatus: "PAID",
       fulfillmentStatus: "NEW",
       amountTotalCadCents: session.amount_total ?? 0,
       currency: (session.currency ?? "cad").toLowerCase(),
+      shippingAmountCadCents,
+      taxAmountCadCents,
+      discountAmountCadCents:
+        totalDetails?.amount_discount && totalDetails.amount_discount > 0
+          ? totalDetails.amount_discount
+          : null,
       presentmentAmountCents:
         session.presentment_details?.presentment_amount ?? null,
       presentmentCurrency:
@@ -192,10 +271,160 @@ export async function createPaidOrderFromCheckoutSession(options: {
         null,
       customerEmail: email.toLowerCase(),
       customerName,
-      customerPhone: user?.phone ?? null,
+      customerPhone:
+        session.customer_details?.phone ?? user?.phone ?? null,
       ...shipping,
       locale: metadata.locale ?? null,
       items: { create: itemsData },
+    },
+  });
+
+  return { created: true, orderId: order.id };
+}
+
+export async function createPaidOrderFromInvoice(options: {
+  eventId: string;
+  invoice: Stripe.Invoice;
+}): Promise<{ created: boolean; orderId?: string }> {
+  if (!isDatabaseConfigured()) {
+    throw new Error("DATABASE_URL is required to persist orders.");
+  }
+
+  const prisma = requirePrisma();
+  const { eventId, invoice } = options;
+
+  if (!invoice.id) {
+    throw new Error("Invoice missing id");
+  }
+
+  const existingByInvoice = await prisma.order.findUnique({
+    where: { stripeInvoiceId: invoice.id },
+  });
+  if (existingByInvoice) {
+    if (!existingByInvoice.stripeEventIds.includes(eventId)) {
+      await prisma.order.update({
+        where: { id: existingByInvoice.id },
+        data: { stripeEventIds: { push: eventId } },
+      });
+    }
+    return { created: false, orderId: existingByInvoice.id };
+  }
+
+  const rawSubscription = (
+    invoice as Stripe.Invoice & {
+      subscription?: string | { id: string } | null;
+    }
+  ).subscription;
+  const subscriptionId =
+    typeof rawSubscription === "string"
+      ? rawSubscription
+      : rawSubscription && typeof rawSubscription === "object"
+        ? rawSubscription.id
+        : null;
+
+  const stripeCustomerId =
+    typeof invoice.customer === "string"
+      ? invoice.customer
+      : invoice.customer &&
+          typeof invoice.customer === "object" &&
+          "id" in invoice.customer
+        ? invoice.customer.id
+        : null;
+
+  const email =
+    invoice.customer_email ||
+    (typeof invoice.customer === "object" &&
+    invoice.customer &&
+    "email" in invoice.customer
+      ? (invoice.customer.email as string | null)
+      : null) ||
+    "";
+
+  let user =
+    (stripeCustomerId
+      ? await prisma.user.findUnique({
+          where: { stripeCustomerId },
+        })
+      : null) ??
+    (email
+      ? await prisma.user.findUnique({
+          where: { email: email.toLowerCase() },
+        })
+      : null);
+
+  if (!user && subscriptionId) {
+    const sub = await prisma.mailClubSubscription.findUnique({
+      where: { stripeSubscriptionId: subscriptionId },
+      include: { user: true },
+    });
+    user = sub?.user ?? null;
+  }
+
+  const catalogId = invoice.lines?.data?.[0]?.metadata?.catalog_product_id;
+  if (!catalogId) {
+    throw new Error(
+      `Invoice ${invoice.id} has no catalog_product_id; refusing to invent a subscription product or price.`,
+    );
+  }
+  const product = getCatalogProduct(catalogId);
+  if (!product || product.kind !== "subscription") {
+    throw new Error(
+      `Invoice ${invoice.id} catalog product is not a known subscription.`,
+    );
+  }
+
+  if (invoice.amount_paid == null) {
+    throw new Error(`Invoice ${invoice.id} has no amount_paid.`);
+  }
+
+  const customerEmail = (email || user?.email || "").toLowerCase();
+  if (!customerEmail) {
+    throw new Error(`Missing customer email for invoice ${invoice.id}`);
+  }
+
+  // Synthetic session id for unique constraint — invoice renewals have no checkout session.
+  const syntheticSessionId = `invoice_${invoice.id}`;
+
+  const order = await prisma.order.create({
+    data: {
+      userId: user?.id ?? null,
+      stripeCheckoutSessionId: syntheticSessionId,
+      stripeInvoiceId: invoice.id,
+      stripeSubscriptionId: subscriptionId,
+      billingReason: invoice.billing_reason ?? "subscription_cycle",
+      stripeEventIds: [eventId],
+      paymentStatus: "PAID",
+      fulfillmentStatus: "NEW",
+      amountTotalCadCents: invoice.amount_paid,
+      currency: (invoice.currency ?? "cad").toLowerCase(),
+      customerEmail,
+      customerName:
+        [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+        user?.name ||
+        null,
+      customerPhone: user?.phone ?? null,
+      shippingName:
+        [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+        user?.name ||
+        null,
+      shippingLine1: user?.addressLine1 ?? null,
+      shippingLine2: user?.addressLine2 ?? null,
+      shippingCity: user?.city ?? null,
+      shippingState: user?.region ?? null,
+      shippingPostalCode: user?.postalCode ?? null,
+      shippingCountry: user?.country ?? null,
+      locale: user?.preferredLocale ?? null,
+      items: {
+        create: [
+          {
+            catalogProductId: product.id,
+            name: product.nameEn,
+            quantity: 1,
+            unitAmountCadCents: product.amountCadCents,
+            currency: product.currency.toLowerCase(),
+          },
+        ],
+      },
     },
   });
 
@@ -303,17 +532,24 @@ export async function listOwnerCustomers(filters: { q?: string } = {}) {
 export async function getOwnerDashboardStats() {
   const prisma = requirePrisma();
   const dayAgo = new Date(Date.now() - 1000 * 60 * 60 * 24);
+  const monthStart = new Date();
+  monthStart.setDate(1);
+  monthStart.setHours(0, 0, 0, 0);
+
   const [
     memberTotal,
     membersNew,
+    activeSubscribers,
     orderTotal,
     ordersNew,
     ordersPreparing,
+    fulfillmentThisMonth,
   ] = await Promise.all([
     prisma.user.count({ where: { role: "CUSTOMER" } }),
     prisma.user.count({
       where: { role: "CUSTOMER", createdAt: { gte: dayAgo } },
     }),
+    prisma.mailClubSubscription.count({ where: { status: "ACTIVE" } }),
     prisma.order.count({ where: { paymentStatus: "PAID" } }),
     prisma.order.count({
       where: { paymentStatus: "PAID", createdAt: { gte: dayAgo } },
@@ -324,8 +560,51 @@ export async function getOwnerDashboardStats() {
         fulfillmentStatus: { in: ["NEW", "PREPARING"] },
       },
     }),
+    prisma.order.count({
+      where: {
+        paymentStatus: "PAID",
+        fulfillmentStatus: { in: ["NEW", "PREPARING"] },
+        createdAt: { gte: monthStart },
+      },
+    }),
   ]);
-  return { memberTotal, membersNew, orderTotal, ordersNew, ordersPreparing };
+  return {
+    memberTotal,
+    membersNew,
+    activeSubscribers,
+    orderTotal,
+    ordersNew,
+    ordersPreparing,
+    fulfillmentThisMonth,
+  };
+}
+
+export async function listFulfillmentRows(options: {
+  year: number;
+  month: number;
+}) {
+  const prisma = requirePrisma();
+  const start = new Date(options.year, options.month - 1, 1);
+  const end = new Date(options.year, options.month, 1);
+
+  const orders = await prisma.order.findMany({
+    where: {
+      paymentStatus: "PAID",
+      fulfillmentStatus: { in: ["NEW", "PREPARING"] },
+      createdAt: { gte: start, lt: end },
+    },
+    include: { items: true, user: true },
+    orderBy: { createdAt: "asc" },
+  });
+
+  const activeSubs = await prisma.mailClubSubscription.findMany({
+    where: { status: "ACTIVE" },
+    include: {
+      user: true,
+    },
+  });
+
+  return { orders, activeSubs };
 }
 
 export async function updateFulfillmentStatus(

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FulfillmentStatusForm } from "@/components/fulfillment-status-form";
 import { isDatabaseConfigured } from "@/lib/db";
+import { displayOrderNumber } from "@/lib/orders/number";
 import { getOwnerOrder } from "@/lib/orders/repository";
 
 function formatMoney(cents: number, currency: string) {
@@ -22,6 +23,10 @@ export default async function OwnerOrderDetailPage({
   const order = await getOwnerOrder(id);
   if (!order) notFound();
 
+  const postageIncluded = order.items.some((item) =>
+    item.catalogProductId.startsWith("snail-mail-"),
+  );
+
   return (
     <div>
       <Link
@@ -30,7 +35,9 @@ export default async function OwnerOrderDetailPage({
       >
         ← Orders
       </Link>
-      <h1 className="mt-4 font-serif text-3xl text-chocolate">Order detail</h1>
+      <h1 className="page-title mt-4">
+        Order {displayOrderNumber(order.id)}
+      </h1>
       <p className="mt-1 text-xs text-chocolate-soft">{order.id}</p>
 
       <dl className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -62,6 +69,27 @@ export default async function OwnerOrderDetailPage({
           <dd className="mt-1">
             {order.paymentStatus} ·{" "}
             {formatMoney(order.amountTotalCadCents, order.currency)}
+            {postageIncluded && (order.shippingAmountCadCents ?? 0) === 0 ? (
+              <span className="block text-xs text-chocolate-soft">
+                Postage included
+              </span>
+            ) : order.shippingAmountCadCents != null ? (
+              <span className="block text-xs text-chocolate-soft">
+                Shipping:{" "}
+                {formatMoney(order.shippingAmountCadCents, order.currency)}
+              </span>
+            ) : null}
+            {order.discountAmountCadCents != null && order.discountAmountCadCents > 0 ? (
+              <span className="block text-xs text-chocolate-soft">
+                Reward discount:{" "}
+                {formatMoney(order.discountAmountCadCents, order.currency)}
+              </span>
+            ) : null}
+            {order.taxAmountCadCents != null ? (
+              <span className="block text-xs text-chocolate-soft">
+                Tax: {formatMoney(order.taxAmountCadCents, order.currency)}
+              </span>
+            ) : null}
             <span className="block text-xs text-chocolate-soft">
               Session: {order.stripeCheckoutSessionId}
             </span>

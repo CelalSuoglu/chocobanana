@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { OwnerAutoRefresh } from "@/components/owner-auto-refresh";
-import { Star } from "@/components/star";
+import { OwnerPublicOpening } from "@/components/owner-public-opening";
 import { displayName } from "@/lib/auth/profile";
 import { isDatabaseConfigured } from "@/lib/db";
+import { displayOrderNumber } from "@/lib/orders/number";
 import {
   getOwnerDashboardStats,
   listOwnerCustomers,
@@ -23,9 +24,11 @@ export default async function OwnerDashboardPage() {
     : {
         memberTotal: 0,
         membersNew: 0,
+        activeSubscribers: 0,
         orderTotal: 0,
         ordersNew: 0,
         ordersPreparing: 0,
+        fulfillmentThisMonth: 0,
       };
 
   const [recentMembers, recentOrders] = configured
@@ -42,34 +45,36 @@ export default async function OwnerDashboardPage() {
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-chocolate">
-            Dashboard
-            <Star className="ms-2 align-super text-sm" style={{ animationDelay: "0.5s" }} />
-          </h1>
+          <h1 className="page-title">Dashboard</h1>
           <p className="mt-1 text-sm text-chocolate-soft">
-            New members and paid orders are counted separately.
+            Free accounts and paid Mail Club subscriptions are counted separately.
           </p>
         </div>
         <OwnerAutoRefresh />
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <StatCard label="Members" value={stats.memberTotal} href="/owner/members" />
+      {configured ? <OwnerPublicOpening /> : null}
+
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="New members (24h)"
-          value={stats.membersNew}
+          label="Registered customers"
+          value={stats.memberTotal}
           href="/owner/members"
         />
-        <StatCard label="Paid orders" value={stats.orderTotal} href="/owner/orders" />
         <StatCard
-          label="New orders (24h)"
+          label="Active paid subscribers"
+          value={stats.activeSubscribers}
+          href="/owner/subscriptions"
+        />
+        <StatCard
+          label="New paid orders (24h)"
           value={stats.ordersNew}
           href="/owner/orders"
         />
         <StatCard
-          label="Needs fulfillment"
-          value={stats.ordersPreparing}
-          href="/owner/orders?status=NEW"
+          label="To prepare this month"
+          value={stats.fulfillmentThisMonth}
+          href="/owner/fulfillment"
         />
       </div>
 
@@ -129,7 +134,7 @@ export default async function OwnerDashboardPage() {
                     className="block hover:text-pink-deep"
                   >
                     <p className="font-serif text-base">
-                      #{order.id.slice(-8)} ·{" "}
+                      {displayOrderNumber(order.id)} ·{" "}
                       {formatMoney(order.amountTotalCadCents, order.currency)}
                     </p>
                     <p className="text-xs text-chocolate-soft">

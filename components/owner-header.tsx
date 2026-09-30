@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
-import { Star } from "@/components/star";
 import { logoutOwnerAction } from "@/lib/auth/actions";
 
 const PANEL_LINKS = [
@@ -18,6 +17,16 @@ const PANEL_LINKS = [
     href: "/owner/members",
     label: "Members",
     match: (path: string) => path.startsWith("/owner/members"),
+  },
+  {
+    href: "/owner/subscriptions",
+    label: "Mail Club",
+    match: (path: string) => path.startsWith("/owner/subscriptions"),
+  },
+  {
+    href: "/owner/fulfillment",
+    label: "Fulfillment",
+    match: (path: string) => path.startsWith("/owner/fulfillment"),
   },
 ] as const;
 
@@ -86,14 +95,11 @@ export function OwnerHeader(props: OwnerHeaderProps) {
               />
             </Link>
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <p className="font-script text-lg leading-none text-pink-deep sm:text-xl">
-                  Chocobanana
-                </p>
-                <Star className="text-xs" style={{ animationDelay: "0.45s" }} />
-              </div>
-              <p className="mt-1 font-serif text-sm tracking-[0.12em] text-chocolate sm:text-base">
-                Owner Dashboard
+              <p className="font-script text-lg leading-none text-pink-deep sm:text-xl">
+                Chocobanana
+              </p>
+              <p className="mt-1 font-serif text-sm tracking-[0.14em] uppercase text-chocolate sm:text-base">
+                Administration
               </p>
               <p className="mt-0.5 truncate text-xs text-chocolate-soft sm:text-sm">
                 {displayName}

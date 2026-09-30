@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { getCatalogProduct } from "@/lib/catalog/products";
 import {
   cartItemCount,
   cartStorageKey,
@@ -28,13 +29,20 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
+function purchasableLines(lines: CartLine[]): CartLine[] {
+  return normalizeCart(lines).filter((line) => {
+    const product = getCatalogProduct(line.productId);
+    return Boolean(product?.purchasable && product.cartEligible);
+  });
+}
+
 function readStoredCart(): CartLine[] {
   try {
     const raw = window.localStorage.getItem(cartStorageKey);
     if (!raw) return [];
     const parsed = JSON.parse(raw) as unknown;
     if (!Array.isArray(parsed)) return [];
-    return normalizeCart(
+    return purchasableLines(
       parsed.map((item) => ({
         productId: String((item as CartLine).productId ?? ""),
         quantity: Number((item as CartLine).quantity ?? 0),
@@ -60,9 +68,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [lines, ready]);
 
   const addItem = useCallback((productId: string, quantity = 1) => {
-    setLines((current) =>
-      normalizeCart([...current, { productId, quantity }]),
-    );
+    setLines((current) => purchasableLines([...current, { productId, quantity }]));
   }, []);
 
   const setQuantity = useCallback((productId: string, quantity: number) => {

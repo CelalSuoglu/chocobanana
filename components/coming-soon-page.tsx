@@ -5,6 +5,11 @@ import { Star } from "@/components/star";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
+import {
+  SITE_EMAIL,
+  SITE_INSTAGRAM_HANDLE,
+  SITE_INSTAGRAM_URL,
+} from "@/lib/site-contact";
 
 type ComingSoonPageProps = {
   dict: Dictionary;
@@ -124,6 +129,22 @@ export function ComingSoonPage({
       </div>
 
       <footer className="relative z-10 flex flex-col items-center gap-4 pb-8 pt-2 text-center">
+        <div className="flex flex-col items-center gap-2 text-sm text-chocolate-soft">
+          <a
+            href={`mailto:${SITE_EMAIL}`}
+            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
+          >
+            {SITE_EMAIL}
+          </a>
+          <a
+            href={SITE_INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
+          >
+            {dict.footer.instagram}: {SITE_INSTAGRAM_HANDLE}
+          </a>
+        </div>
         <div className="flex items-center justify-center gap-2">
           <Star className="text-xs" style={{ animationDelay: "0.5s" }} />
           <p className="font-script text-sm text-chocolate-soft/75 md:text-base">

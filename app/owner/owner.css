@@ -1,32 +1,24 @@
-/* Owner shell — same cream / chocolate / pink / gold language as the storefront */
+/* Owner shell — butter yellow ground, coffee accents, chocolate text. */
 html.owner-shell,
 html.owner-shell body {
   background-color: var(--cream) !important;
   background-image:
-    radial-gradient(ellipse at 16% 10%, rgba(232, 180, 188, 0.42), transparent 46%),
-    radial-gradient(ellipse at 88% 14%, rgba(212, 168, 75, 0.22), transparent 42%),
-    radial-gradient(ellipse at 50% 100%, rgba(235, 224, 208, 0.95), transparent 58%),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(60, 42, 34, 0.018) 3px,
-      rgba(60, 42, 34, 0.018) 4px
-    ) !important;
+    radial-gradient(ellipse at 8% 0%, rgba(111, 78, 55, 0.1), transparent 34%),
+    radial-gradient(ellipse at 100% 0%, rgba(212, 168, 75, 0.1), transparent 28%) !important;
   color: var(--chocolate) !important;
 }
 
 .owner-shell {
   --owner-bg: var(--cream);
-  --owner-surface: rgba(250, 246, 239, 0.78);
-  --owner-elevated: #fffaf3;
-  --owner-border: rgba(201, 139, 150, 0.38);
+  --owner-surface: color-mix(in srgb, var(--paper) 90%, white);
+  --owner-elevated: #fff8dc;
+  --owner-border: rgba(111, 78, 55, 0.34);
   --owner-text: var(--chocolate);
   --owner-muted: var(--chocolate-soft);
-  --owner-accent: var(--pink-deep);
-  --owner-accent-soft: rgba(232, 180, 188, 0.35);
+  --owner-accent: #6f4e37;
+  --owner-accent-soft: rgba(111, 78, 55, 0.14);
   --owner-gold: var(--gold);
-  --owner-danger: #a84855;
+  --owner-danger: #8a3d32;
   --owner-ok: #4f7a4a;
 }
 
@@ -78,7 +70,7 @@ html.owner-shell .font-script {
 }
 
 .owner-sparkle--pink {
-  color: var(--pink-deep);
+  color: var(--owner-accent);
 }
 
 @keyframes owner-twinkle {
@@ -96,8 +88,8 @@ html.owner-shell .font-script {
 .owner-header {
   position: relative;
   z-index: 10;
-  border-bottom: 1px solid rgba(201, 139, 150, 0.35);
-  background: rgba(250, 246, 239, 0.82);
+  border-bottom: 1px solid var(--owner-border);
+  background: color-mix(in srgb, var(--cream) 92%, white);
   backdrop-filter: blur(10px);
 }
 
@@ -145,7 +137,7 @@ html.owner-shell .font-script {
 }
 
 .owner-btn:hover {
-  background: color-mix(in srgb, var(--pink) 55%, white);
+  background: color-mix(in srgb, var(--owner-accent) 16%, var(--paper));
   border-color: var(--owner-accent);
 }
 
@@ -218,5 +210,5 @@ html.owner-shell .font-script {
 }
 
 .owner-rule {
-  border-color: rgba(201, 139, 150, 0.28);
+  border-color: rgba(111, 78, 55, 0.28);
 }

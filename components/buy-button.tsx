@@ -10,6 +10,7 @@ type BuyButtonProps = {
   unavailableLabel: string;
   errorLabel: string;
   enabled: boolean;
+  className?: string;
 };
 
 export function BuyButton({
@@ -19,6 +20,7 @@ export function BuyButton({
   unavailableLabel,
   errorLabel,
   enabled,
+  className = "mt-4",
 }: BuyButtonProps) {
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
@@ -58,12 +60,12 @@ export function BuyButton({
   }
 
   return (
-    <div className="mt-4">
+    <div className={className}>
       <button
         type="button"
         onClick={onClick}
         disabled={pending}
-        className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-chocolate/80 bg-transparent px-5 py-2.5 font-serif text-sm tracking-[0.12em] uppercase text-chocolate transition-all duration-300 hover:border-pink-deep hover:bg-pink-soft/60 disabled:cursor-wait disabled:opacity-60"
+        className="btn-primary"
       >
         {pending ? "…" : label}
       </button>

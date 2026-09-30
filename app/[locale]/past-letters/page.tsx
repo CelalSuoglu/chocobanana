@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/page-hero";
-import { Star } from "@/components/star";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 
@@ -34,14 +33,9 @@ export default async function PastLettersPage({
         {dict.pastLetters.items.map((item, index) => (
           <li
             key={`${item.title}-${index}`}
-            className="rounded-3xl bg-paper/90 px-6 py-7 text-start ring-1 ring-pink/35"
+            className="store-card px-6 py-7 text-start"
           >
-            <div className="flex items-start justify-between gap-3">
-              <h2 className="font-serif text-xl font-medium text-chocolate">
-                {item.title}
-              </h2>
-              <Star className="shrink-0 text-sm" />
-            </div>
+            <h2 className="font-serif text-xl text-chocolate">{item.title}</h2>
             <p className="mt-2 font-script text-lg text-pink-deep">{item.date}</p>
             <p className="mt-3 text-sm leading-relaxed text-chocolate-soft">
               {item.preview}

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
@@ -7,16 +8,15 @@ import { AccountNav } from "@/components/account-nav";
 import { CartIconLink } from "@/components/cart-icon-link";
 import { LocaleCurrencySwitcher } from "@/components/locale-currency-switcher";
 import { logoutCustomerAction } from "@/lib/auth/actions";
-import type { CurrencyCode } from "@/lib/currency/config";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
-import { hrefFor, labelForNav, navItems } from "@/lib/nav";
+import { hrefFor, labelForNav, primaryNavItems } from "@/lib/nav";
 
 type SiteHeaderProps = {
   locale: Locale;
-  currency: CurrencyCode;
   dict: Dictionary;
   signedIn: boolean;
+  userName?: string | null;
 };
 
 function pathMatches(pathname: string, locale: Locale, itemPath: string) {
@@ -27,7 +27,12 @@ function pathMatches(pathname: string, locale: Locale, itemPath: string) {
   return pathname === target || pathname.startsWith(`${target}/`);
 }
 
-export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps) {
+export function SiteHeader({
+  locale,
+  dict,
+  signedIn,
+  userName,
+}: SiteHeaderProps) {
   const pathname = usePathname() || `/${locale}`;
   const [open, setOpen] = useState(false);
   const panelId = useId();
@@ -36,7 +41,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
     setOpen(false);
   }, [pathname]);
 
-  const links = navItems.map((item) => ({
+  const links = primaryNavItems.map((item) => ({
     ...item,
     href: hrefFor(locale, item.path),
     label: labelForNav(dict, item.id),
@@ -45,18 +50,27 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
 
   return (
     <header className="sticky top-0 z-40 border-b border-pink/30 bg-cream/90 backdrop-blur-md">
-      <div className="section-pad mx-auto max-w-5xl py-3 md:py-4">
+      <div className="section-pad mx-auto max-w-6xl py-3 md:py-4">
         <div className="flex items-center justify-between gap-2 sm:gap-3">
           <Link
             href={hrefFor(locale, "")}
-            className="shrink-0 font-serif text-lg tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep md:text-xl"
+            className="flex min-w-0 items-center gap-2"
           >
-            Chocobanana
+            <Image
+              src="/logo.jpg"
+              alt=""
+              width={40}
+              height={40}
+              className="h-10 w-10 rounded-full object-cover ring-1 ring-pink/45"
+            />
+            <span className="truncate font-script text-xl leading-none text-pink-deep sm:text-2xl">
+              Chocobanana
+            </span>
           </Link>
 
           <nav
             aria-label="Primary"
-            className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 overflow-x-auto whitespace-nowrap font-serif text-sm tracking-[0.1em] text-chocolate-soft md:flex lg:gap-x-5 lg:text-[0.95rem]"
+            className="hidden min-w-0 flex-1 items-center justify-center gap-x-5 font-serif text-sm tracking-[0.08em] text-chocolate-soft xl:flex"
           >
             {links.map((link) => (
               <Link
@@ -73,15 +87,12 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
           </nav>
 
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-            <div className="hidden lg:block">
+            <div className="hidden xl:block">
               <LocaleCurrencySwitcher
                 locale={locale}
-                currency={currency}
+                idSuffix="desktop"
                 labels={{
-                  language: dict.nav.language,
-                  currency: dict.nav.currency,
                   selectLanguage: dict.a11y.selectLanguage,
-                  selectCurrency: dict.a11y.selectCurrency,
                 }}
               />
             </div>
@@ -89,6 +100,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
             <AccountNav
               locale={locale}
               signedIn={signedIn}
+              userName={userName}
               accountLabel={dict.nav.account}
               signInLabel={dict.auth.signIn}
               signUpLabel={dict.auth.signUp}
@@ -97,7 +109,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
             />
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate md:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate xl:hidden"
               aria-expanded={open}
               aria-controls={panelId}
               aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
@@ -113,7 +125,7 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
         <nav
           id={panelId}
           aria-label="Mobile"
-          className={`mt-3 border-t border-pink/20 pt-3 md:hidden ${open ? "block" : "hidden"}`}
+          className={`mt-3 border-t border-pink/20 pt-3 xl:hidden ${open ? "block" : "hidden"}`}
         >
           <ul className="flex flex-col gap-1">
             {links.map((link) => (
@@ -180,15 +192,12 @@ export function SiteHeader({ locale, currency, dict, signedIn }: SiteHeaderProps
                 </>
               )}
             </li>
-            <li className="border-t border-pink/20 pt-3 lg:hidden">
+            <li className="border-t border-pink/20 pt-3 xl:hidden">
               <LocaleCurrencySwitcher
                 locale={locale}
-                currency={currency}
+                idSuffix="mobile"
                 labels={{
-                  language: dict.nav.language,
-                  currency: dict.nav.currency,
                   selectLanguage: dict.a11y.selectLanguage,
-                  selectCurrency: dict.a11y.selectCurrency,
                 }}
               />
             </li>

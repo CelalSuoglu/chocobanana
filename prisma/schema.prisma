@@ -26,6 +26,29 @@ enum FulfillmentStatus {
   CANCELED
 }
 
+enum MailClubSubscriptionStatus {
+  ACTIVE
+  PAUSED
+  CANCELED
+  INCOMPLETE
+  PAST_DUE
+}
+
+enum RewardCodeStatus {
+  AVAILABLE
+  RESERVED
+  USED
+  VOID
+}
+
+/// One row. Public pages are open only while server time is inside [startsAt, endsAt).
+model PublicSiteOpening {
+  id        String   @id
+  startsAt  DateTime
+  endsAt    DateTime
+  updatedAt DateTime @updatedAt
+}
+
 model User {
   id                String    @id @default(cuid())
   name              String?
@@ -44,11 +67,15 @@ model User {
   role              Role      @default(CUSTOMER)
   preferredLocale   String?   @default("en")
   image             String?
+  stripeCustomerId  String?   @unique
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
   accounts          Account[]
   sessions          Session[]
   orders            Order[]
+  rewardCodes       RewardCode[]
+  rewardRedemptions RewardCodeRedemption[]
+  mailClubSubscriptions MailClubSubscription[]
   verificationTokens VerificationToken[]
   passwordResetTokens PasswordResetToken[]
 }
@@ -103,11 +130,17 @@ model Order {
   user                   User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   stripeCheckoutSessionId String           @unique
   stripePaymentIntentId  String?
+  stripeSubscriptionId   String?
+  stripeInvoiceId        String?           @unique
+  billingReason          String?
   stripeEventIds         String[]          @default([])
   paymentStatus          PaymentStatus     @default(PAID)
   fulfillmentStatus      FulfillmentStatus @default(NEW)
   amountTotalCadCents    Int
   currency               String            @default("cad")
+  shippingAmountCadCents Int?
+  taxAmountCadCents      Int?
+  discountAmountCadCents Int?
   presentmentAmountCents Int?
   presentmentCurrency    String?
   customerEmail          String
@@ -124,11 +157,14 @@ model Order {
   createdAt              DateTime          @default(now())
   updatedAt              DateTime          @updatedAt
   items                  OrderItem[]
+  rewardEarned           RewardCode?       @relation("RewardEarnedFrom")
+  rewardRedemption       RewardCode?       @relation("RewardUsedOn")
 
   @@index([createdAt])
   @@index([fulfillmentStatus])
   @@index([customerEmail])
   @@index([userId])
+  @@index([stripeSubscriptionId])
 }
 
 model OrderItem {
@@ -140,6 +176,70 @@ model OrderItem {
   quantity        Int
   unitAmountCadCents Int
   currency        String @default("cad")
+}
+
+model MailClubSubscription {
+  id                   String                     @id @default(cuid())
+  userId               String
+  user                 User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeCustomerId     String
+  stripeSubscriptionId String                     @unique
+  status               MailClubSubscriptionStatus @default(INCOMPLETE)
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean                    @default(false)
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+model RewardCode {
+  id                        String           @id @default(cuid())
+  code                      String           @unique
+  userId                    String
+  user                      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /** 5, 10, 15… qualifying paid orders. Manual gifts use 0. */
+  milestone                 Int
+  percentOff                Int              @default(10)
+  /** Issued directly, not from the every-5-orders counter. */
+  manual                    Boolean          @default(false)
+  /** Any signed-in customer can use this code. Personal milestone codes stay false. */
+  shared                    Boolean          @default(false)
+  /** Shared codes that apply only when the customer has no paid order yet. */
+  firstOrderOnly            Boolean          @default(false)
+  status                    RewardCodeStatus @default(AVAILABLE)
+  earnedFromOrderId         String?          @unique
+  earnedFromOrder           Order?           @relation("RewardEarnedFrom", fields: [earnedFromOrderId], references: [id], onDelete: Restrict)
+  stripePromotionCodeId     String?          @unique
+  reservedCheckoutSessionId String?          @unique
+  usedOnOrderId             String?          @unique
+  usedOnOrder               Order?           @relation("RewardUsedOn", fields: [usedOnOrderId], references: [id], onDelete: SetNull)
+  createdAt                 DateTime         @default(now())
+  reservedAt                DateTime?
+  usedAt                    DateTime?
+  voidedAt                  DateTime?
+  redemptions               RewardCodeRedemption[]
+
+  @@unique([userId, milestone])
+  @@index([userId, status])
+}
+
+/** One customer's use of a shared code. The parent code stays available for other accounts. */
+model RewardCodeRedemption {
+  id                        String           @id @default(cuid())
+  rewardCodeId              String
+  rewardCode                RewardCode       @relation(fields: [rewardCodeId], references: [id], onDelete: Cascade)
+  userId                    String
+  user                      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status                    RewardCodeStatus @default(AVAILABLE)
+  reservedCheckoutSessionId String?          @unique
+  usedOnOrderId             String?          @unique
+  reservedAt                DateTime?
+  usedAt                    DateTime?
+
+  @@unique([rewardCodeId, userId])
+  @@index([rewardCodeId, status])
 }
 
 model ProcessedStripeEvent {

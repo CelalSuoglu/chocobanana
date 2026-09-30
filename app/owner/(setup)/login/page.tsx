@@ -1,21 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { OwnerLoginForm } from "@/components/owner-login-form";
-import { Star } from "@/components/star";
 import { isDatabaseConfigured } from "@/lib/db";
 
 export default function OwnerLoginPage() {
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center text-center">
-      <div className="relative">
-        <Star
-          className="absolute -start-5 -top-1 text-sm"
-          style={{ animationDelay: "0.35s" }}
-        />
-        <Star
-          className="absolute -end-4 top-8 text-xs"
-          style={{ animationDelay: "1.2s" }}
-        />
+      <div>
         <Image
           src="/logo.jpg"
           alt="Chocobanana"

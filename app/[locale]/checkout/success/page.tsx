@@ -4,6 +4,7 @@ import { ClearCartOnSuccess } from "@/components/clear-cart-on-success";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { displayOrderNumber } from "@/lib/orders/number";
 import { getStripe } from "@/lib/stripe/client";
 import {
   getPaymentsMode,
@@ -38,7 +39,7 @@ export default async function CheckoutSuccessPage({
   if (!paymentsCheckoutEnabled() || !sessionId) {
     return (
       <main className="section-pad mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center py-16 text-center">
-        <h1 className="font-serif text-3xl text-chocolate">
+        <h1 className="page-title">
           {dict.checkout.successTitle}
         </h1>
         <p className="mt-4 text-chocolate-soft">{dict.checkout.successMissing}</p>
@@ -53,19 +54,50 @@ export default async function CheckoutSuccessPage({
   }
 
   const stripe = getStripe();
-  const session = await stripe.checkout.sessions.retrieve(sessionId);
+  const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    expand: ["total_details"],
+  });
 
-  let dbOrder: { customerEmail: string } | null = null;
+  const paidOnStripe = session.payment_status === "paid";
+
+  let dbOrder: {
+    id: string;
+    customerEmail: string;
+    shippingAmountCadCents: number | null;
+    taxAmountCadCents: number | null;
+  } | null = null;
   if (isDatabaseConfigured()) {
     const prisma = requirePrisma();
-    dbOrder = await prisma.order.findUnique({
-      where: { stripeCheckoutSessionId: sessionId },
-      select: { customerEmail: true },
-    });
+    const select = {
+      id: true,
+      customerEmail: true,
+      shippingAmountCadCents: true,
+      taxAmountCadCents: true,
+    } as const;
+    for (let attempt = 0; attempt < (paidOnStripe ? 6 : 1); attempt += 1) {
+      dbOrder = await prisma.order.findUnique({
+        where: { stripeCheckoutSessionId: sessionId },
+        select,
+      });
+      if (dbOrder || attempt === 5) break;
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
   }
 
   const integrationAmount = formatMoney(
     session.amount_total,
+    session.currency,
+    rawLocale,
+  );
+  const shippingAmount = formatMoney(
+    session.total_details?.amount_shipping ??
+      dbOrder?.shippingAmountCadCents ??
+      null,
+    session.currency,
+    rawLocale,
+  );
+  const taxAmount = formatMoney(
+    session.total_details?.amount_tax ?? dbOrder?.taxAmountCadCents ?? null,
     session.currency,
     rawLocale,
   );
@@ -76,20 +108,49 @@ export default async function CheckoutSuccessPage({
     rawLocale,
   );
 
-  const paidOnStripe = session.payment_status === "paid";
+  const pending =
+    session.payment_status === "unpaid" &&
+    session.status === "complete";
+  const failedOrOpen =
+    !paidOnStripe && session.payment_status !== "no_payment_required";
+
+  const title = paidOnStripe
+    ? dict.checkout.successTitle
+    : pending
+      ? dict.checkout.pendingTitle
+      : dict.checkout.unpaidTitle;
+  const body = paidOnStripe
+    ? dict.checkout.successBody
+    : pending
+      ? dict.checkout.pendingBody
+      : dict.checkout.unpaidBody;
 
   return (
     <main className="section-pad mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center py-16 text-center">
-      <ClearCartOnSuccess active={paidOnStripe} />
+      <ClearCartOnSuccess active={paidOnStripe && Boolean(dbOrder)} />
       <p className="font-script text-2xl text-pink-deep">
-        {dict.checkout.successEyebrow}
+        {paidOnStripe
+          ? dict.checkout.successEyebrow
+          : dict.checkout.pendingEyebrow}
       </p>
-      <h1 className="mt-2 font-serif text-3xl text-chocolate md:text-4xl">
-        {dict.checkout.successTitle}
+      <h1 className="page-title mt-2">
+        {title}
       </h1>
-      <p className="mt-4 text-chocolate-soft">{dict.checkout.successBody}</p>
+      <p className="mt-4 text-chocolate-soft">{body}</p>
+      {dbOrder ? (
+        <p className="mt-6 font-serif text-2xl tracking-wide text-chocolate">
+          <span className="block font-sans text-xs tracking-[0.14em] uppercase text-chocolate-soft">
+            {dict.checkout.orderNumber}
+          </span>
+          {displayOrderNumber(dbOrder.id)}
+        </p>
+      ) : paidOnStripe ? (
+        <p className="mt-6 text-sm text-chocolate-soft">
+          {dict.checkout.orderNumberPending}
+        </p>
+      ) : null}
 
-      <div className="mt-8 rounded-3xl bg-paper/90 px-6 py-6 text-start ring-1 ring-pink/35">
+      <div className="store-card mt-8 px-6 py-6 text-start">
         <p className="text-sm text-chocolate-soft">
           <span className="font-serif text-chocolate">
             {dict.checkout.stripeStatus}:
@@ -104,6 +165,22 @@ export default async function CheckoutSuccessPage({
               {dict.checkout.integrationAmount}:
             </span>{" "}
             {integrationAmount}
+          </p>
+        ) : null}
+        {shippingAmount ? (
+          <p className="mt-2 text-sm text-chocolate-soft">
+            <span className="font-serif text-chocolate">
+              {dict.checkout.shippingAmount}:
+            </span>{" "}
+            {shippingAmount}
+          </p>
+        ) : null}
+        {taxAmount ? (
+          <p className="mt-2 text-sm text-chocolate-soft">
+            <span className="font-serif text-chocolate">
+              {dict.checkout.taxAmount}:
+            </span>{" "}
+            {taxAmount}
           </p>
         ) : null}
         {presentmentAmount &&
@@ -122,7 +199,9 @@ export default async function CheckoutSuccessPage({
           </span>{" "}
           {dbOrder
             ? dict.checkout.orderRecordReady
-            : dict.checkout.orderRecordPendingWebhook}
+            : paidOnStripe
+              ? dict.checkout.orderRecordPendingWebhook
+              : dict.checkout.orderRecordNotPaid}
         </p>
         {dbOrder?.customerEmail ? (
           <p className="mt-2 text-sm text-chocolate-soft">
@@ -135,6 +214,11 @@ export default async function CheckoutSuccessPage({
         <p className="mt-3 text-xs leading-relaxed text-chocolate-soft/90">
           {dict.checkout.webhookTrustNote}
         </p>
+        {failedOrOpen && !paidOnStripe ? (
+          <p className="mt-2 text-xs text-pink-deep">
+            {dict.checkout.unpaidHint}
+          </p>
+        ) : null}
         {getPaymentsMode() === "test" ? (
           <p className="mt-2 text-xs text-pink-deep">{dict.checkout.testModeNote}</p>
         ) : null}
@@ -142,7 +226,7 @@ export default async function CheckoutSuccessPage({
 
       <Link
         href={`/${rawLocale}/shop`}
-        className="mt-8 font-serif text-sm tracking-[0.12em] uppercase text-pink-deep"
+        className="btn-secondary btn-inline mx-auto mt-8"
       >
         {dict.checkout.backToShop}
       </Link>

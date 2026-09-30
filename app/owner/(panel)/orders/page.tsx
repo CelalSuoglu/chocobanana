@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { FulfillmentStatus } from "@prisma/client";
 import { OwnerAutoRefresh } from "@/components/owner-auto-refresh";
 import { isDatabaseConfigured } from "@/lib/db";
+import { displayOrderNumber } from "@/lib/orders/number";
 import { listOwnerOrders } from "@/lib/orders/repository";
 
 function formatMoney(cents: number, currency: string) {
@@ -40,7 +41,7 @@ export default async function OwnerOrdersPage({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl text-chocolate">Orders</h1>
+          <h1 className="page-title">Orders</h1>
           <p className="mt-1 text-sm text-chocolate-soft">
             Paid orders only — created after Stripe webhook confirmation. Payment
             status cannot be set to paid manually.
@@ -87,7 +88,7 @@ export default async function OwnerOrdersPage({
               >
                 <div>
                   <p className="font-serif text-lg">
-                    #{order.id.slice(-8)} · {order.customerEmail}
+                    {displayOrderNumber(order.id)} · {order.customerEmail}
                   </p>
                   <p className="text-xs text-chocolate-soft">
                     {new Date(order.createdAt).toLocaleString("en-CA")} ·{" "}

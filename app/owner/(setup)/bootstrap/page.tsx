@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { OwnerBootstrapForm } from "@/components/owner-bootstrap-form";
-import { Star } from "@/components/star";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 
 export default async function OwnerBootstrapPage() {
@@ -11,11 +10,7 @@ export default async function OwnerBootstrapPage() {
 
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center text-center">
-      <div className="relative">
-        <Star
-          className="absolute -start-5 -top-1 text-sm"
-          style={{ animationDelay: "0.3s" }}
-        />
+      <div>
         <Image
           src="/logo.jpg"
           alt="Chocobanana"

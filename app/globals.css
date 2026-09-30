@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f6efe4;
-  --cream-deep: #ebe0d0;
+  --cream: #f6e29a;
+  --cream-deep: #efd36a;
   --chocolate: #3c2a22;
   --chocolate-soft: #5c4336;
-  --pink: #e8b4bc;
-  --pink-soft: #f3d4d8;
-  --pink-deep: #c98b96;
+  --pink: #c4a484;
+  --pink-soft: #e6d0bc;
+  --pink-deep: #6f4e37;
   --gold: #d4a84b;
   --gold-soft: #e8c978;
-  --paper: #faf6ef;
+  --paper: #fff6d4;
   --background: var(--cream);
   --foreground: var(--chocolate);
 }
@@ -41,18 +41,15 @@ html {
 body {
   background-color: var(--cream);
   background-image:
-    radial-gradient(ellipse at 12% 8%, rgba(232, 180, 188, 0.22), transparent 42%),
-    radial-gradient(ellipse at 88% 18%, rgba(212, 168, 75, 0.12), transparent 40%),
-    radial-gradient(ellipse at 50% 100%, rgba(235, 224, 208, 0.9), transparent 55%),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(60, 42, 34, 0.015) 3px,
-      rgba(60, 42, 34, 0.015) 4px
-    );
+    radial-gradient(ellipse at 8% 0%, rgba(111, 78, 55, 0.12), transparent 36%),
+    radial-gradient(ellipse at 100% 8%, rgba(212, 168, 75, 0.08), transparent 32%);
   color: var(--chocolate);
   font-family: var(--font-body), Georgia, serif;
+}
+
+img,
+video {
+  max-width: 100%;
 }
 
 .font-script {
@@ -171,6 +168,137 @@ body {
   padding-inline: 1.25rem;
 }
 
+.store-card {
+  border-radius: 1.5rem;
+  background: color-mix(in srgb, var(--paper) 96%, white);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pink) 55%, transparent);
+}
+
+.kicker {
+  font-family: var(--font-script), cursive;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--pink-deep);
+}
+
+.page-title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(2.15rem, 5vw, 3.4rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--chocolate);
+}
+
+.page-lead {
+  margin-top: 0.85rem;
+  max-width: 40rem;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--chocolate-soft);
+}
+
+.field {
+  min-height: 3rem;
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--pink) 80%, var(--chocolate));
+  background: var(--paper);
+  padding: 0.7rem 1.1rem;
+  color: var(--chocolate);
+  outline: none;
+}
+
+textarea.field {
+  border-radius: 1.25rem;
+  min-height: 8rem;
+}
+
+.field:focus {
+  border-color: var(--pink-deep);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pink) 40%, transparent);
+}
+
+.notice {
+  border-radius: 1rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.notice-error {
+  border: 1px solid color-mix(in srgb, var(--pink-deep) 55%, transparent);
+  background: color-mix(in srgb, var(--pink-soft) 70%, white);
+  color: var(--pink-deep);
+}
+
+.notice-ok {
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  background: color-mix(in srgb, var(--gold-soft) 40%, white);
+  color: var(--chocolate);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.7rem 1.25rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-primary {
+  border: 1px solid var(--pink-deep);
+  background: var(--pink-deep);
+  color: var(--paper);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--chocolate);
+  border-color: var(--chocolate);
+}
+
+.btn-secondary {
+  border: 1px solid color-mix(in srgb, var(--chocolate) 55%, transparent);
+  background: transparent;
+  color: var(--chocolate);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--pink-deep);
+  background: color-mix(in srgb, var(--pink-soft) 70%, transparent);
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.btn-inline {
+  width: auto;
+  min-width: 11.5rem;
+  padding-inline: 1.5rem;
+}
+
+@media (max-width: 639px) {
+  .btn-inline {
+    width: 100%;
+  }
+}
+
+.btn-pair {
+  width: auto;
+  flex: 1 1 12rem;
+}
+
 @media (min-width: 768px) {
   .section-pad {
     padding-inline: 2rem;
@@ -180,9 +308,9 @@ body {
 /* Unlocked home hero — separate from coming-soon countdown stage */
 .home-hero {
   background-image:
-    radial-gradient(ellipse at 20% 15%, rgba(232, 180, 188, 0.28), transparent 48%),
+    radial-gradient(ellipse at 20% 15%, rgba(111, 78, 55, 0.14), transparent 48%),
     radial-gradient(ellipse at 82% 22%, rgba(212, 168, 75, 0.14), transparent 44%),
-    linear-gradient(180deg, rgba(250, 246, 239, 0.35) 0%, transparent 42%, rgba(235, 224, 208, 0.55) 100%);
+    linear-gradient(180deg, rgba(246, 226, 154, 0.35) 0%, transparent 42%, rgba(239, 211, 106, 0.45) 100%);
 }
 
 .home-hero-glow {
@@ -193,7 +321,7 @@ body {
   border-radius: 999px;
   background: radial-gradient(
     ellipse at center,
-    rgba(243, 212, 216, 0.55),
+    rgba(196, 164, 132, 0.45),
     transparent 70%
   );
   filter: blur(8px);
@@ -202,9 +330,9 @@ body {
 .coming-soon-stage {
   min-height: 100dvh;
   background-image:
-    radial-gradient(ellipse at 18% 12%, rgba(232, 180, 188, 0.34), transparent 46%),
+    radial-gradient(ellipse at 18% 12%, rgba(111, 78, 55, 0.16), transparent 46%),
     radial-gradient(ellipse at 86% 18%, rgba(212, 168, 75, 0.12), transparent 42%),
-    radial-gradient(ellipse at 50% 100%, rgba(235, 224, 208, 0.95), transparent 58%);
+    radial-gradient(ellipse at 50% 100%, rgba(246, 226, 154, 0.95), transparent 58%);
 }
 
 .coming-soon-glow {

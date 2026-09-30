@@ -6,15 +6,17 @@
   "nav": {
     "home": "ホーム",
     "shop": "ショップ",
+    "stickerSheets": "Sticker Sheets",
+    "snailMailClub": "Snail Mail Club",
     "mailClub": "メールクラブ",
     "pastLetters": "これまでの手紙",
-    "about": "私たちについて",
+    "about": "Our Story",
     "contact": "お問い合わせ",
+    "account": "Account",
     "language": "言語",
     "currency": "通貨",
     "openMenu": "メニューを開く",
-    "closeMenu": "メニューを閉じる",
-    "account": "Account"
+    "closeMenu": "メニューを閉じる"
   },
   "home": {
     "greeting": "hello, sweet friend",
@@ -44,8 +46,14 @@
       }
     },
     "taglineShort": "Soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
-    "ctaShop": "Visit the shop",
+    "ctaShop": "Shop Stationery",
     "ctaMailClub": "Mail Club",
+    "stickerSectionTitle": "Sticker Sheets",
+    "stickerSectionBody": "One-time sticker sheets, separate from the mail club.",
+    "stickerSectionCta": "View sticker sheets",
+    "clubSectionTitle": "Snail Mail Club",
+    "clubSectionBody": "Prepaid packages. You pay the package total once. Monthly envelopes are part of that one order.",
+    "clubSectionCta": "View packages",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
     "joinTitle": "Chocobananaに参加",
@@ -53,13 +61,78 @@
     "joinCta": "アカウント作成",
     "productsTitle": "コレクションを見る",
     "productsIntro": "カートに入れられるステーショナリー。",
-    "productsCta": "すべての商品を見る"
+    "productsCta": "すべての商品を見る",
+    "heroHeadline": "Soft stationery and letters worth keeping.",
+    "ctaExploreMailClub": "Explore the Mail Club",
+    "visualTitle": "Letters & parcels",
+    "visualBody": "A place for real Chocobanana photos of letters, seals, and parcels. Owner can replace this image when ready.",
+    "visualSlot": "Photo slot — add a real image in /public when ready.",
+    "howTitle": "How the Mail Club works",
+    "howSteps": [
+      {
+        "title": "Join",
+        "text": "Create a free account if you want order history. A Snail Mail Club package is a separate prepaid purchase: you pay the package total once."
+      },
+      {
+        "title": "We prepare your letter",
+        "text": "When a sending is scheduled, the letter is packed. No send date is published yet."
+      },
+      {
+        "title": "Happy mail arrives",
+        "text": "Delivery is limited to the countries listed on the Mail Club page."
+      }
+    ],
+    "envelopeTitle": "Inside your envelope",
+    "envelopeNote": "These spaces are ready for the real contents. Nothing here is a published promise yet.",
+    "envelopeSlots": [
+      "Not published yet",
+      "Not published yet",
+      "Not published yet"
+    ],
+    "pastGalleryTitle": "Previous envelopes",
+    "pastGalleryEmpty": "No envelope photos yet. The gallery will open when real images are added.",
+    "letterListTitle": "Letter list",
+    "letterListBody": "The email list is not open yet. Write to us and we will keep your note by email.",
+    "clubTitle": "Inside the Mail Club",
+    "clubBody": "Details about what’s in each parcel and who the club is for will live here. Owner fills this in before launch.",
+    "clubForTitle": "Who it’s for",
+    "clubForBody": "Owner note: describe the ideal member — no invented benefits.",
+    "pastTitle": "Past sendings",
+    "pastBody": "Browse earlier letter moods and archives.",
+    "pastCta": "See past letters",
+    "storyTitle": "Our story",
+    "storyBody": "Chocobanana is a mail club by Didem Keskin. The fuller brand story belongs in About — and can grow here as you write it.",
+    "faqTitle": "Questions",
+    "faq": [
+      {
+        "q": "Is a free account the same as Mail Club?",
+        "a": "No. A free account saves your profile. Paid Mail Club membership is separate and starts only after payment is confirmed."
+      },
+      {
+        "q": "When do parcels ship?",
+        "a": "Shipping dates will be published by the owner — we don’t invent dates here."
+      },
+      {
+        "q": "Can I shop without joining Mail Club?",
+        "a": "Yes. Sticker sheets and the shop are one-time purchases. A Snail Mail Club package is paid once, and its postage is already in that price."
+      }
+    ]
+  },
+  "stickerSheets": {
+    "title": "Sticker Sheets",
+    "intro": "One-time sticker sheets. These are not a Snail Mail Club membership and they are not a monthly sending.",
+    "emptyTitle": "No sticker sheets yet",
+    "emptyBody": "Real sticker products and prices are not published yet. This page is ready for them. There is no sample price and nothing to buy until a product is added.",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity"
   },
   "shop": {
     "eyebrow": "小さな宝物",
     "title": "ショップ",
     "intro": "サーバーカタログのステーショナリー。価格は CAD。いつでもカートに追加できます。",
-    "currencyNote": "カタログ価格はサーバー上で CAD として保存されています。",
+    "currencyNote": "価格とお支払いはカナダドル（CAD）です。",
+    "backToShop": "Back to shop",
     "products": {
       "letterSets": {
         "name": "レターセット",
@@ -77,30 +150,141 @@
         "name": "キープセイクノート",
         "note": "手紙に挟んだり机に置いたりする小さなカード。"
       }
-    },
-    "backToShop": "Back to shop"
+    }
+  },
+  "cart": {
+    "eyebrow": "カート",
+    "title": "カート",
+    "intro": "チェックアウト前に内容を確認してください。数量はこの端末に保存されます。",
+    "openCart": "カートを開く",
+    "addToCart": "カートに追加",
+    "added": "追加しました",
+    "empty": "カートは空です。",
+    "continueShopping": "買い物を続ける",
+    "unitPrice": "単価",
+    "lineTotal": "小計（行）",
+    "increase": "数量を増やす",
+    "decrease": "数量を減らす",
+    "remove": "削除",
+    "clear": "カートを空にする",
+    "subtotal": "小計",
+    "cadBasisNote": "カートの計算はすべてサーバー上の CAD カタログ価格を使います。",
+    "estimateNote": "表示希望通貨は {currency} です。CAD 金額は換算後の現地請求ではありません。",
+    "checkoutFinalNote": "お支払いは CAD です。送料は無料です。",
+    "checkout": "チェックアウト",
+    "continueCheckout": "お会計へ進む",
+    "shipping": "送料",
+    "shippingAtCheckout": "無料",
+    "lineSticker": "Sticker sheet",
+    "lineClub": "Snail Mail Club package",
+    "lineShop": "Shop item",
+    "stickerShipping": "Sticker shipping",
+    "stickerShippingValue": "Confirmed at checkout",
+    "stickerShippingNote": "Sticker shipping is separate from Snail Mail Club postage. No sticker shipping price is added until a rate is set, and club postage is not charged again.",
+    "mixedCheckout": "Check out sticker sheets and Snail Mail Club packages separately so club postage is not added again.",
+    "shippingIncluded": "Included",
+    "postageIncludedNote": "Standard postage is included in the Mail Club package price.",
+    "rewardCode": "Reward code",
+    "rewardApply": "Apply",
+    "rewardRemove": "Remove code",
+    "rewardDiscount": "Reward (10%)",
+    "rewardSignIn": "Sign in to use a reward code on this account.",
+    "rewardInvalid": "This code can't be used on this account.",
+    "rewardFirstOrder": "このコードは初回のご注文だけに使えます。",
+    "rewardBusy": "This code is already on an open checkout.",
+    "rewardHint": "10% off products on this account. One code per order. Shipping and tax are not discounted.",
+    "total": "合計",
+    "totalAtCheckout": "お会計時に確定",
+    "guestNote": "アカウントなしでも進めます。注文をアカウントに残すにはサインインしてください。",
+    "checkoutPending": "チェックアウトを開始中…",
+    "checkoutUnavailable": "この環境ではまだチェックアウトできません。カートは保存されています。",
+    "checkoutError": "チェックアウトを開始できませんでした。もう一度お試しください。",
+    "loading": "カートを読み込み中…"
   },
   "mailClub": {
     "eyebrow": "the heart of it all",
-    "title": "Mail Club",
-    "intro": "A gentle outline of how the Mail Club is meant to work. Membership details and schedules stay blank until you decide them.",
+    "title": "Snail Mail Club",
+    "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
+    "productLead": "Choose a package and a delivery region. One envelope is sent each month. Standard postage is included in the total.",
+    "listedPriceLabel": "Package total",
+    "priceClosedNote": "Checkout is not available in this environment yet.",
+    "deliveryScope": "Checkout can ship only to Canada, the United States, the United Kingdom, Australia, France, Germany, and Turkey.",
+    "shippingNotIncluded": "Standard postage is included in the package price. Checkout does not add a second shipping fee.",
+    "nextSendUnset": "The next send date is not published.",
+    "insideEmpty": "Envelope contents are not published yet.",
+    "renewalClosed": "These are prepaid packages. They do not renew automatically.",
+    "noSkipNote": "There is no automatic renewal and no skip-a-month control.",
     "stepsTitle": "How it works",
     "steps": [
       {
-        "title": "Browse with care",
-        "text": "Wander through the club pages and see the kinds of parcels you hope to share."
+        "title": "Join",
+        "text": "A free account saves your details. It does not start a paid membership."
       },
       {
-        "title": "Choose what fits",
-        "text": "Pick stationery moods and keepsakes that feel soft, playful, and a little nostalgic."
+        "title": "We prepare your letter",
+        "text": "Packing happens only when a sending is scheduled. That date is not set."
       },
       {
-        "title": "Open the mail",
-        "text": "When something arrives, settle in and enjoy the ritual of opening a thoughtful letter."
+        "title": "Happy mail arrives",
+        "text": "We ship only to the countries named on this page."
       }
     ],
     "detailsTitle": "Details to fill in later",
-    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]"
+    "detailsBody": "[Add membership rhythm, what’s included, and any club rules here when ready.]",
+    "freeVsPaidTitle": "Free account vs paid Mail Club",
+    "freeVsPaidBody": "A free account stores your details. A Snail Mail Club package is a separate one-time payment and starts only after Stripe confirms it.",
+    "galleryTitle": "Parcel photos",
+    "gallerySlot": "Owner photo slots — add real parcel images before launch.",
+    "thisMonthTitle": "What’s in this month’s letter",
+    "thisMonthSlot": "Owner fills the monthly contents here. No invented items.",
+    "pastLettersTitle": "Past letters",
+    "pastLettersBody": "See the archive of previous sendings.",
+    "pastLettersCta": "Past Letters",
+    "shippingTitle": "Shipping and timing",
+    "shippingSlot": "Owner lists supported countries. We won’t promise unsupported delivery.",
+    "shippingFeeTitle": "Shipping fee",
+    "shippingFeeSlot": "Owner sets shipping fees. Not shown as a made-up amount.",
+    "nextSendTitle": "Next send date",
+    "nextSendSlot": "Owner publishes the next send date when known.",
+    "priceTitle": "Membership price",
+    "priceSlot": "CAD base price and presentment currency will appear here once the owner confirms commercial terms.",
+    "renewalTitle": "Renewal & cancel",
+    "renewalSlot": "Owner documents renewal frequency, next charge date, pause/cancel rules before checkout opens.",
+    "faqTitle": "Mail Club FAQ",
+    "faq": [
+      {
+        "q": "Do I need an account?",
+        "a": "A free account stores your address. It does not start a paid package."
+      },
+      {
+        "q": "When can I join?",
+        "a": "Choose a package and region on this page, then pay the total once. The package does not renew automatically."
+      }
+    ],
+    "termLabel": "Package",
+    "regionLabel": "Region",
+    "term1": "1 month",
+    "term3": "3 months",
+    "term6": "6 months",
+    "term12": "1 year",
+    "regionCanada": "Canada",
+    "regionUsa": "USA",
+    "regionInternational": "International",
+    "oneEnvelope": "One envelope is sent each month for the length of the package.",
+    "paidOnce": "You pay the package total once. This does not renew automatically.",
+    "internationalNote": "International delivery is limited to the United Kingdom, Australia, France, Germany, and Turkey.",
+    "addPackage": "Add package to cart",
+    "joinCta": "Continue to checkout",
+    "joinDisabled": "Checkout is not available in this environment yet.",
+    "missingChecklistTitle": "Owner still needs to confirm",
+    "missingItems": [
+      "Monthly contents copy",
+      "CAD price & presentment currency",
+      "Shipping countries & fees",
+      "Next send date",
+      "Renewal, pause, and cancel rules",
+      "Enable MAIL_CLUB_CHECKOUT_ENABLED for test checkout"
+    ]
   },
   "pastLetters": {
     "eyebrow": "from the archive",
@@ -126,7 +310,7 @@
   },
   "about": {
     "eyebrow": "our story",
-    "title": "About",
+    "title": "Our Story",
     "intro": "Brand story fields below are editable placeholders. Replace them with the real Chocobanana story when you are ready.",
     "p1": "[Brand story paragraph 1 — edit in messages files.]",
     "p2": "[Brand story paragraph 2 — edit in messages files.]",
@@ -135,16 +319,17 @@
   "contact": {
     "eyebrow": "say hello",
     "title": "Contact",
-    "intro": "Sample contact fields only. Replace placeholders with real details and wire the form when your inbox is ready.",
+    "intro": "メールまたはInstagramでご連絡ください。下のフォームからもメッセージを残せます。",
     "emailLabel": "Email",
-    "emailPlaceholder": "[hello@example.com]",
+    "emailPlaceholder": "you@email.com",
     "nameLabel": "Name",
     "namePlaceholder": "[Your name]",
     "messageLabel": "Message",
     "messagePlaceholder": "[Write your message here]",
     "submit": "Send (placeholder)",
     "formNote": "This form does not send messages yet. It is a layout sample you can connect later.",
-    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready."
+    "submittedNote": "Placeholder only — no message was sent. Connect a real contact endpoint when ready.",
+    "instagramLabel": "Instagram"
   },
   "checkout": {
     "buy": "Buy",
@@ -167,50 +352,27 @@
     "integrationAmount": "Amount in CAD (integration currency)",
     "presentmentAmount": "Amount charged in presentment currency",
     "orderRecord": "Order record",
+    "orderNumber": "注文番号",
+    "orderNumberPending": "支払い済みの注文が保存されると、注文番号がここに表示されます。同じ番号はマイ注文にも載ります。",
     "orderRecordReady": "Webhook recorded this paid order in the database",
     "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
     "contactEmail": "Contact email",
-    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment."
+    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment.",
+    "pendingEyebrow": "almost there",
+    "pendingTitle": "Payment pending",
+    "pendingBody": "Stripe has not marked this payment as paid yet. Your order will appear for fulfillment only after the webhook confirms payment.",
+    "unpaidTitle": "Payment not completed",
+    "unpaidBody": "Nothing was recorded as a paid order. You can return to the shop and try again.",
+    "unpaidHint": "Failed or unfinished payments never appear in Owner → Orders.",
+    "orderRecordNotPaid": "No paid order in the database (payment not confirmed)",
+    "shippingAmount": "Shipping",
+    "taxAmount": "Tax",
+    "walletsNote": "Card is always available in test Checkout. Apple Pay and Google Pay appear only when Stripe has them enabled and your device/browser supports them."
   },
   "footer": {
     "tagline": "mail club",
-    "credit": "Made with soft paper & golden stars."
-  },
-  "currency": {
-    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
-    "baseNote": "Catalog prices are set in CAD.",
-    "preferenceHint": "Your currency preference is saved across pages."
-  },
-  "a11y": {
-    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
-    "selectLanguage": "Select language",
-    "selectCurrency": "Select currency",
-    "accountMenu": "アカウント"
-  },
-  "cart": {
-    "eyebrow": "カート",
-    "title": "カート",
-    "intro": "チェックアウト前に内容を確認してください。数量はこの端末に保存されます。",
-    "openCart": "カートを開く",
-    "addToCart": "カートに追加",
-    "added": "追加しました",
-    "empty": "カートは空です。",
-    "continueShopping": "買い物を続ける",
-    "unitPrice": "単価",
-    "lineTotal": "小計（行）",
-    "increase": "数量を増やす",
-    "decrease": "数量を減らす",
-    "remove": "削除",
-    "clear": "カートを空にする",
-    "subtotal": "小計",
-    "cadBasisNote": "カートの計算はすべてサーバー上の CAD カタログ価格を使います。",
-    "estimateNote": "表示希望通貨は {currency} です。CAD 金額は換算後の現地請求ではありません。",
-    "checkoutFinalNote": "お支払い金額は Stripe Checkout で確定します。",
-    "checkout": "チェックアウト",
-    "checkoutPending": "チェックアウトを開始中…",
-    "checkoutUnavailable": "この環境ではまだチェックアウトできません。カートは保存されています。",
-    "checkoutError": "チェックアウトを開始できませんでした。もう一度お試しください。",
-    "loading": "カートを読み込み中…"
+    "credit": "Made with soft paper & golden stars.",
+    "instagram": "Instagram"
   },
   "comingSoon": {
     "brand": "Chocobanana",
@@ -225,6 +387,17 @@
     "title": "やさしいものがやってくる",
     "opensSoon": "メールクラブはもうすぐオープン",
     "eyebrow": "やさしいものがもうすぐ"
+  },
+  "currency": {
+    "estimatedNote": "Any converted amount you see is an estimate for browsing only. The amount you are charged is confirmed at checkout.",
+    "baseNote": "Catalog prices are set in CAD.",
+    "preferenceHint": "Your currency preference is saved across pages."
+  },
+  "a11y": {
+    "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
+    "selectLanguage": "Select language",
+    "selectCurrency": "Select currency",
+    "accountMenu": "アカウント"
   },
   "auth": {
     "eyebrow": "your account",
@@ -241,17 +414,10 @@
     "verifyFailed": "This verification link is invalid or expired.",
     "verifyMissing": "Open the link from your verification email.",
     "notConfigured": "Accounts are not configured in this environment yet.",
+    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
     "email": "Email",
     "password": "Password",
     "name": "Name",
-    "signIn": "Sign in",
-    "signUp": "Create account",
-    "forgotPassword": "Forgot password?",
-    "createAccount": "Create an account",
-    "haveAccount": "Already have an account? Sign in",
-    "sendReset": "Send reset link",
-    "updatePassword": "Update password",
-    "needsDatabase": "Add DATABASE_URL (Postgres) and AUTH_SECRET to the Preview environment, run migrations, then redeploy.",
     "phone": "Phone",
     "addressLine1": "Address",
     "addressLine2": "Apartment, suite (optional)",
@@ -260,11 +426,23 @@
     "postalCode": "Postal code",
     "country": "Country",
     "countryPlaceholder": "Select a country",
+    "signIn": "Sign in",
+    "signUp": "Create account",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create an account",
+    "haveAccount": "Already have an account? Sign in",
+    "sendReset": "Send reset link",
+    "updatePassword": "Update password",
     "firstName": "名",
     "lastName": "姓",
     "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then.",
     "pleaseWait": "お待ちください…",
-    "localDevSignupNotice": "ローカル開発：メール未設定のため、新規アカウントは確認メールなしですぐにログインできます。"
+    "signUpWelcome": "Chocobananaへようこそ！アカウントの準備ができました。今すぐサインインできます。",
+    "signUpCheckEmail": "Chocobananaへようこそ！メールでアカウントを確認してからサインインしてください。",
+    "step1Title": "About you",
+    "step2Title": "Phone & address",
+    "nextStep": "Continue",
+    "backStep": "Back"
   },
   "account": {
     "eyebrow": "welcome back",
@@ -273,14 +451,48 @@
     "profile": "Profile",
     "name": "Name",
     "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
     "signOut": "Sign out",
     "orders": "Your orders",
     "noOrders": "No paid orders yet.",
     "browseShop": "Browse the shop",
     "ordersUnavailable": "Order history needs a configured database in this environment.",
     "openOwner": "Open owner panel",
-    "phone": "Phone",
-    "address": "Address",
-    "saveProfile": "プロフィールを保存"
+    "saveProfile": "プロフィールを保存",
+    "profileSection": "My profile",
+    "addressSection": "My addresses",
+    "ordersSection": "My orders",
+    "orderNumber": "注文番号",
+    "membershipSection": "My Mail Club membership",
+    "membershipNone": "Prepaid Mail Club packages appear in your orders after payment. There is no automatic renewal.",
+    "membershipExplore": "Explore Mail Club",
+    "membershipStatus": "Status",
+    "membershipNextBilling": "Next billing date",
+    "membershipManage": "Manage billing",
+    "membershipPortalUnavailable": "Billing portal opens after a paid subscription exists.",
+    "addressHint": "Updating your address changes future sendings and your profile. Past order address copies stay as they were at purchase.",
+    "saveAddress": "Save address",
+    "rewardSection": "Rewards",
+    "rewardProgress": "Next reward: {current}/{target} paid orders",
+    "rewardHint": "Every 5 paid orders earns one single-use code for 10% off the next purchase. The code works only on this account.",
+    "rewardAvailable": "Available",
+    "rewardNone": "No reward codes yet.",
+    "rewardFirstOrder": "初回注文",
+    "rewardReserved": "Held for an open checkout",
+    "rewardDiscount": "Reward"
+  },
+  "owner": {
+    "subscriptionsTitle": "Mail Club subscriptions",
+    "subscriptionsIntro": "Paid members only. Free customer accounts never appear here.",
+    "subscriptionsEmpty": "No paid subscriptions yet.",
+    "fulfillmentTitle": "Fulfillment",
+    "fulfillmentIntro": "Export address lists for paid, eligible sendings. No sample data.",
+    "fulfillmentEmpty": "No paid orders need fulfillment right now.",
+    "fulfillmentExport": "Export CSV",
+    "statMembers": "Registered customers",
+    "statSubscribers": "Active paid subscribers",
+    "statOrdersNew": "New paid orders (24h)",
+    "statFulfillment": "To prepare this month"
   }
 }

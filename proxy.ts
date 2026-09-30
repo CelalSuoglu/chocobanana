@@ -8,9 +8,8 @@ import {
 } from "./lib/i18n/config";
 import { resolvePreferredLocale } from "./lib/i18n/resolve-locale";
 import {
-  hasValidPreviewAccess,
   isComingSoonEnabled,
-  previewCookieName,
+  isComingSoonGateActiveForRequest,
 } from "./lib/site-access";
 import {
   hasValidOwnerPanelAccess,
@@ -33,11 +32,15 @@ function redirectToLocaleHome(request: NextRequest, locale: string) {
   return NextResponse.redirect(url);
 }
 
-function isGateActive(request: NextRequest): boolean {
-  if (!isComingSoonEnabled()) return false;
-  return !hasValidPreviewAccess(
-    request.cookies.get(previewCookieName)?.value,
+function applyComingSoonCacheHeaders(response: NextResponse) {
+  if (!isComingSoonEnabled()) return response;
+  response.headers.set(
+    "Cache-Control",
+    "private, no-store, max-age=0, must-revalidate",
   );
+  response.headers.set("CDN-Cache-Control", "no-store");
+  response.headers.set("Vercel-CDN-Cache-Control", "no-store");
+  return response;
 }
 
 /** Strip legacy secret query params without granting access. */
@@ -70,30 +73,34 @@ function isMembershipAuthPath(pathname: string): boolean {
   );
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
+  return applyComingSoonCacheHeaders(await routeRequest(request));
+}
+
+async function routeRequest(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Never accept secrets via URL — drop ?preview= / ?owner= without unlocking.
   const stripped = stripSecretQueryParams(request);
   if (stripped) return stripped;
 
-  const gateActive = isGateActive(request);
-  const ownerPanelUnlocked = hasValidOwnerPanelAccess(
-    request.cookies.get(ownerPanelCookieName)?.value,
-  );
-
-  // Stripe webhooks have no preview cookie — always allow signature-verified handler.
+  // Paths that must not wait on the public-opening database check.
   if (
     pathname === "/api/webhooks/stripe" ||
-    pathname.startsWith("/api/webhooks/stripe/")
+    pathname.startsWith("/api/webhooks/stripe/") ||
+    pathname === "/site-unlock" ||
+    pathname.startsWith("/site-unlock/") ||
+    pathname === "/google1b00f9e256712300.html" ||
+    /^\/google[a-f0-9]+\.html$/i.test(pathname) ||
+    pathname.startsWith("/.well-known/")
   ) {
     return NextResponse.next();
   }
 
-  // Form-based site unlock while the public countdown is showing.
-  if (pathname === "/site-unlock" || pathname.startsWith("/site-unlock/")) {
-    return NextResponse.next();
-  }
+  const gateActive = await isComingSoonGateActiveForRequest(request);
+  const ownerPanelUnlocked = hasValidOwnerPanelAccess(
+    request.cookies.get(ownerPanelCookieName)?.value,
+  );
 
   // Membership auth stays reachable while the shop is gated (countdown).
   if (gateActive && isMembershipAuthPath(pathname)) {
@@ -102,6 +109,11 @@ export function proxy(request: NextRequest) {
 
   if (gateActive && pathname.startsWith("/api/")) {
     return comingSoonApiResponse();
+  }
+
+  // Pages get a locale prefix. API routes stay at /api so checkout and auth are not redirected.
+  if (pathname.startsWith("/api/")) {
+    return NextResponse.next();
   }
 
   // Owner panel lives outside the locale site shell.
@@ -194,6 +206,6 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/:path*",
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|\\.well-known/|google[^/]+\\.html|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

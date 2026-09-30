@@ -1,20 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { AddToCartButton } from "@/components/add-to-cart-button";
-import { PageHero } from "@/components/page-hero";
-import { Star } from "@/components/star";
 import {
   getCartEligibleProducts,
   type CatalogProduct,
 } from "@/lib/catalog/products";
 import {
   baseCurrency,
-  currencyCookieName,
   formatCatalogPrice,
-  isCurrencyCode,
 } from "@/lib/currency/config";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
@@ -44,80 +39,80 @@ export default async function ShopPage({
   const { locale: raw } = await params;
   if (!isLocale(raw)) notFound();
   const dict = await getDictionary(raw);
-  const cookieStore = await cookies();
-  const rawCurrency = cookieStore.get(currencyCookieName)?.value;
-  const currency =
-    rawCurrency && isCurrencyCode(rawCurrency) ? rawCurrency : baseCurrency;
   const products = getCartEligibleProducts();
 
   return (
-    <main className="section-pad flex-1 py-12 md:py-16">
-      <PageHero
-        eyebrow={dict.shop.eyebrow}
-        title={dict.shop.title}
-        intro={dict.shop.intro}
-      />
-      <p className="mx-auto mt-4 max-w-xl text-center text-xs text-chocolate-soft/90">
-        {dict.shop.currencyNote}
-      </p>
-      {currency !== baseCurrency ? (
-        <p className="mx-auto mt-2 max-w-xl text-center text-xs text-pink-deep">
-          {dict.currency.estimatedNote}
+    <main className="section-pad mx-auto w-full max-w-6xl flex-1 py-8 md:py-12">
+      <nav aria-label="Breadcrumb" className="text-sm text-chocolate-soft">
+        <Link href={hrefFor(raw, "")} className="hover:text-pink-deep">
+          {dict.nav.home}
+        </Link>
+        <span aria-hidden="true" className="px-2 text-pink/70">
+          /
+        </span>
+        <span className="text-chocolate">{dict.shop.title}</span>
+      </nav>
+
+      <header className="mt-6 flex flex-col gap-3 border-b border-pink/30 pb-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h1 className="page-title">
+            {dict.shop.title}
+          </h1>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-chocolate-soft md:text-base">
+            {dict.shop.intro}
+          </p>
+        </div>
+        <p className="max-w-xs text-xs leading-relaxed text-chocolate-soft">
+          {dict.shop.currencyNote}
         </p>
-      ) : null}
-      <ul className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2">
+      </header>
+
+      <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => {
           const copy = productCopy(dict, product);
           const priced = formatCatalogPrice({
             amountCadCents: product.amountCadCents,
             locale: raw,
-            preferredCurrency: currency,
+            preferredCurrency: baseCurrency,
           });
 
           return (
             <li
               key={product.id}
-              className="rounded-3xl bg-paper/90 px-5 py-6 ring-1 ring-pink/35 sm:px-6 sm:py-7"
+              className="store-card flex flex-col overflow-hidden"
             >
               <Link
                 href={hrefFor(raw, `/shop/${product.id}`)}
-                className="block transition-opacity hover:opacity-90"
+                className="block"
               >
-                <div className="relative mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full ring-1 ring-pink/35">
+                <div className="relative aspect-square bg-cream-deep/50">
                   <Image
                     src={product.imageSrc}
                     alt={copy.name}
                     fill
                     className="object-cover"
-                    sizes="112px"
+                    sizes="(min-width: 1024px) 25vw, 50vw"
                   />
                 </div>
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="font-serif text-2xl font-medium text-chocolate">
+                <div className="px-4 pt-4">
+                  <h2 className="font-serif text-xl text-chocolate">
                     {copy.name}
                   </h2>
-                  <Star className="shrink-0 text-sm" />
+                  <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-chocolate-soft">
+                    {copy.note}
+                  </p>
+                  <p className="mt-3 font-serif text-lg text-chocolate">
+                    {priced.primary}
+                  </p>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-                  {copy.note}
-                </p>
-                <p className="mt-4 font-serif text-lg text-chocolate">
-                  {priced.primary}
-                </p>
               </Link>
-              {priced.isEstimateOnly ? (
-                <p className="mt-1 text-xs text-chocolate-soft/90">
-                  {dict.checkout.preferredCurrencyHint.replace(
-                    "{currency}",
-                    currency,
-                  )}
-                </p>
-              ) : null}
-              <AddToCartButton
-                productId={product.id}
-                label={dict.cart.addToCart}
-                addedLabel={dict.cart.added}
-              />
+              <div className="mt-auto px-4 pb-4">
+                <AddToCartButton
+                  productId={product.id}
+                  label={dict.cart.addToCart}
+                  addedLabel={dict.cart.added}
+                />
+              </div>
             </li>
           );
         })}

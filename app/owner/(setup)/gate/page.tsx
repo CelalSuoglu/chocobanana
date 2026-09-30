@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { OwnerGateForm } from "@/components/owner-gate-form";
-import { Star } from "@/components/star";
 import { getOwnerPanelSecret } from "@/lib/owner-access";
 
 export default function OwnerGatePage() {
@@ -9,15 +8,7 @@ export default function OwnerGatePage() {
 
   return (
     <div className="mx-auto flex max-w-lg flex-col items-center text-center">
-      <div className="relative">
-        <Star
-          className="absolute -start-5 -top-1 text-sm"
-          style={{ animationDelay: "0.3s" }}
-        />
-        <Star
-          className="absolute -end-4 top-8 text-xs"
-          style={{ animationDelay: "1.1s" }}
-        />
+      <div>
         <Image
           src="/logo.jpg"
           alt="Chocobanana"

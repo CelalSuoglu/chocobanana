@@ -32,6 +32,13 @@ export async function OwnerChrome({ children }: { children: ReactNode }) {
         ) : null}
         {children}
       </div>
+      <footer className="relative z-10 border-t border-[color:var(--owner-border)] px-4 py-8 text-center">
+        <p className="font-serif tracking-[0.14em] text-chocolate">Chocobanana</p>
+        <p className="mt-1 text-xs uppercase tracking-[0.16em] text-chocolate-soft">
+          Owner workspace
+        </p>
+        <p className="mt-3 font-script text-lg text-chocolate-soft">by Didem Keskin</p>
+      </footer>
     </>
   );
 }

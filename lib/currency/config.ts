@@ -17,7 +17,7 @@ export type CurrencyCode =
 /**
  * Display / presentment currencies we are willing to offer in the UI.
  * Only Stripe-supported codes are listed — never invent unsupported options.
- * Final charge currency is decided at Stripe Checkout (Adaptive Pricing or CAD).
+ * Shop prices and Stripe charges are CAD. These codes are not offered at checkout.
  */
 export const displayCurrencies: readonly CurrencyCode[] = [
   "CAD",

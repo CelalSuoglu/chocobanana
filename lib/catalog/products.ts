@@ -1,4 +1,15 @@
 import { baseCurrency } from "@/lib/currency/config";
+import {
+  SNAIL_MAIL_REGIONS,
+  SNAIL_MAIL_TERMS,
+  snailMailPriceCadCents,
+  snailMailProductId,
+  snailMailRegionLabel,
+  snailMailTermLabel,
+  type SnailMailRegion,
+  type SnailMailTerm,
+} from "@/lib/catalog/snail-mail";
+import { stickerSheetListings } from "@/lib/catalog/sticker-sheets";
 
 /**
  * Payment kind differences (do not assume one model for the whole shop):
@@ -39,15 +50,26 @@ export type CatalogProduct = {
   interval?: "month";
   /** Offered in checkout when payments mode allows */
   purchasable: boolean;
-  /** Allowed in the shopping cart (one-time items only for multi-item Checkout) */
+  /** Allowed in the shopping cart */
   cartEligible: boolean;
+  /**
+   * sticker — one-time sheet, not a club membership
+   * snail_mail — one prepaid club package
+   * stationery — other one-time shop goods
+   */
+  family: "sticker" | "snail_mail" | "stationery";
+  /** Prepaid Snail Mail Club package. Price comes only from the CAD table. */
+  snailMail?: {
+    termMonths: SnailMailTerm;
+    region: SnailMailRegion;
+  };
 };
 
 /**
  * Server-side catalog. Amounts are CAD cents only.
  * Replace with CMS / admin DB later; keep the same id + amount contract.
  */
-export const catalogProducts: readonly CatalogProduct[] = [
+const stationeryProducts: CatalogProduct[] = [
   {
     id: "letter-sets",
     shopKey: "letterSets",
@@ -59,18 +81,7 @@ export const catalogProducts: readonly CatalogProduct[] = [
     imageSrc: "/logo.jpg",
     purchasable: true,
     cartEligible: true,
-  },
-  {
-    id: "sticker-sheets",
-    shopKey: "stickerSheets",
-    nameEn: "Sticker Sheets",
-    descriptionEn: "Stars, hearts, and envelope doodles.",
-    kind: "one_time",
-    amountCadCents: 1200,
-    currency: baseCurrency,
-    imageSrc: "/logo.jpg",
-    purchasable: true,
-    cartEligible: true,
+    family: "stationery",
   },
   {
     id: "sealing-touches",
@@ -83,6 +94,7 @@ export const catalogProducts: readonly CatalogProduct[] = [
     imageSrc: "/logo.jpg",
     purchasable: true,
     cartEligible: true,
+    family: "stationery",
   },
   {
     id: "keepsake-notes",
@@ -95,20 +107,44 @@ export const catalogProducts: readonly CatalogProduct[] = [
     imageSrc: "/logo.jpg",
     purchasable: true,
     cartEligible: true,
+    family: "stationery",
   },
-  {
-    id: "mail-club-monthly",
-    nameEn: "Mail Club Monthly",
-    descriptionEn: "Monthly mail club membership (subscription example).",
-    kind: "subscription",
-    amountCadCents: 2800,
+];
+
+const stickerProducts: CatalogProduct[] = stickerSheetListings.map((sheet) => ({
+  id: sheet.id,
+  nameEn: sheet.nameEn,
+  descriptionEn: sheet.descriptionEn,
+  kind: "one_time" as const,
+  amountCadCents: sheet.amountCadCents,
+  currency: baseCurrency,
+  imageSrc: sheet.imageSrc,
+  purchasable: true,
+  cartEligible: true,
+  family: "sticker" as const,
+}));
+
+const snailMailProducts: CatalogProduct[] = SNAIL_MAIL_TERMS.flatMap((term) =>
+  SNAIL_MAIL_REGIONS.map((region) => ({
+    id: snailMailProductId(term, region),
+    nameEn: `Snail Mail Club — ${snailMailTermLabel(term)} — ${snailMailRegionLabel(region)}`,
+    descriptionEn: `${term} envelope${term === 1 ? "" : "s"}, one each month. Standard postage is included. Paid once and does not renew.`,
+    kind: "one_time" as const,
+    amountCadCents: snailMailPriceCadCents(region, term),
     currency: baseCurrency,
-    interval: "month",
     imageSrc: "/logo.jpg",
     purchasable: true,
-    cartEligible: false,
-  },
-] as const;
+    cartEligible: true,
+    family: "snail_mail" as const,
+    snailMail: { termMonths: term, region },
+  })),
+);
+
+export const catalogProducts: readonly CatalogProduct[] = [
+  ...stationeryProducts,
+  ...stickerProducts,
+  ...snailMailProducts,
+];
 
 export function getCatalogProduct(id: string): CatalogProduct | undefined {
   return catalogProducts.find((product) => product.id === id);
@@ -120,6 +156,26 @@ export function getPurchasableProducts(): CatalogProduct[] {
 
 export function getCartEligibleProducts(): CatalogProduct[] {
   return catalogProducts.filter(
-    (product) => product.purchasable && product.cartEligible,
+    (product) =>
+      product.purchasable &&
+      product.cartEligible &&
+      product.family === "stationery",
+  );
+}
+
+export function getStickerSheetProducts(): CatalogProduct[] {
+  return catalogProducts.filter(
+    (product) => product.purchasable && product.family === "sticker",
+  );
+}
+
+/** 10% reward codes apply to one-time sticker sheets, club packages, and shop goods. */
+export function isRewardDiscountProduct(product: CatalogProduct): boolean {
+  return (
+    product.purchasable &&
+    product.kind === "one_time" &&
+    (product.family === "sticker" ||
+      product.family === "snail_mail" ||
+      product.family === "stationery")
   );
 }

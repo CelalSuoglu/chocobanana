@@ -2,6 +2,11 @@ import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor, labelForNav, navItems } from "@/lib/nav";
+import {
+  SITE_EMAIL,
+  SITE_INSTAGRAM_HANDLE,
+  SITE_INSTAGRAM_URL,
+} from "@/lib/site-contact";
 
 type SiteFooterProps = {
   locale: Locale;
@@ -35,6 +40,22 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
             </Link>
           ))}
         </nav>
+        <div className="mt-2 flex flex-col items-center gap-2 text-sm text-chocolate-soft">
+          <a
+            href={`mailto:${SITE_EMAIL}`}
+            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
+          >
+            {SITE_EMAIL}
+          </a>
+          <a
+            href={SITE_INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
+          >
+            {dict.footer.instagram}: {SITE_INSTAGRAM_HANDLE}
+          </a>
+        </div>
         <p className="mt-2 text-xs tracking-wide text-chocolate-soft/80">
           {dict.footer.credit}
         </p>

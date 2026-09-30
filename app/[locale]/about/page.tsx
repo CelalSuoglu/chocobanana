@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PageHero } from "@/components/page-hero";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 
@@ -23,16 +23,20 @@ export default async function AboutPage({
   const dict = await getDictionary(raw);
 
   return (
-    <main className="section-pad flex-1 py-12 md:py-16">
-      <PageHero
-        eyebrow={dict.about.eyebrow}
-        title={dict.about.title}
-        intro={dict.about.intro}
+    <main className="section-pad mx-auto w-full max-w-2xl flex-1 py-8 md:py-12">
+      <Image
+        src="/logo.jpg"
+        alt={dict.a11y.logoAlt}
+        width={96}
+        height={96}
+        className="h-20 w-20 rounded-full object-cover ring-1 ring-pink/40"
       />
-      <div className="mx-auto mt-10 max-w-2xl space-y-4 text-center text-base leading-relaxed text-chocolate-soft md:text-lg">
+      <h1 className="page-title mt-5">{dict.about.title}</h1>
+      <p className="page-lead">{dict.about.intro}</p>
+      <div className="mt-8 space-y-4 text-base leading-relaxed text-chocolate-soft">
         <p>{dict.about.p1}</p>
         <p>{dict.about.p2}</p>
-        <p className="pt-2 text-sm text-chocolate-soft/90">{dict.about.logoNote}</p>
+        <p className="text-sm">{dict.about.logoNote}</p>
       </div>
     </main>
   );
