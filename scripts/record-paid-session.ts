@@ -6,6 +6,7 @@
  */
 import { PrismaClient } from "@prisma/client";
 import Stripe from "stripe";
+import { makeOrderNumber } from "../lib/orders/number";
 
 async function main() {
   const sessionId = process.argv[2]?.trim();
@@ -78,6 +79,7 @@ async function main() {
 
   const order = await prisma.order.create({
     data: {
+      publicNumber: makeOrderNumber(),
       stripeCheckoutSessionId: session.id,
       stripePaymentIntentId:
         typeof session.payment_intent === "string"

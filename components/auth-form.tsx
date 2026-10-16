@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import type { AuthActionState } from "@/lib/auth/actions";
 
 type AuthFormProps = {
@@ -12,6 +13,7 @@ type AuthFormProps = {
   pendingLabel?: string;
   children: React.ReactNode;
   hiddenFields?: Record<string, string>;
+  successHref?: string;
 };
 
 const initial: AuthActionState = { ok: false };
@@ -22,10 +24,20 @@ export function AuthForm({
   pendingLabel = "Please wait…",
   children,
   hiddenFields,
+  successHref,
 }: AuthFormProps) {
+  const router = useRouter();
   const [state, formAction, pending] = useActionState(action, initial);
   const showSuccess = state.ok && Boolean(state.message);
   const showError = !state.ok && Boolean(state.error);
+
+  useEffect(() => {
+    if (!showSuccess || !successHref) return;
+    const timer = window.setTimeout(() => {
+      router.push(successHref);
+    }, 1400);
+    return () => window.clearTimeout(timer);
+  }, [router, showSuccess, successHref]);
 
   return (
     <form action={formAction} className="mx-auto flex w-full flex-col gap-4">

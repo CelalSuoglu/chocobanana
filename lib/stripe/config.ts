@@ -27,6 +27,66 @@ function isVercelProduction(): boolean {
   return process.env.VERCEL_ENV === "production";
 }
 
+function serverKeyMode(value: string | undefined): StripeKeyMode {
+  const key = value?.trim() ?? "";
+  if (!key) return "missing";
+  if (key.startsWith("sk_test_") || key.startsWith("rk_test_")) return "test";
+  if (key.startsWith("sk_live_") || key.startsWith("rk_live_")) return "live";
+  return "unknown";
+}
+
+/**
+ * Production may store the live key under SECRET_KEY. The shared
+ * STRIPE_SECRET_KEY row stays the test key for Preview and Development.
+ * Publishable keys are never used as the server secret.
+ */
+export function getStripeSecretKey(): string {
+  const named = process.env.STRIPE_SECRET_KEY?.trim() ?? "";
+  const alternate = process.env.SECRET_KEY?.trim() ?? "";
+  if (isVercelProduction() && serverKeyMode(alternate) === "live") {
+    return alternate;
+  }
+  return named;
+}
+
+function getWebhookSecret(): string {
+  const names = [
+    "STRIPE_WEBHOOK_SECRET",
+    "WEBHOOK_SECRET",
+    "STRIPE_SIGNING_SECRET",
+    "SIGNING_SECRET",
+  ];
+  for (const name of names) {
+    const value = process.env[name]?.trim() ?? "";
+    if (value.startsWith("whsec_")) return value;
+  }
+  return "";
+}
+
+/** Safe status word. Never includes key material. */
+export function paymentsBlockReason(): string | null {
+  if (!process.env.DATABASE_URL?.trim()) return "database_missing";
+  const secretMode = serverKeyMode(getStripeSecretKey());
+  const publishableMode = stripeKeyMode(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  );
+  const liveFlag = process.env.PAYMENTS_LIVE_ENABLED === "true";
+  const webhookSet = Boolean(getWebhookSecret());
+
+  if (!isVercelProduction()) {
+    if (secretMode === "test") return null;
+    return "preview_requires_test_key";
+  }
+  if (secretMode !== "live") {
+    const saved = serverKeyMode(process.env.SECRET_KEY);
+    return `secret_${secretMode}_saved_${saved}`;
+  }
+  if (publishableMode !== "live") return `publishable_${publishableMode}`;
+  if (!liveFlag) return "flag_off";
+  if (!webhookSet) return "webhook_missing";
+  return null;
+}
+
 /**
  * Production accepts a live key only when PAYMENTS_LIVE_ENABLED=true,
  * the publishable key is also live, and the webhook secret is set.
@@ -35,12 +95,12 @@ function isVercelProduction(): boolean {
  * Preview and local development accept test keys only.
  */
 export function getPaymentsMode(): PaymentsMode {
-  const secretMode = stripeKeyMode(process.env.STRIPE_SECRET_KEY);
+  const secretMode = serverKeyMode(getStripeSecretKey());
   const publishableMode = stripeKeyMode(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
   );
   const liveFlag = process.env.PAYMENTS_LIVE_ENABLED === "true";
-  const webhookSet = Boolean(process.env.STRIPE_WEBHOOK_SECRET?.trim());
+  const webhookSet = Boolean(getWebhookSecret());
 
   if (secretMode === "missing" || secretMode === "unknown") return "disabled";
   if (publishableMode !== "missing" && publishableMode !== secretMode) {

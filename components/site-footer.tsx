@@ -1,7 +1,6 @@
-import Link from "next/link";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
-import { hrefFor, labelForNav, navItems } from "@/lib/nav";
+import { hrefFor } from "@/lib/nav";
 import {
   SITE_EMAIL,
   SITE_INSTAGRAM_HANDLE,
@@ -14,54 +13,35 @@ type SiteFooterProps = {
 };
 
 export function SiteFooter({ locale, dict }: SiteFooterProps) {
-  const links = navItems.map((item) => ({
-    href: hrefFor(locale, item.path),
-    label: labelForNav(dict, item.id),
-  }));
+  const links = [
+    { href: hrefFor(locale, "/contact"), label: dict.nav.contact },
+    { href: hrefFor(locale, "/faq"), label: dict.footer.faq },
+    { href: hrefFor(locale, "/shipping"), label: dict.footer.shipping },
+    { href: hrefFor(locale, "/privacy"), label: dict.footer.privacy },
+  ];
 
   return (
-    <footer className="border-t border-pink/30 bg-cream-deep/50">
-      <div className="section-pad mx-auto flex max-w-4xl flex-col items-center gap-4 py-10 text-center md:py-12">
-        <p className="font-serif text-xl tracking-[0.12em] text-chocolate">
-          Chocobanana
-        </p>
-        <p className="font-script text-xl text-pink-deep">{dict.footer.tagline}</p>
-        <nav
-          aria-label="Footer"
-          className="flex flex-wrap justify-center gap-x-5 gap-y-2 font-serif text-sm tracking-[0.12em] text-chocolate-soft"
-        >
+    <footer className="border-t border-line bg-paper">
+      <div className="section-pad mx-auto flex max-w-3xl flex-col items-center gap-4 py-10 text-center text-sm text-chocolate-soft">
+        <nav aria-label={dict.footer.linksLabel} className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-pink-deep"
-            >
+            <a key={link.href} href={link.href} className="min-h-11 inline-flex items-center hover:text-chocolate">
               {link.label}
-            </Link>
+            </a>
           ))}
         </nav>
-        <div className="mt-2 flex flex-col items-center gap-2 text-sm text-chocolate-soft">
-          <a
-            href={`mailto:${SITE_EMAIL}`}
-            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
-          >
-            {SITE_EMAIL}
-          </a>
-          <a
-            href={SITE_INSTAGRAM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-serif tracking-wide transition-colors hover:text-pink-deep"
-          >
-            {dict.footer.instagram}: {SITE_INSTAGRAM_HANDLE}
-          </a>
-        </div>
-        <p className="mt-2 text-xs tracking-wide text-chocolate-soft/80">
-          {dict.footer.credit}
-        </p>
-        <p className="mt-1 font-script text-sm text-chocolate-soft/70 md:text-[0.95rem]">
-          by Didem Keskin
-        </p>
+        <a
+          href={SITE_INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-chocolate"
+        >
+          {dict.footer.instagram}: {SITE_INSTAGRAM_HANDLE}
+        </a>
+        <a href={`mailto:${SITE_EMAIL}`} className="hover:text-chocolate">
+          {SITE_EMAIL}
+        </a>
+        <p className="text-chocolate">by Didem Keskin</p>
       </div>
     </footer>
   );

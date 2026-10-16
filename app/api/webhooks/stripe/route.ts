@@ -15,6 +15,11 @@ import {
   releaseRewardIfCheckoutClosed,
   settleRewardAfterPaidCheckout,
 } from "@/lib/rewards/settle";
+import {
+  consumeWelcomeDiscount,
+  releaseWelcomeReservation,
+} from "@/lib/welcome/discount";
+import { sendGuestOrderConfirmation } from "@/lib/welcome/email";
 
 export const runtime = "nodejs";
 
@@ -84,11 +89,7 @@ async function recordPaidCheckoutSession(
 ): Promise<{ ignored?: string; orderId?: string }> {
   const stripe = getStripe();
   const full = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: [
-      "line_items",
-      "total_details.breakdown.discounts.discount.promotion_code",
-      "subscription",
-    ],
+    expand: ["line_items", "total_details.breakdown", "subscription"],
   });
 
   if (full.payment_status !== "paid") {
@@ -102,14 +103,14 @@ async function recordPaidCheckoutSession(
 
   const stripeCustomerId = customerIdFrom(full.customer);
   const metadata = (full.metadata ?? {}) as Record<string, string>;
-  const userId = await resolveUserId({
-    metadataUserId: metadata.user_id || full.client_reference_id,
-    email:
-      full.customer_details?.email ||
-      full.customer_email ||
-      metadata.customer_email,
-    stripeCustomerId,
-  });
+  const guest = metadata.guest === "1";
+  const userId = guest
+    ? null
+    : await resolveUserId({
+        metadataUserId: metadata.user_id || full.client_reference_id,
+        email: null,
+        stripeCustomerId: null,
+      });
 
   if (userId && stripeCustomerId) {
     await attachStripeCustomerToUser(userId, stripeCustomerId);
@@ -121,6 +122,18 @@ async function recordPaidCheckoutSession(
       orderId: orderResult.orderId,
       userId,
     });
+  }
+
+  if (
+    orderResult.created &&
+    userId &&
+    metadata.welcome_discount === "1"
+  ) {
+    await consumeWelcomeDiscount(requirePrisma(), userId, full.id);
+  }
+
+  if (orderResult.created && orderResult.orderId) {
+    await sendGuestOrderConfirmation(orderResult.orderId);
   }
 
   if (full.mode === "subscription" && userId && stripeCustomerId) {
@@ -205,6 +218,7 @@ export async function POST(request: Request) {
 
       if (session.payment_status !== "paid") {
         await releaseRewardIfCheckoutClosed({ checkoutSessionId: session.id });
+        await releaseWelcomeReservation(requirePrisma(), session.id);
         await markStripeEventProcessed(event.id);
         return NextResponse.json({ received: true, ignored: "not_paid" });
       }
@@ -231,6 +245,7 @@ export async function POST(request: Request) {
     ) {
       const session = event.data.object as Stripe.Checkout.Session;
       await releaseRewardIfCheckoutClosed({ checkoutSessionId: session.id });
+      await releaseWelcomeReservation(requirePrisma(), session.id);
       await markStripeEventProcessed(event.id);
       return NextResponse.json({ received: true, ignored: "not_paid" });
     }

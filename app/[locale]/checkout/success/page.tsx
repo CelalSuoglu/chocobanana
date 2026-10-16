@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CheckoutSteps } from "@/components/checkout-steps";
 import { ClearCartOnSuccess } from "@/components/clear-cart-on-success";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
@@ -62,6 +63,7 @@ export default async function CheckoutSuccessPage({
 
   let dbOrder: {
     id: string;
+    publicNumber: string;
     customerEmail: string;
     shippingAmountCadCents: number | null;
     taxAmountCadCents: number | null;
@@ -70,6 +72,7 @@ export default async function CheckoutSuccessPage({
     const prisma = requirePrisma();
     const select = {
       id: true,
+      publicNumber: true,
       customerEmail: true,
       shippingAmountCadCents: true,
       taxAmountCadCents: true,
@@ -127,6 +130,13 @@ export default async function CheckoutSuccessPage({
 
   return (
     <main className="section-pad mx-auto flex min-h-[70vh] max-w-xl flex-col justify-center py-16 text-center">
+      <CheckoutSteps
+        current={paidOnStripe ? "confirmation" : "payment"}
+        label={dict.checkout.stepsLabel}
+        details={dict.checkout.stepDetails}
+        payment={dict.checkout.stepPayment}
+        confirmation={dict.checkout.stepConfirmation}
+      />
       <ClearCartOnSuccess active={paidOnStripe && Boolean(dbOrder)} />
       <p className="font-script text-2xl text-pink-deep">
         {paidOnStripe
@@ -142,7 +152,7 @@ export default async function CheckoutSuccessPage({
           <span className="block font-sans text-xs tracking-[0.14em] uppercase text-chocolate-soft">
             {dict.checkout.orderNumber}
           </span>
-          {displayOrderNumber(dbOrder.id)}
+          {displayOrderNumber(dbOrder.publicNumber)}
         </p>
       ) : paidOnStripe ? (
         <p className="mt-6 text-sm text-chocolate-soft">
@@ -223,6 +233,15 @@ export default async function CheckoutSuccessPage({
           <p className="mt-2 text-xs text-pink-deep">{dict.checkout.testModeNote}</p>
         ) : null}
       </div>
+
+      {paidOnStripe && session.metadata?.guest === "1" ? (
+        <div className="mt-8">
+          <p className="text-sm text-chocolate-soft">{dict.checkout.createAccountAfterNote}</p>
+          <Link href={`/${rawLocale}/register`} className="btn-secondary btn-inline mx-auto mt-4">
+            {dict.checkout.createAccountAfter}
+          </Link>
+        </div>
+      ) : null}
 
       <Link
         href={`/${rawLocale}/shop`}

@@ -6,9 +6,9 @@ import { CHECKOUT_SHIPPING_COUNTRIES } from "@/lib/stripe/shipping";
  * One envelope is sent each month of the package.
  */
 export const SNAIL_MAIL_PRICE_CAD = {
-  canada: { 1: 12, 3: 36, 6: 72, 12: 144 },
-  usa: { 1: 13, 3: 39, 6: 78, 12: 156 },
-  international: { 1: 16, 3: 48, 6: 96, 12: 192 },
+  canada: { 1: 2, 3: 36, 6: 72, 12: 144 },
+  usa: { 1: 2, 3: 39, 6: 78, 12: 156 },
+  international: { 1: 2, 3: 48, 6: 96, 12: 192 },
 } as const;
 
 export const SNAIL_MAIL_TERMS = [1, 3, 6, 12] as const;

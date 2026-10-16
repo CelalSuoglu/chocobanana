@@ -3,8 +3,9 @@
 import { revalidatePath } from "next/cache";
 import type { FulfillmentStatus } from "@prisma/client";
 import { requireOwner } from "@/lib/auth/session";
-import { isDatabaseConfigured } from "@/lib/db";
+import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { updateFulfillmentStatus } from "@/lib/orders/repository";
+import { notifyOrderStatusChanged } from "@/lib/push/send";
 
 const allowed: FulfillmentStatus[] = [
   "NEW",
@@ -37,8 +38,17 @@ export async function setOrderFulfillmentStatus(
     return { ok: false, error: "Invalid order or status." };
   }
 
+  const previous = await requirePrisma().order.findUnique({
+    where: { id: orderId },
+    select: { fulfillmentStatus: true },
+  });
+
   // Payment status is never writable here — only fulfillment.
   await updateFulfillmentStatus(orderId, status);
+
+  // App notification for the customer (only if they turned it on). Best-effort:
+  // a push failure never blocks the panel update.
+  await notifyOrderStatusChanged(orderId, previous?.fulfillmentStatus ?? null);
   revalidatePath("/owner");
   revalidatePath(`/owner/orders/${orderId}`);
 

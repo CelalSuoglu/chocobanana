@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #f6e29a;
-  --cream-deep: #efd36a;
-  --chocolate: #3c2a22;
-  --chocolate-soft: #5c4336;
-  --pink: #c4a484;
-  --pink-soft: #e6d0bc;
-  --pink-deep: #6f4e37;
-  --gold: #d4a84b;
-  --gold-soft: #e8c978;
-  --paper: #fff6d4;
+  --cream: #fff4cc;
+  --cream-deep: #f3e7b0;
+  --chocolate: #4b281b;
+  --chocolate-soft: #6b4636;
+  --pink: #e7b7c4;
+  --pink-soft: #f8e8ee;
+  --pink-deep: #c4899a;
+  --gold: #c4a15a;
+  --gold-soft: #ead9ae;
+  --paper: #fffbee;
+  --line: #e5d3a8;
   --background: var(--cream);
   --foreground: var(--chocolate);
 }
@@ -28,6 +29,7 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-paper: var(--paper);
+  --color-line: var(--line);
   --font-sans: var(--font-body);
   --font-serif: var(--font-serif);
   --font-script: var(--font-script);
@@ -40,9 +42,6 @@ html {
 
 body {
   background-color: var(--cream);
-  background-image:
-    radial-gradient(ellipse at 8% 0%, rgba(111, 78, 55, 0.12), transparent 36%),
-    radial-gradient(ellipse at 100% 8%, rgba(212, 168, 75, 0.08), transparent 32%);
   color: var(--chocolate);
   font-family: var(--font-body), Georgia, serif;
 }
@@ -169,16 +168,18 @@ video {
 }
 
 .store-card {
-  border-radius: 1.5rem;
-  background: color-mix(in srgb, var(--paper) 96%, white);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pink) 55%, transparent);
+  border-radius: 1rem;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
 }
 
 .kicker {
-  font-family: var(--font-script), cursive;
-  font-size: 1.75rem;
-  line-height: 1;
-  color: var(--pink-deep);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--gold);
 }
 
 .page-title {
@@ -202,7 +203,7 @@ video {
   min-height: 3rem;
   width: 100%;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--pink) 80%, var(--chocolate));
+  border: 1px solid var(--line);
   background: var(--paper);
   padding: 0.7rem 1.1rem;
   color: var(--chocolate);
@@ -214,9 +215,18 @@ textarea.field {
   min-height: 8rem;
 }
 
-.field:focus {
-  border-color: var(--pink-deep);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pink) 40%, transparent);
+.field:focus,
+.field:focus-visible {
+  border-color: var(--chocolate);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--chocolate) 25%, transparent);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--chocolate);
+  outline-offset: 3px;
 }
 
 .notice {
@@ -227,9 +237,9 @@ textarea.field {
 }
 
 .notice-error {
-  border: 1px solid color-mix(in srgb, var(--pink-deep) 55%, transparent);
+  border: 1px solid color-mix(in srgb, var(--chocolate) 35%, transparent);
   background: color-mix(in srgb, var(--pink-soft) 70%, white);
-  color: var(--pink-deep);
+  color: var(--chocolate);
 }
 
 .notice-ok {
@@ -248,32 +258,31 @@ textarea.field {
   border-radius: 999px;
   padding: 0.7rem 1.25rem;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: 0.875rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-primary {
-  border: 1px solid var(--pink-deep);
-  background: var(--pink-deep);
+  border: 1px solid var(--chocolate);
+  background: var(--chocolate);
   color: var(--paper);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--chocolate);
-  border-color: var(--chocolate);
+  background: #3a1e14;
+  border-color: #3a1e14;
 }
 
 .btn-secondary {
-  border: 1px solid color-mix(in srgb, var(--chocolate) 55%, transparent);
-  background: transparent;
+  border: 1px solid var(--line);
+  background: var(--paper);
   color: var(--chocolate);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  border-color: var(--pink-deep);
-  background: color-mix(in srgb, var(--pink-soft) 70%, transparent);
+  border-color: var(--chocolate);
+  background: var(--cream);
 }
 
 .btn-primary:disabled,
@@ -307,10 +316,7 @@ textarea.field {
 
 /* Unlocked home hero — separate from coming-soon countdown stage */
 .home-hero {
-  background-image:
-    radial-gradient(ellipse at 20% 15%, rgba(111, 78, 55, 0.14), transparent 48%),
-    radial-gradient(ellipse at 82% 22%, rgba(212, 168, 75, 0.14), transparent 44%),
-    linear-gradient(180deg, rgba(246, 226, 154, 0.35) 0%, transparent 42%, rgba(239, 211, 106, 0.45) 100%);
+  background: transparent;
 }
 
 .home-hero-glow {
@@ -329,24 +335,11 @@ textarea.field {
 
 .coming-soon-stage {
   min-height: 100dvh;
-  background-image:
-    radial-gradient(ellipse at 18% 12%, rgba(111, 78, 55, 0.16), transparent 46%),
-    radial-gradient(ellipse at 86% 18%, rgba(212, 168, 75, 0.12), transparent 42%),
-    radial-gradient(ellipse at 50% 100%, rgba(246, 226, 154, 0.95), transparent 58%);
+  background: var(--cream);
 }
 
 .coming-soon-glow {
-  pointer-events: none;
-  position: absolute;
-  inset: 18% 10% auto;
-  height: 42%;
-  border-radius: 999px;
-  background: radial-gradient(
-    circle,
-    rgba(232, 201, 120, 0.16),
-    transparent 70%
-  );
-  filter: blur(8px);
+  display: none;
 }
 
 .coming-soon-sparkles {
@@ -395,8 +388,8 @@ textarea.field {
   line-height: 0.95;
   letter-spacing: 0.04em;
   font-variant-numeric: tabular-nums;
-  color: var(--pink-deep);
-  -webkit-text-fill-color: var(--pink-deep);
+  color: var(--chocolate);
+  -webkit-text-fill-color: var(--chocolate);
   background: none;
   filter: none;
   animation: none;
@@ -406,8 +399,8 @@ textarea.field {
   flex: 0 0 auto;
   padding-top: 0.08em;
   font-size: clamp(1.5rem, 7vw, 2.8rem);
-  color: var(--pink);
-  -webkit-text-fill-color: var(--pink);
+  color: var(--gold);
+  -webkit-text-fill-color: var(--gold);
 }
 
 .coming-soon-timer-label {
@@ -445,5 +438,200 @@ textarea.field {
 
   .coming-soon-sparkle {
     opacity: 0.45;
+  }
+}
+
+
+/* ------------------------------------------------------------------------
+ * Native app (iOS/Android shell). Every rule is scoped to html[data-app],
+ * which is only set for the Chocobanana app, so the website is unaffected.
+ * --------------------------------------------------------------------- */
+html[data-app] {
+  scroll-behavior: auto;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+}
+
+html[data-app] body {
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+html[data-app]:not([data-tabs]) body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Keeps scrolled content from showing through the status bar / notch. */
+html[data-app] body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: env(safe-area-inset-top);
+  background: var(--paper);
+  z-index: 70;
+  pointer-events: none;
+}
+
+html[data-app] header.sticky {
+  top: env(safe-area-inset-top);
+  /* Paints the seam between the status-bar area and the header in the header colour. */
+  box-shadow: 0 -24px 0 0 var(--paper);
+}
+
+html[data-app] .app-hide {
+  display: none;
+}
+
+/* iOS zooms into inputs smaller than 16px. */
+html[data-app] input,
+html[data-app] select,
+html[data-app] textarea {
+  font-size: max(16px, 1em);
+}
+
+html[data-app] button,
+html[data-app] a {
+  touch-action: manipulation;
+}
+
+.app-tabbar-spacer {
+  height: calc(4rem + env(safe-area-inset-bottom));
+  flex-shrink: 0;
+}
+
+.app-tabbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 45;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  transition: transform 0.2s ease;
+}
+
+.app-tab {
+  display: flex;
+  min-height: 4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  color: var(--chocolate-soft);
+  font-family: var(--font-serif), var(--font-body), Georgia, serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  transition: color 0.15s ease, transform 0.1s ease;
+}
+
+.app-tab.is-active {
+  color: var(--pink-deep);
+}
+
+.app-tab:active {
+  transform: scale(0.94);
+}
+
+.app-tab-label {
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0 2px;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html.keyboard-open .app-tabbar {
+  transform: translateY(110%);
+}
+
+html.keyboard-open .app-tabbar-spacer {
+  height: 0;
+}
+
+html[data-tabs] .app-lift-bottom {
+  bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+
+html[data-tabs].keyboard-open .app-lift-bottom {
+  bottom: 0;
+}
+
+html[data-tabs] .app-lift-toast {
+  bottom: calc(5rem + env(safe-area-inset-bottom));
+}
+
+html[data-app] .app-safe-sheet {
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  z-index: 60;
+}
+
+.app-progress {
+  position: fixed;
+  top: env(safe-area-inset-top);
+  left: 0;
+  z-index: 80;
+  height: 2px;
+  width: 0;
+  opacity: 0;
+  background: var(--pink-deep);
+  pointer-events: none;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.app-progress.is-active {
+  width: 75%;
+  opacity: 1;
+  transition: width 8s cubic-bezier(0.1, 0.7, 0.2, 1), opacity 0.1s ease;
+}
+
+.app-net-banner {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  z-index: 65;
+  border-radius: 999px;
+  background: var(--chocolate);
+  color: var(--cream);
+  padding: 0.65rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.35;
+  box-shadow: 0 6px 20px rgb(75 40 27 / 0.18);
+}
+
+.app-net-banner.is-online {
+  background: var(--gold-soft);
+  color: var(--chocolate);
+}
+
+html[data-app] .app-page {
+  animation: app-page-in 0.22s ease-out both;
+}
+
+/* Opacity only: a transform here would break position: fixed bars inside pages. */
+@keyframes app-page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-app] .app-page {
+    animation: none;
+  }
+  .app-progress,
+  .app-progress.is-active,
+  .app-tabbar {
+    transition: none;
   }
 }

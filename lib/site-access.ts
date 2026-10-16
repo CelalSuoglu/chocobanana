@@ -13,6 +13,7 @@
  */
 
 import { unlockCookieToken } from "@/lib/security/secrets";
+import { isNativeAppUserAgent } from "@/lib/native/user-agent";
 import { isPublicSiteOpen } from "@/lib/site/public-opening";
 
 export const previewCookieName = "cb_site_preview";
@@ -63,6 +64,8 @@ export async function isComingSoonGateActiveForRequest(
   request: Request,
 ): Promise<boolean> {
   if (!isComingSoonEnabled()) return false;
+  // The iOS/Android app always shows the full shop (owner decision; also what App Review sees).
+  if (isNativeAppUserAgent(request.headers.get("user-agent"))) return false;
   if (hasValidPreviewAccess(readPreviewCookie(request.headers.get("cookie")))) {
     return false;
   }

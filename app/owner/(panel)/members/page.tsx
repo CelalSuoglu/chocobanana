@@ -64,7 +64,7 @@ export default async function OwnerMembersPage({
           automatically.
         </p>
       ) : (
-        <ul className="mt-8 divide-y divide-pink/25 border-t border-pink/30">
+        <ul className="mt-8 divide-y divide-pink/25 border-t border-line">
           {members.map((member) => {
             const fullName = displayName(
               member.firstName,

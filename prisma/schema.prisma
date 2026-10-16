@@ -68,6 +68,10 @@ model User {
   preferredLocale   String?   @default("en")
   image             String?
   stripeCustomerId  String?   @unique
+  marketingOptIn    Boolean   @default(false)
+  welcomeEmailSentAt DateTime?
+  welcomeDiscountUsedAt DateTime?
+  welcomeReservedSessionId String? @unique
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
   accounts          Account[]
@@ -78,6 +82,7 @@ model User {
   mailClubSubscriptions MailClubSubscription[]
   verificationTokens VerificationToken[]
   passwordResetTokens PasswordResetToken[]
+  pushDevices       PushDevice[]
 }
 
 model Account {
@@ -118,14 +123,26 @@ model VerificationToken {
 model PasswordResetToken {
   id        String   @id @default(cuid())
   userId    String
+  /** SHA-256 hex of the raw token. The raw value is only emailed once. */
   token     String   @unique
   expires   DateTime
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+/** Hashed IP and email buckets for password-reset request limits. */
+model PasswordResetAttempt {
+  id        String   @id @default(cuid())
+  bucket    String
+  createdAt DateTime @default(now())
+
+  @@index([bucket, createdAt])
+}
+
 model Order {
   id                     String            @id @default(cuid())
+  /** Customer-facing code: 4 digits and 1 letter, for example 4821K. */
+  publicNumber           String            @unique
   userId                 String?
   user                   User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
   stripeCheckoutSessionId String           @unique
@@ -154,6 +171,7 @@ model Order {
   shippingPostalCode     String?
   shippingCountry        String?
   locale                 String?
+  confirmationEmailSentAt DateTime?
   createdAt              DateTime          @default(now())
   updatedAt              DateTime          @updatedAt
   items                  OrderItem[]
@@ -245,4 +263,61 @@ model RewardCodeRedemption {
 model ProcessedStripeEvent {
   id        String   @id
   createdAt DateTime @default(now())
+}
+
+enum MailingStatus {
+  PENDING
+  CONFIRMED
+  UNSUBSCRIBED
+}
+
+/// Mailing-list signup. This is not a customer account.
+model EmailSubscriber {
+  id                     String        @id @default(cuid())
+  email                  String        @unique
+  firstName              String?
+  marketingOptIn         Boolean       @default(false)
+  status                 MailingStatus @default(PENDING)
+  verificationTokenHash  String?       @unique
+  unsubscribeTokenHash   String?       @unique
+  verificationSentAt     DateTime?
+  verifiedAt             DateTime?
+  welcomeEmailSentAt     DateTime?
+  unsubscribedAt         DateTime?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+/** A note sent from the public contact form. */
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+enum PushPlatform {
+  IOS
+  ANDROID
+}
+
+/// A phone that opted in to notifications in the iOS/Android app.
+/// Tokens are only ever created after the member taps "Turn on notifications".
+model PushDevice {
+  id         String       @id @default(cuid())
+  token      String       @unique
+  platform   PushPlatform
+  userId     String
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locale     String?
+  createdAt  DateTime     @default(now())
+  lastSeenAt DateTime     @default(now())
+
+  @@index([userId])
 }

@@ -625,6 +625,30 @@ export async function customerRewardView(db: RewardDb, userId: string) {
   };
 }
 
+/** Read-only history for the account page. Does not change how codes are earned or applied. */
+export async function listUsedRewardCodes(db: RewardDb, userId: string) {
+  const [personal, redemptions] = await Promise.all([
+    db.rewardCode.findMany({
+      where: { userId, shared: false, status: "USED" },
+      orderBy: { usedAt: "desc" },
+      select: { code: true, firstOrderOnly: true },
+    }),
+    db.rewardCodeRedemption.findMany({
+      where: { userId, status: "USED" },
+      orderBy: { usedAt: "desc" },
+      select: { rewardCode: { select: { code: true, firstOrderOnly: true } } },
+    }),
+  ]);
+  const seen = new Set<string>();
+  const used: { code: string; firstOrderOnly: boolean }[] = [];
+  for (const row of [...personal, ...redemptions.map((row) => row.rewardCode)]) {
+    if (seen.has(row.code)) continue;
+    seen.add(row.code);
+    used.push(row);
+  }
+  return used;
+}
+
 async function sharedRewardCodesForCustomer(db: RewardDb, userId: string) {
   const paid = await db.order.count({
     where: { userId, ...qualifyingOrderWhere },

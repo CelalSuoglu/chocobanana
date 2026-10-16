@@ -148,7 +148,7 @@ export default async function OwnerFulfillmentPage({
             {data.orders.length === 0 ? (
               <p className="mt-3 text-sm text-chocolate-soft">None this month.</p>
             ) : (
-              <ul className="mt-4 divide-y divide-pink/25 border-t border-pink/30">
+              <ul className="mt-4 divide-y divide-pink/25 border-t border-line">
                 {data.orders.map((order) => (
                   <li key={order.id} className="flex flex-wrap items-start justify-between gap-4 py-4">
                     <div className="min-w-0 flex-1">
@@ -156,7 +156,7 @@ export default async function OwnerFulfillmentPage({
                         href={`/owner/orders/${order.id}`}
                         className="font-serif text-lg text-chocolate hover:text-pink-deep"
                       >
-                        {displayOrderNumber(order.id)} · {order.customerEmail}
+                        {displayOrderNumber(order.publicNumber)} · {order.customerEmail}
                       </Link>
                       <p className="mt-1 text-xs text-chocolate-soft">
                         {[
@@ -196,7 +196,7 @@ export default async function OwnerFulfillmentPage({
             {data.activeSubs.length === 0 ? (
               <p className="mt-3 text-sm text-chocolate-soft">No active paid subscribers.</p>
             ) : (
-              <ul className="mt-4 divide-y divide-pink/25 border-t border-pink/30">
+              <ul className="mt-4 divide-y divide-pink/25 border-t border-line">
                 {data.activeSubs.map((sub) => (
                   <li key={sub.id} className="py-3 text-sm">
                     <p className="font-serif text-base text-chocolate">

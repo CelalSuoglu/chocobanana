@@ -36,7 +36,7 @@ export default async function OwnerOrderDetailPage({
         ← Orders
       </Link>
       <h1 className="page-title mt-4">
-        Order {displayOrderNumber(order.id)}
+        Order {displayOrderNumber(order.publicNumber)}
       </h1>
       <p className="mt-1 text-xs text-chocolate-soft">{order.id}</p>
 
@@ -49,6 +49,11 @@ export default async function OwnerOrderDetailPage({
             {order.customerName ?? "—"}
             <br />
             {order.customerEmail}
+            {order.user ? null : (
+              <span className="ms-2 text-xs uppercase tracking-wider text-chocolate-soft">
+                Guest
+              </span>
+            )}
             {order.customerPhone ? (
               <>
                 <br />
@@ -122,7 +127,7 @@ export default async function OwnerOrderDetailPage({
 
       <div className="mt-8">
         <h2 className="font-serif text-xl text-chocolate">Items</h2>
-        <ul className="mt-3 divide-y divide-pink/25 border-t border-pink/30">
+        <ul className="mt-3 divide-y divide-pink/25 border-t border-line">
           {order.items.map((item) => (
             <li
               key={item.id}

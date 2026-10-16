@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
+import { useToast } from "@/components/toast-provider";
 
 type AddToCartButtonProps = {
   productId: string;
@@ -17,19 +18,24 @@ export function AddToCartButton({
   className = "mt-4",
 }: AddToCartButtonProps) {
   const { addItem } = useCart();
-  const [justAdded, setJustAdded] = useState(false);
+  const toast = useToast();
+  const [pending, setPending] = useState(false);
 
   return (
     <button
       type="button"
       className={`${className} btn-secondary`}
+      disabled={pending}
+      aria-busy={pending}
       onClick={() => {
-        addItem(productId, 1);
-        setJustAdded(true);
-        window.setTimeout(() => setJustAdded(false), 1200);
+        if (pending) return;
+        setPending(true);
+        const added = addItem(productId, 1);
+        if (added) toast?.notify({ message: addedLabel, tone: "ok" });
+        setPending(false);
       }}
     >
-      {justAdded ? addedLabel : label}
+      {label}
     </button>
   );
 }

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { OwnerAutoRefresh } from "@/components/owner-auto-refresh";
 import { OwnerPublicOpening } from "@/components/owner-public-opening";
 import { displayName } from "@/lib/auth/profile";
-import { isDatabaseConfigured } from "@/lib/db";
+import { countContactMessages, listContactMessages } from "@/lib/contact/repository";
+import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
 import { displayOrderNumber } from "@/lib/orders/number";
 import {
   getOwnerDashboardStats,
@@ -31,12 +32,16 @@ export default async function OwnerDashboardPage() {
         fulfillmentThisMonth: 0,
       };
 
-  const [recentMembers, recentOrders] = configured
-    ? await Promise.all([
-        listOwnerCustomers({}),
-        listOwnerOrders({ status: "ALL" }),
-      ])
-    : [[], []];
+  const [recentMembers, recentOrders, recentMessages, messageCount, subscriberCount] =
+    configured
+      ? await Promise.all([
+          listOwnerCustomers({}),
+          listOwnerOrders({ status: "ALL" }),
+          listContactMessages(),
+          countContactMessages(),
+          requirePrisma().emailSubscriber.count(),
+        ])
+      : [[], [], [], 0, 0];
 
   const newMembers = recentMembers.slice(0, 8);
   const newOrders = recentOrders.slice(0, 8);
@@ -76,6 +81,16 @@ export default async function OwnerDashboardPage() {
           value={stats.fulfillmentThisMonth}
           href="/owner/fulfillment"
         />
+        <StatCard
+          label="Contact notes"
+          value={messageCount}
+          href="/owner/messages"
+        />
+        <StatCard
+          label="Email subscribers"
+          value={subscriberCount}
+          href="/owner/subscribers"
+        />
       </div>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-2">
@@ -92,7 +107,7 @@ export default async function OwnerDashboardPage() {
           {newMembers.length === 0 ? (
             <p className="mt-4 text-sm text-chocolate-soft">No customer accounts yet.</p>
           ) : (
-            <ul className="mt-4 divide-y divide-pink/25 border-t border-pink/30">
+            <ul className="mt-4 divide-y divide-pink/25 border-t border-line">
               {newMembers.map((member) => (
                 <li key={member.id} className="py-3 text-sm">
                   <p className="font-serif text-base text-chocolate">
@@ -126,7 +141,7 @@ export default async function OwnerDashboardPage() {
               No paid orders yet. They appear only after a verified Stripe webhook.
             </p>
           ) : (
-            <ul className="mt-4 divide-y divide-pink/25 border-t border-pink/30">
+            <ul className="mt-4 divide-y divide-pink/25 border-t border-line">
               {newOrders.map((order) => (
                 <li key={order.id} className="py-3">
                   <Link
@@ -134,7 +149,7 @@ export default async function OwnerDashboardPage() {
                     className="block hover:text-pink-deep"
                   >
                     <p className="font-serif text-base">
-                      {displayOrderNumber(order.id)} ·{" "}
+                      {displayOrderNumber(order.publicNumber)} ·{" "}
                       {formatMoney(order.amountTotalCadCents, order.currency)}
                     </p>
                     <p className="text-xs text-chocolate-soft">
@@ -150,6 +165,31 @@ export default async function OwnerDashboardPage() {
           )}
         </section>
       </div>
+
+      <section className="mt-12">
+        <div className="flex items-baseline justify-between gap-3">
+          <h2 className="font-serif text-xl text-chocolate">Contact notes</h2>
+          <Link
+            href="/owner/messages"
+            className="text-xs text-chocolate-soft hover:text-pink-deep"
+          >
+            View all
+          </Link>
+        </div>
+        {recentMessages.length === 0 ? (
+          <p className="mt-4 text-sm text-chocolate-soft">No messages yet.</p>
+        ) : (
+          <ul className="mt-4 divide-y divide-line border-t border-line">
+            {recentMessages.slice(0, 5).map((note) => (
+              <li key={note.id} className="py-3 text-sm">
+                <p className="font-serif text-base text-chocolate">{note.name}</p>
+                <p className="text-xs text-chocolate-soft">{note.email}</p>
+                <p className="mt-1 line-clamp-2 text-chocolate-soft">{note.message}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

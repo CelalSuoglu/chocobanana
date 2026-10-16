@@ -2,11 +2,31 @@ import "server-only";
 import type Stripe from "stripe";
 import type { FulfillmentStatus, Prisma } from "@prisma/client";
 import { getCatalogProduct } from "@/lib/catalog/products";
+import { makeOrderNumber } from "@/lib/orders/number";
 import {
   snailMailPriceCadCents,
   snailMailRegionForCountry,
 } from "@/lib/catalog/snail-mail";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
+
+async function nextOrderNumber(db: {
+  order: {
+    findUnique: (args: {
+      where: { publicNumber: string };
+      select: { id: true };
+    }) => Promise<{ id: string } | null>;
+  };
+}): Promise<string> {
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    const publicNumber = makeOrderNumber();
+    const taken = await db.order.findUnique({
+      where: { publicNumber },
+      select: { id: true },
+    });
+    if (!taken) return publicNumber;
+  }
+  throw new Error("order_number_unavailable");
+}
 
 export function parseCartMetadata(
   metadata: Record<string, string> | null | undefined,
@@ -47,6 +67,26 @@ type ShippingDetails = {
     country?: string | null;
   } | null;
 };
+
+function shippingFromMetadata(metadata: Record<string, string>) {
+  return {
+    shippingName: metadata.ship_name || null,
+    shippingLine1: metadata.ship_line1 || null,
+    shippingLine2: metadata.ship_line2 || null,
+    shippingCity: metadata.ship_city || null,
+    shippingState: metadata.ship_state || null,
+    shippingPostalCode: metadata.ship_postal || null,
+    shippingCountry: metadata.ship_country || null,
+  };
+}
+
+function preferShipping(
+  primary: ReturnType<typeof shippingFromMetadata>,
+  fallback: ReturnType<typeof shippingFromMetadata>,
+) {
+  if (primary.shippingLine1) return primary;
+  return fallback;
+}
 
 function shippingFromSession(session: Stripe.Checkout.Session) {
   const collected = session.collected_information?.shipping_details as
@@ -153,6 +193,7 @@ export async function createPaidOrderFromCheckoutSession(options: {
   }
 
   const email =
+    metadata.ship_email ||
     session.customer_details?.email ||
     session.customer_email ||
     metadata.customer_email ||
@@ -161,17 +202,17 @@ export async function createPaidOrderFromCheckoutSession(options: {
     throw new Error(`Missing customer email for session ${session.id}`);
   }
 
-  const metadataUserId = metadata.user_id?.trim() || null;
-  const userById = metadataUserId
+  const guestCheckout = metadata.guest === "1";
+  const metadataUserId = guestCheckout ? null : metadata.user_id?.trim() || null;
+  const user = metadataUserId
     ? await prisma.user.findUnique({ where: { id: metadataUserId } })
     : null;
-  const user =
-    userById ??
-    (await prisma.user.findUnique({
-      where: { email: email.toLowerCase() },
-    }));
 
   const shippingFromStripe = shippingFromSession(session);
+  const shippingSnapshot = preferShipping(
+    shippingFromStripe,
+    shippingFromMetadata(metadata),
+  );
   const totalDetails = session.total_details;
   const shippingAmountCadCents = totalDetails?.amount_shipping ?? null;
   const taxAmountCadCents = totalDetails?.amount_tax ?? null;
@@ -199,7 +240,9 @@ export async function createPaidOrderFromCheckoutSession(options: {
         `Session ${session.id} adds a shipping fee to a Mail Club package.`,
       );
     }
-    const region = snailMailRegionForCountry(shippingFromStripe.shippingCountry);
+    const region = snailMailRegionForCountry(
+      shippingSnapshot.shippingCountry || metadata.ship_country,
+    );
     if (!region) {
       throw new Error(
         `Session ${session.id} shipping country is outside Mail Club regions.`,
@@ -215,21 +258,21 @@ export async function createPaidOrderFromCheckoutSession(options: {
     }
   }
 
-  // Snapshot: prefer Stripe shipping, else freeze the customer's profile address at purchase time.
-  const shipping = {
-    shippingName:
-      shippingFromStripe.shippingName ||
-      [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
-      user?.name ||
-      null,
-    shippingLine1: shippingFromStripe.shippingLine1 || user?.addressLine1 || null,
-    shippingLine2: shippingFromStripe.shippingLine2 || user?.addressLine2 || null,
-    shippingCity: shippingFromStripe.shippingCity || user?.city || null,
-    shippingState: shippingFromStripe.shippingState || user?.region || null,
-    shippingPostalCode:
-      shippingFromStripe.shippingPostalCode || user?.postalCode || null,
-    shippingCountry: shippingFromStripe.shippingCountry || user?.country || null,
-  };
+  const profileShipping = guestCheckout
+    ? shippingFromMetadata({})
+    : {
+        shippingName:
+          [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+          user?.name ||
+          null,
+        shippingLine1: user?.addressLine1 || null,
+        shippingLine2: user?.addressLine2 || null,
+        shippingCity: user?.city || null,
+        shippingState: user?.region || null,
+        shippingPostalCode: user?.postalCode || null,
+        shippingCountry: user?.country || null,
+      };
+  const shipping = preferShipping(shippingSnapshot, profileShipping);
   const paymentIntent =
     typeof session.payment_intent === "string"
       ? session.payment_intent
@@ -241,13 +284,17 @@ export async function createPaidOrderFromCheckoutSession(options: {
       : session.subscription?.id ?? null;
 
   const customerName =
+    metadata.ship_name ||
     session.customer_details?.name ||
-    [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
-    user?.name ||
-    null;
+    (guestCheckout
+      ? null
+      : [user?.firstName, user?.lastName].filter(Boolean).join(" ") ||
+        user?.name ||
+        null);
 
   const order = await prisma.order.create({
     data: {
+      publicNumber: await nextOrderNumber(prisma),
       userId: user?.id ?? null,
       stripeCheckoutSessionId: session.id,
       stripePaymentIntentId: paymentIntent,
@@ -272,7 +319,9 @@ export async function createPaidOrderFromCheckoutSession(options: {
       customerEmail: email.toLowerCase(),
       customerName,
       customerPhone:
-        session.customer_details?.phone ?? user?.phone ?? null,
+        metadata.ship_phone ||
+        session.customer_details?.phone ||
+        (guestCheckout ? null : user?.phone ?? null),
       ...shipping,
       locale: metadata.locale ?? null,
       items: { create: itemsData },
@@ -387,6 +436,7 @@ export async function createPaidOrderFromInvoice(options: {
 
   const order = await prisma.order.create({
     data: {
+      publicNumber: await nextOrderNumber(prisma),
       userId: user?.id ?? null,
       stripeCheckoutSessionId: syntheticSessionId,
       stripeInvoiceId: invoice.id,
@@ -467,6 +517,7 @@ export async function listOwnerOrders(filters: {
       { customerEmail: { contains: q, mode: "insensitive" } },
       { customerName: { contains: q, mode: "insensitive" } },
       { id: { contains: q, mode: "insensitive" } },
+      { publicNumber: { contains: q.replace(/^#/, ""), mode: "insensitive" } },
       { stripeCheckoutSessionId: { contains: q, mode: "insensitive" } },
     ];
   }

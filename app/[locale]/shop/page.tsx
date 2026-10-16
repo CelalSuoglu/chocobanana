@@ -53,7 +53,7 @@ export default async function ShopPage({
         <span className="text-chocolate">{dict.shop.title}</span>
       </nav>
 
-      <header className="mt-6 flex flex-col gap-3 border-b border-pink/30 pb-6 md:flex-row md:items-end md:justify-between">
+      <header className="mt-6 flex flex-col gap-3 border-b border-line pb-6 md:flex-row md:items-end md:justify-between">
         <div>
           <h1 className="page-title">
             {dict.shop.title}
@@ -66,6 +66,12 @@ export default async function ShopPage({
           {dict.shop.currencyNote}
         </p>
       </header>
+
+      {products.length === 0 ? (
+        <section className="mt-10 text-center">
+          <p className="font-serif text-2xl text-chocolate">{dict.shop.emptyTitle}</p>
+        </section>
+      ) : null}
 
       <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {products.map((product) => {
@@ -110,7 +116,7 @@ export default async function ShopPage({
                 <AddToCartButton
                   productId={product.id}
                   label={dict.cart.addToCart}
-                  addedLabel={dict.cart.added}
+                  addedLabel={dict.cart.addedToast}
                 />
               </div>
             </li>

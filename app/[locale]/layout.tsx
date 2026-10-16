@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import {
   Bebas_Neue,
   Caveat,
@@ -17,6 +17,7 @@ import {
   type Locale,
 } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getNativeAppContext } from "@/lib/native/app-context";
 import "../globals.css";
 
 const serif = Cormorant_Garamond({
@@ -86,6 +87,21 @@ export async function generateMetadata({
   };
 }
 
+export async function generateViewport(): Promise<Viewport> {
+  const app = await getNativeAppContext();
+  if (!app.isApp) {
+    // Same as the Next.js default the website already used.
+    return { width: "device-width", initialScale: 1 };
+  }
+  // In the app, draw under the notch/home indicator; CSS pads with safe-area insets.
+  return {
+    width: "device-width",
+    initialScale: 1,
+    viewportFit: "cover",
+    themeColor: "#fffbee",
+  };
+}
+
 function localeFontClass(locale: Locale): string {
   if (locale === "ar") return arabic.variable;
   if (locale === "ja") return japanese.variable;
@@ -106,11 +122,13 @@ export default async function LocaleLayout({
   const locale = raw;
   const direction = getDirection(locale);
   const dict = await getDictionary(locale);
+  const app = await getNativeAppContext();
 
   return (
     <html
       lang={locale}
       dir={direction}
+      data-app={app.isApp ? (app.platform ?? "native") : undefined}
       className={`${serif.variable} ${script.variable} ${body.variable} ${display.variable} ${arabic.variable} ${japanese.variable} ${chinese.variable} ${localeFontClass(locale)} h-full antialiased`}
     >
       <body

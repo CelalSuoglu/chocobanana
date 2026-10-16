@@ -114,7 +114,7 @@ export default async function ProductDetailPage({
             <AddToCartButton
               productId={product.id}
               label={dict.cart.addToCart}
-              addedLabel={dict.cart.added}
+              addedLabel={dict.cart.addedToast}
               className="mt-0"
             />
             <BuyButton
@@ -136,7 +136,7 @@ export default async function ProductDetailPage({
       </div>
 
       {others.length > 0 ? (
-        <section className="mt-14 border-t border-pink/30 pt-8">
+        <section className="mt-14 border-t border-line pt-8">
           <h2 className="font-serif text-2xl text-chocolate">{dict.shop.title}</h2>
           <ul className="mt-5 grid gap-4 sm:grid-cols-3">
             {others.map((item) => {

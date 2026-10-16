@@ -3,6 +3,7 @@ import { requirePrisma } from "@/lib/db";
 import {
   claimRewardCode,
   customerRewardView,
+  listUsedRewardCodes,
   reconcileCustomerRewards,
   releaseRewardReservationById,
   releaseRewardReservationForSession,
@@ -30,6 +31,10 @@ export function releaseRewardForCheckoutSession(checkoutSessionId: string) {
 
 export function getCustomerRewardView(userId: string) {
   return customerRewardView(requirePrisma(), userId);
+}
+
+export function getUsedRewardCodes(userId: string) {
+  return listUsedRewardCodes(requirePrisma(), userId);
 }
 
 export function getRewardSnapshots(userIds: string[]) {

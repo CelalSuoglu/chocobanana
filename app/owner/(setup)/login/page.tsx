@@ -17,7 +17,7 @@ export default function OwnerLoginPage() {
         />
       </div>
 
-      <p className="mt-6 font-script text-3xl text-pink-deep sm:text-4xl">
+      <p className="mt-6 font-script text-3xl text-chocolate sm:text-4xl">
         Owner Portal
       </p>
       <p className="mt-2 max-w-md text-sm leading-relaxed text-chocolate-soft">

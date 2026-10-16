@@ -105,6 +105,8 @@ export async function sendAppEmail(options: {
   subject: string;
   text: string;
   html?: string;
+  replyTo?: string;
+  attachments?: { filename: string; content: Uint8Array }[];
 }): Promise<{ ok: true; mode: "sent" }> {
   assertEmailReady();
 
@@ -123,6 +125,11 @@ export async function sendAppEmail(options: {
       subject: options.subject,
       text: options.text,
       html: options.html ?? options.text,
+      reply_to: options.replyTo,
+      attachments: options.attachments?.map((file) => ({
+        filename: file.filename,
+        content: Buffer.from(file.content).toString("base64"),
+      })),
     }),
   });
 

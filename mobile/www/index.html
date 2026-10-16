@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Chocobanana</title>
+  <link rel="stylesheet" href="shared.css" />
+  <script src="app-url.js"></script>
+</head>
+<body>
+  <!-- Only shown if the native shell starts without server.url; it forwards to the live site. -->
+  <main>
+    <img src="logo.jpg" alt="Chocobanana" />
+    <h1>Chocobanana</h1>
+    <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  </main>
+  <script>
+    location.replace((window.CHOCO_APP_URL || "https://thechocobananaclub.com") + "/");
+  </script>
+</body>
+</html>

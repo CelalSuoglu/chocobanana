@@ -88,6 +88,10 @@ async function routeRequest(request: NextRequest) {
   if (
     pathname === "/api/webhooks/stripe" ||
     pathname.startsWith("/api/webhooks/stripe/") ||
+    pathname === "/api/mailing/confirm" ||
+    pathname.startsWith("/api/mailing/confirm/") ||
+    pathname === "/api/mailing/unsubscribe" ||
+    pathname.startsWith("/api/mailing/unsubscribe/") ||
     pathname === "/site-unlock" ||
     pathname.startsWith("/site-unlock/") ||
     pathname === "/google1b00f9e256712300.html" ||
@@ -118,6 +122,20 @@ async function routeRequest(request: NextRequest) {
 
   // Owner panel lives outside the locale site shell.
   if (pathname === "/owner" || pathname.startsWith("/owner/")) {
+    const host =
+      request.headers.get("x-forwarded-host") ??
+      request.headers.get("host") ??
+      "";
+    const hostname = host.split(",")[0]?.trim().split(":")[0]?.replace(/^\[|\]$/g, "") ?? "";
+    const localHost =
+      hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+    if (
+      localHost &&
+      (pathname === "/owner/login" || pathname.startsWith("/owner/login/"))
+    ) {
+      return redirectToLocaleHome(request, defaultLocale);
+    }
+
     const publicOwnerPaths =
       pathname === "/owner/gate" || pathname.startsWith("/owner/gate/");
 

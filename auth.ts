@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import { requirePrisma, isDatabaseConfigured } from "@/lib/db";
 import { verifyPassword } from "@/lib/auth/password";
+import { sendWelcomeEmail } from "@/lib/welcome/email";
 
 const credentialsSchema = z.object({
   email: z.string().email(),
@@ -40,6 +41,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!user.emailVerified) {
           throw new Error("EMAIL_NOT_VERIFIED");
+        }
+
+        if (user.role === "CUSTOMER") {
+          await sendWelcomeEmail(user.id);
         }
 
         return {

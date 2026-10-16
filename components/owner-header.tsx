@@ -28,6 +28,16 @@ const PANEL_LINKS = [
     label: "Fulfillment",
     match: (path: string) => path.startsWith("/owner/fulfillment"),
   },
+  {
+    href: "/owner/messages",
+    label: "Messages",
+    match: (path: string) => path.startsWith("/owner/messages"),
+  },
+  {
+    href: "/owner/subscribers",
+    label: "Email subscribers",
+    match: (path: string) => path.startsWith("/owner/subscribers"),
+  },
 ] as const;
 
 export type OwnerHeaderProps =
@@ -61,7 +71,7 @@ export function OwnerHeader(props: OwnerHeaderProps) {
               priority
             />
             <div>
-              <p className="font-script text-lg leading-none text-pink-deep sm:text-xl">
+              <p className="font-script text-lg leading-none text-chocolate sm:text-xl">
                 Chocobanana
               </p>
               <p className="mt-0.5 font-serif text-sm tracking-[0.14em] text-chocolate">
@@ -95,7 +105,7 @@ export function OwnerHeader(props: OwnerHeaderProps) {
               />
             </Link>
             <div className="min-w-0">
-              <p className="font-script text-lg leading-none text-pink-deep sm:text-xl">
+              <p className="font-script text-lg leading-none text-chocolate sm:text-xl">
                 Chocobanana
               </p>
               <p className="mt-1 font-serif text-sm tracking-[0.14em] uppercase text-chocolate sm:text-base">
@@ -118,7 +128,7 @@ export function OwnerHeader(props: OwnerHeaderProps) {
             </form>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate md:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper/90 text-chocolate md:hidden"
               aria-expanded={open}
               aria-controls={panelId}
               aria-label={open ? "Close menu" : "Open menu"}

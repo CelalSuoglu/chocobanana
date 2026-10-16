@@ -18,26 +18,10 @@ type ComingSoonPageProps = {
 };
 
 const SPARKLES = [
-  { top: "5%", left: "10%", delay: "0s", size: "text-sm", tone: "gold" },
-  { top: "9%", left: "28%", delay: "0.4s", size: "text-xs", tone: "pink" },
-  { top: "7%", left: "72%", delay: "1.1s", size: "text-sm", tone: "gold" },
-  { top: "12%", left: "88%", delay: "0.7s", size: "text-base", tone: "pink" },
-  { top: "18%", left: "6%", delay: "1.6s", size: "text-xs", tone: "gold" },
-  { top: "22%", left: "48%", delay: "2.1s", size: "text-sm", tone: "pink" },
-  { top: "26%", left: "82%", delay: "0.3s", size: "text-xs", tone: "gold" },
-  { top: "34%", left: "14%", delay: "1.4s", size: "text-sm", tone: "pink" },
-  { top: "38%", left: "92%", delay: "0.9s", size: "text-xs", tone: "gold" },
-  { top: "44%", left: "8%", delay: "2.4s", size: "text-sm", tone: "gold" },
-  { top: "48%", left: "58%", delay: "1.8s", size: "text-xs", tone: "pink" },
-  { top: "52%", left: "86%", delay: "0.5s", size: "text-sm", tone: "pink" },
-  { top: "58%", left: "22%", delay: "1.2s", size: "text-xs", tone: "gold" },
-  { top: "64%", left: "78%", delay: "2.0s", size: "text-sm", tone: "pink" },
-  { top: "70%", left: "12%", delay: "0.6s", size: "text-xs", tone: "pink" },
-  { top: "74%", left: "42%", delay: "1.5s", size: "text-sm", tone: "gold" },
-  { top: "78%", left: "68%", delay: "2.3s", size: "text-xs", tone: "gold" },
-  { top: "84%", left: "30%", delay: "0.8s", size: "text-sm", tone: "pink" },
-  { top: "88%", left: "90%", delay: "1.9s", size: "text-xs", tone: "gold" },
-  { top: "16%", left: "34%", delay: "2.6s", size: "text-xs", tone: "gold" },
+  { top: "8%", left: "8%", delay: "0s", size: "text-xs", tone: "gold" },
+  { top: "12%", left: "90%", delay: "1.1s", size: "text-xs", tone: "pink" },
+  { top: "78%", left: "10%", delay: "0.6s", size: "text-xs", tone: "gold" },
+  { top: "84%", left: "88%", delay: "1.6s", size: "text-xs", tone: "pink" },
 ] as const;
 
 export function ComingSoonPage({
@@ -69,20 +53,12 @@ export function ComingSoonPage({
       <div className="section-pad relative z-10 flex flex-1 flex-col items-center justify-center py-12 text-center md:py-16">
         <div className="animate-rise relative">
           <Star
-            className="absolute -start-6 -top-1 text-base md:-start-9 md:text-lg"
+            className="absolute -start-5 -top-1 text-xs md:-start-7"
             style={{ animationDelay: "0.35s" }}
           />
           <Star
-            className="absolute -end-5 top-8 text-sm md:-end-8"
+            className="absolute -end-4 top-6 text-xs md:-end-6"
             style={{ animationDelay: "1.2s" }}
-          />
-          <Star
-            className="absolute -start-2 bottom-0 text-xs md:-start-4"
-            style={{ animationDelay: "0.9s" }}
-          />
-          <Star
-            className="absolute -end-1 -bottom-1 text-sm md:-end-3"
-            style={{ animationDelay: "1.7s" }}
           />
           <div className="animate-float mx-auto overflow-hidden rounded-full bg-paper/70 p-2.5 shadow-[0_16px_48px_rgba(60,42,34,0.1)] ring-1 ring-pink/40">
             <Image
@@ -96,7 +72,7 @@ export function ComingSoonPage({
           </div>
         </div>
 
-        <h1 className="animate-rise delay-1 mt-8 font-script text-3xl text-pink-deep sm:text-4xl md:text-[2.75rem]">
+        <h1 className="animate-rise delay-1 mt-8 font-script text-3xl text-chocolate sm:text-4xl md:text-[2.75rem]">
           {c.eyebrow}
         </h1>
 
@@ -105,14 +81,6 @@ export function ComingSoonPage({
         </div>
 
         <div className="animate-rise delay-2 relative mt-8 w-full">
-          <Star
-            className="pointer-events-none absolute -top-3 start-[8%] text-xs"
-            style={{ animationDelay: "0.4s" }}
-          />
-          <Star
-            className="pointer-events-none absolute -top-2 end-[10%] text-sm"
-            style={{ animationDelay: "1.3s" }}
-          />
           <CountdownTimer
             endsAtIso={endsAtIso}
             labels={{

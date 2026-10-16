@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ContactForm } from "@/components/contact-form";
 import { PageHero } from "@/components/page-hero";
 import { isLocale } from "@/lib/i18n/config";
@@ -30,6 +31,16 @@ export default async function ContactPage({
 
   return (
     <main className="section-pad flex-1 py-12 md:py-16">
+      <div className="mx-auto mb-6 max-w-3xl">
+        <Breadcrumbs
+          locale={raw}
+          label={dict.a11y.breadcrumb}
+          items={[
+            { label: dict.nav.home, path: "" },
+            { label: dict.contact.title },
+          ]}
+        />
+      </div>
       <PageHero
         eyebrow={dict.contact.eyebrow}
         title={dict.contact.title}

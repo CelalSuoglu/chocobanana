@@ -7,6 +7,8 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getOptionalSession } from "@/lib/auth/session";
 import { hrefFor } from "@/lib/nav";
 import { paymentsCheckoutEnabled } from "@/lib/stripe/config";
+import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
+import { readWelcomeDiscount } from "@/lib/welcome/discount";
 
 export async function generateMetadata({
   params,
@@ -26,6 +28,11 @@ export default async function CartPage({
   if (!isLocale(raw)) notFound();
   const dict = await getDictionary(raw);
   const session = await getOptionalSession();
+  const member =
+    session?.user?.id && session.user.role === "CUSTOMER" ? session.user : null;
+  const welcome = member && isDatabaseConfigured()
+    ? await readWelcomeDiscount(requirePrisma(), member.id)
+    : { eligible: false };
 
   return (
     <main className="section-pad mx-auto w-full max-w-6xl flex-1 py-8 md:py-12">
@@ -44,7 +51,7 @@ export default async function CartPage({
         </span>
         <span className="text-chocolate">{dict.cart.title}</span>
       </nav>
-      <header className="mt-6 border-b border-pink/30 pb-6">
+      <header className="mt-6 border-b border-line pb-6">
         <h1 className="page-title">
           {dict.cart.title}
         </h1>
@@ -56,7 +63,8 @@ export default async function CartPage({
         locale={raw}
         dict={dict}
         checkoutEnabled={paymentsCheckoutEnabled()}
-        signedIn={Boolean(session?.user?.id) && session?.user?.role !== "OWNER"}
+        signedIn={Boolean(member)}
+        welcomeEligible={welcome.eligible}
       />
     </main>
   );

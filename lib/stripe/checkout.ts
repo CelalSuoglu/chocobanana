@@ -26,11 +26,22 @@ import {
   getCheckoutShippingOptions,
 } from "./shipping";
 import {
+  allowedCountriesForRegions,
+  parseDeliveryDetails,
+  type DeliveryDetails,
+} from "@/lib/checkout/address";
+import {
   attachReservationSession,
   claimRewardCode,
   detachReservationSession,
   releaseRewardReservationById,
 } from "@/lib/rewards/engine";
+import {
+  attachWelcomeReservation,
+  chooseCheckoutDiscount,
+  readWelcomeDiscount,
+  releaseWelcomeReservation,
+} from "@/lib/welcome/discount";
 
 export type CreateCheckoutResult =
   | { ok: true; url: string; sessionId: string }
@@ -40,6 +51,52 @@ export type CheckoutItemInput = {
   productId: string;
   quantity: number;
 };
+
+function stripeResourceMissing(error: unknown): boolean {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "code" in error &&
+    (error as { code?: string }).code === "resource_missing"
+  );
+}
+
+/** A sandbox customer id is invisible to live mode, and the reverse. */
+async function usableStripeCustomerId(
+  stripe: Stripe,
+  userId: string,
+  storedId: string | null | undefined,
+): Promise<string | undefined> {
+  if (!storedId) return undefined;
+  try {
+    const customer = await stripe.customers.retrieve(storedId);
+    if ("deleted" in customer && customer.deleted) {
+      throw Object.assign(new Error("deleted customer"), {
+        code: "resource_missing",
+      });
+    }
+    return storedId;
+  } catch (error) {
+    if (!stripeResourceMissing(error)) throw error;
+    await requirePrisma().user.update({
+      where: { id: userId },
+      data: { stripeCustomerId: null },
+    });
+    return undefined;
+  }
+}
+
+async function retrieveCheckoutSession(
+  stripe: Stripe,
+  sessionId: string,
+): Promise<Stripe.Checkout.Session | null> {
+  try {
+    return await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (error) {
+    if (stripeResourceMissing(error)) return null;
+    throw error;
+  }
+}
 
 function buildLineItem(
   product: CatalogProduct,
@@ -122,6 +179,7 @@ export async function createCheckoutSession(options: {
   userId?: string | null;
   customerEmail?: string | null;
   rewardCode?: string | null;
+  delivery?: DeliveryDetails | null;
 }): Promise<CreateCheckoutResult> {
   if (!paymentsCheckoutEnabled()) {
     return {
@@ -214,6 +272,32 @@ export async function createCheckoutSession(options: {
     };
   }
 
+  const snailRegionsForDelivery = [
+    ...new Set(
+      lineProducts
+        .map((entry) => entry.product.snailMail?.region)
+        .filter((region): region is SnailMailRegion => Boolean(region)),
+    ),
+  ];
+  let delivery = options.delivery ?? null;
+  if (options.delivery) {
+    const parsed = parseDeliveryDetails(
+      options.delivery,
+      allowedCountriesForRegions(snailRegionsForDelivery),
+    );
+    if (!parsed.ok) {
+      return {
+        ok: false,
+        error:
+          parsed.error === "country_mismatch"
+            ? "This package is priced for a different delivery region."
+            : "Check the delivery details and try again.",
+        status: 400,
+      };
+    }
+    delivery = parsed.value;
+  }
+
   const locale: Locale = isLocale(options.locale) ? options.locale : "en";
   const baseUrl = getAppBaseUrl();
   const stripe = getStripe();
@@ -240,7 +324,11 @@ export async function createCheckoutSession(options: {
       where: { id: options.userId },
       select: { stripeCustomerId: true, email: true },
     });
-    stripeCustomerId = user?.stripeCustomerId ?? undefined;
+    stripeCustomerId = await usableStripeCustomerId(
+      stripe,
+      options.userId,
+      user?.stripeCustomerId,
+    );
     if (!stripeCustomerId && user?.email) {
       const created = await stripe.customers.create({
         email: user.email,
@@ -262,6 +350,62 @@ export async function createCheckoutSession(options: {
     }
   }
 
+  if (delivery && !stripeCustomerId) {
+    const created = await stripe.customers.create({
+      email: delivery.email,
+      name: `${delivery.firstName} ${delivery.lastName}`,
+      phone: delivery.phone,
+      shipping: {
+        name: `${delivery.firstName} ${delivery.lastName}`,
+        phone: delivery.phone,
+        address: {
+          line1: delivery.line1,
+          line2: delivery.line2 || undefined,
+          city: delivery.city,
+          state: delivery.region,
+          postal_code: delivery.postalCode,
+          country: delivery.country,
+        },
+      },
+    });
+    stripeCustomerId = created.id;
+  }
+
+  if (delivery && stripeCustomerId) {
+    await stripe.customers.update(stripeCustomerId, {
+      email: delivery.email,
+      name: `${delivery.firstName} ${delivery.lastName}`,
+      phone: delivery.phone,
+      shipping: {
+        name: `${delivery.firstName} ${delivery.lastName}`,
+        phone: delivery.phone,
+        address: {
+          line1: delivery.line1,
+          line2: delivery.line2 || undefined,
+          city: delivery.city,
+          state: delivery.region,
+          postal_code: delivery.postalCode,
+          country: delivery.country,
+        },
+      },
+    });
+  }
+
+  const shipMetadata: Record<string, string> = delivery
+    ? {
+        guest: options.userId ? "0" : "1",
+        ship_name: `${delivery.firstName} ${delivery.lastName}`,
+        ship_email: delivery.email,
+        ship_phone: delivery.phone,
+        ship_line1: delivery.line1,
+        ship_line2: delivery.line2,
+        ship_city: delivery.city,
+        ship_state: delivery.region,
+        ship_postal: delivery.postalCode,
+        ship_country: delivery.country,
+      }
+    : {};
+
   // Do not set payment_method_types — Stripe Checkout shows Dashboard-enabled
   // methods (card / Apple Pay / Google Pay / Link) when eligible for that device.
   // Wallets are never guaranteed on every browser; Safari+Apple Pay / Chrome+Google Pay.
@@ -274,16 +418,20 @@ export async function createCheckoutSession(options: {
     cancel_url:
       kind === "subscription" || snailRegion
         ? `${baseUrl}/${locale}/snail-mail-club`
-        : `${baseUrl}/${locale}/cart`,
-    billing_address_collection: "required",
-    phone_number_collection: { enabled: true },
-    shipping_address_collection: {
-      allowed_countries: snailRegion
-        ? (countriesForSnailMailRegion(
-            snailRegion,
-          ) as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection["allowed_countries"])
-        : [...CHECKOUT_SHIPPING_COUNTRIES],
-    },
+        : `${baseUrl}/${locale}/checkout`,
+    ...(delivery
+      ? { billing_address_collection: "auto" as const }
+      : {
+          billing_address_collection: "required" as const,
+          phone_number_collection: { enabled: true },
+          shipping_address_collection: {
+            allowed_countries: snailRegion
+              ? (countriesForSnailMailRegion(
+                  snailRegion,
+                ) as Stripe.Checkout.SessionCreateParams.ShippingAddressCollection["allowed_countries"])
+              : [...CHECKOUT_SHIPPING_COUNTRIES],
+          },
+        }),
     // Postage is already inside a Mail Club package total. Do not add a second shipping line.
     ...(snailRegion
       ? {}
@@ -295,7 +443,9 @@ export async function createCheckoutSession(options: {
     client_reference_id: options.userId ?? undefined,
     ...(stripeCustomerId
       ? { customer: stripeCustomerId }
-      : { customer_email: options.customerEmail ?? undefined }),
+      : {
+          customer_email: delivery?.email ?? options.customerEmail ?? undefined,
+        }),
     metadata: {
       product_kind: kind,
       locale,
@@ -304,13 +454,27 @@ export async function createCheckoutSession(options: {
       cart_product_ids: lineProducts.map((e) => e.product.id).join(","),
       cart_json: cartJson,
       user_id: options.userId ?? "",
-      customer_email: options.customerEmail ?? "",
+      customer_email: delivery?.email ?? options.customerEmail ?? "",
+      ...shipMetadata,
     },
   };
 
   let reservedRewardId: string | null = null;
+  let welcomePreviousSessionId: string | null = null;
+  let applyWelcome = false;
   const rewardCode = options.rewardCode?.trim();
-  if (rewardCode) {
+  const welcomeState =
+    options.userId && !rewardCode
+      ? await readWelcomeDiscount(requirePrisma(), options.userId)
+      : { eligible: false as const };
+  const welcomeProducts =
+    kind !== "subscription" &&
+    lineProducts.every((entry) => isRewardDiscountProduct(entry.product));
+  const discountChoice = chooseCheckoutDiscount({
+    rewardCode,
+    welcomeEligible: welcomeState.eligible && welcomeProducts,
+  });
+  if (discountChoice === "reward" && rewardCode) {
     if (
       kind === "subscription" ||
       lineProducts.some((entry) => !isRewardDiscountProduct(entry.product))
@@ -327,10 +491,11 @@ export async function createCheckoutSession(options: {
       userId: options.userId ?? null,
     });
     if (!claim.ok && claim.error === "reward_stale_reservation") {
-      const previous = await stripe.checkout.sessions.retrieve(
+      const previous = await retrieveCheckoutSession(
+        stripe,
         claim.previousSessionId,
       );
-      if (previous.payment_status === "paid") {
+      if (previous?.payment_status === "paid") {
         return {
           ok: false,
           error: "This code can't be used on this account.",
@@ -349,7 +514,7 @@ export async function createCheckoutSession(options: {
           status: 409,
         };
       }
-      if (previous.status === "open") {
+      if (previous?.status === "open") {
         await stripe.checkout.sessions.expire(previous.id).catch(() => undefined);
       }
       claim = { ok: true, rewardCodeId: claim.rewardCodeId };
@@ -377,12 +542,48 @@ export async function createCheckoutSession(options: {
       select: { stripePromotionCodeId: true, shared: true },
     });
     if (reserved?.stripePromotionCodeId && !reserved.shared) {
-      await setRewardPromotionActive(reserved.stripePromotionCodeId, true);
-      params.discounts = [{ promotion_code: reserved.stripePromotionCodeId }];
+      try {
+        await setRewardPromotionActive(reserved.stripePromotionCodeId, true);
+        params.discounts = [{ promotion_code: reserved.stripePromotionCodeId }];
+      } catch (error) {
+        if (!stripeResourceMissing(error)) throw error;
+        params.discounts = [{ coupon: couponId }];
+      }
     } else {
       params.discounts = [{ coupon: couponId }];
     }
-  } else if (kind !== "subscription") {
+  } else if (discountChoice === "welcome" && options.userId && welcomeState.eligible) {
+    if (welcomeState.previousSessionId) {
+      const previous = await retrieveCheckoutSession(
+        stripe,
+        welcomeState.previousSessionId,
+      );
+      if (previous?.payment_status === "paid") {
+        welcomePreviousSessionId = null;
+      } else {
+        if (previous?.status === "open") {
+          await stripe.checkout.sessions.expire(previous.id).catch(() => undefined);
+        }
+        await releaseWelcomeReservation(
+          requirePrisma(),
+          welcomeState.previousSessionId,
+        );
+        welcomePreviousSessionId = welcomeState.previousSessionId;
+      }
+    }
+    if (
+      !welcomeState.previousSessionId ||
+      welcomePreviousSessionId
+    ) {
+      const couponId = await ensureRewardCoupon();
+      params.metadata = {
+        ...params.metadata,
+        welcome_discount: "1",
+      };
+      params.discounts = [{ coupon: couponId }];
+      applyWelcome = true;
+    }
+  } else if (kind !== "subscription" && options.userId) {
     params.allow_promotion_codes = true;
   }
 
@@ -406,7 +607,24 @@ export async function createCheckoutSession(options: {
         cart_product_ids: lineProducts.map((e) => e.product.id).join(","),
         user_id: options.userId ?? "",
         ...(reservedRewardId ? { reward_code_id: reservedRewardId } : {}),
+        ...(applyWelcome ? { welcome_discount: "1" } : {}),
       },
+      ...(delivery
+        ? {
+            shipping: {
+              name: `${delivery.firstName} ${delivery.lastName}`,
+              phone: delivery.phone,
+              address: {
+                line1: delivery.line1,
+                line2: delivery.line2 || undefined,
+                city: delivery.city,
+                state: delivery.region,
+                postal_code: delivery.postalCode,
+                country: delivery.country,
+              },
+            },
+          }
+        : {}),
     };
   }
 
@@ -416,6 +634,22 @@ export async function createCheckoutSession(options: {
   let session: Stripe.Checkout.Session | null = null;
   try {
     session = await stripe.checkout.sessions.create(params);
+    if (applyWelcome && options.userId) {
+      const reserved = await attachWelcomeReservation(
+        requirePrisma(),
+        options.userId,
+        session.id,
+        welcomePreviousSessionId,
+      );
+      if (!reserved) {
+        await stripe.checkout.sessions.expire(session.id).catch(() => undefined);
+        return {
+          ok: false,
+          error: "Your welcome discount is already on an open checkout.",
+          status: 409,
+        };
+      }
+    }
     if (reservedRewardId) {
       try {
         await attachReservationSession(requirePrisma(), {

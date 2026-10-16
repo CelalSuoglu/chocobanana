@@ -49,10 +49,10 @@
     "ctaShop": "Voir la papeterie",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
-    "stickerSectionBody": "One-time sticker sheets, separate from the mail club.",
+    "stickerSectionBody": "One-time sheets you can order on their own.",
     "stickerSectionCta": "View sticker sheets",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Prepaid packages. You pay the package total once. Monthly envelopes are part of that one order.",
+    "clubSectionBody": "A prepaid package. One payment, postage included.",
     "clubSectionCta": "View packages",
     "exploreTitle": "Flâner un peu",
     "exploreIntro": "Choisis une porte — boutique, lettres, ou un doux bonjour.",
@@ -96,7 +96,7 @@
     "clubTitle": "Inside the Mail Club",
     "clubBody": "Details about what’s in each parcel and who the club is for will live here. Owner fills this in before launch.",
     "clubForTitle": "Who it’s for",
-    "clubForBody": "Owner note: describe the ideal member — no invented benefits.",
+    "clubForBody": "Who the club is for will be written here.",
     "pastTitle": "Past sendings",
     "pastBody": "Browse earlier letter moods and archives.",
     "pastCta": "See past letters",
@@ -106,11 +106,11 @@
     "faq": [
       {
         "q": "Is a free account the same as Mail Club?",
-        "a": "No. A free account saves your profile. Paid Mail Club membership is separate and starts only after payment is confirmed."
+        "a": "No. A free account saves your details. A club package is a separate one-time payment."
       },
       {
         "q": "When do parcels ship?",
-        "a": "Shipping dates will be published by the owner — we don’t invent dates here."
+        "a": "Send dates will be posted here when they’re set."
       },
       {
         "q": "Can I shop without joining Mail Club?",
@@ -120,8 +120,8 @@
   },
   "stickerSheets": {
     "title": "Sticker Sheets",
-    "intro": "One-time sticker sheets. These are not a Snail Mail Club membership and they are not a monthly sending.",
-    "emptyTitle": "No sticker sheets yet",
+    "intro": "One-time sticker sheets.",
+    "emptyTitle": "De petits trésors de papier sont en chemin 💌",
     "emptyBody": "Real sticker products and prices are not published yet. This page is ready for them. There is no sample price and nothing to buy until a product is added.",
     "quantity": "Quantity",
     "decrease": "Decrease quantity",
@@ -150,7 +150,8 @@
         "name": "Petites notes",
         "note": "Petites cartes à glisser dans une lettre ou sur un bureau."
       }
-    }
+    },
+    "emptyTitle": "De petits trésors de papier sont en chemin 💌"
   },
   "cart": {
     "eyebrow": "votre panier",
@@ -159,7 +160,7 @@
     "openCart": "Ouvrir le panier",
     "addToCart": "Ajouter au panier",
     "added": "Ajouté",
-    "empty": "Votre panier est vide.",
+    "empty": "Votre sac est vide.",
     "continueShopping": "Continuer vos achats",
     "unitPrice": "Prix unitaire",
     "lineTotal": "Total de la ligne",
@@ -180,10 +181,10 @@
     "lineShop": "Shop item",
     "stickerShipping": "Sticker shipping",
     "stickerShippingValue": "Confirmed at checkout",
-    "stickerShippingNote": "Sticker shipping is separate from Snail Mail Club postage. No sticker shipping price is added until a rate is set, and club postage is not charged again.",
+    "stickerShippingNote": "Sticker shipping is confirmed at checkout.",
     "mixedCheckout": "Check out sticker sheets and Snail Mail Club packages separately so club postage is not added again.",
     "shippingIncluded": "Included",
-    "postageIncludedNote": "Standard postage is included in the Mail Club package price.",
+    "postageIncludedNote": "Postage included.",
     "rewardCode": "Reward code",
     "rewardApply": "Apply",
     "rewardRemove": "Remove code",
@@ -195,11 +196,17 @@
     "rewardHint": "10% off products on this account. One code per order. Shipping and tax are not discounted.",
     "total": "Total",
     "totalAtCheckout": "Confirmé au paiement",
-    "guestNote": "Vous pouvez continuer sans compte. Connectez-vous pour retrouver cette commande dans votre compte.",
+    "guestNote": "Pas besoin de compte. Tu indiques l’adresse, puis tu paies.",
     "checkoutPending": "Ouverture du paiement…",
     "checkoutUnavailable": "Le paiement n'est pas encore disponible ici. Votre panier est conservé.",
     "checkoutError": "Impossible de démarrer le paiement. Réessayez.",
-    "loading": "Chargement du panier…"
+    "loading": "Chargement du panier…",
+    "guestCheckout": "Continuer en invité",
+    "joinTitle": "Rejoignez le club et profitez de 10 % sur votre première commande.",
+    "joinNote": "Créez un compte pour utiliser votre réduction de bienvenue.",
+    "exploreClub": "Explorer le club",
+    "addedToast": "Ajouté à votre sac 💛",
+    "bagCount": "Sac, {count} articles"
   },
   "mailClub": {
     "eyebrow": "le cœur de tout",
@@ -209,7 +216,7 @@
     "listedPriceLabel": "Package total",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "Le paiement ne livre qu’au Canada, aux États-Unis, au Royaume-Uni, en Australie, en France, en Allemagne et en Turquie.",
-    "shippingNotIncluded": "Standard postage is included in the package price. Checkout does not add a second shipping fee.",
+    "shippingNotIncluded": "Postage included.",
     "nextSendUnset": "La prochaine date d’envoi n’est pas publiée.",
     "insideEmpty": "Le contenu de l’enveloppe n’est pas publié.",
     "renewalClosed": "These are prepaid packages. They do not renew automatically.",
@@ -232,11 +239,11 @@
     "detailsTitle": "Détails à compléter plus tard",
     "detailsBody": "[Ajoutez ici le rythme d'adhésion, le contenu et les règles du club quand vous serez prêt·e.]",
     "freeVsPaidTitle": "Free account vs paid Mail Club",
-    "freeVsPaidBody": "A free account stores your details. A Snail Mail Club package is a separate one-time payment and starts only after Stripe confirms it.",
+    "freeVsPaidBody": "A free account saves your details. A club package is a separate one-time payment.",
     "galleryTitle": "Parcel photos",
     "gallerySlot": "Owner photo slots — add real parcel images before launch.",
     "thisMonthTitle": "What’s in this month’s letter",
-    "thisMonthSlot": "Owner fills the monthly contents here. No invented items.",
+    "thisMonthSlot": "This month’s contents will be listed here.",
     "pastLettersTitle": "Past letters",
     "pastLettersBody": "See the archive of previous sendings.",
     "pastLettersCta": "Past Letters",
@@ -271,7 +278,7 @@
     "regionUsa": "USA",
     "regionInternational": "International",
     "oneEnvelope": "One envelope is sent each month for the length of the package.",
-    "paidOnce": "You pay the package total once. This does not renew automatically.",
+    "paidOnce": "One-time payment.",
     "internationalNote": "International delivery is limited to the United Kingdom, Australia, France, Germany, and Turkey.",
     "addPackage": "Add package to cart",
     "joinCta": "Continue to checkout",
@@ -283,7 +290,7 @@
       "Shipping countries & fees",
       "Next send date",
       "Renewal, pause, and cancel rules",
-      "Enable MAIL_CLUB_CHECKOUT_ENABLED for test checkout"
+      "Checkout opens when payments are turned on."
     ]
   },
   "pastLetters": {
@@ -311,10 +318,10 @@
   "about": {
     "eyebrow": "notre histoire",
     "title": "Notre histoire",
-    "intro": "Les champs ci-dessous sont des placeholders. Remplacez-les par la vraie histoire Chocobanana.",
-    "p1": "[Paragraphe d'histoire 1 — à éditer.]",
-    "p2": "[Paragraphe d'histoire 2 — à éditer.]",
-    "logoNote": "Le chaton à l'étoile dorée est la marque affichée sur ce site."
+    "intro": "Chocobanana a commencé dans ma petite maison de Montréal, au milieu du papier, des autocollants, des idées à moitié finies et de ma chatte Winnie, qui pense d’habitude que tout ce qui est sur mon bureau lui appartient.",
+    "p1": "C’est devenu un endroit où je transforme ce que j’aime, les lieux que je découvre et les petits moments du quotidien en quelque chose que tu peux trouver dans ta boîte aux lettres.",
+    "p2": "Fait par moi, parfois approuvé par Winnie 🍌💌",
+    "logoNote": ""
   },
   "contact": {
     "eyebrow": "dire bonjour",
@@ -323,13 +330,16 @@
     "emailLabel": "E-mail",
     "emailPlaceholder": "vous@email.com",
     "nameLabel": "Nom",
-    "namePlaceholder": "[Votre nom]",
+    "namePlaceholder": "Ton nom",
     "messageLabel": "Message",
-    "messagePlaceholder": "[Écrivez votre message ici]",
-    "submit": "Envoyer (exemple)",
-    "formNote": "Ce formulaire n'envoie pas encore de messages. C'est une maquette à connecter plus tard.",
-    "submittedNote": "Exemple seulement — aucun message n'a été envoyé.",
-    "instagramLabel": "Instagram"
+    "messagePlaceholder": "Écris ton message",
+    "submit": "Envoyer",
+    "formNote": "Nous répondons par e-mail.",
+    "submittedNote": "Ton application e-mail devrait s'ouvrir avec ce message. Envoie-le depuis là.",
+    "instagramLabel": "Instagram",
+    "sending": "Envoi…",
+    "sentNote": "Message envoyé. Nous te répondrons bientôt.",
+    "invalidNote": "Ajoute ton nom, un e-mail valide et un message."
   },
   "checkout": {
     "buy": "Buy",
@@ -340,8 +350,8 @@
     "preferredCurrencyHint": "Preferred currency {currency} is saved for Stripe Checkout when Adaptive Pricing applies.",
     "testModeNote": "Test mode: use Stripe test cards. No live charges.",
     "successEyebrow": "almost there",
-    "successTitle": "Payment received by Stripe",
-    "successBody": "Thanks for your order. We confirm fulfillment from Stripe webhooks, not only from this page.",
+    "successTitle": "Thank you",
+    "successBody": "Your payment went through. We’ll email you when the order is confirmed.",
     "successMissing": "We could not find a checkout session to display.",
     "cancelEyebrow": "no worries",
     "cancelTitle": "Checkout canceled",
@@ -354,10 +364,10 @@
     "orderRecord": "Order record",
     "orderNumber": "Numéro de commande",
     "orderNumberPending": "Votre numéro de commande apparaît ici dès que la commande payée est enregistrée. Le même numéro figure dans Mes commandes.",
-    "orderRecordReady": "Webhook recorded this paid order in the database",
-    "orderRecordPendingWebhook": "Waiting for webhook confirmation (not trusted from redirect alone)",
+    "orderRecordReady": "Your order is saved.",
+    "orderRecordPendingWebhook": "Your order will appear once payment is confirmed.",
     "contactEmail": "Contact email",
-    "webhookTrustNote": "This page reads the Checkout Session from Stripe. Paid orders are stored only after the webhook confirms payment.",
+    "webhookTrustNote": "Your order is confirmed after payment is complete.",
     "pendingEyebrow": "presque",
     "pendingTitle": "Paiement en attente",
     "pendingBody": "Stripe n’a pas encore marqué ce paiement comme payé. La commande n’apparaît qu’après confirmation webhook.",
@@ -367,12 +377,55 @@
     "orderRecordNotPaid": "Aucune commande payée en base (paiement non confirmé)",
     "shippingAmount": "Livraison",
     "taxAmount": "Taxe",
-    "walletsNote": "La carte est disponible. Apple Pay et Google Pay n’apparaissent que si Stripe les active et que l’appareil les prend en charge."
+    "walletsNote": "La carte est disponible. Apple Pay et Google Pay n’apparaissent que si Stripe les active et que l’appareil les prend en charge.",
+    "shipTitle": "Livraison",
+    "shipIntro": "Où faut-il envoyer ceci ?",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "E-mail",
+    "country": "Pays",
+    "address": "Adresse de livraison",
+    "apartment": "Appartement (facultatif)",
+    "city": "Ville",
+    "region": "Province / état",
+    "postal": "Code postal",
+    "phone": "Téléphone",
+    "continuePayment": "Continuer vers le paiement",
+    "pending": "Un instant…",
+    "summary": "Ta commande",
+    "deliveryRegion": "Région de livraison",
+    "regionCanada": "Canada",
+    "regionUsa": "États-Unis",
+    "regionInternational": "International",
+    "postageIncluded": "Port inclus",
+    "shippingLine": "Livraison",
+    "total": "Total",
+    "countryMismatch": "Ce forfait est tarifé pour une autre région.",
+    "addressInvalid": "Vérifie l’adresse et réessaie.",
+    "checkoutEmpty": "Ton panier est vide.",
+    "createAccountAfter": "Créer un compte",
+    "createAccountAfterNote": "Garde tes coordonnées pour la prochaine fois. Cette commande reste une commande invité.",
+    "welcomeDiscount": "Réduction de bienvenue — 10 %",
+    "joinTitle": "Rejoignez le club et profitez de 10 % sur votre première commande.",
+    "joinNote": "Créez un compte pour utiliser votre réduction de bienvenue.",
+    "stepDetails": "Vos informations",
+    "stepPayment": "Paiement",
+    "stepConfirmation": "Confirmation",
+    "stepsLabel": "Étapes du paiement",
+    "fieldRequired": "Ce champ est requis.",
+    "emailInvalid": "Indiquez un e-mail valide.",
+    "postalInvalid": "Vérifiez le code postal.",
+    "phoneInvalid": "Indiquez un numéro utilisable pour la livraison.",
+    "regionInvalid": "Choisissez une province ou un état."
   },
   "footer": {
     "tagline": "mail club",
     "credit": "Fait avec du papier doux et des étoiles dorées.",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "faq": "FAQ",
+    "shipping": "Livraison",
+    "linksLabel": "Pied de page",
+    "privacy": "Confidentialité"
   },
   "comingSoon": {
     "brand": "Chocobanana",
@@ -397,7 +450,9 @@
     "logoAlt": "Chocobanana mail club logo with a kitten wearing a golden star",
     "selectLanguage": "Select language",
     "selectCurrency": "Select currency",
-    "accountMenu": "Compte"
+    "accountMenu": "Compte",
+    "breadcrumb": "Fil d’Ariane",
+    "notifications": "Notifications"
   },
   "auth": {
     "eyebrow": "your account",
@@ -433,6 +488,15 @@
     "haveAccount": "Already have an account? Sign in",
     "sendReset": "Send reset link",
     "updatePassword": "Update password",
+    "confirmPassword": "Confirme le mot de passe",
+    "resetSent": "Si cette adresse est enregistrée, un lien de réinitialisation a été envoyé.",
+    "resetWait": "Attends quelques minutes, puis réessaie.",
+    "resetInvalid": "Ce lien de réinitialisation est invalide ou expiré.",
+    "resetRequestAgain": "Demander un nouveau lien",
+    "resetMismatch": "Les mots de passe ne correspondent pas.",
+    "resetRules": "Utilise au moins 8 caractères, avec une lettre et un chiffre.",
+    "resetUpdated": "Mot de passe mis à jour. Tu peux te connecter.",
+    "resetEmailInvalid": "Saisis une adresse e-mail valide.",
     "firstName": "Prénom",
     "lastName": "Nom",
     "emailSetupRequired": "Email delivery is not set up yet. Set RESEND_API_KEY and EMAIL_FROM (address on a Resend-verified domain). Registration and password reset stay unavailable until then.",
@@ -442,7 +506,8 @@
     "step1Title": "About you",
     "step2Title": "Phone & address",
     "nextStep": "Continue",
-    "backStep": "Back"
+    "backStep": "Back",
+    "marketingOptIn": "Recevoir parfois des nouvelles de Chocobanana. C’est facultatif."
   },
   "account": {
     "eyebrow": "welcome back",
@@ -473,14 +538,51 @@
     "membershipPortalUnavailable": "Billing portal opens after a paid subscription exists.",
     "addressHint": "Updating your address changes future sendings and your profile. Past order address copies stay as they were at purchase.",
     "saveAddress": "Save address",
-    "rewardSection": "Rewards",
+    "rewardSection": "Mes récompenses",
     "rewardProgress": "Next reward: {current}/{target} paid orders",
     "rewardHint": "Every 5 paid orders earns one single-use code for 10% off the next purchase. The code works only on this account.",
     "rewardAvailable": "Available",
     "rewardNone": "No reward codes yet.",
     "rewardFirstOrder": "Première commande",
     "rewardReserved": "Held for an open checkout",
-    "rewardDiscount": "Reward"
+    "rewardDiscount": "Reward",
+    "settingsSection": "Paramètres du compte",
+    "discover": "Découvrir Chocobanana",
+    "welcomeTitle": "Réduction de bienvenue — 10 %",
+    "welcomeAvailable": "Disponible sur votre première commande. Connectez-vous au paiement et elle s’affiche toute seule. Elle s’applique une fois et ne se combine pas avec un autre code.",
+    "welcomeUsed": "Utilisée",
+    "welcomeUnavailable": "Indisponible. Cette réduction est réservée à une première commande.",
+    "rewardUsed": "Utilisée",
+    "rewardEmptyTitle": "Pas encore de récompense",
+    "rewardEmptyBody": "Toutes les 5 commandes terminées, vous recevez 10 % sur la suivante. La réduction de bienvenue est séparée et ne concerne que la première commande.",
+    "savedToast": "Enregistré 💛",
+    "saving": "Enregistrement…",
+    "profileInvalid": "Vérifiez les champs et réessayez.",
+    "addressEmpty": "Aucune adresse enregistrée.",
+    "ordersCounted": "{count} commandes terminées comptent pour la prochaine récompense.",
+    "deleteAccount": {
+      "title": "Supprimer le compte",
+      "description": "Cette action supprime définitivement votre compte, votre profil, vos adresses, vos codes de récompense et les notifications de l'app, et arrête toute facturation Mail Club. Les commandes payées sont conservées sans lien avec votre compte pour la comptabilité. Action irréversible.",
+      "open": "Supprimer mon compte",
+      "passwordLabel": "Mot de passe actuel",
+      "confirmLabel": "Je comprends que mon compte sera définitivement supprimé.",
+      "submit": "Supprimer définitivement",
+      "submitting": "Suppression…",
+      "cancel": "Annuler",
+      "errors": {
+        "password": "Mot de passe incorrect.",
+        "confirm": "Cochez la case pour confirmer.",
+        "billing": "Impossible d'arrêter la facturation Mail Club : rien n'a été supprimé. Réessayez ou contactez-nous.",
+        "owner": "Le compte propriétaire ne peut pas être supprimé ici.",
+        "unavailable": "La suppression n'est pas disponible pour le moment. Contactez-nous.",
+        "generic": "Une erreur est survenue, rien n'a été supprimé. Réessayez."
+      }
+    },
+    "deleted": {
+      "title": "Votre compte a été supprimé",
+      "body": "Votre compte et vos données personnelles ont été supprimés. Merci d'avoir fait partie de Chocobanana.",
+      "back": "Retour à l'accueil"
+    }
   },
   "owner": {
     "subscriptionsTitle": "Mail Club subscriptions",
@@ -494,5 +596,73 @@
     "statSubscribers": "Active paid subscribers",
     "statOrdersNew": "New paid orders (24h)",
     "statFulfillment": "To prepare this month"
+  },
+  "mailing": {
+    "title": "Un peu de joie dans ta boîte mail 💛",
+    "note": "Rejoins la liste pour les nouvelles, les sorties et le mail club.",
+    "firstName": "Prénom (facultatif)",
+    "email": "E-mail",
+    "consent": "Je veux recevoir les nouvelles de Chocobanana. C’est facultatif et cela ne crée pas de compte.",
+    "submit": "Rejoindre la liste",
+    "pending": "Un instant…",
+    "signIn": "Déjà membre ? Connexion",
+    "later": "Plus tard",
+    "success": "Vérifie ton e-mail pour confirmer. Aucun compte n’est créé.",
+    "consentError": "Coche la case pour recevoir les e-mails.",
+    "emailError": "Entre un e-mail valide.",
+    "already": "Cet e-mail est déjà sur la liste.",
+    "pendingNote": "Cet e-mail attend déjà une confirmation.",
+    "sendError": "L’e-mail de confirmation n’a pas pu être envoyé. Rien n’a été ajouté.",
+    "close": "Fermer"
+  },
+  "faq": {
+    "title": "FAQ",
+    "intro": "Quelques réponses sur le fonctionnement actuel du club.",
+    "q1": "Faut-il un compte pour commander ?",
+    "a1": "Non. Vous pouvez continuer en invité. Un compte enregistre vos informations et est nécessaire pour les réductions membres.",
+    "q2": "Comment fonctionne la réduction de bienvenue de 10 % ?",
+    "a2": "Créez un compte, puis connectez-vous avant de payer. Elle s’applique une fois, à la première commande, et ne se combine pas avec un autre code.",
+    "q3": "Comment fonctionnent les récompenses toutes les 5 commandes ?",
+    "a3": "Toutes les 5 commandes terminées sur votre compte, un code de 10 % est créé pour une commande suivante. Ce code ne fonctionne que sur ce compte.",
+    "q4": "Où livrez-vous ?",
+    "a4": "Le paiement peut livrer au Canada, aux États-Unis, au Royaume-Uni, en Australie, en France, en Allemagne et en Turquie. L’affranchissement standard est inclus dans les forfaits Snail Mail Club."
+  },
+  "shipping": {
+    "title": "Livraison",
+    "intro": "Ce que nous pouvons dire aujourd’hui sur la livraison.",
+    "postage": "L’affranchissement standard est inclus dans les forfaits Snail Mail Club.",
+    "countries": "Le paiement peut livrer au Canada, aux États-Unis, au Royaume-Uni, en Australie, en France, en Allemagne et en Turquie.",
+    "stickers": "La livraison des stickers est confirmée au paiement. Des frais séparés ne sont pas encore publiés.",
+    "timing": "Aucun délai de livraison n’est publié pour le moment."
+  },
+  "app": {
+    "tabs": {
+      "home": "Accueil",
+      "stickers": "Stickers",
+      "club": "Club",
+      "cart": "Panier",
+      "account": "Compte",
+      "navigation": "Navigation de l'app"
+    },
+    "offline": "Vous êtes hors ligne. La navigation et le paiement reprendront à la reconnexion.",
+    "backOnline": "De nouveau en ligne",
+    "loading": "Chargement",
+    "push": {
+      "title": "Notifications",
+      "description": "Recevez une notification quand votre commande est préparée, expédiée ou livrée. Uniquement des mises à jour de commande.",
+      "enable": "Activer les notifications",
+      "enabled": "Les notifications de commande sont activées sur cet appareil.",
+      "denied": "Les notifications sont bloquées. Autorisez-les pour Chocobanana dans les Réglages du téléphone.",
+      "unavailable": "Les notifications ne sont pas encore disponibles dans cette version de l'app.",
+      "error": "Impossible d'activer les notifications. Réessayez.",
+      "saving": "Activation…",
+      "orderTitle": "Mise à jour de commande Chocobanana",
+      "orderStatus": {
+        "PREPARING": "Nous préparons votre commande {order}.",
+        "SHIPPED": "Votre commande {order} est en route !",
+        "COMPLETED": "Votre commande {order} a été livrée. Profitez-en !",
+        "CANCELED": "Votre commande {order} a été annulée. Contactez-nous en cas de question."
+      }
+    }
   }
 }

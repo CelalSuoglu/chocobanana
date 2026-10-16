@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AuthField, AuthForm } from "@/components/auth-form";
-import { PageHero } from "@/components/page-hero";
+import { AuthPageShell } from "@/components/auth-page-shell";
 import { resetPassword } from "@/lib/auth/actions";
+import { passwordResetTokenIsValid } from "@/lib/auth/password-reset";
 import { isDatabaseConfigured } from "@/lib/db";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { hrefFor } from "@/lib/nav";
 
 export default async function ResetPasswordPage({
   params,
@@ -17,24 +20,40 @@ export default async function ResetPasswordPage({
   if (!isLocale(raw)) notFound();
   const dict = await getDictionary(raw);
   const { token = "" } = await searchParams;
+  const tokenOk =
+    isDatabaseConfigured() && (await passwordResetTokenIsValid(token));
 
   return (
-    <main className="section-pad flex-1 pb-16 pt-8 md:pb-20 md:pt-12">
-      <PageHero
-        eyebrow={dict.auth.eyebrow}
-        title={dict.auth.resetTitle}
-        intro={dict.auth.resetIntro}
-      />
+    <AuthPageShell
+      eyebrow={dict.auth.eyebrow}
+      title={dict.auth.resetTitle}
+      intro={tokenOk ? dict.auth.resetIntro : dict.auth.resetInvalid}
+      logoAlt={dict.a11y.logoAlt}
+    >
       {!isDatabaseConfigured() ? (
-        <p className="mx-auto mt-8 max-w-md text-center text-sm text-chocolate-soft">
+        <p className="text-center text-sm text-chocolate-soft">
           {dict.auth.notConfigured}
         </p>
+      ) : !tokenOk ? (
+        <p className="text-center text-sm text-chocolate-soft">
+          <Link
+            href={hrefFor(raw, "/forgot-password")}
+            className="text-pink-deep underline-offset-2 hover:underline"
+          >
+            {dict.auth.resetRequestAgain}
+          </Link>
+        </p>
       ) : (
-        <div className="mt-10">
+        <>
+          <p className="mb-4 text-center text-sm text-chocolate-soft">
+            {dict.auth.resetRules}
+          </p>
           <AuthForm
             action={resetPassword}
             submitLabel={dict.auth.updatePassword}
-            hiddenFields={{ token }}
+            pendingLabel={dict.auth.pleaseWait}
+            hiddenFields={{ token, locale: raw }}
+            successHref={hrefFor(raw, "/login")}
           >
             <AuthField
               label={dict.auth.password}
@@ -42,9 +61,15 @@ export default async function ResetPasswordPage({
               type="password"
               autoComplete="new-password"
             />
+            <AuthField
+              label={dict.auth.confirmPassword}
+              name="confirm"
+              type="password"
+              autoComplete="new-password"
+            />
           </AuthForm>
-        </div>
+        </>
       )}
-    </main>
+    </AuthPageShell>
   );
 }

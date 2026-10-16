@@ -34,6 +34,7 @@ type RegisterWizardProps = {
     signUp: string;
     pleaseWait: string;
     haveAccount: string;
+    marketingOptIn: string;
   };
   countries: CountryOption[];
 };
@@ -189,6 +190,15 @@ export function RegisterWizard({
             {state.error}
           </p>
         ) : null}
+        <label className="flex items-start gap-3 text-sm leading-relaxed text-chocolate">
+          <input
+            type="checkbox"
+            name="marketingOptIn"
+            value="yes"
+            className="mt-1 h-4 w-4 accent-chocolate"
+          />
+          <span>{labels.marketingOptIn}</span>
+        </label>
         <div className="flex flex-wrap gap-3">
           <button
             type="button"

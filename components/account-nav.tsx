@@ -53,7 +53,7 @@ export function AccountNav({
     <div className="flex items-center gap-1 sm:gap-2">
       <Link
         href={iconHref}
-        className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
+        className="relative inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line bg-paper/90 text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
         aria-label={signedIn ? accountLabel : accountIconLabel}
       >
         <PersonIcon />
@@ -61,11 +61,17 @@ export function AccountNav({
 
       {signedIn ? (
         <>
+          <Link
+            href={hrefFor(locale, "/account")}
+            className="hidden min-h-10 items-center rounded-full px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:text-pink-deep xl:inline-flex"
+          >
+            {accountLabel}
+          </Link>
           <form action={logoutCustomerAction} className="hidden xl:block">
             <input type="hidden" name="locale" value={locale} />
             <button
               type="submit"
-              className="inline-flex min-h-10 items-center rounded-full border border-pink/45 bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
+              className="inline-flex min-h-10 items-center rounded-full border border-line bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
             >
               {signOutLabel}
             </button>
@@ -81,7 +87,7 @@ export function AccountNav({
           </Link>
           <Link
             href={hrefFor(locale, "/register")}
-            className="hidden min-h-10 items-center rounded-full border border-pink/45 bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep xl:inline-flex"
+            className="hidden min-h-10 items-center rounded-full border border-line bg-paper/90 px-3 font-serif text-sm tracking-[0.08em] text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep xl:inline-flex"
           >
             {signUpLabel}
           </Link>

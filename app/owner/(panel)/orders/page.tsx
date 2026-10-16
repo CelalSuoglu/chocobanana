@@ -79,7 +79,7 @@ export default async function OwnerOrdersPage({
           see real orders here. Sample/demo orders are never listed.
         </p>
       ) : (
-        <ul className="mt-8 divide-y divide-pink/25 border-t border-pink/30">
+        <ul className="mt-8 divide-y divide-pink/25 border-t border-line">
           {orders.map((order) => (
             <li key={order.id} className="py-4">
               <Link
@@ -88,7 +88,12 @@ export default async function OwnerOrdersPage({
               >
                 <div>
                   <p className="font-serif text-lg">
-                    {displayOrderNumber(order.id)} · {order.customerEmail}
+                    {displayOrderNumber(order.publicNumber)} · {order.customerEmail}
+                    {order.userId ? null : (
+                      <span className="ms-2 text-xs uppercase tracking-wider text-chocolate-soft">
+                        Guest
+                      </span>
+                    )}
                   </p>
                   <p className="text-xs text-chocolate-soft">
                     {new Date(order.createdAt).toLocaleString("en-CA")} ·{" "}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
+import { useToast } from "@/components/toast-provider";
 
 type StickerAddToCartProps = {
   productId: string;
@@ -21,13 +22,14 @@ export function StickerAddToCart({
   increaseLabel,
 }: StickerAddToCartProps) {
   const { addItem } = useCart();
+  const toast = useToast();
   const [quantity, setQuantity] = useState(1);
-  const [justAdded, setJustAdded] = useState(false);
+  const [pending, setPending] = useState(false);
 
   return (
     <div className="mt-6">
       <p className="text-sm text-chocolate-soft">{quantityLabel}</p>
-      <div className="mt-2 inline-flex items-center rounded-full border border-pink/45">
+      <div className="mt-2 inline-flex items-center rounded-full border border-line">
         <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center text-lg text-chocolate"
@@ -49,13 +51,17 @@ export function StickerAddToCart({
       <button
         type="button"
         className="btn-secondary mt-4"
+        disabled={pending}
+        aria-busy={pending}
         onClick={() => {
-          addItem(productId, quantity);
-          setJustAdded(true);
-          window.setTimeout(() => setJustAdded(false), 1200);
+          if (pending) return;
+          setPending(true);
+          const added = addItem(productId, quantity);
+          if (added) toast?.notify({ message: addedLabel, tone: "ok" });
+          setPending(false);
         }}
       >
-        {justAdded ? addedLabel : label}
+        {label}
       </button>
     </div>
   );

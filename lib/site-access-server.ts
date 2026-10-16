@@ -1,4 +1,5 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { isNativeAppUserAgent } from "@/lib/native/user-agent";
 import {
   hasValidPreviewAccess,
   isComingSoonEnabled,
@@ -13,6 +14,8 @@ import { isPublicSiteOpen } from "@/lib/site/public-opening";
  */
 export async function isComingSoonGateActive(): Promise<boolean> {
   if (!isComingSoonEnabled()) return false;
+  // The iOS/Android app always shows the full shop.
+  if (isNativeAppUserAgent((await headers()).get("user-agent"))) return false;
   const cookieStore = await cookies();
   if (hasValidPreviewAccess(cookieStore.get(previewCookieName)?.value)) {
     return false;

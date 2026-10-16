@@ -8,6 +8,7 @@ import { hrefFor } from "@/lib/nav";
 type CartIconLinkProps = {
   locale: Locale;
   label: string;
+  countLabel: string;
 };
 
 function BagIcon() {
@@ -26,15 +27,15 @@ function BagIcon() {
   );
 }
 
-export function CartIconLink({ locale, label }: CartIconLinkProps) {
+export function CartIconLink({ locale, label, countLabel }: CartIconLinkProps) {
   const { itemCount, ready } = useCart();
   const count = ready ? itemCount : 0;
 
   return (
     <Link
       href={hrefFor(locale, "/cart")}
-      className="relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
-      aria-label={label}
+      className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper/90 text-chocolate transition-colors hover:border-pink-deep hover:text-pink-deep"
+      aria-label={count > 0 ? countLabel.replace("{count}", String(count)) : label}
     >
       <BagIcon />
       {count > 0 ? (

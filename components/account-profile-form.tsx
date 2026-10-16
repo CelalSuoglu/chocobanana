@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { AuthField } from "@/components/auth-form";
+import { useToast } from "@/components/toast-provider";
 import {
   updateCustomerProfile,
   type AuthActionState,
@@ -32,6 +33,14 @@ export function AccountProfileForm({
   profile: Profile;
 }) {
   const [state, action, pending] = useActionState(updateCustomerProfile, initial);
+  const toast = useToast();
+  const wasPending = useRef(false);
+  useEffect(() => {
+    if (wasPending.current && !pending && state.ok) {
+      toast?.notify({ message: dict.account.savedToast, tone: "ok" });
+    }
+    wasPending.current = pending;
+  }, [pending, state.ok, dict.account.savedToast, toast]);
 
   return (
     <form action={action} className="mt-4 flex flex-col gap-4">
@@ -70,17 +79,13 @@ export function AccountProfileForm({
           {state.error}
         </p>
       ) : null}
-      {state.message ? (
-        <p className="notice notice-ok" role="status">
-          {state.message}
-        </p>
-      ) : null}
       <button
         type="submit"
         disabled={pending}
+        aria-busy={pending}
         className="btn-secondary btn-inline"
       >
-        {pending ? "Saving…" : dict.account.saveProfile}
+        {pending ? dict.account.saving : dict.account.saveProfile}
       </button>
     </form>
   );

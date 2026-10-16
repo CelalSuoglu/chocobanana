@@ -16,11 +16,10 @@ export type NavItem = {
   path: string;
 };
 
-/** Primary storefront menu (header). */
+/** Primary storefront menu (header). Shop stays at /shop for stationery that is not a sticker sheet. */
 export const primaryNavItems: readonly NavItem[] = [
   { id: "stickerSheets", path: "/sticker-sheets" },
   { id: "snailMailClub", path: "/snail-mail-club" },
-  { id: "shop", path: "/shop" },
   { id: "about", path: "/about" },
 ] as const;
 

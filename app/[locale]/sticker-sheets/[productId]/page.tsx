@@ -93,7 +93,7 @@ export default async function StickerSheetProductPage({
           <StickerAddToCart
             productId={product.id}
             label={dict.cart.addToCart}
-            addedLabel={dict.cart.added}
+            addedLabel={dict.cart.addedToast}
             quantityLabel={dict.stickerSheets.quantity}
             decreaseLabel={dict.stickerSheets.decrease}
             increaseLabel={dict.stickerSheets.increase}

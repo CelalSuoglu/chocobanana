@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
+import { parseDeliveryDetails, type DeliveryDetails } from "@/lib/checkout/address";
+import { CHECKOUT_SHIPPING_COUNTRIES } from "@/lib/stripe/shipping";
 import { isDatabaseConfigured } from "@/lib/db";
 import { isComingSoonGateActiveForRequest } from "@/lib/site-access";
 import { createCheckoutSession } from "@/lib/stripe/checkout";
@@ -16,6 +18,7 @@ type CheckoutBody = {
   unitAmount?: unknown;
   currency?: unknown;
   rewardCode?: unknown;
+  delivery?: unknown;
   /** Ignored. Discount is calculated on the server from a valid reward code. */
   discount?: unknown;
   discountCadCents?: unknown;
@@ -89,15 +92,30 @@ export async function POST(request: Request) {
     typeof body.rewardCode === "string" ? body.rewardCode.trim() : undefined;
 
   const session = await auth();
+  const signedInMember =
+    session?.user?.id && session.user.role === "CUSTOMER" ? session.user : null;
+
+  const parsedDelivery = parseDeliveryDetails(
+    body.delivery,
+    CHECKOUT_SHIPPING_COUNTRIES,
+  );
+  if (!parsedDelivery.ok) {
+    return NextResponse.json(
+      { error: parsedDelivery.error },
+      { status: 400 },
+    );
+  }
+  const delivery: DeliveryDetails = parsedDelivery.value;
 
   try {
     const result = await createCheckoutSession({
       productId,
       locale,
       items,
-      userId: session?.user?.id ?? null,
-      customerEmail: session?.user?.email ?? null,
-      rewardCode,
+      userId: signedInMember?.id ?? null,
+      customerEmail: signedInMember?.email ?? delivery.email,
+      rewardCode: signedInMember ? rewardCode : undefined,
+      delivery,
     });
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: result.status });

@@ -1,0 +1,15 @@
+node_modules/
+# Native build outputs (the android/ and ios/ projects themselves are committed)
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+ios/App/Pods/
+ios/App/build/
+ios/DerivedData/
+# Firebase client config: not a server secret, but keep it out of the public repo
+android/app/google-services.json
+*.keystore
+*.jks
+*.p8
+_to_delete/

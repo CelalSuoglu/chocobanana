@@ -72,7 +72,7 @@ export function CountdownTimer({
   if (expired) {
     return (
       <div className="mx-auto max-w-lg animate-rise text-center">
-        <p className="font-script text-3xl text-pink-deep md:text-4xl">
+        <p className="font-script text-3xl text-chocolate md:text-4xl">
           {almostHereTitle}
         </p>
         <p className="mt-3 font-serif text-base leading-relaxed text-chocolate-soft md:text-lg">

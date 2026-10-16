@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BuyButton } from "@/components/buy-button";
 import { getStickerSheetProducts } from "@/lib/catalog/products";
 import { baseCurrency, formatCatalogPrice } from "@/lib/currency/config";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
+import { paymentsCheckoutEnabled } from "@/lib/stripe/config";
 
 export async function generateMetadata({
   params,
@@ -26,6 +28,7 @@ export default async function StickerSheetsPage({
   if (!isLocale(raw)) notFound();
   const dict = await getDictionary(raw);
   const products = getStickerSheetProducts();
+  const checkoutOpen = paymentsCheckoutEnabled();
 
   return (
     <main className="section-pad mx-auto w-full max-w-6xl flex-1 py-8 md:py-12">
@@ -39,7 +42,7 @@ export default async function StickerSheetsPage({
         <span className="text-chocolate">{dict.stickerSheets.title}</span>
       </nav>
 
-      <header className="mt-6 max-w-2xl border-b border-pink/30 pb-6">
+      <header className="mt-6 max-w-2xl border-b border-line pb-6">
         <h1 className="page-title">
           {dict.stickerSheets.title}
         </h1>
@@ -66,9 +69,9 @@ export default async function StickerSheetsPage({
               preferredCurrency: baseCurrency,
             });
             return (
-              <li key={product.id} className="store-card overflow-hidden">
+              <li key={product.id} className="overflow-hidden rounded-2xl border border-line bg-paper">
                 <Link href={hrefFor(raw, `/sticker-sheets/${product.id}`)} className="block">
-                  <div className="relative aspect-square bg-cream-deep/40">
+                  <div className="relative aspect-square bg-cream">
                     <Image
                       src={product.imageSrc}
                       alt={product.nameEn}
@@ -77,14 +80,22 @@ export default async function StickerSheetsPage({
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     />
                   </div>
-                  <div className="px-5 py-5">
-                    <h2 className="font-serif text-2xl text-chocolate">{product.nameEn}</h2>
-                    <p className="mt-2 font-serif text-xl text-chocolate">{priced.primary}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-                      {product.descriptionEn}
-                    </p>
-                  </div>
                 </Link>
+                <div className="px-4 py-4">
+                  <h2 className="font-serif text-xl text-chocolate">
+                    <Link href={hrefFor(raw, `/sticker-sheets/${product.id}`)}>{product.nameEn}</Link>
+                  </h2>
+                  <p className="mt-1 font-serif text-lg text-chocolate">{priced.primary}</p>
+                  <BuyButton
+                    productId={product.id}
+                    locale={raw}
+                    label={dict.checkout.buy}
+                    unavailableLabel={dict.stickerSheets.emptyBody}
+                    errorLabel={dict.checkout.error}
+                    enabled={checkoutOpen}
+                    className="mt-4"
+                  />
+                </div>
               </li>
             );
           })}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import type { Locale } from "@/lib/i18n/config";
 
 type BuyButtonProps = {
@@ -18,12 +19,11 @@ export function BuyButton({
   locale,
   label,
   unavailableLabel,
-  errorLabel,
   enabled,
   className = "mt-4",
 }: BuyButtonProps) {
-  const [error, setError] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
+  const router = useRouter();
+  const [pending, setPending] = useState(false);
 
   if (!enabled) {
     return (
@@ -33,47 +33,20 @@ export function BuyButton({
     );
   }
 
-  function onClick() {
-    setError(null);
-    startTransition(async () => {
-      try {
-        const response = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ productId, locale }),
-        });
-        const data = (await response.json()) as {
-          url?: string;
-          error?: string;
-        };
-
-        if (!response.ok || !data.url) {
-          setError(data.error ?? errorLabel);
-          return;
-        }
-
-        window.location.assign(data.url);
-      } catch {
-        setError(errorLabel);
-      }
-    });
-  }
-
   return (
     <div className={className}>
       <button
         type="button"
-        onClick={onClick}
         disabled={pending}
+        aria-busy={pending}
         className="btn-primary"
+        onClick={() => {
+          setPending(true);
+          router.push(`/${locale}/checkout?product=${encodeURIComponent(productId)}`);
+        }}
       >
         {pending ? "…" : label}
       </button>
-      {error ? (
-        <p className="mt-2 text-xs text-pink-deep" role="alert">
-          {error}
-        </p>
-      ) : null}
     </div>
   );
 }

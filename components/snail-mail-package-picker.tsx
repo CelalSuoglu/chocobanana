@@ -32,6 +32,7 @@ type SnailMailPackagePickerProps = {
     paidOnce: string;
     postageIncluded: string;
     internationalNote: string;
+    detailsTitle: string;
     checkout: string;
     addPackage: string;
     added: string;
@@ -68,15 +69,10 @@ export function SnailMailPackagePicker({
   });
 
   return (
-    <div className="mt-4">
-      <p className="text-xs uppercase tracking-[0.14em] text-chocolate-soft">
-        {labels.listedPriceLabel}
-      </p>
-      <p className="font-serif text-3xl text-chocolate">{priced.primary}</p>
-
-      <fieldset className="mt-4">
+    <div className="mt-6">
+      <fieldset>
         <legend className="text-sm text-chocolate">{labels.termLabel}</legend>
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
+        <div className="mt-2 grid grid-cols-2 gap-2">
           {SNAIL_MAIL_TERMS.map((option) => (
             <button
               key={option}
@@ -86,7 +82,7 @@ export function SnailMailPackagePicker({
               className={`min-h-11 rounded-full border px-3 text-sm ${
                 term === option
                   ? "border-chocolate bg-chocolate text-paper"
-                  : "border-pink/50 text-chocolate"
+                  : "border-chocolate/20 bg-paper text-chocolate"
               }`}
             >
               {labels[termLabels[option]]}
@@ -95,7 +91,7 @@ export function SnailMailPackagePicker({
         </div>
       </fieldset>
 
-      <fieldset className="mt-4">
+      <fieldset className="mt-5">
         <legend className="text-sm text-chocolate">{labels.regionLabel}</legend>
         <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
           {SNAIL_MAIL_REGIONS.map((option) => (
@@ -107,7 +103,7 @@ export function SnailMailPackagePicker({
               className={`min-h-11 rounded-full border px-3 text-sm ${
                 region === option
                   ? "border-chocolate bg-chocolate text-paper"
-                  : "border-pink/50 text-chocolate"
+                  : "border-chocolate/20 bg-paper text-chocolate"
               }`}
             >
               {labels[regionLabels[option]]}
@@ -116,20 +112,10 @@ export function SnailMailPackagePicker({
         </div>
       </fieldset>
 
-      <p className="mt-4 text-sm leading-relaxed text-chocolate-soft">
-        {labels.oneEnvelope}
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-        {labels.paidOnce}
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-        {labels.postageIncluded}
-      </p>
-      {region === "international" ? (
-        <p className="mt-2 text-sm leading-relaxed text-chocolate-soft">
-          {labels.internationalNote}
-        </p>
-      ) : null}
+      <p className="mt-6 text-sm text-chocolate-soft">{labels.listedPriceLabel}</p>
+      <p className="font-serif text-4xl text-chocolate">{priced.primary}</p>
+      <p className="mt-2 text-sm text-chocolate-soft">{labels.postageIncluded}</p>
+      <p className="mt-1 text-sm text-chocolate-soft">{labels.paidOnce}</p>
 
       <BuyButton
         productId={productId}
@@ -138,7 +124,7 @@ export function SnailMailPackagePicker({
         unavailableLabel={labels.unavailable}
         errorLabel={labels.error}
         enabled={enabled}
-        className="mt-4"
+        className="mt-5"
       />
       {enabled ? (
         <AddToCartButton
@@ -148,6 +134,13 @@ export function SnailMailPackagePicker({
           className="mt-3"
         />
       ) : null}
+      <details className="mt-8 border-t border-line pt-4">
+        <summary className="cursor-pointer text-sm text-chocolate">{labels.detailsTitle}</summary>
+        <div className="mt-3 space-y-2 text-sm leading-relaxed text-chocolate-soft">
+          <p>{labels.oneEnvelope}</p>
+          {region === "international" ? <p>{labels.internationalNote}</p> : null}
+        </div>
+      </details>
     </div>
   );
 }

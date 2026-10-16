@@ -54,7 +54,7 @@ export function LocaleCurrencySwitcher({
   }
 
   const selectClass =
-    "min-h-10 min-w-[6.5rem] max-w-[42vw] rounded-full border border-pink/45 bg-paper/90 px-2.5 py-2 font-serif text-xs text-chocolate shadow-sm outline-none transition-colors hover:border-pink-deep focus-visible:ring-2 focus-visible:ring-pink sm:text-sm md:max-w-none md:min-w-[8.5rem] md:px-3";
+    "min-h-10 min-w-[6.5rem] max-w-[42vw] rounded-full border border-line bg-paper/90 px-2.5 py-2 font-serif text-xs text-chocolate shadow-sm outline-none transition-colors hover:border-pink-deep focus-visible:ring-2 focus-visible:ring-pink sm:text-sm md:max-w-none md:min-w-[8.5rem] md:px-3";
 
   return (
     <div

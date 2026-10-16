@@ -57,6 +57,7 @@ export default async function RegisterPage({
             signUp: dict.auth.signUp,
             pleaseWait: dict.auth.pleaseWait,
             haveAccount: dict.auth.haveAccount,
+            marketingOptIn: dict.auth.marketingOptIn,
           }}
         />
       )}

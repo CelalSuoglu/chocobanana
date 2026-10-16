@@ -1,6 +1,8 @@
+import type { Viewport } from "next";
 import type { ReactNode } from "react";
 import { Caveat, Cormorant_Garamond, Lora } from "next/font/google";
 import { OwnerChrome } from "@/components/owner-chrome";
+import { getNativeAppContext } from "@/lib/native/app-context";
 import "../globals.css";
 import "./owner.css";
 
@@ -27,11 +29,20 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
+export async function generateViewport(): Promise<Viewport> {
+  const app = await getNativeAppContext();
+  return app.isApp
+    ? { width: "device-width", initialScale: 1, viewportFit: "cover", themeColor: "#fffbee" }
+    : { width: "device-width", initialScale: 1 };
+}
+
 /** Shared owner chrome — same brand palette as the storefront, without shop navigation. */
-export default function OwnerRootLayout({ children }: { children: ReactNode }) {
+export default async function OwnerRootLayout({ children }: { children: ReactNode }) {
+  const app = await getNativeAppContext();
   return (
     <html
       lang="en"
+      data-app={app.isApp ? (app.platform ?? "native") : undefined}
       className={`owner-shell ${serif.variable} ${script.variable} ${body.variable} h-full antialiased`}
     >
       <body className="owner-shell flex min-h-full flex-col">

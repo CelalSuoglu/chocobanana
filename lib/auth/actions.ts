@@ -6,6 +6,14 @@ import { signIn, signOut } from "@/auth";
 import { sendAppEmail, isEmailConfigured, formatEmailErrorForUser } from "@/lib/auth/email";
 import { createToken, hashPassword, hashToken } from "@/lib/auth/password";
 import {
+  clientIp,
+  issuePasswordReset,
+  passwordMeetsRules,
+  passwordResetAllowed,
+  passwordResetTokenIsValid,
+  recordPasswordResetAttempt,
+} from "@/lib/auth/password-reset";
+import {
   assertSignupCountry,
   displayName,
   normalizePhone,
@@ -16,6 +24,7 @@ import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { isLocale } from "@/lib/i18n/config";
+import { sendWelcomeEmail } from "@/lib/welcome/email";
 
 const addressFields = {
   addressLine1: z.string().trim().min(1).max(120),
@@ -116,6 +125,7 @@ export async function registerCustomer(
       passwordHash,
       role: "CUSTOMER",
       preferredLocale: parsed.data.locale ?? "en",
+      marketingOptIn: formData.get("marketingOptIn") === "yes",
       // Without a mail provider, the account can sign in immediately.
       // When email is configured, sign-in waits for the verification link.
       emailVerified: emailReady ? null : new Date(),
@@ -177,13 +187,19 @@ export async function updateCustomerProfile(
   _prev: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const localeRaw = String(formData.get("locale") ?? "en");
+  const locale = isLocale(localeRaw) ? localeRaw : "en";
+  const dict = await getDictionary(locale);
+
   if (!isDatabaseConfigured()) {
-    return { ok: false, error: "Accounts are not configured in this environment yet." };
+    console.error("profile_update_unavailable");
+    return { ok: false, error: dict.account.profileInvalid };
   }
 
   const session = await auth();
   if (!session?.user?.id || session.user.role === "OWNER") {
-    return { ok: false, error: "You must be signed in as a customer." };
+    console.error("profile_update_forbidden");
+    return { ok: false, error: dict.account.profileInvalid };
   }
 
   const parsed = profileSchema.safeParse({
@@ -200,9 +216,10 @@ export async function updateCustomerProfile(
   });
   const phone = parsed.success ? normalizePhone(parsed.data.phone) : null;
   if (!parsed.success || !phone || !assertSignupCountry(parsed.data.country)) {
+    console.error("profile_update_invalid");
     return {
       ok: false,
-      error: "Please check your profile and address fields.",
+      error: dict.account.profileInvalid,
     };
   }
 
@@ -225,9 +242,8 @@ export async function updateCustomerProfile(
     },
   });
 
-  const locale = parsed.data.locale ?? "en";
   revalidatePath(`/${locale}/account`);
-  return { ok: true, message: "Profile saved." };
+  return { ok: true, message: dict.account.savedToast };
 }
 
 export async function loginCustomer(
@@ -309,90 +325,99 @@ export async function requestPasswordReset(
   _prev: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const localeRaw = String(formData.get("locale") ?? "en");
+  const locale = isLocale(localeRaw) ? localeRaw : "en";
+  const dict = await getDictionary(locale);
+
   if (!isDatabaseConfigured()) {
-    return { ok: false, error: "Accounts are not configured in this environment yet." };
+    return { ok: false, error: dict.auth.notConfigured };
   }
 
   if (!isEmailConfigured()) {
-    return {
-      ok: false,
-      error:
-        "[EMAIL_NOT_CONFIGURED] Password reset needs RESEND_API_KEY and EMAIL_FROM (verified domain).",
-    };
+    return { ok: false, error: dict.auth.emailSetupRequired };
   }
 
   const email = String(formData.get("email") ?? "").toLowerCase().trim();
-  const locale = String(formData.get("locale") ?? "en");
-  if (!email) return { ok: false, error: "Email is required." };
-
-  const prisma = requirePrisma();
-  const user = await prisma.user.findUnique({ where: { email } });
-
-  // Always return success to avoid email enumeration when send succeeds or user missing.
-  if (user) {
-    await prisma.passwordResetToken.deleteMany({ where: { userId: user.id } });
-    const rawToken = createToken();
-    await prisma.passwordResetToken.create({
-      data: {
-        userId: user.id,
-        token: hashToken(rawToken),
-        expires: new Date(Date.now() + 1000 * 60 * 60),
-      },
-    });
-    const resetUrl = `${getAppBaseUrl()}/${locale}/reset-password?token=${rawToken}`;
-    try {
-      await sendAppEmail({
-        to: email,
-        subject: "Reset your Chocobanana password",
-        text: `Reset your password:\n${resetUrl}\n\nThis link expires in one hour.`,
-      });
-    } catch (error) {
-      await prisma.passwordResetToken.deleteMany({ where: { userId: user.id } });
-      return {
-        ok: false,
-        error: formatEmailErrorForUser(error).replace(
-          "Account was not created.",
-          "Reset email was not sent.",
-        ),
-      };
-    }
+  if (!email || !z.string().email().safeParse(email).success) {
+    return { ok: false, error: dict.auth.resetEmailInvalid };
   }
 
-  return {
-    ok: true,
-    message: "If that email exists, a reset link has been sent.",
-  };
+  const ip = await clientIp();
+  if (!(await passwordResetAllowed(email, ip))) {
+    return { ok: false, error: dict.auth.resetWait };
+  }
+  await recordPasswordResetAttempt(email, ip);
+
+  const prisma = requirePrisma();
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: { id: true },
+  });
+
+  // Same success whether the address exists. A failed send is logged, not revealed.
+  if (user) {
+    await issuePasswordReset({ userId: user.id, email, locale });
+  }
+
+  return { ok: true, message: dict.auth.resetSent };
 }
 
 export async function resetPassword(
   _prev: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  const localeRaw = String(formData.get("locale") ?? "en");
+  const locale = isLocale(localeRaw) ? localeRaw : "en";
+  const dict = await getDictionary(locale);
+
   if (!isDatabaseConfigured()) {
-    return { ok: false, error: "Accounts are not configured in this environment yet." };
+    return { ok: false, error: dict.auth.notConfigured };
   }
 
-  const token = String(formData.get("token") ?? "");
+  const token = String(formData.get("token") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  if (!token || password.length < 8) {
-    return { ok: false, error: "Invalid token or password (8+ characters)." };
+  const confirm = String(formData.get("confirm") ?? "");
+  if (!(await passwordResetTokenIsValid(token))) {
+    return { ok: false, error: dict.auth.resetInvalid };
+  }
+  if (password !== confirm) {
+    return { ok: false, error: dict.auth.resetMismatch };
+  }
+  if (!passwordMeetsRules(password)) {
+    return { ok: false, error: dict.auth.resetRules };
   }
 
   const prisma = requirePrisma();
-  const record = await prisma.passwordResetToken.findUnique({
-    where: { token: hashToken(token) },
-  });
-  if (!record || record.expires < new Date()) {
-    return { ok: false, error: "This reset link is invalid or expired." };
+  const hashed = hashToken(token);
+  const passwordHash = await hashPassword(password);
+
+  try {
+    await prisma.$transaction(async (tx) => {
+      const record = await tx.passwordResetToken.findUnique({
+        where: { token: hashed },
+      });
+      if (!record || record.expires < new Date()) {
+        throw new Error("invalid_reset_token");
+      }
+      await tx.user.update({
+        where: { id: record.userId },
+        data: { passwordHash },
+      });
+      await tx.session.deleteMany({ where: { userId: record.userId } });
+      await tx.passwordResetToken.deleteMany({ where: { userId: record.userId } });
+    });
+  } catch (error) {
+    if (error instanceof Error && error.message === "invalid_reset_token") {
+      return { ok: false, error: dict.auth.resetInvalid };
+    }
+    console.error(
+      "password_reset.update_failed",
+      error instanceof Error ? error.name : "update_failed",
+    );
+    return { ok: false, error: dict.auth.resetInvalid };
   }
 
-  await prisma.user.update({
-    where: { id: record.userId },
-    data: { passwordHash: await hashPassword(password) },
-  });
-  await prisma.passwordResetToken.deleteMany({ where: { userId: record.userId } });
-
-  return { ok: true, message: "Password updated. You can sign in now." };
+  return { ok: true, message: dict.auth.resetUpdated };
 }
 
 export async function verifyEmailToken(token: string): Promise<AuthActionState> {
@@ -414,6 +439,7 @@ export async function verifyEmailToken(token: string): Promise<AuthActionState> 
     data: { emailVerified: new Date() },
   });
   await prisma.verificationToken.deleteMany({ where: { userId: record.userId } });
+  await sendWelcomeEmail(record.userId);
 
   return { ok: true, message: "Email verified. You can sign in." };
 }

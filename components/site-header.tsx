@@ -49,7 +49,7 @@ export function SiteHeader({
   }));
 
   return (
-    <header className="sticky top-0 z-40 border-b border-pink/30 bg-cream/90 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md">
       <div className="section-pad mx-auto max-w-6xl py-3 md:py-4">
         <div className="flex items-center justify-between gap-2 sm:gap-3">
           <Link
@@ -63,7 +63,7 @@ export function SiteHeader({
               height={40}
               className="h-10 w-10 rounded-full object-cover ring-1 ring-pink/45"
             />
-            <span className="truncate font-script text-xl leading-none text-pink-deep sm:text-2xl">
+            <span className="truncate font-script text-xl leading-none text-chocolate sm:text-2xl">
               Chocobanana
             </span>
           </Link>
@@ -76,8 +76,10 @@ export function SiteHeader({
               <Link
                 key={link.id}
                 href={link.href}
-                className={`transition-colors hover:text-pink-deep ${
-                  link.active ? "text-pink-deep" : ""
+                className={`border-b-2 py-1 transition-colors hover:text-chocolate ${
+                  link.active
+                    ? "border-chocolate font-medium text-chocolate"
+                    : "border-transparent text-chocolate-soft"
                 }`}
                 aria-current={link.active ? "page" : undefined}
               >
@@ -96,7 +98,15 @@ export function SiteHeader({
                 }}
               />
             </div>
-            <CartIconLink locale={locale} label={dict.cart.openCart} />
+            {/* In the iOS/Android app these live in the bottom tab bar instead. */}
+            <span className="app-hide contents">
+            <CartIconLink
+              locale={locale}
+              label={dict.cart.openCart}
+              countLabel={dict.cart.bagCount}
+            />
+            </span>
+            <span className="app-hide contents">
             <AccountNav
               locale={locale}
               signedIn={signedIn}
@@ -107,9 +117,10 @@ export function SiteHeader({
               signOutLabel={dict.account.signOut}
               accountIconLabel={dict.a11y.accountMenu}
             />
+            </span>
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-pink/45 bg-paper/90 text-chocolate xl:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper/90 text-chocolate xl:hidden"
               aria-expanded={open}
               aria-controls={panelId}
               aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}
@@ -132,10 +143,10 @@ export function SiteHeader({
               <li key={link.id}>
                 <Link
                   href={link.href}
-                  className={`block rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] transition-colors ${
+                  className={`block min-h-11 rounded-2xl px-4 py-3 font-serif text-base tracking-[0.08em] transition-colors ${
                     link.active
-                      ? "bg-pink-soft/50 text-pink-deep"
-                      : "text-chocolate-soft hover:bg-paper/80 hover:text-pink-deep"
+                      ? "bg-cream font-medium text-chocolate"
+                      : "text-chocolate-soft hover:bg-cream hover:text-chocolate"
                   }`}
                   aria-current={link.active ? "page" : undefined}
                   onClick={() => setOpen(false)}
@@ -167,7 +178,7 @@ export function SiteHeader({
                     <input type="hidden" name="locale" value={locale} />
                     <button
                       type="submit"
-                      className="mt-1 w-full rounded-2xl border border-pink/40 bg-paper/90 px-4 py-3 text-start font-serif text-base tracking-[0.08em] text-chocolate hover:border-pink-deep hover:text-pink-deep"
+                      className="mt-1 w-full rounded-2xl border border-line bg-paper/90 px-4 py-3 text-start font-serif text-base tracking-[0.08em] text-chocolate hover:border-pink-deep hover:text-pink-deep"
                     >
                       {dict.account.signOut}
                     </button>

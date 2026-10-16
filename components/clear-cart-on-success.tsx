@@ -10,6 +10,7 @@ export function ClearCartOnSuccess({ active }: { active: boolean }) {
   useEffect(() => {
     if (active && ready) {
       clearCart();
+      window.sessionStorage.removeItem("chocobanana_checkout_delivery");
     }
   }, [active, ready, clearCart]);
 

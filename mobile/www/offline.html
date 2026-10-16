@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Chocobanana</title>
+  <link rel="stylesheet" href="shared.css" />
+  <script src="app-url.js"></script>
+</head>
+<body>
+  <main role="alert">
+    <img src="logo.jpg" alt="" />
+    <h1 id="t"></h1>
+    <p id="d"></p>
+    <button id="retry" type="button"></button>
+    <p class="status" id="s" aria-live="polite"></p>
+  </main>
+  <script>
+    var T = {
+      en: ["You're offline", "We couldn't reach Chocobanana. Check your Wi‑Fi or mobile data, then try again.", "Try again", "Still no connection…"],
+      tr: ["İnternet bağlantısı yok", "Chocobanana'ya ulaşamadık. Wi‑Fi veya mobil verini kontrol edip tekrar dene.", "Tekrar dene", "Hâlâ bağlantı yok…"],
+      fr: ["Vous êtes hors ligne", "Impossible de joindre Chocobanana. Vérifiez votre Wi‑Fi ou vos données mobiles, puis réessayez.", "Réessayer", "Toujours pas de connexion…"],
+      es: ["Sin conexión", "No pudimos conectar con Chocobanana. Revisa tu Wi‑Fi o datos móviles e inténtalo de nuevo.", "Reintentar", "Sigue sin conexión…"],
+      de: ["Du bist offline", "Chocobanana ist gerade nicht erreichbar. Prüfe WLAN oder mobile Daten und versuche es erneut.", "Erneut versuchen", "Immer noch keine Verbindung…"],
+      it: ["Sei offline", "Non riusciamo a raggiungere Chocobanana. Controlla Wi‑Fi o dati mobili e riprova.", "Riprova", "Ancora nessuna connessione…"],
+      pt: ["Você está offline", "Não conseguimos acessar a Chocobanana. Verifique o Wi‑Fi ou os dados móveis e tente novamente.", "Tentar novamente", "Ainda sem conexão…"],
+      ar: ["لا يوجد اتصال", "تعذّر الوصول إلى Chocobanana. تحقّق من الواي فاي أو بيانات الجوال ثم حاول مرة أخرى.", "إعادة المحاولة", "لا يزال الاتصال غير متاح…"],
+      ja: ["オフラインです", "Chocobananaに接続できませんでした。Wi‑Fiまたはモバイルデータを確認して、もう一度お試しください。", "再試行", "まだ接続できません…"],
+      zh: ["网络未连接", "无法连接到 Chocobanana。请检查 Wi‑Fi 或移动数据后重试。", "重试", "仍然无法连接…"]
+    };
+    var lang = (navigator.language || "en").slice(0, 2).toLowerCase();
+    var L = T[lang] || T.en;
+    document.documentElement.lang = T[lang] ? lang : "en";
+    if (lang === "ar") document.documentElement.dir = "rtl";
+    document.getElementById("t").textContent = L[0];
+    document.getElementById("d").textContent = L[1];
+    var btn = document.getElementById("retry");
+    btn.textContent = L[2];
+    var base = (window.CHOCO_APP_URL || "https://thechocobananaclub.com") + "/";
+    function retry() {
+      if (navigator.onLine === false) { document.getElementById("s").textContent = L[3]; return; }
+      btn.disabled = true;
+      location.replace(base);
+    }
+    btn.addEventListener("click", retry);
+    window.addEventListener("online", function () { setTimeout(retry, 600); });
+  </script>
+</body>
+</html>

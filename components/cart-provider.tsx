@@ -21,7 +21,7 @@ type CartContextValue = {
   lines: CartLine[];
   ready: boolean;
   itemCount: number;
-  addItem: (productId: string, quantity?: number) => void;
+  addItem: (productId: string, quantity?: number) => boolean;
   setQuantity: (productId: string, quantity: number) => void;
   removeItem: (productId: string) => void;
   clearCart: () => void;
@@ -68,7 +68,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [lines, ready]);
 
   const addItem = useCallback((productId: string, quantity = 1) => {
+    const product = getCatalogProduct(productId);
+    if (!product?.purchasable || !product.cartEligible || quantity <= 0) return false;
     setLines((current) => purchasableLines([...current, { productId, quantity }]));
+    return true;
   }, []);
 
   const setQuantity = useCallback((productId: string, quantity: number) => {

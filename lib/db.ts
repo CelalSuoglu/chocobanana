@@ -24,7 +24,13 @@ export function getPrisma(): PrismaClient | null {
       typeof (cached as PrismaClient & { publicSiteOpening?: unknown })
         .publicSiteOpening === "undefined" ||
       typeof (cached as PrismaClient & { rewardCodeRedemption?: unknown })
-        .rewardCodeRedemption === "undefined")
+        .rewardCodeRedemption === "undefined" ||
+      typeof (cached as PrismaClient & { contactMessage?: unknown })
+        .contactMessage === "undefined" ||
+      typeof (cached as PrismaClient & { emailSubscriber?: unknown })
+        .emailSubscriber === "undefined" ||
+      typeof (cached as PrismaClient & { passwordResetAttempt?: unknown })
+        .passwordResetAttempt === "undefined")
   ) {
     void cached.$disconnect().catch(() => undefined);
     globalForPrisma.prisma = undefined;

@@ -8,6 +8,7 @@ import {
   reconcileCustomerRewards,
   releaseRewardReservationForSession,
 } from "../lib/rewards/engine";
+import { makeOrderNumber } from "../lib/orders/number";
 import { countsTowardReward, progressTowardNextReward } from "../lib/rewards/logic";
 
 config({ path: ".env.local" });
@@ -35,6 +36,7 @@ async function makeOrder(
 ) {
   return prisma.order.create({
     data: {
+      publicNumber: makeOrderNumber(),
       userId,
       stripeCheckoutSessionId: `cs_reward_${crypto.randomUUID()}`,
       paymentStatus: "PAID",

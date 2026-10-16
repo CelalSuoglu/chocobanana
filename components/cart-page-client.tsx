@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import {
   getCatalogProduct,
@@ -15,12 +16,15 @@ import {
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
+import { rewardDiscountCadCents } from "@/lib/rewards/logic";
+import { JoinClubBanner } from "@/components/join-club-banner";
 
 type CartPageClientProps = {
   locale: Locale;
   dict: Dictionary;
   checkoutEnabled: boolean;
   signedIn: boolean;
+  welcomeEligible: boolean;
 };
 
 function localizedName(dict: Dictionary, product: CatalogProduct): string {
@@ -35,10 +39,11 @@ export function CartPageClient({
   dict,
   checkoutEnabled,
   signedIn,
+  welcomeEligible,
 }: CartPageClientProps) {
   const { lines, ready, setQuantity, removeItem, clearCart } = useCart();
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
   const [rewardInput, setRewardInput] = useState("");
   const [rewardError, setRewardError] = useState<string | null>(null);
   const [rewardPending, setRewardPending] = useState(false);
@@ -180,20 +185,34 @@ export function CartPageClient({
     })();
   }
 
+  const showWelcome =
+    signedIn && welcomeEligible && !appliedReward && subtotalCadCents > 0;
+  const welcomeCents = showWelcome ? rewardDiscountCadCents(subtotalCadCents) : 0;
+  const welcomePriced = showWelcome
+    ? formatCatalogPrice({
+        amountCadCents: welcomeCents,
+        locale,
+        preferredCurrency: baseCurrency,
+      })
+    : null;
   const discountPriced = appliedReward
     ? formatCatalogPrice({
         amountCadCents: appliedReward.discountCadCents,
         locale,
         preferredCurrency: baseCurrency,
       })
-    : null;
+    : welcomePriced;
   const totalPriced = appliedReward
     ? formatCatalogPrice({
         amountCadCents: appliedReward.totalCadCents,
         locale,
         preferredCurrency: baseCurrency,
       })
-    : priced;
+    : formatCatalogPrice({
+        amountCadCents: Math.max(0, subtotalCadCents - welcomeCents),
+        locale,
+        preferredCurrency: baseCurrency,
+      });
 
   function checkout() {
     setError(null);
@@ -201,30 +220,12 @@ export function CartPageClient({
       setError(dict.cart.mixedCheckout);
       return;
     }
-    startTransition(async () => {
-      try {
-        const response = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            locale,
-            items: rows.map((row) => ({
-              productId: row.product.id,
-              quantity: row.line.quantity,
-            })),
-            ...(appliedReward ? { rewardCode: appliedReward.code } : {}),
-          }),
-        });
-        const data = (await response.json()) as { url?: string; error?: string };
-        if (!response.ok || !data.url) {
-          setError(data.error ?? dict.cart.checkoutError);
-          return;
-        }
-        window.location.assign(data.url);
-      } catch {
-        setError(dict.cart.checkoutError);
-      }
-    });
+    if (signedIn && appliedReward) {
+      window.sessionStorage.setItem("chocobanana_checkout_reward", appliedReward.code);
+    } else {
+      window.sessionStorage.removeItem("chocobanana_checkout_reward");
+    }
+    router.push(hrefFor(locale, "/checkout"));
   }
 
   if (!ready) {
@@ -239,13 +240,13 @@ export function CartPageClient({
   if (rows.length === 0) {
     return (
       <div className="store-card mx-auto mt-8 max-w-lg px-6 py-10 text-center">
-        <p className="font-script text-2xl text-pink-deep">{dict.cart.eyebrow}</p>
+        <p className="font-script text-2xl text-chocolate">{dict.cart.eyebrow}</p>
         <p className="mt-3 text-base text-chocolate-soft">{dict.cart.empty}</p>
         <Link
-          href={hrefFor(locale, "/shop")}
+          href={hrefFor(locale, "")}
           className="btn-primary mx-auto mt-6 max-w-xs"
         >
-          {dict.cart.continueShopping}
+          {dict.cart.exploreClub}
         </Link>
       </div>
     );
@@ -312,7 +313,7 @@ export function CartPageClient({
                     {dict.cart.unitPrice}: {unit.primary}
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <div className="inline-flex items-center rounded-full border border-pink/45">
+                    <div className="inline-flex items-center rounded-full border border-line">
                       <button
                         type="button"
                         className="inline-flex h-11 w-11 items-center justify-center text-lg text-chocolate"
@@ -375,13 +376,15 @@ export function CartPageClient({
               <dd className="text-end text-chocolate">{dict.cart.shippingAtCheckout}</dd>
             </div>
           ) : null}
-          {appliedReward && discountPriced ? (
+          {discountPriced && (appliedReward || showWelcome) ? (
             <div className="flex items-baseline justify-between gap-4">
-              <dt className="text-chocolate-soft">{dict.cart.rewardDiscount}</dt>
+              <dt className="text-chocolate-soft">
+                {appliedReward ? dict.cart.rewardDiscount : dict.checkout.welcomeDiscount}
+              </dt>
               <dd className="text-end text-chocolate">−{discountPriced.primary}</dd>
             </div>
           ) : null}
-          <div className="flex items-baseline justify-between gap-4 border-t border-pink/30 pt-3">
+          <div className="flex items-baseline justify-between gap-4 border-t border-line pt-3">
             <dt className="font-serif text-base text-chocolate">{dict.cart.total}</dt>
             <dd className="text-end font-serif text-lg text-chocolate">
               {totalPriced.primary}
@@ -399,7 +402,7 @@ export function CartPageClient({
                 value={rewardInput}
                 onChange={(event) => setRewardInput(event.target.value)}
                 autoComplete="off"
-                className="min-h-14 min-w-0 flex-1 rounded-full border border-pink/50 bg-paper px-5 text-base text-chocolate"
+                className="min-h-14 min-w-0 flex-1 rounded-full border border-line bg-paper px-5 text-base text-chocolate"
               />
               <button
                 type="button"
@@ -427,40 +430,21 @@ export function CartPageClient({
                 {rewardError}
               </p>
             ) : null}
-            <p className="mt-2 text-xs leading-relaxed text-chocolate-soft">
-              {dict.cart.rewardHint}
-            </p>
           </div>
         ) : (
           <p className="mt-4 text-sm text-chocolate-soft">{dict.cart.rewardSignIn}</p>
         )}
-        <p className="mt-4 text-xs leading-relaxed text-chocolate-soft">
-          {dict.cart.cadBasisNote}
-        </p>
         {hasClub ? (
-          <p className="mt-2 text-xs leading-relaxed text-chocolate-soft">
-            {dict.cart.postageIncludedNote}
-          </p>
-        ) : null}
-        {hasSticker ? (
-          <p className="mt-2 text-xs leading-relaxed text-chocolate-soft">
-            {dict.cart.stickerShippingNote}
-          </p>
-        ) : null}
-        {!hasClub && !hasSticker ? (
-          <p className="mt-2 text-xs leading-relaxed text-chocolate-soft">
-            {dict.cart.checkoutFinalNote}
-          </p>
+          <p className="mt-4 text-sm text-chocolate-soft">{dict.cart.postageIncludedNote}</p>
         ) : null}
 
         {checkoutEnabled ? (
           <button
             type="button"
-            disabled={pending}
             onClick={checkout}
             className="btn-primary mt-5 hidden lg:flex"
           >
-            {pending ? dict.cart.checkoutPending : dict.cart.continueCheckout}
+            {signedIn ? dict.cart.continueCheckout : dict.cart.guestCheckout}
           </button>
         ) : (
           <p className="mt-5 rounded-2xl bg-cream-deep/50 px-3 py-3 text-sm text-chocolate-soft">
@@ -478,18 +462,20 @@ export function CartPageClient({
         ) : null}
 
         {!signedIn ? (
-          <div className="mt-5 border-t border-pink/30 pt-4">
-            <p className="text-sm leading-relaxed text-chocolate-soft">
-              {dict.cart.guestNote}
-            </p>
-            <div className="mt-3 grid grid-cols-2 gap-2">
-              <Link href={hrefFor(locale, "/login")} className="btn-secondary">
-                {dict.auth.signIn}
-              </Link>
-              <Link href={hrefFor(locale, "/register")} className="btn-secondary">
-                {dict.auth.signUp}
-              </Link>
-            </div>
+          <div className="mt-5 space-y-3 border-t border-line pt-4">
+            <JoinClubBanner
+              title={dict.cart.joinTitle}
+              note={dict.cart.joinNote}
+              actionLabel={dict.auth.signUp}
+              href={hrefFor(locale, "/register")}
+            />
+            <p className="text-sm leading-relaxed text-chocolate-soft">{dict.cart.guestNote}</p>
+            <Link
+              href={hrefFor(locale, "/login")}
+              className="inline-flex min-h-11 items-center text-sm text-chocolate-soft underline-offset-2 hover:underline"
+            >
+              {dict.auth.signIn}
+            </Link>
           </div>
         ) : null}
 
@@ -502,9 +488,9 @@ export function CartPageClient({
         </button>
       </aside>
       {checkoutEnabled ? (
-        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-pink/40 bg-cream/95 p-3 backdrop-blur-md lg:hidden">
-          <button type="button" disabled={pending} onClick={checkout} className="btn-primary">
-            {pending ? dict.cart.checkoutPending : dict.cart.continueCheckout}
+        <div className="app-lift-bottom fixed inset-x-0 bottom-0 z-30 border-t border-line bg-cream/95 p-3 backdrop-blur-md lg:hidden">
+          <button type="button" onClick={checkout} className="btn-primary">
+            {signedIn ? dict.cart.continueCheckout : dict.cart.guestCheckout}
           </button>
         </div>
       ) : null}

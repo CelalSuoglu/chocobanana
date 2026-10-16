@@ -50,7 +50,7 @@ export default async function OwnerSubscriptionsPage({
             className={`rounded-full border px-3 py-1.5 text-xs tracking-wider uppercase ${
               status === s
                 ? "border-pink-deep bg-pink-soft/50 text-pink-deep"
-                : "border-pink/40 text-chocolate-soft hover:border-pink-deep"
+                : "border-line text-chocolate-soft hover:border-pink-deep"
             }`}
           >
             {s}
@@ -63,7 +63,7 @@ export default async function OwnerSubscriptionsPage({
       ) : rows.length === 0 ? (
         <p className="mt-8 text-sm text-chocolate-soft">No subscriptions yet.</p>
       ) : (
-        <ul className="mt-8 divide-y divide-pink/25 border-t border-pink/30">
+        <ul className="mt-8 divide-y divide-pink/25 border-t border-line">
           {rows.map((row) => (
             <li key={row.id} className="py-4 text-sm">
               <div className="flex flex-wrap items-start justify-between gap-3">

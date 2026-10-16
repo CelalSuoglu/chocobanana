@@ -1,22 +1,20 @@
-/* Owner shell — butter yellow ground, coffee accents, chocolate text. */
+/* Owner shell uses the store butter yellow, cream, and chocolate. */
 html.owner-shell,
 html.owner-shell body {
   background-color: var(--cream) !important;
-  background-image:
-    radial-gradient(ellipse at 8% 0%, rgba(111, 78, 55, 0.1), transparent 34%),
-    radial-gradient(ellipse at 100% 0%, rgba(212, 168, 75, 0.1), transparent 28%) !important;
+  background-image: none !important;
   color: var(--chocolate) !important;
 }
 
 .owner-shell {
   --owner-bg: var(--cream);
-  --owner-surface: color-mix(in srgb, var(--paper) 90%, white);
-  --owner-elevated: #fff8dc;
-  --owner-border: rgba(111, 78, 55, 0.34);
+  --owner-surface: var(--paper);
+  --owner-elevated: #fffbee;
+  --owner-border: #e5d3a8;
   --owner-text: var(--chocolate);
   --owner-muted: var(--chocolate-soft);
-  --owner-accent: #6f4e37;
-  --owner-accent-soft: rgba(111, 78, 55, 0.14);
+  --owner-accent: var(--chocolate);
+  --owner-accent-soft: rgba(75, 40, 27, 0.08);
   --owner-gold: var(--gold);
   --owner-danger: #8a3d32;
   --owner-ok: #4f7a4a;
@@ -35,19 +33,9 @@ html.owner-shell .font-script {
   font-family: var(--font-script), var(--font-body), cursive;
 }
 
-.owner-glow {
-  pointer-events: none;
-  position: fixed;
-  inset: 10% 8% auto;
-  height: 40%;
-  border-radius: 999px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(232, 201, 120, 0.22),
-    transparent 70%
-  );
-  filter: blur(10px);
-  z-index: 0;
+.owner-glow,
+.owner-sparkles {
+  display: none;
 }
 
 .owner-sparkles {

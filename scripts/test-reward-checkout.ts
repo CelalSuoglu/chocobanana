@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { writeFile } from "node:fs/promises";
+import { makeOrderNumber } from "../lib/orders/number";
 import { reconcileCustomerRewards } from "../lib/rewards/engine";
 
 config({ path: ".env.local" });
@@ -13,6 +14,7 @@ const email = `reward-checkout-${Date.now()}@example.com`;
 async function makeOrder(userId: string) {
   return prisma.order.create({
     data: {
+      publicNumber: makeOrderNumber(),
       userId,
       stripeCheckoutSessionId: `cs_reward_${crypto.randomUUID()}`,
       paymentStatus: "PAID",
