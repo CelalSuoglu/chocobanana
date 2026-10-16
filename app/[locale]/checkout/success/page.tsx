@@ -114,8 +114,6 @@ export default async function CheckoutSuccessPage({
   const pending =
     session.payment_status === "unpaid" &&
     session.status === "complete";
-  const failedOrOpen =
-    !paidOnStripe && session.payment_status !== "no_payment_required";
 
   const title = paidOnStripe
     ? dict.checkout.successTitle
@@ -203,16 +201,6 @@ export default async function CheckoutSuccessPage({
             {presentmentAmount}
           </p>
         ) : null}
-        <p className="mt-2 text-sm text-chocolate-soft">
-          <span className="font-serif text-chocolate">
-            {dict.checkout.orderRecord}:
-          </span>{" "}
-          {dbOrder
-            ? dict.checkout.orderRecordReady
-            : paidOnStripe
-              ? dict.checkout.orderRecordPendingWebhook
-              : dict.checkout.orderRecordNotPaid}
-        </p>
         {dbOrder?.customerEmail ? (
           <p className="mt-2 text-sm text-chocolate-soft">
             <span className="font-serif text-chocolate">
@@ -221,12 +209,11 @@ export default async function CheckoutSuccessPage({
             {dbOrder.customerEmail}
           </p>
         ) : null}
-        <p className="mt-3 text-xs leading-relaxed text-chocolate-soft/90">
-          {dict.checkout.webhookTrustNote}
-        </p>
-        {failedOrOpen && !paidOnStripe ? (
-          <p className="mt-2 text-xs text-pink-deep">
-            {dict.checkout.unpaidHint}
+        {!dbOrder ? (
+          <p className="mt-3 text-sm leading-relaxed text-chocolate-soft">
+            {paidOnStripe
+              ? dict.checkout.orderRecordPendingWebhook
+              : dict.checkout.orderRecordNotPaid}
           </p>
         ) : null}
         {getPaymentsMode() === "test" ? (
@@ -244,7 +231,7 @@ export default async function CheckoutSuccessPage({
       ) : null}
 
       <Link
-        href={`/${rawLocale}/shop`}
+        href={`/${rawLocale}`}
         className="btn-secondary btn-inline mx-auto mt-8"
       >
         {dict.checkout.backToShop}

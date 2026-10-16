@@ -12,6 +12,9 @@
   --gold-soft: #ead9ae;
   --paper: #fffbee;
   --line: #e5d3a8;
+  /* Text-safe accents (4.5:1+ on cream and paper). */
+  --rose-ink: #9c5a6e;
+  --gold-ink: #8a6a2c;
   --background: var(--cream);
   --foreground: var(--chocolate);
 }
@@ -30,6 +33,8 @@
   --color-gold-soft: var(--gold-soft);
   --color-paper: var(--paper);
   --color-line: var(--line);
+  --color-rose-ink: var(--rose-ink);
+  --color-gold-ink: var(--gold-ink);
   --font-sans: var(--font-body);
   --font-serif: var(--font-serif);
   --font-script: var(--font-script);
@@ -173,13 +178,12 @@ video {
   box-shadow: 0 0 0 1px var(--line);
 }
 
+/* Handwritten aside above a heading, like a note in the margin of a letter. */
 .kicker {
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  color: var(--gold);
+  font-family: var(--font-script), var(--font-body), cursive;
+  font-size: 1.4rem;
+  line-height: 1.1;
+  color: var(--rose-ink);
 }
 
 .page-title {
@@ -193,10 +197,148 @@ video {
 
 .page-lead {
   margin-top: 0.85rem;
-  max-width: 40rem;
-  font-size: 1rem;
-  line-height: 1.7;
+  max-width: 38rem;
+  font-size: 1.0625rem;
+  line-height: 1.75;
   color: var(--chocolate-soft);
+}
+
+.body-copy {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--chocolate-soft);
+}
+
+/* Product photo stand-in; real photos replace the drawing via photoSrc. */
+.brand-illustration {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--pink-soft) 90%, transparent) 0 28%, transparent 60%),
+    var(--cream-deep);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+/* Home product "doors": the whole panel is the link. */
+.home-door .brand-illustration {
+  transition: transform 0.3s ease;
+}
+
+.home-door:hover .brand-illustration {
+  transform: translateY(-4px);
+}
+
+.home-door-link {
+  border-bottom: 1px solid var(--rose-ink);
+  padding-bottom: 0.1rem;
+}
+
+.home-door:hover .home-door-link {
+  color: var(--rose-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-door .brand-illustration {
+    transition: none;
+  }
+  .home-door:hover .brand-illustration {
+    transform: none;
+  }
+}
+
+/* Winnie's photo as a taped polaroid with a handwritten caption: the one playful element on the home page. */
+.polaroid {
+  position: relative;
+  transform: rotate(-2.5deg);
+  background: #fffdf6;
+  padding: 0.85rem 0.85rem 0;
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 22px 44px -26px rgb(75 40 27 / 0.5);
+}
+
+.polaroid::before {
+  content: "";
+  position: absolute;
+  top: -0.9rem;
+  left: 50%;
+  height: 1.8rem;
+  width: 6.5rem;
+  transform: translateX(-50%) rotate(3deg);
+  background: color-mix(in srgb, var(--pink) 55%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--pink-deep) 25%, transparent);
+}
+
+.polaroid-note {
+  padding: 0.9rem 0.4rem 1.1rem;
+  text-align: center;
+  font-family: var(--font-script), var(--font-body), cursive;
+  font-size: clamp(1.45rem, 2.6vw, 1.85rem);
+  line-height: 1.2;
+  color: var(--chocolate);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .polaroid {
+    transition: transform 0.4s ease;
+  }
+  .polaroid:hover {
+    transform: rotate(-0.5deg);
+  }
+}
+
+/* Accordions: quiet rows with a plus that turns into a minus. */
+.soft-details {
+  border-bottom: 1px solid var(--line);
+}
+
+.soft-details > summary {
+  display: flex;
+  min-height: 3.5rem;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--chocolate);
+}
+
+.soft-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.soft-details > summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font-family: var(--font-body), Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--rose-ink);
+  transition: transform 0.2s ease;
+}
+
+.soft-details[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.soft-details > .soft-details-body {
+  padding-bottom: 1.25rem;
+}
+
+.step-number {
+  font-family: var(--font-script), var(--font-body), cursive;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--gold-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soft-details > summary::after {
+    transition: none;
+  }
 }
 
 .field {

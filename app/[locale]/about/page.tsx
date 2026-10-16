@@ -24,7 +24,7 @@ export default async function AboutPage({
   const dict = await getDictionary(raw);
 
   return (
-    <main className="section-pad mx-auto w-full max-w-2xl flex-1 py-8 md:py-12">
+    <main className="section-pad mx-auto w-full max-w-5xl flex-1 py-8 md:py-12">
       <Breadcrumbs
         locale={raw}
         label={dict.a11y.breadcrumb}
@@ -33,21 +33,27 @@ export default async function AboutPage({
           { label: dict.about.title },
         ]}
       />
-      <Image
-        src="/logo.jpg"
-        alt={dict.a11y.logoAlt}
-        width={96}
-        height={96}
-        className="mt-6 h-20 w-20 rounded-full object-cover ring-1 ring-pink/40"
-      />
-      <h1 className="page-title mt-5">{dict.about.title}</h1>
-      <p className="page-lead">{dict.about.intro}</p>
-      <div className="mt-8 space-y-4 text-base leading-relaxed text-chocolate-soft">
-        <p>{dict.about.p1}</p>
-        <p>{dict.about.p2}</p>
-        {dict.about.logoNote ? (
-          <p className="text-sm">{dict.about.logoNote}</p>
-        ) : null}
+      <div className="mt-8 grid items-start gap-12 md:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] md:gap-16">
+        <div>
+          <h1 className="page-title">{dict.about.title}</h1>
+          <p className="page-lead">{dict.about.intro}</p>
+          <p className="body-copy mt-5 max-w-xl">{dict.about.p1}</p>
+          {dict.about.logoNote ? (
+            <p className="mt-4 text-sm text-chocolate-soft">{dict.about.logoNote}</p>
+          ) : null}
+        </div>
+        <figure className="polaroid mx-auto w-full max-w-sm md:mt-4">
+          <Image
+            src="/winnie.jpg"
+            alt={dict.home.winnieAlt}
+            width={1100}
+            height={1100}
+            priority
+            sizes="(min-width: 768px) 24rem, 90vw"
+            className="aspect-square w-full object-cover"
+          />
+          <figcaption className="polaroid-note">{dict.about.p2}</figcaption>
+        </figure>
       </div>
     </main>
   );

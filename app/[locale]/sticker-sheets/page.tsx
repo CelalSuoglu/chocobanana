@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BrandIllustration } from "@/components/brand-illustration";
+import { SITE_INSTAGRAM_URL } from "@/lib/site-contact";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BuyButton } from "@/components/buy-button";
@@ -32,7 +34,7 @@ export default async function StickerSheetsPage({
 
   return (
     <main className="section-pad mx-auto w-full max-w-6xl flex-1 py-8 md:py-12">
-      <nav aria-label="Breadcrumb" className="text-sm text-chocolate-soft">
+      <nav aria-label={dict.a11y.breadcrumb} className="text-sm text-chocolate-soft">
         <Link href={hrefFor(raw, "")} className="hover:text-pink-deep">
           {dict.nav.home}
         </Link>
@@ -42,23 +44,35 @@ export default async function StickerSheetsPage({
         <span className="text-chocolate">{dict.stickerSheets.title}</span>
       </nav>
 
-      <header className="mt-6 max-w-2xl border-b border-line pb-6">
+      <header className="mt-6 max-w-2xl">
         <h1 className="page-title">
           {dict.stickerSheets.title}
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-chocolate-soft md:text-base">
-          {dict.stickerSheets.intro}
-        </p>
+        <p className="page-lead">{dict.stickerSheets.intro}</p>
       </header>
 
       {products.length === 0 ? (
-        <section className="store-card mt-8 px-6 py-10 text-center">
-          <h2 className="font-serif text-2xl text-chocolate">
-            {dict.stickerSheets.emptyTitle}
-          </h2>
-          <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-chocolate-soft">
-            {dict.stickerSheets.emptyBody}
-          </p>
+        <section className="mt-10 grid max-w-5xl items-center gap-8 md:grid-cols-2 md:gap-12">
+          <BrandIllustration kind="stickers" className="aspect-[4/3]" />
+          <div>
+            <h2 className="font-serif text-3xl leading-tight text-chocolate">
+              {dict.stickerSheets.emptyTitle}
+            </h2>
+            <p className="body-copy mt-3">{dict.stickerSheets.emptyBody}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link href={hrefFor(raw, "/snail-mail-club")} className="btn-primary btn-inline">
+                {dict.stickerSheets.emptyCtaClub}
+              </Link>
+              <a
+                href={SITE_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary btn-inline"
+              >
+                {dict.stickerSheets.emptyCtaInstagram}
+              </a>
+            </div>
+          </div>
         </section>
       ) : (
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

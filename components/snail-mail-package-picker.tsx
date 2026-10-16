@@ -69,7 +69,7 @@ export function SnailMailPackagePicker({
   });
 
   return (
-    <div className="mt-6">
+    <div>
       <fieldset>
         <legend className="text-sm text-chocolate">{labels.termLabel}</legend>
         <div className="mt-2 grid grid-cols-2 gap-2">
@@ -134,13 +134,9 @@ export function SnailMailPackagePicker({
           className="mt-3"
         />
       ) : null}
-      <details className="mt-8 border-t border-line pt-4">
-        <summary className="cursor-pointer text-sm text-chocolate">{labels.detailsTitle}</summary>
-        <div className="mt-3 space-y-2 text-sm leading-relaxed text-chocolate-soft">
-          <p>{labels.oneEnvelope}</p>
-          {region === "international" ? <p>{labels.internationalNote}</p> : null}
-        </div>
-      </details>
+      {region === "international" ? (
+        <p className="mt-5 text-sm leading-relaxed text-chocolate-soft">{labels.internationalNote}</p>
+      ) : null}
     </div>
   );
 }
