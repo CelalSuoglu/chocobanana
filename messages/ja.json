@@ -52,7 +52,7 @@
     "stickerSectionBody": "手紙や手帳、封筒を彩る小さな星やピンクのハート、手描きのイラスト。",
     "stickerSectionCta": "ステッカーを見る",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "毎月ポストに届く一通の手紙。1・3・6・12か月から選べて、お支払いは一回、送料込みです。",
+    "clubSectionBody": "毎月ポストに届く一通の手紙。1か月・3か月・1年から選べて、お支払いは一回、送料込みです。",
     "clubSectionCta": "パッケージを見る",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "パッケージを選ぶ",
-        "text": "1・3・6・12か月と、お届け先を選びます。お支払いは一回のみで、自動更新はありません。"
+        "text": "1か月・3か月・1年から選び、手紙の届け先を決めてください。お支払いは一回だけで、自動更新はありません。"
       },
       {
         "title": "手紙を用意します",

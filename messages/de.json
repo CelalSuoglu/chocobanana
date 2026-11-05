@@ -52,7 +52,7 @@
     "stickerSectionBody": "Kleine Sterne, rosa Herzen und Kritzeleien für deine Briefe, Tagebücher und Umschläge.",
     "stickerSectionCta": "Sticker ansehen",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Jeden Monat ein Brief in deinem Briefkasten. Wähle 1, 3, 6 oder 12 Monate: eine Zahlung, Porto inklusive.",
+    "clubSectionBody": "Jeden Monat ein Brief in deinem Briefkasten. Wähle 1 Monat, 3 Monate oder ein Jahr: eine Zahlung, Porto inklusive.",
     "clubSectionCta": "Pakete ansehen",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Wähle dein Paket",
-        "text": "1, 3, 6 oder 12 Monate und wohin deine Briefe gehen sollen. Du zahlst einmal, nichts verlängert sich automatisch."
+        "text": "Wähle 1 Monat, 3 Monate oder ein Jahr und wohin deine Briefe gehen sollen. Du zahlst einmal, nichts verlängert sich automatisch."
       },
       {
         "title": "Wir stellen deinen Brief zusammen",

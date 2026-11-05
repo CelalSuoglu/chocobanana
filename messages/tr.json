@@ -52,7 +52,7 @@
     "stickerSectionBody": "Mektuplarını, ajandalarını ve zarflarını süsleyecek minik yıldızlar, pembe kalpler ve çizimler.",
     "stickerSectionCta": "Sticker sayfalarını gör",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Her ay posta kutunda bir mektup. 1, 3, 6 ya da 12 ay seç: tek ödeme, posta dahil.",
+    "clubSectionBody": "Her ay posta kutunda bir mektup. 1 ay, 3 ay ya da 1 yıl seç: tek ödeme, posta dahil.",
     "clubSectionCta": "Paketleri gör",
     "exploreTitle": "Biraz gez",
     "exploreIntro": "Bir kapı seç — dükkan, mektuplar veya sessiz bir merhaba.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Paketini seç",
-        "text": "1, 3, 6 ya da 12 ayı ve mektupların nereye gideceğini seç. Bir kez ödersin, hiçbir şey otomatik yenilenmez."
+        "text": "1 ay, 3 ay ya da 1 yıl seç ve mektupların nereye gideceğini belirle. Bir kez ödersin, hiçbir şey otomatik yenilenmez."
       },
       {
         "title": "Mektubunu hazırlıyoruz",

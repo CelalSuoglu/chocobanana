@@ -52,7 +52,7 @@
     "stickerSectionBody": "Estrellitas, corazones rosas y dibujos para decorar tus cartas, diarios y sobres.",
     "stickerSectionCta": "Ver stickers",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Una carta en tu buzón cada mes. Elige 1, 3, 6 o 12 meses: un solo pago, envío incluido.",
+    "clubSectionBody": "Una carta en tu buzón cada mes. Elige 1 mes, 3 meses o un año: un solo pago, envío incluido.",
     "clubSectionCta": "Ver paquetes",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Elige tu paquete",
-        "text": "Escoge 1, 3, 6 o 12 meses y a dónde enviar tus cartas. Pagas una vez y nada se renueva automáticamente."
+        "text": "Elige 1 mes, 3 meses o un año, y adónde deben ir tus cartas. Pagas una vez y nada se renueva automáticamente."
       },
       {
         "title": "Preparamos tu carta",

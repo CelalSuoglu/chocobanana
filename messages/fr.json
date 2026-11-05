@@ -52,7 +52,7 @@
     "stickerSectionBody": "De petites étoiles, des cœurs roses et des dessins pour habiller vos lettres, carnets et enveloppes.",
     "stickerSectionCta": "Voir les stickers",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Une lettre dans votre boîte aux lettres chaque mois. Choisissez 1, 3, 6 ou 12 mois : un seul paiement, frais de port inclus.",
+    "clubSectionBody": "Une lettre dans votre boîte aux lettres chaque mois. Choisissez 1 mois, 3 mois ou un an : un seul paiement, frais de port inclus.",
     "clubSectionCta": "Voir les formules",
     "exploreTitle": "Flâner un peu",
     "exploreIntro": "Choisis une porte — boutique, lettres, ou un doux bonjour.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Choisissez votre formule",
-        "text": "1, 3, 6 ou 12 mois, et l'adresse où envoyer vos lettres. Vous payez une fois, rien ne se renouvelle automatiquement."
+        "text": "Choisissez 1 mois, 3 mois ou un an, et où envoyer vos lettres. Vous payez une fois, rien ne se renouvelle automatiquement."
       },
       {
         "title": "Nous préparons votre lettre",

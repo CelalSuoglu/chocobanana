@@ -52,7 +52,7 @@
     "stickerSectionBody": "Estrelinhas, corações rosa e desenhos para enfeitar cartas, cadernos e envelopes.",
     "stickerSectionCta": "Ver stickers",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "Uma carta na sua caixa de correio todo mês. Escolha 1, 3, 6 ou 12 meses: um só pagamento, frete incluído.",
+    "clubSectionBody": "Uma carta na sua caixa de correio todo mês. Escolha 1 mês, 3 meses ou um ano: um só pagamento, frete incluído.",
     "clubSectionCta": "Ver pacotes",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Escolha seu pacote",
-        "text": "1, 3, 6 ou 12 meses e para onde enviar suas cartas. Você paga uma vez e nada é renovado automaticamente."
+        "text": "Escolha 1 mês, 3 meses ou um ano, e para onde suas cartas devem ir. Você paga uma vez e nada é renovado automaticamente."
       },
       {
         "title": "Preparamos sua carta",

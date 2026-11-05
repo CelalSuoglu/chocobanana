@@ -52,7 +52,7 @@
     "stickerSectionBody": "小星星、粉色爱心和手绘涂鸦，装点你的信件、手账和信封。",
     "stickerSectionCta": "查看贴纸",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "每个月，一封信来到你的信箱。可选 1、3、6 或 12 个月：一次付款，含邮费。",
+    "clubSectionBody": "每个月，一封信来到你的信箱。可选 1 个月、3 个月或一年：一次付款，含邮费。",
     "clubSectionCta": "查看套餐",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "选择你的套餐",
-        "text": "选择 1、3、6 或 12 个月以及收信地址。只需付款一次，不会自动续订。"
+        "text": "选择 1 个月、3 个月或一年，以及信件寄往何处。只需付款一次，不会自动续订。"
       },
       {
         "title": "我们准备你的信",

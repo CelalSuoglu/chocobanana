@@ -31,6 +31,8 @@ export default async function HomePage({
     {
       href: hrefFor(raw, "/snail-mail-club"),
       kind: "envelope" as const,
+      photoSrc: "/mail-club/home-envelope.jpg" as string | undefined,
+      photoAlt: dict.mailClub.insideAltEnvelope,
       title: dict.home.clubSectionTitle,
       body: dict.home.clubSectionBody,
       cta: dict.home.clubSectionCta,
@@ -38,6 +40,8 @@ export default async function HomePage({
     {
       href: hrefFor(raw, "/sticker-sheets"),
       kind: "stickers" as const,
+      photoSrc: undefined as string | undefined,
+      photoAlt: "",
       title: dict.home.stickerSectionTitle,
       body: dict.home.stickerSectionBody,
       cta: dict.home.stickerSectionCta,
@@ -76,7 +80,12 @@ export default async function HomePage({
           {doors.map((door) => (
             <li key={door.href}>
               <Link href={door.href} className="home-door group block">
-                <BrandIllustration kind={door.kind} className="aspect-[4/3]" />
+                <BrandIllustration
+                  kind={door.kind}
+                  photoSrc={door.photoSrc}
+                  photoAlt={door.photoAlt}
+                  className="aspect-[4/3]"
+                />
                 <h2 className="mt-6 font-serif text-3xl text-chocolate">{door.title}</h2>
                 <p className="body-copy mt-2 max-w-md">{door.body}</p>
                 <span className="home-door-link mt-4 inline-flex items-center gap-2 font-serif text-lg text-chocolate">

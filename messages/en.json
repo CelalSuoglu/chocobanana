@@ -52,7 +52,7 @@
     "stickerSectionBody": "Tiny stars, pink hearts and doodles to dress up your letters, journals and envelopes.",
     "stickerSectionCta": "View sticker sheets",
     "clubSectionTitle": "Snail Mail Club",
-    "clubSectionBody": "A letter in your mailbox every month. Choose 1, 3, 6 or 12 months: one payment, postage included.",
+    "clubSectionBody": "A letter in your mailbox every month. Choose 1 month, 3 months or a year: one payment, postage included.",
     "clubSectionCta": "View packages",
     "exploreTitle": "Wander a little",
     "exploreIntro": "Pick a door — shop, letters, or a quiet hello.",
@@ -71,7 +71,7 @@
     "howSteps": [
       {
         "title": "Choose your package",
-        "text": "Pick 1, 3, 6 or 12 months and where your letters should go. You pay once, and nothing renews automatically."
+        "text": "Pick 1 month, 3 months or a year, and where your letters should go. You pay once, and nothing renews automatically."
       },
       {
         "title": "We put your letter together",
