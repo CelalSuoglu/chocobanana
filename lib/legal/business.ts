@@ -11,7 +11,7 @@ export const BUSINESS = {
   /** Person or registered business that sells. */
   sellerName: "Didem Keskin",
   /** e.g. "PO Box 123, Station A, Toronto, ON M5W 1A1, Canada". Empty = not yet provided. */
-  mailingAddress: "",
+  mailingAddress: "Montréal (Québec), Canada",
   /** e.g. "+1 416 555 0100". Empty = not yet provided. */
   phone: "+1 437 255 7464",
   email: "thechocobananaclub@gmail.com",
