@@ -433,7 +433,7 @@
     "phoneInvalid": "配送に使える電話番号を入力してください。",
     "regionInvalid": "州または都道府県を選んでください。",
     "acceptTerms": "",
-    "termsLink": "販売条件",
+    "termsLink": "利用規約・販売条件",
     "acceptTermsEnd": "（14日間のキャンセル規定を含む）を読み、同意します。",
     "acceptRequired": "続けるには販売条件に同意してください。",
     "dutiesNote": "価格はカナダドルです。カナダ国外へのお届けでは、配達時に輸入税や関税がかかる場合があります。"
@@ -446,8 +446,13 @@
     "shipping": "配送",
     "linksLabel": "フッター",
     "privacy": "プライバシー",
-    "terms": "販売条件",
-    "withdraw": "契約の撤回はこちら"
+    "terms": "利用規約・販売条件",
+    "withdraw": "契約の撤回はこちら",
+    "legal": "法的情報",
+    "privacyPolicy": "プライバシーポリシー",
+    "shippingPolicy": "配送ポリシー",
+    "refundPolicy": "返金ポリシー",
+    "accessibility": "アクセシビリティ方針"
   },
   "comingSoon": {
     "brand": "Chocobanana",

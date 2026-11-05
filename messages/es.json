@@ -433,7 +433,7 @@
     "phoneInvalid": "Escribe un teléfono que podamos usar para la entrega.",
     "regionInvalid": "Elige una provincia o estado.",
     "acceptTerms": "He leído y acepto las",
-    "termsLink": "Condiciones de venta",
+    "termsLink": "Términos y condiciones",
     "acceptTermsEnd": "incluido el derecho de cancelación de 14 días.",
     "acceptRequired": "Acepta las Condiciones de venta para continuar.",
     "dutiesNote": "Precios en CAD. Fuera de Canadá, el país de destino puede cobrar impuestos o aranceles de importación en la entrega."
@@ -446,8 +446,13 @@
     "shipping": "Envío",
     "linksLabel": "Pie de página",
     "privacy": "Privacidad",
-    "terms": "Condiciones de venta",
-    "withdraw": "Desistir del contrato aquí"
+    "terms": "Términos y condiciones",
+    "withdraw": "Desistir del contrato aquí",
+    "legal": "Legal",
+    "privacyPolicy": "Política de privacidad",
+    "shippingPolicy": "Política de envíos",
+    "refundPolicy": "Política de reembolsos",
+    "accessibility": "Declaración de accesibilidad"
   },
   "comingSoon": {
     "brand": "Chocobanana",

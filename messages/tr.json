@@ -433,7 +433,7 @@
     "phoneInvalid": "Teslimat için kullanabileceğimiz bir telefon yaz.",
     "regionInvalid": "Bir il veya eyalet seç.",
     "acceptTerms": "Okudum ve kabul ediyorum:",
-    "termsLink": "Satış Koşulları",
+    "termsLink": "Şartlar ve Koşullar",
     "acceptTermsEnd": "(14 günlük cayma hakkı dahil).",
     "acceptRequired": "Devam etmek için Satış Koşulları'nı kabul et.",
     "dutiesNote": "Fiyatlar CAD cinsindendir. Kanada dışındaki siparişlerde varış ülkesi teslimatta ithalat vergisi veya gümrük alabilir."
@@ -446,8 +446,13 @@
     "shipping": "Kargo",
     "linksLabel": "Alt bilgi",
     "privacy": "Gizlilik",
-    "terms": "Satış Koşulları",
-    "withdraw": "Sözleşmeden cayma"
+    "terms": "Şartlar ve Koşullar",
+    "withdraw": "Sözleşmeden cayma",
+    "legal": "Yasal",
+    "privacyPolicy": "Gizlilik Politikası",
+    "shippingPolicy": "Kargo Politikası",
+    "refundPolicy": "İade Politikası",
+    "accessibility": "Erişilebilirlik Beyanı"
   },
   "comingSoon": {
     "brand": "Chocobanana",

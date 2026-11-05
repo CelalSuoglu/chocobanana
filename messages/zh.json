@@ -433,7 +433,7 @@
     "phoneInvalid": "请输入可用于配送的电话。",
     "regionInvalid": "请选择省或州。",
     "acceptTerms": "我已阅读并同意",
-    "termsLink": "销售条款",
+    "termsLink": "条款与条件",
     "acceptTermsEnd": "（包括 14 天取消政策）。",
     "acceptRequired": "请先同意销售条款再继续。",
     "dutiesNote": "价格以加元计。寄往加拿大以外的订单，目的地国家可能在派送时收取进口税或关税。"
@@ -446,8 +446,13 @@
     "shipping": "配送",
     "linksLabel": "页脚",
     "privacy": "隐私",
-    "terms": "销售条款",
-    "withdraw": "在此撤回合同"
+    "terms": "条款与条件",
+    "withdraw": "在此撤回合同",
+    "legal": "法律信息",
+    "privacyPolicy": "隐私政策",
+    "shippingPolicy": "配送政策",
+    "refundPolicy": "退款政策",
+    "accessibility": "无障碍声明"
   },
   "comingSoon": {
     "brand": "Chocobanana",

@@ -1,46 +1,34 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Breadcrumbs } from "@/components/breadcrumbs";
+import { LegalDocument } from "@/components/legal-document";
 import { isLocale } from "@/lib/i18n/config";
-import { getDictionary } from "@/lib/i18n/get-dictionary";
+import { getShippingPolicy } from "@/lib/legal/policies";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale: raw } = await params;
-  if (!isLocale(raw)) return {};
-  const dict = await getDictionary(raw);
-  return { title: dict.shipping.title };
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return { title: getShippingPolicy(locale).title };
 }
 
-export default async function ShippingPage({
+export default async function Page({
   params,
-}: PageProps<"/[locale]/shipping">) {
-  const { locale: raw } = await params;
-  if (!isLocale(raw)) notFound();
-  const dict = await getDictionary(raw);
-
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const doc = getShippingPolicy(locale);
   return (
-    <main className="section-pad mx-auto w-full max-w-2xl flex-1 py-8 md:py-12">
-      <Breadcrumbs
-        locale={raw}
-        label={dict.a11y.breadcrumb}
-        items={[
-          { label: dict.nav.home, path: "" },
-          { label: dict.shipping.title },
-        ]}
-      />
-      <h1 className="page-title mt-6">{dict.shipping.title}</h1>
-      <p className="page-lead">{dict.shipping.intro}</p>
-      <div className="mt-8 space-y-4 text-sm leading-relaxed text-chocolate-soft">
-        <p>{dict.shipping.postage}</p>
-        <p>{dict.shipping.countries}</p>
-        <p>{dict.shipping.stickers}</p>
-        <p>{dict.shipping.timing}</p>
-        <p>{dict.shipping.duties}</p>
-      </div>
-    </main>
+    <LegalDocument
+      lang={doc.lang}
+      title={doc.title}
+      updated={doc.updated}
+      intro={doc.intro}
+      sections={doc.sections}
+    />
   );
 }

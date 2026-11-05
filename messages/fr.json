@@ -433,7 +433,7 @@
     "phoneInvalid": "Indiquez un numéro utilisable pour la livraison.",
     "regionInvalid": "Choisissez une province ou un état.",
     "acceptTerms": "J'ai lu et j'accepte les",
-    "termsLink": "Conditions de vente",
+    "termsLink": "Conditions générales",
     "acceptTermsEnd": "y compris le droit d'annulation de 14 jours.",
     "acceptRequired": "Veuillez accepter les Conditions de vente pour continuer.",
     "dutiesNote": "Prix en CAD. Hors du Canada, le pays de destination peut percevoir des taxes ou droits à l'importation à la livraison."
@@ -446,8 +446,13 @@
     "shipping": "Livraison",
     "linksLabel": "Pied de page",
     "privacy": "Confidentialité",
-    "terms": "Conditions de vente",
-    "withdraw": "Se rétracter du contrat ici"
+    "terms": "Conditions générales",
+    "withdraw": "Se rétracter du contrat ici",
+    "legal": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité",
+    "shippingPolicy": "Politique de livraison",
+    "refundPolicy": "Politique de remboursement",
+    "accessibility": "Déclaration d'accessibilité"
   },
   "comingSoon": {
     "brand": "Chocobanana",

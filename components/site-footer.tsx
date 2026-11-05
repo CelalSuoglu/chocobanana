@@ -19,14 +19,18 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
     { href: hrefFor(locale, "/about"), label: dict.nav.about },
     { href: hrefFor(locale, "/contact"), label: dict.nav.contact },
     { href: hrefFor(locale, "/faq"), label: dict.footer.faq },
-    { href: hrefFor(locale, "/shipping"), label: dict.footer.shipping },
+  ];
+  const legal = [
     { href: hrefFor(locale, "/terms"), label: dict.footer.terms },
-    { href: hrefFor(locale, "/privacy"), label: dict.footer.privacy },
+    { href: hrefFor(locale, "/privacy"), label: dict.footer.privacyPolicy },
+    { href: hrefFor(locale, "/shipping"), label: dict.footer.shippingPolicy },
+    { href: hrefFor(locale, "/refund-policy"), label: dict.footer.refundPolicy },
+    { href: hrefFor(locale, "/accessibility"), label: dict.footer.accessibility },
   ];
 
   return (
     <footer className="border-t border-line bg-paper">
-      <div className="section-pad mx-auto grid max-w-5xl gap-6 py-10 text-sm text-chocolate-soft md:grid-cols-3 md:gap-10 md:py-14">
+      <div className="section-pad mx-auto grid max-w-5xl gap-6 py-10 text-sm text-chocolate-soft md:grid-cols-4 md:gap-10 md:py-14">
         <div>
           <a href={hrefFor(locale, "")} className="inline-flex items-center gap-3">
             <Image
@@ -47,6 +51,19 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
             {links.map((link) => (
               <li key={link.href}>
                 <a href={link.href} className="inline-flex min-h-11 items-center hover:text-chocolate">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <nav aria-label={dict.footer.legal}>
+          <p className="mb-1 text-xs uppercase tracking-[0.18em] text-chocolate">{dict.footer.legal}</p>
+          <ul className="flex flex-col">
+            {legal.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="inline-flex min-h-10 items-center hover:text-chocolate">
                   {link.label}
                 </a>
               </li>

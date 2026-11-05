@@ -28,7 +28,7 @@ function sellerLines(labels: { address: string; phone: string; email: string; pe
 function en(): LegalDoc {
   return {
     lang: "en",
-    title: "Terms of Sale",
+    title: "Terms & Conditions",
     updated: `Last updated: ${BUSINESS.termsVersion}`,
     intro:
       "These terms apply when you buy from thechocobananaclub.com or the Chocobanana apps. Please read them before you order. Nothing here takes away rights you have under the consumer laws of the place where you live.",
@@ -86,9 +86,9 @@ function en(): LegalDoc {
         body: [
           "You can cancel any order within 14 days without giving a reason. For sticker sheets the 14 days start when you receive them; for a Club package they start on the day you pay.",
           "To cancel, use the \"Withdraw from contract here\" button at the bottom of every page, or email us with your name and order number. We confirm receipt by email.",
-          "Sticker sheets: send them back unused within 14 days of cancelling. Return postage is paid by you unless the item was faulty or wrong.",
+          "Sticker sheets: send them back unused within 14 days of cancelling. Return postage is paid by you unless the item was faulty or wrong, or you live in Türkiye (we pay it).",
           "Club packages: we refund every month that has not been mailed yet. Envelopes already received within the 14 days can be returned unused for a refund of that month.",
-          "We refund within 14 days of your cancellation to your original payment method, at no cost to you. For goods you are sending back, we may wait until we receive them or you show proof of mailing.",
+          "We refund within 14 days of your cancellation to your original payment method, including the standard postage you paid, at no cost to you. For goods you are sending back, we may wait until we receive them or you show proof of mailing.",
         ],
       },
       {
@@ -193,9 +193,9 @@ function tr(): LegalDoc {
         body: [
           "Her siparişi gerekçe göstermeden 14 gün içinde iptal edebilirsin. Sticker sayfalarında 14 gün ürünü teslim aldığın gün, Kulüp paketlerinde ödeme yaptığın gün başlar.",
           "İptal için her sayfanın altındaki \"Sözleşmeden cayma\" butonunu kullan ya da adın ve sipariş numaranla bize e-posta gönder. Talebini aldığımızı e-postayla onaylarız.",
-          "Sticker sayfaları: cayma bildiriminden sonraki 14 gün içinde kullanılmamış olarak geri gönder. Ürün kusurlu veya yanlış değilse iade postası sana aittir.",
+          "Sticker sayfaları: cayma bildiriminden sonraki 14 gün içinde kullanılmamış olarak geri gönder. Ürün kusurlu veya yanlış değilse iade postası sana aittir; Türkiye'de yaşıyorsan iade postasını biz karşılarız.",
           "Kulüp paketleri: henüz postalanmamış her ayın ücretini iade ederiz. 14 gün içinde teslim aldığın zarflar kullanılmadan geri gönderilirse o ayın ücreti de iade edilir.",
-          "İadeyi cayma bildiriminden itibaren 14 gün içinde, ücretsiz olarak, ödeme yaptığın yönteme yaparız. Geri gönderilen ürünlerde, ürün bize ulaşana veya gönderim belgesini paylaşana kadar bekleyebiliriz.",
+          "İadeyi cayma bildiriminden itibaren 14 gün içinde, ücretsiz olarak, ödediğin standart posta dahil, ödeme yaptığın yönteme yaparız. Geri gönderilen ürünlerde, ürün bize ulaşana veya gönderim belgesini paylaşana kadar bekleyebiliriz.",
         ],
       },
       {
@@ -300,9 +300,9 @@ function fr(): LegalDoc {
         body: [
           "Vous pouvez annuler toute commande dans un délai de 14 jours sans donner de motif. Pour les planches de stickers, le délai court à partir de leur réception ; pour un forfait du Club, à partir du jour du paiement.",
           "Pour vous rétracter, utilisez le bouton « Se rétracter du contrat ici » en bas de chaque page, ou envoyez-nous un courriel avec votre nom et votre numéro de commande. Nous accusons réception par courriel.",
-          "Planches de stickers : renvoyez-les inutilisées dans les 14 jours suivant votre rétractation. Les frais de retour sont à votre charge, sauf si l'article est défectueux ou erroné.",
+          "Planches de stickers : renvoyez-les inutilisées dans les 14 jours suivant votre rétractation. Les frais de retour sont à votre charge, sauf si l'article est défectueux ou erroné, ou si vous résidez en Turquie (nous les payons).",
           "Forfaits du Club : nous remboursons chaque mois qui n'a pas encore été posté. Les enveloppes reçues pendant les 14 jours peuvent être renvoyées inutilisées pour obtenir le remboursement du mois concerné.",
-          "Nous remboursons dans les 14 jours suivant votre rétractation, sur votre moyen de paiement d'origine, sans frais. Pour les articles à renvoyer, nous pouvons attendre leur réception ou une preuve d'expédition.",
+          "Nous remboursons dans les 14 jours suivant votre rétractation, sur votre moyen de paiement d'origine, affranchissement standard compris, sans frais. Pour les articles à renvoyer, nous pouvons attendre leur réception ou une preuve d'expédition.",
         ],
       },
       {
@@ -407,9 +407,9 @@ function de(): LegalDoc {
         body: [
           "Du kannst jede Bestellung innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Bei Stickerbögen beginnt die Frist mit dem Erhalt der Ware, bei Club-Paketen am Tag der Zahlung.",
           "Zum Widerruf nutze den Button „Vertrag hier widerrufen“ unten auf jeder Seite oder schreib uns eine E-Mail mit deinem Namen und deiner Bestellnummer. Wir bestätigen den Eingang per E-Mail.",
-          "Stickerbögen: Sende sie innerhalb von 14 Tagen nach dem Widerruf unbenutzt zurück. Die Rücksendekosten trägst du, außer der Artikel war fehlerhaft oder falsch.",
+          "Stickerbögen: Sende sie innerhalb von 14 Tagen nach dem Widerruf unbenutzt zurück. Die Rücksendekosten trägst du, außer der Artikel war fehlerhaft oder falsch oder du wohnst in der Türkei (dann zahlen wir).",
           "Club-Pakete: Wir erstatten jeden Monat, der noch nicht verschickt wurde. Innerhalb der 14 Tage erhaltene Umschläge können unbenutzt zurückgesendet werden; dann erstatten wir auch diesen Monat.",
-          "Wir erstatten innerhalb von 14 Tagen nach deinem Widerruf über dein ursprüngliches Zahlungsmittel, ohne Kosten für dich. Bei Rücksendungen können wir warten, bis die Ware bei uns ist oder du den Versand nachweist.",
+          "Wir erstatten innerhalb von 14 Tagen nach deinem Widerruf über dein ursprüngliches Zahlungsmittel, einschließlich des Standardportos, ohne Kosten für dich. Bei Rücksendungen können wir warten, bis die Ware bei uns ist oder du den Versand nachweist.",
         ],
       },
       {
