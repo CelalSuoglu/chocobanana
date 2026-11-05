@@ -7,7 +7,7 @@ import type Stripe from "stripe";
 export const CHECKOUT_SHIPPING_COUNTRIES = [
   "CA",
   "US",
-  "GB",
+  // "GB" paused: UK requires VAT registration from the first sale under £135.
   "AU",
   "FR",
   "DE",

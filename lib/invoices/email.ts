@@ -8,6 +8,33 @@ import {
   type InvoiceDocumentInput,
 } from "@/lib/invoices/model";
 import { buildInvoicePdf } from "@/lib/invoices/pdf";
+import { formatInvoiceDate } from "@/lib/invoices/model";
+import { businessContactLines } from "@/lib/legal/business";
+import { getAppBaseUrl } from "@/lib/stripe/config";
+
+/** Ontario/EU: the confirmation is the buyer's copy of the agreement. */
+function agreementLines(invoice: InvoiceDocument): string[] {
+  const base = getAppBaseUrl();
+  const address = [
+    invoice.shippingName,
+    invoice.shippingLine1,
+    invoice.shippingLine2,
+    [invoice.shippingCity, invoice.shippingState, invoice.shippingPostalCode].filter(Boolean).join(" "),
+    invoice.shippingCountry,
+  ]
+    .filter((part) => part && String(part).trim())
+    .join(", ");
+  return [
+    `Order date: ${formatInvoiceDate(invoice.createdAt)}`,
+    ...(address ? [`Delivery address: ${address}`] : []),
+    "Prices are in Canadian dollars (CAD). Delivery times and our 14-day cancellation policy are in our Terms of Sale:",
+    `${base}/en/terms`,
+    `To cancel, use: ${base}/en/withdraw`,
+    "",
+    "Seller:",
+    ...businessContactLines(),
+  ];
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -70,6 +97,8 @@ export function invoiceEmailContent(invoice: InvoiceDocument): {
     "",
     "Your invoice is attached as a PDF. 📄",
     "",
+    ...agreementLines(invoice),
+    "",
     "With love,",
     "Didem 🤎",
     "Chocobanana Mail Club",
@@ -87,6 +116,7 @@ export function invoiceEmailContent(invoice: InvoiceDocument): {
     <p style="margin:0 0 16px;">Total ${escapeHtml(total)} 💛</p>
     <p style="margin:0 0 16px;">Your invoice is attached as a PDF. 📄</p>
     <p style="margin:0;">With love,<br>Didem 🤎<br>Chocobanana Mail Club</p>
+    <p style="margin:24px 0 0;font-size:13px;line-height:1.5;color:#6B4636;">${agreementLines(invoice).map(escapeHtml).join("<br>")}</p>
   `);
   return { subject, text, html };
 }

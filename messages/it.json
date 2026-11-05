@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana è un accogliente club di posta per cancelleria morbida e momenti scritti a mano."
+    "description": "Chocobanana è un accogliente club postale di cancelleria morbida e piccole gioie di carta."
   },
   "nav": {
     "home": "Home",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "tagline": "Un piccolo club postale accogliente di cancelleria morbida, piccole gioie di carta e pacchi che sembrano un abbraccio.",
     "explore": "Explore",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Reach out through a contact layout with editable sample fields."
       }
     },
-    "taglineShort": "Cancelleria morbida, momenti scritti a mano e pacchi che sembrano un abbraccio per posta.",
+    "taglineShort": "Cancelleria morbida, piccole gioie di carta e pacchi che sembrano un abbraccio.",
     "ctaShop": "Shop Stationery",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "una lettera al mese",
     "title": "Snail Mail Club",
     "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
-    "productLead": "Una lettera scritta a mano nella tua cassetta ogni mese. Scegli per quanti mesi e dove spedirla. Paghi una volta, spedizione inclusa.",
+    "productLead": "Una lettera nella tua cassetta ogni mese. Scegli quanti mesi e dove. Paghi una volta, spedizione inclusa.",
     "listedPriceLabel": "Totale pacchetto",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "Al momento spediamo le lettere del club in questi paesi:",
@@ -431,7 +431,12 @@
     "emailInvalid": "Inserisci un’email valida.",
     "postalInvalid": "Controlla il codice postale.",
     "phoneInvalid": "Inserisci un telefono che possiamo usare per la consegna.",
-    "regionInvalid": "Scegli una provincia o uno stato."
+    "regionInvalid": "Scegli una provincia o uno stato.",
+    "acceptTerms": "Ho letto e accetto le",
+    "termsLink": "Condizioni di vendita",
+    "acceptTermsEnd": "incluso il diritto di recesso di 14 giorni.",
+    "acceptRequired": "Accetta le Condizioni di vendita per continuare.",
+    "dutiesNote": "Prezzi in CAD. Fuori dal Canada il paese di destinazione può applicare tasse o dazi all'importazione alla consegna."
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "FAQ",
     "shipping": "Spedizione",
     "linksLabel": "Piè di pagina",
-    "privacy": "Privacy"
+    "privacy": "Privacy",
+    "terms": "Condizioni di vendita",
+    "withdraw": "Recedi dal contratto qui"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "Un cosy mail club per cancelleria morbida e momenti scritti a mano — apre presto.",
+    "tagline": "Un club postale accogliente di cancelleria morbida e piccole gioie di carta — apre presto.",
     "days": "Giorni",
     "hours": "Ore",
     "minutes": "Minuti",
@@ -640,15 +647,16 @@
     "q3": "Come funzionano i premi ogni 5 ordini?",
     "a3": "Ogni 5 ordini completati sul tuo account generano un codice del 10% per un ordine successivo. Quel codice funziona solo su questo account.",
     "q4": "Dove spedite?",
-    "a4": "Il pagamento può spedire in Canada, Stati Uniti, Regno Unito, Australia, Francia, Germania e Turchia. La posta standard è inclusa nei pacchetti Snail Mail Club."
+    "a4": "Spediamo in Canada, Stati Uniti, Australia, Francia, Germania e Turchia. L'affrancatura standard è inclusa nei pacchetti Snail Mail Club."
   },
   "shipping": {
     "title": "Spedizione",
-    "intro": "Quello che possiamo dire oggi sulla consegna.",
-    "postage": "La posta standard è inclusa nei pacchetti Snail Mail Club.",
-    "countries": "Il pagamento può spedire in Canada, Stati Uniti, Regno Unito, Australia, Francia, Germania e Turchia.",
-    "stickers": "La spedizione degli sticker si conferma al pagamento. Una tariffa separata non è ancora pubblicata.",
-    "timing": "Un tempo di consegna non è ancora pubblicato."
+    "intro": "Come e quando viaggia la tua posta.",
+    "postage": "I pacchetti Snail Mail Club includono l'affrancatura standard. I fogli di sticker sono spediti gratis in Canada; si aggiungono CA$1 a foglio per gli USA e CA$2 a foglio per gli altri paesi.",
+    "countries": "Spediamo in Canada, Stati Uniti, Australia, Francia, Germania e Turchia con posta ordinaria, di solito senza tracciamento.",
+    "stickers": "I fogli di sticker partono entro 5 giorni lavorativi. Le buste del Club partono nei primi 10 giorni di ogni mese; gli ordini pagati entro il 20 rientrano nell'invio del mese.",
+    "timing": "Tempi abituali dopo la spedizione: Canada 2–9 giorni lavorativi, USA 6–12, altri paesi 10–25. Se dopo 30 giorni (45 fuori da Canada e USA) non è arrivato nulla o arriva danneggiato, scrivici: rispediamo o rimborsiamo.",
+    "duties": "Fuori dal Canada il paese di destinazione può applicare tasse o dazi all'importazione, a carico del destinatario."
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "Il tuo ordine {order} è stato annullato. Scrivici per qualsiasi domanda."
       }
     }
+  },
+  "withdraw": {
+    "title": "Recesso dal contratto",
+    "intro": "Hai cambiato idea? Puoi annullare entro 14 giorni e interrompere un pacchetto del Club in qualsiasi momento per i mesi non ancora spediti. Compila il modulo e ti confermeremo via email.",
+    "name": "Nome e cognome",
+    "email": "Email per la conferma",
+    "orderNumber": "Numero d'ordine",
+    "items": "Cosa vuoi annullare?",
+    "itemsHint": "Lascia vuoto per l'intero ordine o indica gli articoli",
+    "confirm": "Conferma il recesso",
+    "sentTitle": "Abbiamo ricevuto il tuo recesso",
+    "sentBody": "Ti rimborseremo entro 14 giorni sul metodo di pagamento originale. La conferma sta arrivando via email.",
+    "receivedAt": "Ricevuto il",
+    "noEmail": "Non è stato possibile inviare l'email di conferma. Conserva questa pagina o scrivici:",
+    "invalid": "Inserisci nome, un'email valida e il numero d'ordine.",
+    "unavailable": "Qualcosa è andato storto. Invia nome e numero d'ordine a"
   }
 }

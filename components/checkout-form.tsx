@@ -16,6 +16,7 @@ import {
 } from "@/lib/checkout/address";
 import { getCatalogProduct, type CatalogProduct } from "@/lib/catalog/products";
 import { type SnailMailRegion } from "@/lib/catalog/snail-mail";
+import { STICKER_POSTAGE_PER_SHEET_CAD_CENTS } from "@/lib/catalog/sticker-sheets";
 import { baseCurrency, formatCatalogPrice } from "@/lib/currency/config";
 import type { Locale } from "@/lib/i18n/config";
 import { hrefFor } from "@/lib/nav";
@@ -35,6 +36,11 @@ export type CheckoutProfile = {
 };
 
 type CheckoutLabels = {
+  acceptTerms: string;
+  termsLink: string;
+  acceptTermsEnd: string;
+  acceptRequired: string;
+  dutiesNote: string;
   shipTitle: string;
   shipIntro: string;
   firstName: string;
@@ -157,6 +163,7 @@ export function CheckoutForm({
 }: CheckoutFormProps) {
   const { lines, ready } = useCart();
   const [pending, setPending] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Partial<Record<DeliveryField, DeliveryFieldError>>>({});
   const [draft, setDraft] = useState<Draft>(() => draftFromProfile(profile));
@@ -217,8 +224,19 @@ export function CheckoutForm({
     locale,
     preferredCurrency: baseCurrency,
   });
+  const stickerSheets = rows
+    .filter((row) => row.product.family === "sticker")
+    .reduce((sum, row) => sum + row.line.quantity, 0);
+  // Mirrors the server: extra postage per sticker sheet outside Canada.
+  const postageCents =
+    stickerSheets * STICKER_POSTAGE_PER_SHEET_CAD_CENTS[deliveryRegion ?? "international"];
+  const postage = formatCatalogPrice({
+    amountCadCents: postageCents,
+    locale,
+    preferredCurrency: baseCurrency,
+  });
   const total = formatCatalogPrice({
-    amountCadCents: Math.max(0, subtotal - discountCents),
+    amountCadCents: Math.max(0, subtotal - discountCents) + postageCents,
     locale,
     preferredCurrency: baseCurrency,
   });
@@ -231,6 +249,11 @@ export function CheckoutForm({
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (pending || mixedRegions || rows.length === 0) return;
+    if (!acceptedTerms) {
+      setError(labels.acceptRequired);
+      document.getElementById("checkout-terms")?.focus();
+      return;
+    }
     const delivery = { ...draft, country: selectedCountry };
     const problems = deliveryFieldErrors(delivery, allowed);
     setFieldErrors(problems);
@@ -256,6 +279,7 @@ export function CheckoutForm({
           })),
           ...(rewardCode ? { rewardCode } : {}),
           delivery,
+          acceptTerms: true,
         }),
       });
       const body = (await response.json()) as { url?: string; error?: string };
@@ -486,7 +510,9 @@ export function CheckoutForm({
           </div>
           <div className="flex justify-between gap-3">
             <dt className="text-chocolate-soft">{labels.shippingLine}</dt>
-            <dd className="text-chocolate">{labels.postageIncluded}</dd>
+            <dd className="text-chocolate">
+              {postageCents > 0 ? postage.primary : labels.postageIncluded}
+            </dd>
           </div>
           {discountCents > 0 ? (
             <div className="flex justify-between gap-3">
@@ -511,6 +537,28 @@ export function CheckoutForm({
             {error}
           </p>
         ) : null}
+        {selectedCountry && selectedCountry !== "CA" ? (
+          <p className="mt-4 text-xs leading-relaxed text-chocolate-soft">{labels.dutiesNote}</p>
+        ) : null}
+        <label htmlFor="checkout-terms" className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-chocolate">
+          <input
+            id="checkout-terms"
+            type="checkbox"
+            checked={acceptedTerms}
+            onChange={(event) => {
+              setAcceptedTerms(event.target.checked);
+              if (event.target.checked) setError(null);
+            }}
+            className="mt-1 h-4 w-4 shrink-0 accent-[var(--chocolate)]"
+          />
+          <span>
+            {labels.acceptTerms}{labels.acceptTerms ? " " : ""}
+            <Link href={hrefFor(locale, "/terms")} target="_blank" className="underline underline-offset-2">
+              {labels.termsLink}
+            </Link>{" "}
+            {labels.acceptTermsEnd}
+          </span>
+        </label>
         <button
           type="submit"
           className="btn-primary mt-5 w-full"

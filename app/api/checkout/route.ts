@@ -19,6 +19,8 @@ type CheckoutBody = {
   currency?: unknown;
   rewardCode?: unknown;
   delivery?: unknown;
+  /** Must be true: the buyer ticked the Terms of Sale box. */
+  acceptTerms?: unknown;
   /** Ignored. Discount is calculated on the server from a valid reward code. */
   discount?: unknown;
   discountCadCents?: unknown;
@@ -94,6 +96,13 @@ export async function POST(request: Request) {
   const session = await auth();
   const signedInMember =
     session?.user?.id && session.user.role === "CUSTOMER" ? session.user : null;
+
+  if (body.acceptTerms !== true) {
+    return NextResponse.json(
+      { error: "Please accept the Terms of Sale to continue." },
+      { status: 400 },
+    );
+  }
 
   const parsedDelivery = parseDeliveryDetails(
     body.delivery,

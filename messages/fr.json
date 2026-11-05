@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana est un club de courrier chaleureux pour la papeterie douce et les mots écrits à la main."
+    "description": "Chocobanana est un club de courrier douillet pour la papeterie douce et les petites joies en papier."
   },
   "nav": {
     "home": "Accueil",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "bonjour, douce amie",
     "name": "Chocobanana",
-    "tagline": "Un petit mail club chaleureux pour la papeterie douce et les moments manuscrits.",
+    "tagline": "Un petit club de courrier douillet pour la papeterie douce, les petites joies en papier et des colis qui font l'effet d'un câlin.",
     "explore": "Explorer",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Une mise en page contact avec des champs d'exemple modifiables."
       }
     },
-    "taglineShort": "De la papeterie tout en douceur, des moments écrits à la main et des colis qui ressemblent à un câlin par la poste.",
+    "taglineShort": "Papeterie douce, petites joies en papier et colis qui font l'effet d'un câlin.",
     "ctaShop": "Voir la papeterie",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "une lettre par mois",
     "title": "Snail Mail Club",
     "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
-    "productLead": "Une lettre manuscrite dans votre boîte aux lettres chaque mois. Choisissez la durée et la destination. Vous payez une fois, frais de port inclus.",
+    "productLead": "Une lettre dans votre boîte aux lettres chaque mois. Choisissez la durée et la destination. Vous payez une fois, affranchissement compris.",
     "listedPriceLabel": "Total de la formule",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "Nous envoyons actuellement les lettres du club vers ces pays :",
@@ -431,7 +431,12 @@
     "emailInvalid": "Indiquez un e-mail valide.",
     "postalInvalid": "Vérifiez le code postal.",
     "phoneInvalid": "Indiquez un numéro utilisable pour la livraison.",
-    "regionInvalid": "Choisissez une province ou un état."
+    "regionInvalid": "Choisissez une province ou un état.",
+    "acceptTerms": "J'ai lu et j'accepte les",
+    "termsLink": "Conditions de vente",
+    "acceptTermsEnd": "y compris le droit d'annulation de 14 jours.",
+    "acceptRequired": "Veuillez accepter les Conditions de vente pour continuer.",
+    "dutiesNote": "Prix en CAD. Hors du Canada, le pays de destination peut percevoir des taxes ou droits à l'importation à la livraison."
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "FAQ",
     "shipping": "Livraison",
     "linksLabel": "Pied de page",
-    "privacy": "Confidentialité"
+    "privacy": "Confidentialité",
+    "terms": "Conditions de vente",
+    "withdraw": "Se rétracter du contrat ici"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "Un club de courrier douillet pour la papeterie tendre et les moments écrits à la main — bientôt ouvert.",
+    "tagline": "Un club de courrier douillet pour la papeterie douce et les petites joies en papier — bientôt ouvert.",
     "days": "Jours",
     "hours": "Heures",
     "minutes": "Minutes",
@@ -640,15 +647,16 @@
     "q3": "Comment fonctionnent les récompenses toutes les 5 commandes ?",
     "a3": "Toutes les 5 commandes terminées sur votre compte, un code de 10 % est créé pour une commande suivante. Ce code ne fonctionne que sur ce compte.",
     "q4": "Où livrez-vous ?",
-    "a4": "Le paiement peut livrer au Canada, aux États-Unis, au Royaume-Uni, en Australie, en France, en Allemagne et en Turquie. L’affranchissement standard est inclus dans les forfaits Snail Mail Club."
+    "a4": "Nous expédions au Canada, aux États-Unis, en Australie, en France, en Allemagne et en Turquie. L'affranchissement standard est inclus dans les forfaits Snail Mail Club."
   },
   "shipping": {
     "title": "Livraison",
-    "intro": "Ce que nous pouvons dire aujourd’hui sur la livraison.",
-    "postage": "L’affranchissement standard est inclus dans les forfaits Snail Mail Club.",
-    "countries": "Le paiement peut livrer au Canada, aux États-Unis, au Royaume-Uni, en Australie, en France, en Allemagne et en Turquie.",
-    "stickers": "La livraison des stickers est confirmée au paiement. Des frais séparés ne sont pas encore publiés.",
-    "timing": "Aucun délai de livraison n’est publié pour le moment."
+    "intro": "Comment et quand votre courrier voyage.",
+    "postage": "Les forfaits Snail Mail Club incluent l'affranchissement standard. Les planches de stickers sont expédiées gratuitement au Canada ; 1 $ CA par planche est ajouté pour les États-Unis et 2 $ CA par planche pour les autres pays.",
+    "countries": "Nous expédions au Canada, aux États-Unis, en Australie, en France, en Allemagne et en Turquie par courrier standard, généralement sans suivi.",
+    "stickers": "Les planches de stickers sont postées sous 5 jours ouvrables. Les enveloppes du Club partent pendant les 10 premiers jours du mois ; les commandes payées au plus tard le 20 rejoignent l'envoi du mois.",
+    "timing": "Délai habituel après l'envoi : Canada 2 à 9 jours ouvrables, États-Unis 6 à 12, autres pays 10 à 25. Si rien n'est arrivé après 30 jours (45 hors Canada et États-Unis) ou si l'envoi est endommagé, écrivez-nous : nous renvoyons ou remboursons.",
+    "duties": "Hors du Canada, le pays de destination peut percevoir des taxes ou droits à l'importation, payés par le destinataire."
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "Votre commande {order} a été annulée. Contactez-nous en cas de question."
       }
     }
+  },
+  "withdraw": {
+    "title": "Se rétracter du contrat",
+    "intro": "Vous avez changé d'avis ? Vous pouvez annuler sous 14 jours, et arrêter un forfait du Club à tout moment pour les mois non encore postés. Remplissez ce formulaire, nous confirmerons par courriel.",
+    "name": "Nom complet",
+    "email": "Courriel pour la confirmation",
+    "orderNumber": "Numéro de commande",
+    "items": "Que souhaitez-vous annuler ?",
+    "itemsHint": "Laissez vide pour toute la commande, ou indiquez les articles",
+    "confirm": "Confirmer la rétractation",
+    "sentTitle": "Nous avons reçu votre rétractation",
+    "sentBody": "Nous vous rembourserons sous 14 jours sur votre moyen de paiement d'origine. Une confirmation arrive par courriel.",
+    "receivedAt": "Reçue le",
+    "noEmail": "Le courriel de confirmation n'a pas pu être envoyé. Conservez cette page ou écrivez-nous :",
+    "invalid": "Indiquez votre nom, un courriel valide et votre numéro de commande.",
+    "unavailable": "Une erreur est survenue. Envoyez votre nom et numéro de commande à"
   }
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { businessContactLines } from "@/lib/legal/business";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ContactForm } from "@/components/contact-form";
 import { PageHero } from "@/components/page-hero";
@@ -71,6 +72,10 @@ export default async function ContactPage({
           </a>
         </p>
       </div>
+
+      <p className="mx-auto mt-6 max-w-lg text-center text-xs leading-relaxed text-chocolate-soft">
+        {businessContactLines().join(" · ")}
+      </p>
 
       <ContactForm dict={dict.contact} />
     </main>

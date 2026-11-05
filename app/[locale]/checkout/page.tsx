@@ -93,6 +93,11 @@ export default async function CheckoutPage({
         profile={profile}
         productId={product?.trim() || undefined}
         labels={{
+          acceptTerms: labels.acceptTerms,
+          termsLink: labels.termsLink,
+          acceptTermsEnd: labels.acceptTermsEnd,
+          acceptRequired: labels.acceptRequired,
+          dutiesNote: labels.dutiesNote,
           shipTitle: labels.shipTitle,
           shipIntro: labels.shipIntro,
           firstName: labels.firstName,

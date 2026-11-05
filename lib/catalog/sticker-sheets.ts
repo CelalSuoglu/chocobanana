@@ -21,22 +21,8 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     amountCadCents: 600,
     imageSrc: "/stickers/xmas-mug-sticker-sheet.jpg",
   },
-  {
-    id: "olivia-rodrigo-sticker-sheet",
-    nameEn: "Olivia Rodrigo Sticker Sheet",
-    descriptionEn:
-      "A heart lock, a blue convertible, vampire lips and more on a lilac gingham sheet.",
-    amountCadCents: 600,
-    imageSrc: "/stickers/olivia-rodrigo-sticker-sheet.jpg",
-  },
-  {
-    id: "tortured-poets-sticker-sheet",
-    nameEn: "The Tortured Poets Sticker Sheet",
-    descriptionEn:
-      "A typewriter, the manuscript, a red phone box and a white rabbit on a soft grey sheet.",
-    amountCadCents: 600,
-    imageSrc: "/stickers/tortured-poets-sticker-sheet.jpg",
-  },
+  // Olivia Rodrigo and Tortured Poets sheets are off sale for now: they use
+  // artist names, an album title and lyric lines (rights/trademark risk).
   {
     id: "tiny-tasks-sticker-sheet",
     nameEn: "Tiny Tasks Sticker Sheet",

@@ -1,5 +1,6 @@
 import "server-only";
 
+import { businessContactLines } from "@/lib/legal/business";
 import { getAppBaseUrl } from "@/lib/stripe/config";
 
 const CLUB_URL = "https://thechocobananaclub.com";
@@ -75,6 +76,8 @@ export function listWelcomeMessage(row: {
     "",
     `Explore the club 💌: ${CLUB_URL}`,
     `Unsubscribe: ${unsubscribeUrl}`,
+    "",
+    ...businessContactLines(),
   ].join("\n");
   const html = welcomeLetter({
     greeting,
@@ -140,6 +143,7 @@ function welcomeLetter(input: {
           <tr>
             <td align="center" style="padding:8px 32px 40px;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.5;">
               <a href="${input.unsubscribeUrl}" style="color:#6B4636;text-decoration:underline;">Unsubscribe</a>
+              <br><span style="color:#6B4636;font-size:12px;">${businessContactLines().join(" · ")}</span>
             </td>
           </tr>
         </table>

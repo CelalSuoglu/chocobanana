@@ -14,7 +14,6 @@ const COUNTRY_NAMES: Record<(typeof CHECKOUT_SHIPPING_COUNTRIES)[number], string
   {
     CA: "Canada",
     US: "United States",
-    GB: "United Kingdom",
     AU: "Australia",
     FR: "France",
     DE: "Germany",

@@ -94,7 +94,6 @@ export const US_STATES = [
 const COUNTRY_LABELS: Record<CheckoutShippingCountry, string> = {
   CA: "Canada",
   US: "United States",
-  GB: "United Kingdom",
   AU: "Australia",
   FR: "France",
   DE: "Germany",

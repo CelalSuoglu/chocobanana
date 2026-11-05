@@ -39,6 +39,7 @@ export default async function ShippingPage({
         <p>{dict.shipping.countries}</p>
         <p>{dict.shipping.stickers}</p>
         <p>{dict.shipping.timing}</p>
+        <p>{dict.shipping.duties}</p>
       </div>
     </main>
   );

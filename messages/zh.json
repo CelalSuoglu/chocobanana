@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana 是一个温暖的信件俱乐部，寄送柔软的文具和手写的时刻。"
+    "description": "Chocobanana 是一个温馨的邮件俱乐部，带来柔和文具和小小的纸上喜悦。"
   },
   "nav": {
     "home": "首页",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "tagline": "一个温馨的小邮件俱乐部：柔和文具、小小的纸上喜悦，以及像拥抱一样的包裹。",
     "explore": "Explore",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Reach out through a contact layout with editable sample fields."
       }
     },
-    "taglineShort": "柔软的文具、手写的时刻，还有像拥抱一样寄来的包裹。",
+    "taglineShort": "柔和文具、小小的纸上喜悦，以及像拥抱一样的包裹。",
     "ctaShop": "Shop Stationery",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "每月一封信",
     "title": "Snail Mail Club",
     "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
-    "productLead": "每个月，一封手写信来到你的信箱。选择月数和寄送地址，一次付款，含邮费。",
+    "productLead": "每个月，一封信来到你的信箱。选择几个月以及寄到哪里。一次付款，含邮费。",
     "listedPriceLabel": "套餐总价",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "目前俱乐部的信件可寄往以下国家：",
@@ -431,7 +431,12 @@
     "emailInvalid": "请输入有效邮箱。",
     "postalInvalid": "请检查邮政编码。",
     "phoneInvalid": "请输入可用于配送的电话。",
-    "regionInvalid": "请选择省或州。"
+    "regionInvalid": "请选择省或州。",
+    "acceptTerms": "我已阅读并同意",
+    "termsLink": "销售条款",
+    "acceptTermsEnd": "（包括 14 天取消政策）。",
+    "acceptRequired": "请先同意销售条款再继续。",
+    "dutiesNote": "价格以加元计。寄往加拿大以外的订单，目的地国家可能在派送时收取进口税或关税。"
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "常见问题",
     "shipping": "配送",
     "linksLabel": "页脚",
-    "privacy": "隐私"
+    "privacy": "隐私",
+    "terms": "销售条款",
+    "withdraw": "在此撤回合同"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "一个温暖的邮件俱乐部，为柔软文具与手写时刻而设——即将开放。",
+    "tagline": "柔和文具和小小纸上喜悦的温馨邮件俱乐部 — 即将开张。",
     "days": "天",
     "hours": "小时",
     "minutes": "分钟",
@@ -640,15 +647,16 @@
     "q3": "每 5 笔订单的奖励怎么算？",
     "a3": "账户每完成 5 笔订单，会得到一个用于之后订单的 10% 优惠码。该优惠码只在这个账户上有效。",
     "q4": "寄到哪里？",
-    "a4": "结账可以寄往加拿大、美国、英国、澳大利亚、法国、德国和土耳其。Snail Mail Club 套餐价格已含普通邮资。"
+    "a4": "我们寄往加拿大、美国、澳大利亚、法国、德国和土耳其。Snail Mail Club 套餐价格已含普通邮费。"
   },
   "shipping": {
     "title": "配送",
-    "intro": "目前可以说明的配送信息。",
-    "postage": "普通邮资已包含在 Snail Mail Club 套餐价格中。",
-    "countries": "结账可以寄往加拿大、美国、英国、澳大利亚、法国、德国和土耳其。",
-    "stickers": "贴纸运费在结账时确认。单独的贴纸运费尚未公布。",
-    "timing": "送达时间承诺尚未公布。"
+    "intro": "你的信件如何、何时寄出。",
+    "postage": "Snail Mail Club 套餐价格已含普通邮费。贴纸在加拿大境内免邮；寄往美国每张加 CA$1，其他国家每张加 CA$2。",
+    "countries": "我们以普通信件寄往加拿大、美国、澳大利亚、法国、德国和土耳其，通常没有追踪。",
+    "stickers": "贴纸在 5 个工作日内寄出。俱乐部信封在每月前 10 天寄出；20 日前付款的订单加入当月寄送。",
+    "timing": "寄出后的一般时间：加拿大 2–9 个工作日，美国 6–12，其他国家 10–25。若 30 天（加拿大和美国以外 45 天）仍未收到或有损坏，请联系我们，我们会补寄或退款。",
+    "duties": "寄往加拿大以外时，目的地国家可能收取进口税或关税，由收件人支付。"
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "你的订单 {order} 已取消。如有疑问请联系我们。"
       }
     }
+  },
+  "withdraw": {
+    "title": "撤回合同",
+    "intro": "改变主意了？你可以在 14 天内取消，也可以随时停止俱乐部套餐中尚未寄出的月份。填写表单后，我们会通过邮件确认。",
+    "name": "姓名",
+    "email": "接收确认的邮箱",
+    "orderNumber": "订单号",
+    "items": "你想取消什么？",
+    "itemsHint": "取消整个订单请留空，或填写商品",
+    "confirm": "确认撤回",
+    "sentTitle": "我们已收到你的撤回申请",
+    "sentBody": "我们会在 14 天内退款到你的原支付方式。确认邮件正在发送。",
+    "receivedAt": "收到时间",
+    "noEmail": "暂时无法发送确认邮件。请保存此页面或联系我们：",
+    "invalid": "请填写姓名、有效邮箱和订单号。",
+    "unavailable": "出现问题。请将姓名和订单号发送至"
   }
 }

@@ -12,6 +12,7 @@ import {
   type SnailMailRegion,
 } from "@/lib/catalog/snail-mail";
 import { STICKER_POSTAGE_PER_SHEET_CAD_CENTS } from "@/lib/catalog/sticker-sheets";
+import { BUSINESS } from "@/lib/legal/business";
 import type { Locale } from "@/lib/i18n/config";
 import { isLocale } from "@/lib/i18n/config";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
@@ -466,6 +467,7 @@ export async function createCheckoutSession(options: {
     metadata: {
       product_kind: kind,
       locale,
+      terms_version: BUSINESS.termsVersion,
       amount_cad_cents: String(totalCadCents),
       ...(snailRegion ? { snail_mail_region: snailRegion } : {}),
       cart_product_ids: lineProducts.map((e) => e.product.id).join(","),

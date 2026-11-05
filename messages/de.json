@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana ist ein gemütlicher Briefclub für sanftes Papier und handgeschriebene Momente."
+    "description": "Chocobanana ist ein gemütlicher Mail Club für sanftes Briefpapier und kleine Papierfreuden."
   },
   "nav": {
     "home": "Start",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "tagline": "Ein gemütlicher kleiner Mail Club für sanftes Briefpapier, kleine Papierfreuden und Päckchen, die sich wie eine Umarmung anfühlen.",
     "explore": "Explore",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Reach out through a contact layout with editable sample fields."
       }
     },
-    "taglineShort": "Sanftes Papier, handgeschriebene Momente und Päckchen, die sich wie eine Umarmung per Post anfühlen.",
+    "taglineShort": "Sanftes Briefpapier, kleine Papierfreuden und Päckchen wie eine Umarmung.",
     "ctaShop": "Shop Stationery",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "ein Brief im Monat",
     "title": "Snail Mail Club",
     "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
-    "productLead": "Jeden Monat ein handgeschriebener Brief in deinem Briefkasten. Wähle, wie viele Monate und wohin. Du zahlst einmal, Porto inklusive.",
+    "productLead": "Jeden Monat ein Brief in deinem Briefkasten. Wähle, wie viele Monate und wohin. Du zahlst einmal, Porto inklusive.",
     "listedPriceLabel": "Paketpreis",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "Club-Briefe verschicken wir derzeit in diese Länder:",
@@ -431,7 +431,12 @@
     "emailInvalid": "Gib eine gültige E-Mail ein.",
     "postalInvalid": "Prüfe die Postleitzahl.",
     "phoneInvalid": "Gib eine Telefonnummer für die Lieferung ein.",
-    "regionInvalid": "Wähle ein Bundesland oder einen Staat."
+    "regionInvalid": "Wähle ein Bundesland oder einen Staat.",
+    "acceptTerms": "Ich habe die",
+    "termsLink": "Verkaufsbedingungen",
+    "acceptTermsEnd": "einschließlich des 14-tägigen Widerrufsrechts gelesen und akzeptiere sie.",
+    "acceptRequired": "Bitte akzeptiere die Verkaufsbedingungen, um fortzufahren.",
+    "dutiesNote": "Preise in CAD. Außerhalb Kanadas kann das Zielland bei Lieferung Einfuhrabgaben oder Zölle erheben."
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "FAQ",
     "shipping": "Versand",
     "linksLabel": "Fußzeile",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "terms": "Verkaufsbedingungen",
+    "withdraw": "Vertrag hier widerrufen"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "Ein gemütlicher Mail-Club für sanfte Schreibwaren und handgeschriebene Momente — öffnet bald.",
+    "tagline": "Ein gemütlicher Mail Club für sanftes Briefpapier und kleine Papierfreuden — bald geöffnet.",
     "days": "Tage",
     "hours": "Stunden",
     "minutes": "Minuten",
@@ -640,15 +647,16 @@
     "q3": "Wie funktionieren die Prämien alle 5 Bestellungen?",
     "a3": "Alle 5 abgeschlossenen Bestellungen auf deinem Konto ergeben einen Code über 10 % für eine spätere Bestellung. Der Code gilt nur für dieses Konto.",
     "q4": "Wohin liefert ihr?",
-    "a4": "Die Kasse kann nach Kanada, in die USA, das Vereinigte Königreich, nach Australien, Frankreich, Deutschland und in die Türkei liefern. Das Standardporto ist in den Snail-Mail-Club-Paketen enthalten."
+    "a4": "Wir versenden nach Kanada, in die USA, nach Australien, Frankreich, Deutschland und in die Türkei. Standardporto ist in den Snail Mail Club Paketen enthalten."
   },
   "shipping": {
     "title": "Versand",
-    "intro": "Was wir heute zur Lieferung sagen können.",
-    "postage": "Das Standardporto ist in den Snail-Mail-Club-Paketen enthalten.",
-    "countries": "Die Kasse kann nach Kanada, in die USA, das Vereinigte Königreich, nach Australien, Frankreich, Deutschland und in die Türkei liefern.",
-    "stickers": "Der Stickerversand wird an der Kasse bestätigt. Eine eigene Stickergebühr ist noch nicht veröffentlicht.",
-    "timing": "Eine Lieferzeit ist noch nicht veröffentlicht."
+    "intro": "Wie und wann deine Post reist.",
+    "postage": "Snail Mail Club Preise enthalten Standardporto. Stickerbögen werden in Kanada kostenlos versandt; für die USA kommen CA$1 und für andere Länder CA$2 pro Bogen hinzu.",
+    "countries": "Wir versenden nach Kanada, in die USA, nach Australien, Frankreich, Deutschland und in die Türkei als Standardbrief, meist ohne Sendungsverfolgung.",
+    "stickers": "Stickerbögen werden innerhalb von 5 Werktagen verschickt. Club-Umschläge gehen in den ersten 10 Tagen jedes Monats raus; bis zum 20. bezahlte Bestellungen sind im selben Monat dabei.",
+    "timing": "Übliche Laufzeit nach Versand: Kanada 2–9 Werktage, USA 6–12, andere Länder 10–25. Ist nach 30 Tagen (45 außerhalb Kanadas und der USA) nichts angekommen oder ist etwas beschädigt, schreib uns: Wir senden Ersatz oder erstatten.",
+    "duties": "Außerhalb Kanadas kann das Zielland Einfuhrabgaben oder Zölle erheben; diese trägt der Empfänger."
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "Deine Bestellung {order} wurde storniert. Melde dich bei Fragen."
       }
     }
+  },
+  "withdraw": {
+    "title": "Vertrag widerrufen",
+    "intro": "Meinung geändert? Du kannst innerhalb von 14 Tagen widerrufen und ein Club-Paket jederzeit für die noch nicht verschickten Monate beenden. Fülle das Formular aus, wir bestätigen per E-Mail.",
+    "name": "Vollständiger Name",
+    "email": "E-Mail für die Bestätigung",
+    "orderNumber": "Bestellnummer",
+    "items": "Was möchtest du widerrufen?",
+    "itemsHint": "Leer lassen für die ganze Bestellung oder Artikel angeben",
+    "confirm": "Widerruf bestätigen",
+    "sentTitle": "Wir haben deinen Widerruf erhalten",
+    "sentBody": "Wir erstatten innerhalb von 14 Tagen über dein ursprüngliches Zahlungsmittel. Eine Bestätigung ist per E-Mail unterwegs.",
+    "receivedAt": "Eingegangen am",
+    "noEmail": "Die Bestätigungs-E-Mail konnte gerade nicht gesendet werden. Bitte speichere diese Seite oder schreib uns:",
+    "invalid": "Bitte gib deinen Namen, eine gültige E-Mail und deine Bestellnummer an.",
+    "unavailable": "Etwas ist schiefgelaufen. Bitte schick Name und Bestellnummer an"
   }
 }

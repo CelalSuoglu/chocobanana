@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobananaは、やさしい文房具と手書きのひとときを届ける、あたたかなメールクラブです。"
+    "description": "Chocobananaは、やさしい文房具と小さな紙のよろこびを届ける心あたたまるメールクラブです。"
   },
   "nav": {
     "home": "ホーム",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "hello, sweet friend",
     "name": "Chocobanana",
-    "tagline": "A cozy little mail club for soft stationery, handwritten moments, and parcels that feel like a hug in the post.",
+    "tagline": "やさしい文房具、小さな紙のよろこび、ハグのような小包を届ける心あたたまるメールクラブ。",
     "explore": "Explore",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Reach out through a contact layout with editable sample fields."
       }
     },
-    "taglineShort": "やさしい文房具、手書きのひととき、そして郵便で届くハグのような小包。",
+    "taglineShort": "やさしい文房具、小さな紙のよろこび、ハグのような小包。",
     "ctaShop": "Shop Stationery",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "毎月一通の手紙",
     "title": "Snail Mail Club",
     "intro": "Prepaid Snail Mail Club packages in Canadian dollars. You pay the package total once.",
-    "productLead": "毎月ポストに届く手書きの手紙。期間とお届け先を選ぶだけ。お支払いは一回、送料込みです。",
+    "productLead": "毎月ポストに一通の手紙。期間と届け先を選んでください。お支払いは一回、送料込みです。",
     "listedPriceLabel": "パッケージ合計",
     "priceClosedNote": "Checkout is not available in this environment yet.",
     "deliveryScope": "現在、クラブの手紙は以下の国へお届けしています：",
@@ -431,7 +431,12 @@
     "emailInvalid": "有効なメールアドレスを入力してください。",
     "postalInvalid": "郵便番号を確認してください。",
     "phoneInvalid": "配送に使える電話番号を入力してください。",
-    "regionInvalid": "州または都道府県を選んでください。"
+    "regionInvalid": "州または都道府県を選んでください。",
+    "acceptTerms": "",
+    "termsLink": "販売条件",
+    "acceptTermsEnd": "（14日間のキャンセル規定を含む）を読み、同意します。",
+    "acceptRequired": "続けるには販売条件に同意してください。",
+    "dutiesNote": "価格はカナダドルです。カナダ国外へのお届けでは、配達時に輸入税や関税がかかる場合があります。"
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "FAQ",
     "shipping": "配送",
     "linksLabel": "フッター",
-    "privacy": "プライバシー"
+    "privacy": "プライバシー",
+    "terms": "販売条件",
+    "withdraw": "契約の撤回はこちら"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "やわらかいステーショナリーと手書きの時間のための、こころあたたまるメールクラブ。まもなくオープン。",
+    "tagline": "やさしい文房具と小さな紙のよろこびのメールクラブ — まもなくオープン。",
     "days": "日",
     "hours": "時間",
     "minutes": "分",
@@ -640,15 +647,16 @@
     "q3": "5回ごとのリワードは？",
     "a3": "アカウントで完了した注文が5件ごとに、あとから使える10%オフのコードが1つ生まれます。そのコードはこのアカウントだけで使えます。",
     "q4": "どこへ配送しますか？",
-    "a4": "お支払いはカナダ、アメリカ、イギリス、オーストラリア、フランス、ドイツ、トルコへ配送できます。Snail Mail Clubのパッケージ料金には通常郵便が含まれます。"
+    "a4": "カナダ、アメリカ、オーストラリア、フランス、ドイツ、トルコへお届けします。メールクラブの価格には通常郵便料金が含まれます。"
   },
   "shipping": {
     "title": "配送",
-    "intro": "いまお伝えできる配送のことです。",
-    "postage": "通常郵便は Snail Mail Club のパッケージ料金に含まれます。",
-    "countries": "お支払いはカナダ、アメリカ、イギリス、オーストラリア、フランス、ドイツ、トルコへ配送できます。",
-    "stickers": "ステッカーの配送はお支払い時に確定します。別のステッカー送料はまだ公開されていません。",
-    "timing": "お届け日数のお約束はまだ公開されていません。"
+    "intro": "郵便物の届き方とタイミング。",
+    "postage": "メールクラブの価格には通常郵便料金が含まれます。ステッカーシートはカナダ国内送料無料、アメリカは1シートにつきCA$1、その他の国は1シートにつきCA$2が加算されます。",
+    "countries": "カナダ、アメリカ、オーストラリア、フランス、ドイツ、トルコへ通常郵便（通常は追跡なし）でお届けします。",
+    "stickers": "ステッカーシートは5営業日以内に発送します。クラブの封筒は毎月1〜10日に発送し、20日までにお支払いの注文はその月の発送に含まれます。",
+    "timing": "発送後の目安：カナダ2〜9営業日、アメリカ6〜12、その他の国10〜25。30日（カナダ・アメリカ以外は45日）経っても届かない場合や破損していた場合はご連絡ください。再送または返金します。",
+    "duties": "カナダ国外では、届け先の国が輸入税や関税を課す場合があり、受取人の負担となります。"
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "ご注文 {order} はキャンセルされました。ご不明点はお問い合わせください。"
       }
     }
+  },
+  "withdraw": {
+    "title": "契約の撤回",
+    "intro": "気が変わりましたか？14日以内ならキャンセルでき、クラブのパッケージは未発送の月についていつでも停止できます。フォームを送信すると、メールで確認をお送りします。",
+    "name": "お名前",
+    "email": "確認用メールアドレス",
+    "orderNumber": "注文番号",
+    "items": "キャンセルする内容",
+    "itemsHint": "注文全体なら空欄のまま、または商品を記入",
+    "confirm": "撤回を確定する",
+    "sentTitle": "撤回のご連絡を受け付けました",
+    "sentBody": "14日以内に元のお支払い方法へ返金します。確認メールをお送りしています。",
+    "receivedAt": "受付日時",
+    "noEmail": "確認メールを送信できませんでした。このページを保存するか、こちらへご連絡ください：",
+    "invalid": "お名前、有効なメールアドレス、注文番号を入力してください。",
+    "unavailable": "問題が発生しました。お名前と注文番号をこちらへお送りください："
   }
 }

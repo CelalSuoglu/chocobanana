@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Chocobanana Mail Club",
-    "description": "Chocobanana, yumuşak kırtasiye ve el yazısı anlar için sıcak bir mektup kulübü."
+    "description": "Chocobanana, yumuşak kırtasiye ve küçük kâğıt sevinçleri için sıcacık bir mail club."
   },
   "nav": {
     "home": "Ana sayfa",
@@ -21,7 +21,7 @@
   "home": {
     "greeting": "merhaba, tatlı dostum",
     "name": "Chocobanana",
-    "tagline": "Yumuşak kırtasiye ve elle yazılmış anlar için sıcak bir mail club.",
+    "tagline": "Yumuşak kırtasiye, küçük kâğıt sevinçleri ve postada sarılma gibi hissettiren paketler için sıcacık bir mail club.",
     "explore": "Keşfet",
     "cards": {
       "shop": {
@@ -45,7 +45,7 @@
         "text": "Düzenlenebilir örnek alanlarla iletişim düzeni."
       }
     },
-    "taglineShort": "Yumuşak kırtasiye, el yazısı anlar ve postada sarılma gibi hissettiren paketler.",
+    "taglineShort": "Yumuşak kırtasiye, küçük kâğıt sevinçleri ve postada sarılma gibi hissettiren paketler.",
     "ctaShop": "Kırtasiyeye bak",
     "ctaMailClub": "Mail Club",
     "stickerSectionTitle": "Sticker Sheets",
@@ -218,7 +218,7 @@
     "eyebrow": "ayda bir mektup",
     "title": "Snail Mail Club",
     "intro": "Peşin ödenen Snail Mail Club paketleri, Kanada doları. Paket toplamını bir kez ödersiniz.",
-    "productLead": "Her ay posta kutunda el yazısıyla bir mektup. Kaç ay süreceğini ve nereye gideceğini seç. Bir kez ödersin, posta dahil.",
+    "productLead": "Her ay posta kutunda bir mektup. Kaç ay ve nereye gideceğini seç. Bir kez ödersin, posta dahil.",
     "listedPriceLabel": "Paket toplamı",
     "priceClosedNote": "Bu ortamda ödeme henüz açık değil.",
     "deliveryScope": "Kulüp mektuplarını şu an bu ülkelere gönderiyoruz:",
@@ -431,7 +431,12 @@
     "emailInvalid": "Geçerli bir e-posta yaz.",
     "postalInvalid": "Posta kodunu kontrol et.",
     "phoneInvalid": "Teslimat için kullanabileceğimiz bir telefon yaz.",
-    "regionInvalid": "Bir il veya eyalet seç."
+    "regionInvalid": "Bir il veya eyalet seç.",
+    "acceptTerms": "Okudum ve kabul ediyorum:",
+    "termsLink": "Satış Koşulları",
+    "acceptTermsEnd": "(14 günlük cayma hakkı dahil).",
+    "acceptRequired": "Devam etmek için Satış Koşulları'nı kabul et.",
+    "dutiesNote": "Fiyatlar CAD cinsindendir. Kanada dışındaki siparişlerde varış ülkesi teslimatta ithalat vergisi veya gümrük alabilir."
   },
   "footer": {
     "tagline": "mail club",
@@ -440,11 +445,13 @@
     "faq": "SSS",
     "shipping": "Kargo",
     "linksLabel": "Alt bilgi",
-    "privacy": "Gizlilik"
+    "privacy": "Gizlilik",
+    "terms": "Satış Koşulları",
+    "withdraw": "Sözleşmeden cayma"
   },
   "comingSoon": {
     "brand": "Chocobanana",
-    "tagline": "Yumuşak kırtasiye ve elle yazılmış anlar için sıcacık bir posta kulübü — yakında kapılarını açıyor.",
+    "tagline": "Yumuşak kırtasiye ve küçük kâğıt sevinçleri için sıcacık bir mail club — kapılarını yakında açıyor.",
     "days": "Gün",
     "hours": "Saat",
     "minutes": "Dakika",
@@ -640,15 +647,16 @@
     "q3": "Her 5 siparişte bir ödül nasıl işler?",
     "a3": "Hesabındaki her 5 tamamlanmış sipariş, sonraki bir siparişte %10 indirim kodu kazandırır. Kod yalnızca bu hesapta geçerlidir.",
     "q4": "Nereye gönderiyorsunuz?",
-    "a4": "Ödeme Kanada, Amerika Birleşik Devletleri, Birleşik Krallık, Avustralya, Fransa, Almanya ve Türkiye’ye gönderim yapabilir. Snail Mail Club paket fiyatlarına standart posta dahildir."
+    "a4": "Kanada, ABD, Avustralya, Fransa, Almanya ve Türkiye'ye gönderiyoruz. Snail Mail Club paket fiyatlarına standart posta dahildir."
   },
   "shipping": {
     "title": "Kargo",
-    "intro": "Teslimat hakkında bugün söyleyebildiklerimiz.",
-    "postage": "Standart posta, Snail Mail Club paket fiyatına dahildir.",
-    "countries": "Ödeme Kanada, Amerika Birleşik Devletleri, Birleşik Krallık, Avustralya, Fransa, Almanya ve Türkiye’ye gönderim yapabilir.",
-    "stickers": "Sticker kargosu ödemede netleşir. Ayrı bir sticker kargo ücreti henüz yayımlanmadı.",
-    "timing": "Teslimat süresi sözü henüz yayımlanmadı."
+    "intro": "Postanın nasıl ve ne zaman yola çıktığı.",
+    "postage": "Snail Mail Club fiyatlarına standart posta dahildir. Sticker sayfaları Kanada içinde ücretsiz; ABD için sayfa başı CA$1, diğer ülkeler için sayfa başı CA$2 eklenir.",
+    "countries": "Kanada, ABD, Avustralya, Fransa, Almanya ve Türkiye'ye standart mektup postasıyla, genellikle takip numarasız gönderiyoruz.",
+    "stickers": "Sticker sayfaları 5 iş günü içinde postalanır. Kulüp zarfları her ayın ilk 10 gününde postalanır; ayın 20'sine kadar ödenen siparişler o ayın gönderimine katılır.",
+    "timing": "Postalamadan sonra olağan süre: Kanada 2–9 iş günü, ABD 6–12, diğer ülkeler 10–25. 30 gün içinde (Kanada ve ABD dışında 45) ulaşmazsa veya hasarlı gelirse bize yaz; yenisini göndeririz ya da iade ederiz.",
+    "duties": "Kanada dışında varış ülkesi teslimatta ithalat vergisi veya gümrük alabilir; bunu alıcı öder."
   },
   "app": {
     "tabs": {
@@ -679,5 +687,21 @@
         "CANCELED": "{order} numaralı siparişin iptal edildi. Sorun varsa bize yaz."
       }
     }
+  },
+  "withdraw": {
+    "title": "Sözleşmeden cayma",
+    "intro": "Fikrini mi değiştirdin? 14 gün içinde iptal edebilir, Kulüp paketini henüz postalanmamış aylar için istediğin zaman durdurabilirsin. Formu doldur, e-postayla onaylayalım.",
+    "name": "Ad soyad",
+    "email": "Onay için e-posta",
+    "orderNumber": "Sipariş numarası",
+    "items": "Neyi iptal etmek istiyorsun?",
+    "itemsHint": "Tüm siparişi iptal etmek için boş bırak veya ürünleri yaz",
+    "confirm": "Caymayı onayla",
+    "sentTitle": "Cayma talebini aldık",
+    "sentBody": "14 gün içinde ödeme yaptığın yönteme iade edeceğiz. Onay e-postası yolda.",
+    "receivedAt": "Alınma zamanı",
+    "noEmail": "Onay e-postası şu an gönderilemedi. Bu sayfayı sakla veya bize yaz:",
+    "invalid": "Lütfen adını, geçerli bir e-posta ve sipariş numaranı yaz.",
+    "unavailable": "Bir sorun oldu. Lütfen adını ve sipariş numaranı şu adrese yaz:"
   }
 }

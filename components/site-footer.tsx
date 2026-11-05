@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/get-dictionary";
 import { hrefFor } from "@/lib/nav";
+import { BUSINESS } from "@/lib/legal/business";
 import {
   SITE_EMAIL,
   SITE_INSTAGRAM_HANDLE,
@@ -19,6 +20,7 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
     { href: hrefFor(locale, "/contact"), label: dict.nav.contact },
     { href: hrefFor(locale, "/faq"), label: dict.footer.faq },
     { href: hrefFor(locale, "/shipping"), label: dict.footer.shipping },
+    { href: hrefFor(locale, "/terms"), label: dict.footer.terms },
     { href: hrefFor(locale, "/privacy"), label: dict.footer.privacy },
   ];
 
@@ -63,6 +65,17 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
           </a>
           <a href={`mailto:${SITE_EMAIL}`} className="inline-flex min-h-11 items-center break-all hover:text-chocolate">
             {SITE_EMAIL}
+          </a>
+          <p className="mt-2 text-xs leading-relaxed">
+            {BUSINESS.tradeName} · {BUSINESS.sellerName}
+            {BUSINESS.mailingAddress ? <><br />{BUSINESS.mailingAddress}</> : null}
+            {BUSINESS.phone ? <><br />{BUSINESS.phone}</> : null}
+          </p>
+          <a
+            href={hrefFor(locale, "/withdraw")}
+            className="mt-4 inline-flex min-h-11 w-fit items-center rounded-full border border-chocolate px-4 text-sm text-chocolate hover:bg-chocolate hover:text-cream"
+          >
+            {dict.footer.withdraw}
           </a>
         </div>
       </div>
