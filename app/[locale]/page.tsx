@@ -40,8 +40,8 @@ export default async function HomePage({
     {
       href: hrefFor(raw, "/sticker-sheets"),
       kind: "stickers" as const,
-      photoSrc: undefined as string | undefined,
-      photoAlt: "",
+      photoSrc: "/stickers/home-stickers.jpg" as string | undefined,
+      photoAlt: dict.stickerSheets.title,
       title: dict.home.stickerSectionTitle,
       body: dict.home.stickerSectionBody,
       cta: dict.home.stickerSectionCta,

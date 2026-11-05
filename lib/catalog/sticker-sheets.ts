@@ -21,6 +21,38 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     amountCadCents: 600,
     imageSrc: "/stickers/xmas-mug-sticker-sheet.jpg",
   },
+  {
+    id: "olivia-rodrigo-sticker-sheet",
+    nameEn: "Olivia Rodrigo Sticker Sheet",
+    descriptionEn:
+      "A heart lock, a blue convertible, vampire lips and more on a lilac gingham sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/olivia-rodrigo-sticker-sheet.jpg",
+  },
+  {
+    id: "tortured-poets-sticker-sheet",
+    nameEn: "The Tortured Poets Sticker Sheet",
+    descriptionEn:
+      "A typewriter, the manuscript, a red phone box and a white rabbit on a soft grey sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/tortured-poets-sticker-sheet.jpg",
+  },
+  {
+    id: "tiny-tasks-sticker-sheet",
+    nameEn: "Tiny Tasks Sticker Sheet",
+    descriptionEn:
+      "To do, done, reminder and habit trackers to plan your week on a pink striped sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/tiny-tasks-sticker-sheet.jpg",
+  },
+  {
+    id: "starry-numbers-sticker-sheet",
+    nameEn: "Starry Numbers Sticker Sheet",
+    descriptionEn:
+      "Pastel star numbers 0 to 9 with little symbols for dates and lists, on a sky blue sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/starry-numbers-sticker-sheet.jpg",
+  },
 ];
 
 /**
