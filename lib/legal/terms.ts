@@ -82,19 +82,11 @@ function en(): LegalDoc {
         ],
       },
       {
-        heading: "Changing your mind: 14 days for every customer",
+        heading: "Cancellations and refunds",
         body: [
-          "You can cancel any order within 14 days without giving a reason. For sticker sheets the 14 days start when you receive them; for a Club package they start on the day you pay.",
-          "To cancel, use the \"Withdraw from contract here\" button at the bottom of every page, or email us with your name and order number. We confirm receipt by email.",
-          "Sticker sheets: send them back unused within 14 days of cancelling. Return postage is paid by you unless the item was faulty or wrong, or you live in Türkiye (we pay it).",
-          "Club packages: we refund every month that has not been mailed yet. Envelopes already received within the 14 days can be returned unused for a refund of that month.",
-          "We refund within 14 days of your cancellation to your original payment method, including the standard postage you paid, at no cost to you. For goods you are sending back, we may wait until we receive them or you show proof of mailing.",
-        ],
-      },
-      {
-        heading: "Cancelling a Club package later",
-        body: [
-          "After the 14 days you can still stop a Club package at any time. We refund the months that have not been mailed yet (package price divided by the number of months).",
+          "All sales are final. Once your order has been paid and mailed, we do not accept returns or give refunds or exchanges if you change your mind. Snail Mail Club packages cannot be cancelled for a refund once paid.",
+          "This does not affect rights the law gives you: customers in the European Union and Türkiye can withdraw within 14 days (use the \"Withdraw from contract here\" button), Canadian customers keep their cancellation rights under the Quebec Consumer Protection Act and similar laws, and US customers can cancel if we cannot ship on time.",
+          "You always get a replacement or a full refund if an item is faulty, damaged, wrong or lost, if we do not deliver within 30 days of the promised date, or if we cannot mail a month of your Club package. Details are in our Refund Policy.",
         ],
       },
       {
@@ -189,19 +181,11 @@ function tr(): LegalDoc {
         ],
       },
       {
-        heading: "Fikrini değiştirirsen: herkes için 14 gün",
+        heading: "İptal ve iade",
         body: [
-          "Her siparişi gerekçe göstermeden 14 gün içinde iptal edebilirsin. Sticker sayfalarında 14 gün ürünü teslim aldığın gün, Kulüp paketlerinde ödeme yaptığın gün başlar.",
-          "İptal için her sayfanın altındaki \"Sözleşmeden cayma\" butonunu kullan ya da adın ve sipariş numaranla bize e-posta gönder. Talebini aldığımızı e-postayla onaylarız.",
-          "Sticker sayfaları: cayma bildiriminden sonraki 14 gün içinde kullanılmamış olarak geri gönder. Ürün kusurlu veya yanlış değilse iade postası sana aittir; Türkiye'de yaşıyorsan iade postasını biz karşılarız.",
-          "Kulüp paketleri: henüz postalanmamış her ayın ücretini iade ederiz. 14 gün içinde teslim aldığın zarflar kullanılmadan geri gönderilirse o ayın ücreti de iade edilir.",
-          "İadeyi cayma bildiriminden itibaren 14 gün içinde, ücretsiz olarak, ödediğin standart posta dahil, ödeme yaptığın yönteme yaparız. Geri gönderilen ürünlerde, ürün bize ulaşana veya gönderim belgesini paylaşana kadar bekleyebiliriz.",
-        ],
-      },
-      {
-        heading: "Kulüp paketini daha sonra durdurmak",
-        body: [
-          "14 gün geçtikten sonra da Kulüp paketini istediğin zaman durdurabilirsin. Henüz postalanmamış ayların ücretini (paket fiyatı ÷ ay sayısı) iade ederiz.",
+          "Tüm satışlar kesindir. Siparişin ödenip postalandıktan sonra fikrini değiştirirsen iade, değişim veya para iadesi yapmıyoruz. Snail Mail Club paketleri ödendikten sonra iade için iptal edilemez.",
+          "Bu, yasanın sana verdiği hakları etkilemez: AB ve Türkiye'deki müşteriler 14 gün içinde cayabilir (\"Sözleşmeden cayma\" butonunu kullan), Kanada'daki müşteriler Quebec Tüketiciyi Koruma Yasası ve benzer yasalardaki iptal haklarını korur, ABD'deki müşteriler zamanında gönderemezsek iptal edebilir.",
+          "Ürün kusurlu, hasarlı, yanlış veya kayıpsa, söz verilen tarihten sonraki 30 gün içinde teslim edemezsek ya da Kulüp paketinin bir ayını gönderemezsek her zaman yenisini göndeririz veya tamamını iade ederiz. Ayrıntılar İade Politikası'ndadır.",
         ],
       },
       {
@@ -296,19 +280,11 @@ function fr(): LegalDoc {
         ],
       },
       {
-        heading: "Droit de rétractation : 14 jours pour tous",
+        heading: "Annulations et remboursements",
         body: [
-          "Vous pouvez annuler toute commande dans un délai de 14 jours sans donner de motif. Pour les planches de stickers, le délai court à partir de leur réception ; pour un forfait du Club, à partir du jour du paiement.",
-          "Pour vous rétracter, utilisez le bouton « Se rétracter du contrat ici » en bas de chaque page, ou envoyez-nous un courriel avec votre nom et votre numéro de commande. Nous accusons réception par courriel.",
-          "Planches de stickers : renvoyez-les inutilisées dans les 14 jours suivant votre rétractation. Les frais de retour sont à votre charge, sauf si l'article est défectueux ou erroné, ou si vous résidez en Turquie (nous les payons).",
-          "Forfaits du Club : nous remboursons chaque mois qui n'a pas encore été posté. Les enveloppes reçues pendant les 14 jours peuvent être renvoyées inutilisées pour obtenir le remboursement du mois concerné.",
-          "Nous remboursons dans les 14 jours suivant votre rétractation, sur votre moyen de paiement d'origine, affranchissement standard compris, sans frais. Pour les articles à renvoyer, nous pouvons attendre leur réception ou une preuve d'expédition.",
-        ],
-      },
-      {
-        heading: "Arrêter un forfait du Club plus tard",
-        body: [
-          "Après les 14 jours, vous pouvez toujours arrêter un forfait à tout moment. Nous remboursons les mois non encore postés (prix du forfait divisé par le nombre de mois).",
+          "Toutes les ventes sont finales. Une fois votre commande payée et postée, nous n'acceptons ni retours, ni échanges, ni remboursements pour un changement d'avis. Les forfaits Snail Mail Club ne peuvent pas être annulés contre remboursement une fois payés.",
+          "Cela ne touche pas les droits que la loi vous accorde : la clientèle de l'Union européenne et de Turquie peut se rétracter dans les 14 jours (bouton « Se rétracter du contrat ici »), la clientèle canadienne conserve ses droits de résolution selon la Loi sur la protection du consommateur du Québec et les lois semblables, et la clientèle américaine peut annuler si nous ne pouvons pas expédier à temps.",
+          "Vous obtenez toujours un remplacement ou un remboursement complet si un article est défectueux, endommagé, erroné ou perdu, si nous ne livrons pas dans les 30 jours suivant la date promise, ou si nous ne pouvons pas poster un mois de votre forfait. Détails dans notre Politique de remboursement.",
         ],
       },
       {
@@ -403,19 +379,11 @@ function de(): LegalDoc {
         ],
       },
       {
-        heading: "Widerrufsrecht: 14 Tage für alle",
+        heading: "Stornierung und Erstattung",
         body: [
-          "Du kannst jede Bestellung innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Bei Stickerbögen beginnt die Frist mit dem Erhalt der Ware, bei Club-Paketen am Tag der Zahlung.",
-          "Zum Widerruf nutze den Button „Vertrag hier widerrufen“ unten auf jeder Seite oder schreib uns eine E-Mail mit deinem Namen und deiner Bestellnummer. Wir bestätigen den Eingang per E-Mail.",
-          "Stickerbögen: Sende sie innerhalb von 14 Tagen nach dem Widerruf unbenutzt zurück. Die Rücksendekosten trägst du, außer der Artikel war fehlerhaft oder falsch oder du wohnst in der Türkei (dann zahlen wir).",
-          "Club-Pakete: Wir erstatten jeden Monat, der noch nicht verschickt wurde. Innerhalb der 14 Tage erhaltene Umschläge können unbenutzt zurückgesendet werden; dann erstatten wir auch diesen Monat.",
-          "Wir erstatten innerhalb von 14 Tagen nach deinem Widerruf über dein ursprüngliches Zahlungsmittel, einschließlich des Standardportos, ohne Kosten für dich. Bei Rücksendungen können wir warten, bis die Ware bei uns ist oder du den Versand nachweist.",
-        ],
-      },
-      {
-        heading: "Club-Paket später beenden",
-        body: [
-          "Auch nach den 14 Tagen kannst du ein Club-Paket jederzeit beenden. Wir erstatten die noch nicht verschickten Monate (Paketpreis geteilt durch die Anzahl der Monate).",
+          "Alle Verkäufe sind endgültig. Nach Zahlung und Versand nehmen wir bei Meinungsänderung nichts zurück und erstatten oder tauschen nicht. Club-Pakete können nach der Zahlung nicht gegen Erstattung gekündigt werden.",
+          "Gesetzliche Rechte bleiben unberührt: Kundinnen und Kunden in der EU und der Türkei können innerhalb von 14 Tagen widerrufen (Button „Vertrag hier widerrufen“, siehe Widerrufsbelehrung in unserer Rückerstattungsrichtlinie); in Kanada gelten die Rechte nach dem Quebecer Verbraucherschutzgesetz; in den USA kannst du stornieren, wenn wir nicht rechtzeitig liefern können.",
+          "Ist ein Artikel fehlerhaft, beschädigt, falsch oder verloren, liefern wir nicht innerhalb von 30 Tagen nach dem zugesagten Termin oder können wir einen Monat deines Pakets nicht verschicken, senden wir immer Ersatz oder erstatten vollständig.",
         ],
       },
       {

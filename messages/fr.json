@@ -434,7 +434,7 @@
     "regionInvalid": "Choisissez une province ou un état.",
     "acceptTerms": "J'ai lu et j'accepte les",
     "termsLink": "Conditions générales",
-    "acceptTermsEnd": "y compris le droit d'annulation de 14 jours.",
+    "acceptTermsEnd": "et la Politique de remboursement (ventes finales, sauf disposition légale contraire).",
     "acceptRequired": "Veuillez accepter les Conditions de vente pour continuer.",
     "dutiesNote": "Prix en CAD. Hors du Canada, le pays de destination peut percevoir des taxes ou droits à l'importation à la livraison."
   },
@@ -695,7 +695,7 @@
   },
   "withdraw": {
     "title": "Se rétracter du contrat",
-    "intro": "Vous avez changé d'avis ? Vous pouvez annuler sous 14 jours, et arrêter un forfait du Club à tout moment pour les mois non encore postés. Remplissez ce formulaire, nous confirmerons par courriel.",
+    "intro": "La clientèle de l'Union européenne et de Turquie peut se rétracter dans les 14 jours, comme le prévoit la loi. Ailleurs, toutes les ventes sont finales, sauf article défectueux, endommagé, erroné ou perdu. Remplissez ce formulaire, nous confirmerons par courriel.",
     "name": "Nom complet",
     "email": "Courriel pour la confirmation",
     "orderNumber": "Numéro de commande",
@@ -703,7 +703,7 @@
     "itemsHint": "Laissez vide pour toute la commande, ou indiquez les articles",
     "confirm": "Confirmer la rétractation",
     "sentTitle": "Nous avons reçu votre rétractation",
-    "sentBody": "Nous vous rembourserons sous 14 jours sur votre moyen de paiement d'origine. Une confirmation arrive par courriel.",
+    "sentBody": "Nous l'examinerons selon notre Politique de remboursement et répondrons sous 5 jours ouvrables. Si vous avez droit à un remboursement, il sera effectué sous 14 jours sur votre moyen de paiement d'origine. Une confirmation arrive par courriel.",
     "receivedAt": "Reçue le",
     "noEmail": "Le courriel de confirmation n'a pas pu être envoyé. Conservez cette page ou écrivez-nous :",
     "invalid": "Indiquez votre nom, un courriel valide et votre numéro de commande.",

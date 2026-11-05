@@ -179,150 +179,141 @@ const shipping: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
 
 /* ------------------------------------------------------------------ refund */
 
-const MODEL_FORM_EN =
-  "Model withdrawal form (EU): To " + BUSINESS.tradeName + ", " + BUSINESS.email + ": I/We hereby give notice that I/We withdraw from my/our contract of sale of the following goods: … Ordered on / received on: … Name: … Address: … Date: …";
-
 const refund: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
   en: {
     title: "Refund Policy",
-    intro: "Our promise is simple: every customer, wherever they live, can change their mind within 14 days. Below are the details and the extra rights that apply in your region.",
+    intro: "All sales are final. We do not give refunds if you change your mind, except where the law of your country gives you that right. You are always protected if something goes wrong on our side.",
     sections: [
-      { heading: "14 days to change your mind (everyone)", body: [
-        "Sticker sheets: cancel within 14 days of receiving them. Send them back unused within 14 days of cancelling.",
-        "Snail Mail Club: cancel within 14 days of paying for a full refund of every month not yet mailed. Envelopes received during those 14 days can be returned unused for a refund of that month.",
+      { heading: "All sales are final", body: [
+        "We do not accept returns or give refunds or exchanges if you change your mind about sticker sheets or a Snail Mail Club package. Please check your items, delivery country and address before paying.",
+        "Snail Mail Club packages cannot be cancelled for a refund once paid. They never renew, so you are never charged again.",
       ] },
-      { heading: "Stopping a Club package later", body: [
-        "After 14 days you can still stop a Club package at any time. We refund every month that has not been mailed yet (package price divided by the number of months). Packages never renew automatically.",
+      { heading: "When we always replace or refund", body: [
+        "An item is faulty, damaged in the mail or not what you ordered: tell us within 30 days of receiving it, with a photo if you can.",
+        "Your mail has not arrived 30 days after mailing (45 days outside Canada and the USA), or we did not deliver within 30 days of the promised date.",
+        "We cannot mail one or more months of your Club package: we refund those months.",
+        "In these cases we send a replacement or refund you in full, including postage, to your original payment method within 15 days.",
       ] },
-      { heading: "How to cancel", body: [
-        "Use the \"Withdraw from contract here\" button at the bottom of every page, or email " + BUSINESS.email + " with your name and order number. You do not need to give a reason. We confirm receipt by email.",
-      ] },
-      { heading: "How you are refunded", body: [
-        "We refund within 14 days of your cancellation, to your original payment method, including the standard postage you paid. For items you send back we may wait until they arrive or you show proof of mailing. There is no restocking fee.",
-        "Return postage for unwanted items is paid by you, except in Türkiye (see below) or when an item was faulty or wrong.",
-      ] },
-      { heading: "Faulty, damaged, wrong or lost", body: [
-        "Tell us within 30 days of receiving it (or of the expected delivery), with a photo if you can. We replace it or refund you in full, including postage. These rights are in addition to your legal warranties.",
+      { heading: "How to contact us", body: [
+        "Email " + BUSINESS.email + (BUSINESS.phone ? " or call " + BUSINESS.phone : "") + " with your name and order number. Customers in the EU and Türkiye can also use the \"Withdraw from contract here\" button at the bottom of every page.",
       ] },
       { heading: "Canada", body: [
-        "We are based in Quebec. Under the Quebec Consumer Protection Act (distance contracts) and similar laws in other provinces, you may also cancel if the required information was not given to you before you ordered (within 7 days of receiving your copy of the contract), if you did not receive a copy of the contract within 15 days (within 30 days), or if goods were not delivered within 30 days of the promised date. We refund within 15 days of such a cancellation; if we do not, you can ask your credit card issuer to reverse the charge.",
+        "We are based in Quebec. Our final-sale rule does not limit the rights that cannot be waived under the Quebec Consumer Protection Act and similar provincial laws: the legal warranty that goods are fit for use and durable, and your right to cancel a distance contract if the required information was not given before you ordered (within 7 days of receiving your copy), if you did not receive a copy of the contract within 15 days (within 30 days), or if goods were not delivered within 30 days of the promised date. If we do not refund within 15 days of such a cancellation, you can ask your credit card issuer to reverse the charge.",
       ] },
       { heading: "United States", body: [
-        "This policy gives you more than US law requires. If we cannot ship on time we will offer you the choice to cancel for a prompt refund. You can also dispute a charge with your card issuer under the Fair Credit Billing Act.",
+        "All sales are final. If we cannot ship within the time we stated, we will tell you and let you cancel for a prompt full refund, as the FTC Mail, Internet or Telephone Order Merchandise Rule requires. Your card dispute rights are not affected.",
       ] },
-      { heading: "European Union", body: [
-        "You have a statutory right to withdraw within 14 days without giving any reason. The period starts on the day you (or someone you name) receive the goods; for Club packages, on the day of the contract. We refund all payments, including standard delivery costs, within 14 days of receiving your notice. You are only liable for any loss in value caused by handling beyond what is needed to check the goods.",
-        MODEL_FORM_EN,
+      { heading: "Australia", body: [
+        "All sales are final for change of mind. Your rights under the Australian Consumer Law for items that are faulty or not as described are not affected.",
+      ] },
+      { heading: "European Union: 14-day right of withdrawal", body: [
+        "EU law gives you a right to withdraw from this contract within 14 days without giving any reason, and our final-sale rule does not apply to you. The period starts on the day you (or someone you name, other than the carrier) receive the goods; for Club packages, on the day of the contract.",
+        "To withdraw, use the \"Withdraw from contract here\" button or send us a clear statement by email. We refund all payments, including standard delivery costs, within 14 days of receiving your notice, to the same payment method. We may wait until we receive the goods or proof that you sent them back. You pay the direct cost of returning the goods and are only liable for loss in value caused by handling beyond what is needed to check them.",
+        "Model withdrawal form: To " + BUSINESS.tradeName + ", " + BUSINESS.email + ": I/We hereby give notice that I/We withdraw from my/our contract of sale of the following goods: … Ordered on / received on: … Name: … Address: … Date: …",
       ] },
       { heading: "Türkiye", body: [
-        "6502 sayılı Kanun ve Mesafeli Sözleşmeler Yönetmeliği uyarınca 14 gün içinde gerekçe göstermeden cayma hakkın vardır. Cayma bildiriminden itibaren 14 gün içinde ödemenin tamamını iade ederiz. Ürünü cayma bildiriminden sonraki 14 gün içinde geri göndermen yeterlidir; iade posta masrafını biz karşılarız.",
+        "6502 sayılı Kanun ve Mesafeli Sözleşmeler Yönetmeliği uyarınca 14 gün içinde gerekçe göstermeden cayma hakkın vardır; \"iade yok\" kuralımız sana uygulanmaz. Ayrıntılar bu sayfanın Türkçe sürümündedir.",
       ] },
     ],
   },
   tr: {
     title: "İade Politikası",
-    intro: "Sözümüz basit: nerede yaşarsan yaşa, 14 gün içinde fikrini değiştirebilirsin. Ayrıntılar ve bölgene özel ek haklar aşağıda.",
+    intro: "Tüm satışlar kesindir. Fikrini değiştirdiğinde iade yapmıyoruz; yalnızca yaşadığın ülkenin yasası bu hakkı veriyorsa iade ederiz. Bizden kaynaklı bir sorun olursa her zaman korunursun.",
     sections: [
-      { heading: "Herkes için 14 gün", body: [
-        "Sticker sayfaları: teslim aldıktan sonraki 14 gün içinde iptal et; iptalden sonraki 14 gün içinde kullanılmamış olarak geri gönder.",
-        "Snail Mail Club: ödemeden sonraki 14 gün içinde iptal edersen henüz postalanmamış her ayın tamamını iade ederiz. Bu 14 gün içinde aldığın zarfları kullanılmadan geri gönderirsen o ayın ücretini de iade ederiz.",
+      { heading: "Tüm satışlar kesindir", body: [
+        "Sticker sayfaları veya Snail Mail Club paketi için fikrini değiştirirsen iade, değişim veya para iadesi yapmıyoruz. Lütfen ödemeden önce ürünleri, teslimat ülkesini ve adresini kontrol et.",
+        "Snail Mail Club paketleri ödendikten sonra iade için iptal edilemez. Hiçbir zaman yenilenmez, tekrar ücret alınmaz.",
       ] },
-      { heading: "Kulüp paketini sonra durdurmak", body: [
-        "14 günden sonra da Kulüp paketini istediğin zaman durdurabilirsin. Henüz postalanmamış ayların ücretini (paket fiyatı ÷ ay sayısı) iade ederiz. Paketler hiçbir zaman otomatik yenilenmez.",
+      { heading: "Her zaman yenisini gönderdiğimiz veya iade ettiğimiz durumlar", body: [
+        "Ürün kusurlu, postada hasar görmüş veya sipariş ettiğin ürün değil: teslimden sonraki 30 gün içinde, mümkünse fotoğrafla bildir.",
+        "Postan postalamadan 30 gün sonra (Kanada ve ABD dışında 45 gün) ulaşmadı veya söz verdiğimiz tarihten sonraki 30 gün içinde teslim edemedik.",
+        "Kulüp paketinin bir veya daha fazla ayını gönderemiyoruz: o ayları iade ederiz.",
+        "Bu durumlarda yenisini göndeririz ya da posta dahil tamamını 15 gün içinde ödeme yaptığın yönteme iade ederiz.",
       ] },
-      { heading: "Nasıl iptal edilir", body: [
-        "Her sayfanın altındaki \"Sözleşmeden cayma\" butonunu kullan veya adın ve sipariş numaranla " + BUSINESS.email + " adresine yaz. Gerekçe göstermen gerekmez. Talebini e-postayla onaylarız.",
-      ] },
-      { heading: "İade nasıl yapılır", body: [
-        "İptalinden itibaren 14 gün içinde, ödediğin standart posta dahil, ödeme yaptığın yönteme iade ederiz. Geri gönderilen ürünlerde ürün bize ulaşana veya gönderim belgesini paylaşana kadar bekleyebiliriz. Ek ücret alınmaz.",
-        "İstenmeyen ürünlerin iade postası sana aittir; Türkiye'de (aşağıya bak) veya ürün kusurlu ya da yanlışsa bize aittir.",
-      ] },
-      { heading: "Kusurlu, hasarlı, yanlış veya kayıp", body: [
-        "Teslimden (veya beklenen teslimattan) sonraki 30 gün içinde, mümkünse fotoğrafla bildir. Yenisini göndeririz veya posta dahil tamamını iade ederiz. Bu hakların yasal garantilerine ektir.",
+      { heading: "Bize nasıl ulaşırsın", body: [
+        "Adın ve sipariş numaranla " + BUSINESS.email + (BUSINESS.phone ? " adresine yaz veya " + BUSINESS.phone + " numarasını ara" : " adresine yaz") + ". AB ve Türkiye'deki müşteriler her sayfanın altındaki \"Sözleşmeden cayma\" butonunu da kullanabilir.",
       ] },
       { heading: "Kanada", body: [
-        "Quebec merkezliyiz. Quebec Tüketiciyi Koruma Yasası (mesafeli sözleşmeler) ve diğer eyaletlerin benzer yasaları gereği de iptal edebilirsin: örneğin sipariş öncesinde gerekli bilgiler verilmediyse (kopyanı aldıktan sonraki 7 gün içinde), sözleşme kopyası 15 gün içinde gönderilmediyse (30 gün içinde) veya ürün söz verilen tarihten sonraki 30 gün içinde teslim edilmediyse. Böyle bir iptalden sonra 15 gün içinde iade etmezsek kart şirketinden ödemenin geri alınmasını isteyebilirsin.",
+        "Quebec merkezliyiz. \"İade yok\" kuralımız, Quebec Tüketiciyi Koruma Yasası ve benzer eyalet yasalarının vazgeçilemeyen haklarını sınırlamaz: ürünün kullanıma uygun ve dayanıklı olacağına dair yasal garanti ve mesafeli sözleşmeyi iptal hakkı (sipariş öncesi gerekli bilgiler verilmediyse kopyanı aldıktan sonra 7 gün içinde, sözleşme kopyası 15 gün içinde gönderilmediyse 30 gün içinde, ürün söz verilen tarihten sonraki 30 gün içinde teslim edilmediyse). Böyle bir iptalden sonra 15 gün içinde iade etmezsek kart şirketinden ödemenin geri alınmasını isteyebilirsin.",
       ] },
       { heading: "ABD", body: [
-        "Bu politika ABD yasasının istediğinden fazlasını verir. Zamanında gönderemezsek iptal edip hızlıca iade alma seçeneği sunarız. Ayrıca kart şirketine itiraz hakkın vardır.",
+        "Tüm satışlar kesindir. Belirttiğimiz sürede gönderemezsek sana haber verir ve FTC kuralı gereği iptal edip hızlıca tam iade almana izin veririz. Kart itiraz hakların saklıdır.",
       ] },
-      { heading: "Avrupa Birliği", body: [
-        "14 gün içinde gerekçe göstermeden yasal cayma hakkın vardır. Süre ürünü teslim aldığın gün, Kulüp paketlerinde sözleşme günü başlar. Bildirimini aldıktan sonraki 14 gün içinde standart teslimat dahil tüm ödemeleri iade ederiz. Yalnızca ürünü incelemek için gerekenden fazla kullanımın yol açtığı değer kaybından sorumlusun.",
-        MODEL_FORM_EN,
+      { heading: "Avustralya", body: [
+        "Fikir değişikliğinde tüm satışlar kesindir. Kusurlu veya tarif edildiği gibi olmayan ürünler için Avustralya Tüketici Yasası haklarını etkilemez.",
       ] },
-      { heading: "Türkiye", body: [
-        "6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği uyarınca, ürünü teslim aldığın tarihten (Kulüp paketlerinde sözleşme tarihinden) itibaren 14 gün içinde gerekçe göstermeden ve cezai şart ödemeden cayma hakkın vardır. Cayma bildirimimize ulaştığı tarihten itibaren 14 gün içinde ödemenin tamamını, ödeme yaptığın yöntemle iade ederiz. Ürünü cayma bildiriminden sonraki 14 gün içinde geri göndermen yeterlidir; iade posta masrafını biz karşılarız. Şikâyetlerin için Tüketici Hakem Heyetlerine veya Tüketici Mahkemelerine başvurabilirsin.",
+      { heading: "Avrupa Birliği: 14 günlük cayma hakkı", body: [
+        "AB hukuku sana 14 gün içinde gerekçe göstermeden cayma hakkı verir; \"iade yok\" kuralımız sana uygulanmaz. Süre ürünü teslim aldığın gün, Kulüp paketlerinde sözleşme günü başlar.",
+        "Cayma için \"Sözleşmeden cayma\" butonunu kullan veya bize açık bir e-posta gönder. Bildirimini aldıktan sonraki 14 gün içinde standart teslimat dahil tüm ödemeleri aynı yöntemle iade ederiz. Ürünü geri alana veya gönderim belgesini görene kadar bekleyebiliriz. İade postası sana aittir.",
+      ] },
+      { heading: "Türkiye: 14 günlük cayma hakkı", body: [
+        "6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği uyarınca, ürünü teslim aldığın tarihten (Kulüp paketlerinde sözleşme tarihinden) itibaren 14 gün içinde gerekçe göstermeden ve cezai şart ödemeden cayma hakkın vardır; \"iade yok\" kuralımız sana uygulanmaz.",
+        "Cayma için \"Sözleşmeden cayma\" butonunu kullan veya bize yaz. Bildirimin bize ulaştıktan sonraki 14 gün içinde ödemenin tamamını iade ederiz. Ürünü cayma bildiriminden sonraki 10 gün içinde geri göndermelisin; iade posta masrafını biz karşılarız.",
+        "Şikâyetlerin için Tüketici Hakem Heyetlerine veya Tüketici Mahkemelerine başvurabilirsin.",
       ] },
     ],
   },
   fr: {
     title: "Politique de remboursement",
-    intro: "Notre engagement est simple : où que vous viviez, vous pouvez changer d'avis dans les 14 jours. Voici les détails et les droits supplémentaires de votre région.",
+    intro: "Toutes les ventes sont finales. Nous ne remboursons pas un changement d'avis, sauf lorsque la loi de votre pays vous en donne le droit. Vous êtes toujours protégé si un problème vient de nous.",
     sections: [
-      { heading: "14 jours pour changer d'avis (pour tous)", body: [
-        "Planches de stickers : annulez dans les 14 jours suivant la réception et renvoyez-les inutilisées dans les 14 jours suivant l'annulation.",
-        "Snail Mail Club : annulez dans les 14 jours suivant le paiement pour un remboursement de chaque mois non posté. Les enveloppes reçues pendant ces 14 jours peuvent être renvoyées inutilisées pour le remboursement du mois concerné.",
+      { heading: "Toutes les ventes sont finales", body: [
+        "Nous n'acceptons ni retours, ni échanges, ni remboursements pour un changement d'avis sur les planches de stickers ou un forfait Snail Mail Club. Vérifiez vos articles, le pays et l'adresse de livraison avant de payer.",
+        "Les forfaits Snail Mail Club ne peuvent pas être annulés contre remboursement une fois payés. Ils ne se renouvellent jamais.",
       ] },
-      { heading: "Arrêter un forfait plus tard", body: [
-        "Après 14 jours, vous pouvez toujours arrêter un forfait. Nous remboursons les mois non encore postés (prix du forfait divisé par le nombre de mois). Les forfaits ne se renouvellent jamais automatiquement.",
+      { heading: "Quand nous remplaçons ou remboursons toujours", body: [
+        "Un article est défectueux, endommagé pendant le transport ou ne correspond pas à votre commande : prévenez-nous dans les 30 jours suivant la réception, avec une photo si possible.",
+        "Votre envoi n'est pas arrivé 30 jours après l'expédition (45 jours hors Canada et États-Unis), ou nous n'avons pas livré dans les 30 jours suivant la date promise.",
+        "Nous ne pouvons pas poster un ou plusieurs mois de votre forfait : nous remboursons ces mois.",
+        "Dans ces cas, nous remplaçons l'article ou remboursons intégralement, port compris, sur votre moyen de paiement d'origine dans les 15 jours.",
       ] },
-      { heading: "Comment annuler", body: [
-        "Utilisez le bouton « Se rétracter du contrat ici » en bas de chaque page, ou écrivez à " + BUSINESS.email + " avec votre nom et votre numéro de commande. Aucun motif n'est nécessaire. Nous accusons réception par courriel.",
-      ] },
-      { heading: "Comment vous êtes remboursé", body: [
-        "Nous remboursons dans les 14 jours suivant votre annulation, sur votre moyen de paiement d'origine, y compris l'affranchissement standard payé. Pour les articles renvoyés, nous pouvons attendre leur réception ou une preuve d'envoi. Aucuns frais de restockage.",
-        "Les frais de retour d'articles non désirés sont à votre charge, sauf en Turquie ou si l'article était défectueux ou erroné.",
-      ] },
-      { heading: "Défectueux, endommagé, erroné ou perdu", body: [
-        "Prévenez-nous dans les 30 jours suivant la réception (ou la livraison prévue), avec une photo si possible. Nous remplaçons ou remboursons intégralement, port compris. Ces droits s'ajoutent à vos garanties légales.",
+      { heading: "Nous joindre", body: [
+        "Écrivez à " + BUSINESS.email + (BUSINESS.phone ? " ou appelez le " + BUSINESS.phone : "") + " avec votre nom et votre numéro de commande. La clientèle de l'UE et de Turquie peut aussi utiliser le bouton « Se rétracter du contrat ici » en bas de chaque page.",
       ] },
       { heading: "Canada", body: [
-        "Vous pouvez aussi annuler en vertu de la loi provinciale, par exemple si les renseignements exigés ne vous ont pas été fournis avant la commande, si vous n'avez pas reçu copie du contrat dans les 15 jours, ou si les biens n'ont pas été livrés dans les 30 jours suivant la date prévue. Au Québec, la Loi sur la protection du consommateur vous permet alors de demander à l'émetteur de votre carte d'annuler le paiement si nous ne remboursons pas dans les 15 jours.",
+        "Nous sommes établis au Québec. Notre règle de vente finale ne limite pas les droits d'ordre public prévus par la Loi sur la protection du consommateur du Québec et les lois provinciales semblables : la garantie légale que le bien sert à l'usage prévu et est durable, et votre droit de résoudre un contrat à distance si les renseignements exigés ne vous ont pas été fournis avant la commande (dans les 7 jours suivant la réception de votre copie), si vous n'avez pas reçu copie du contrat dans les 15 jours (dans les 30 jours), ou si le bien n'a pas été livré dans les 30 jours suivant la date convenue. Si nous ne remboursons pas dans les 15 jours suivant cette résolution, vous pouvez demander à l'émetteur de votre carte d'annuler le paiement.",
       ] },
       { heading: "États-Unis", body: [
-        "Cette politique va au-delà du droit américain. Si nous ne pouvons pas expédier à temps, nous vous proposons d'annuler avec remboursement rapide. Vous pouvez aussi contester un débit auprès de l'émetteur de votre carte.",
+        "Toutes les ventes sont finales. Si nous ne pouvons pas expédier dans le délai annoncé, nous vous prévenons et vous permettons d'annuler avec remboursement rapide, conformément à la règle de la FTC.",
       ] },
-      { heading: "Union européenne", body: [
-        "Vous disposez d'un droit légal de rétractation de 14 jours sans motif. Le délai court à compter de la réception des biens ; pour un forfait du Club, à compter de la conclusion du contrat. Nous remboursons tous les paiements, frais de livraison standard compris, dans les 14 jours suivant votre notification. Vous n'êtes responsable que de la dépréciation résultant de manipulations au-delà de ce qui est nécessaire pour examiner les biens.",
+      { heading: "Australie", body: [
+        "Aucun remboursement pour changement d'avis. Vos droits selon l'Australian Consumer Law pour les articles défectueux ne sont pas touchés.",
+      ] },
+      { heading: "Union européenne : droit de rétractation de 14 jours", body: [
+        "Le droit de l'UE vous permet de vous rétracter dans les 14 jours sans motif ; notre règle de vente finale ne s'applique pas à vous. Le délai court à compter de la réception des biens ; pour un forfait, à compter de la conclusion du contrat.",
+        "Pour vous rétracter, utilisez le bouton « Se rétracter du contrat ici » ou envoyez-nous une déclaration claire par courriel. Nous remboursons tous les paiements, frais de livraison standard compris, dans les 14 jours suivant votre notification, par le même moyen de paiement. Nous pouvons attendre la réception des biens ou une preuve d'envoi. Les frais de retour sont à votre charge ; vous n'êtes responsable que de la dépréciation due à des manipulations excédant ce qui est nécessaire pour examiner les biens.",
         "Modèle de formulaire de rétractation : À l'attention de " + BUSINESS.tradeName + ", " + BUSINESS.email + " : Je vous notifie par la présente ma rétractation du contrat portant sur la vente du bien ci-dessous : … Commandé le / reçu le : … Nom : … Adresse : … Date : …",
       ] },
       { heading: "Turquie", body: [
-        "Selon la loi turque n° 6502, vous disposez de 14 jours pour vous rétracter sans motif. Nous remboursons intégralement sous 14 jours et prenons en charge les frais de retour.",
+        "La loi turque n° 6502 vous donne 14 jours pour vous rétracter sans motif ; notre règle de vente finale ne s'applique pas à vous. Nous remboursons intégralement sous 14 jours et prenons en charge les frais de retour.",
       ] },
     ],
   },
   de: {
-    title: "Rückerstattungsrichtlinie",
-    intro: "Unser Versprechen ist einfach: Egal wo du wohnst, du kannst es dir 14 Tage lang anders überlegen. Hier sind die Details und die zusätzlichen Rechte in deiner Region.",
+    title: "Rückerstattung & Widerruf",
+    intro: "Alle Verkäufe sind endgültig. Bei Meinungsänderung erstatten wir nicht, außer das Recht deines Landes gibt dir diesen Anspruch. Liegt ein Fehler bei uns, bist du immer geschützt.",
     sections: [
-      { heading: "14 Tage Bedenkzeit (für alle)", body: [
-        "Stickerbögen: Widerruf innerhalb von 14 Tagen nach Erhalt; Rücksendung unbenutzt innerhalb von 14 Tagen nach dem Widerruf.",
-        "Snail Mail Club: Widerruf innerhalb von 14 Tagen nach Zahlung; wir erstatten jeden noch nicht verschickten Monat. Innerhalb dieser 14 Tage erhaltene Umschläge können unbenutzt zurückgesendet werden; dann erstatten wir auch diesen Monat.",
+      { heading: "Alle Verkäufe sind endgültig", body: [
+        "Bei Meinungsänderung nehmen wir Stickerbögen oder Snail Mail Club Pakete nicht zurück und erstatten oder tauschen nicht. Bitte prüfe Artikel, Lieferland und Adresse vor der Zahlung.",
+        "Club-Pakete können nach der Zahlung nicht gegen Erstattung gekündigt werden. Sie verlängern sich nie automatisch.",
       ] },
-      { heading: "Club-Paket später beenden", body: [
-        "Auch nach 14 Tagen kannst du ein Club-Paket jederzeit beenden. Wir erstatten die noch nicht verschickten Monate (Paketpreis geteilt durch die Anzahl der Monate). Pakete verlängern sich nie automatisch.",
+      { heading: "Wann wir immer ersetzen oder erstatten", body: [
+        "Ein Artikel ist fehlerhaft, beim Versand beschädigt oder nicht das Bestellte: Melde dich innerhalb von 30 Tagen nach Erhalt, wenn möglich mit Foto.",
+        "Deine Sendung ist 30 Tage nach Versand (45 Tage außerhalb Kanadas und der USA) nicht angekommen, oder wir haben nicht innerhalb von 30 Tagen nach dem zugesagten Termin geliefert.",
+        "Wir können einen oder mehrere Monate deines Pakets nicht verschicken: Wir erstatten diese Monate.",
+        "In diesen Fällen senden wir Ersatz oder erstatten vollständig inklusive Porto innerhalb von 15 Tagen über dein ursprüngliches Zahlungsmittel. Deine gesetzlichen Gewährleistungsrechte bleiben unberührt.",
       ] },
-      { heading: "So widerrufst du", body: [
-        "Nutze den Button „Vertrag hier widerrufen“ unten auf jeder Seite oder schreib an " + BUSINESS.email + " mit Name und Bestellnummer. Ein Grund ist nicht nötig. Wir bestätigen den Eingang per E-Mail.",
-      ] },
-      { heading: "So wird erstattet", body: [
-        "Wir erstatten innerhalb von 14 Tagen nach deinem Widerruf über dein ursprüngliches Zahlungsmittel, einschließlich des bezahlten Standardportos. Bei Rücksendungen können wir warten, bis die Ware ankommt oder du den Versand nachweist. Keine Bearbeitungsgebühr.",
-        "Die Rücksendekosten für nicht gewünschte Artikel trägst du, außer in der Türkei oder wenn der Artikel fehlerhaft oder falsch war.",
-      ] },
-      { heading: "Fehlerhaft, beschädigt, falsch oder verloren", body: [
-        "Melde dich innerhalb von 30 Tagen nach Erhalt (oder erwarteter Lieferung), wenn möglich mit Foto. Wir ersetzen oder erstatten vollständig, inklusive Porto. Deine gesetzlichen Gewährleistungsrechte bleiben unberührt.",
-      ] },
-      { heading: "Kanada", body: [
-        "Wir sitzen in Quebec. Nach dem Quebecer Verbraucherschutzgesetz (Fernabsatzverträge) und ähnlichen Gesetzen anderer Provinzen kannst du zusätzlich stornieren, etwa wenn dir vorgeschriebene Informationen fehlten, du innerhalb von 15 Tagen keine Vertragskopie erhalten hast oder die Ware nicht innerhalb von 30 Tagen nach dem zugesagten Termin geliefert wurde.",
-      ] },
-      { heading: "USA", body: [
-        "Diese Richtlinie geht über das US-Recht hinaus. Können wir nicht rechtzeitig versenden, bieten wir dir die Stornierung mit schneller Erstattung an.",
+      { heading: "Kontakt", body: [
+        "Schreib an " + BUSINESS.email + (BUSINESS.phone ? " oder ruf an unter " + BUSINESS.phone : "") + " mit Name und Bestellnummer, oder nutze den Button „Vertrag hier widerrufen“ unten auf jeder Seite.",
       ] },
       { heading: "Europäische Union – Widerrufsbelehrung", body: [
-        "Widerrufsrecht: Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem du oder ein von dir benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen hast bzw. hat; bei Club-Paketen ab dem Tag des Vertragsschlusses.",
+        "Widerrufsrecht: Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen; unsere Regel „Alle Verkäufe sind endgültig“ gilt für dich nicht. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag, an dem du oder ein von dir benannter Dritter, der nicht der Beförderer ist, die Waren in Besitz genommen hast bzw. hat; bei Club-Paketen ab dem Tag des Vertragsschlusses.",
         "Um dein Widerrufsrecht auszuüben, musst du uns (" + BUSINESS.tradeName + ", " + BUSINESS.sellerName + ", " + (BUSINESS.mailingAddress || "Postanschrift auf Anfrage") + ", Tel. " + (BUSINESS.phone || "–") + ", " + BUSINESS.email + ") mittels einer eindeutigen Erklärung (z. B. per E-Mail oder über den Widerrufs-Button) über deinen Entschluss informieren. Zur Wahrung der Frist reicht die rechtzeitige Absendung.",
         "Folgen des Widerrufs: Wir zahlen dir alle Zahlungen, einschließlich der Standard-Lieferkosten, unverzüglich und spätestens binnen vierzehn Tagen ab Eingang deines Widerrufs zurück, über dasselbe Zahlungsmittel. Wir können die Rückzahlung verweigern, bis wir die Waren zurückerhalten haben oder du den Nachweis der Rücksendung erbracht hast. Du trägst die unmittelbaren Kosten der Rücksendung. Für einen Wertverlust musst du nur aufkommen, wenn er auf einen zur Prüfung nicht notwendigen Umgang zurückzuführen ist.",
         "Muster-Widerrufsformular: An " + BUSINESS.tradeName + ", " + BUSINESS.email + ": Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über den Kauf der folgenden Waren: … Bestellt am / erhalten am: … Name: … Anschrift: … Datum: …",
+      ] },
+      { heading: "Kanada, USA, Australien", body: [
+        "Dort sind alle Verkäufe bei Meinungsänderung endgültig. Unberührt bleiben die zwingenden Rechte nach dem Quebecer Verbraucherschutzgesetz, der FTC-Regel zu Lieferverzögerungen in den USA und dem Australian Consumer Law.",
       ] },
       { heading: "Türkei", body: [
         "Nach türkischem Recht (Gesetz Nr. 6502) hast du 14 Tage Widerrufsrecht ohne Angabe von Gründen. Wir erstatten vollständig innerhalb von 14 Tagen und übernehmen die Rücksendekosten.",

@@ -434,7 +434,7 @@
     "regionInvalid": "Choose a province or state.",
     "acceptTerms": "I have read and accept the",
     "termsLink": "Terms & Conditions",
-    "acceptTermsEnd": "including the 14-day cancellation policy.",
+    "acceptTermsEnd": "and the Refund Policy (all sales are final, except where the law says otherwise).",
     "acceptRequired": "Please accept the Terms of Sale to continue.",
     "dutiesNote": "Prices are in CAD. Orders outside Canada may be charged import taxes or duties by the destination country on delivery."
   },
@@ -695,7 +695,7 @@
   },
   "withdraw": {
     "title": "Withdraw from contract",
-    "intro": "Changed your mind? You can cancel within 14 days, and stop a Club package at any time for the months not mailed yet. Fill in this form and we will confirm by email.",
+    "intro": "Customers in the European Union and Türkiye can withdraw within 14 days, as the law allows. Elsewhere all sales are final, except for faulty, damaged, wrong or lost items. Fill in this form and we will confirm by email.",
     "name": "Full name",
     "email": "Email for the confirmation",
     "orderNumber": "Order number",
@@ -703,7 +703,7 @@
     "itemsHint": "Leave empty to cancel the whole order, or list the items",
     "confirm": "Confirm withdrawal",
     "sentTitle": "We received your withdrawal",
-    "sentBody": "We will refund you within 14 days to your original payment method. A confirmation is on its way to your email.",
+    "sentBody": "We will review it under our Refund Policy and reply within 5 business days. If you are entitled to a refund, we refund within 14 days to your original payment method. A confirmation is on its way to your email.",
     "receivedAt": "Received",
     "noEmail": "We could not send the confirmation email right now. Please keep this page, or email us:",
     "invalid": "Please fill in your name, a valid email and your order number.",

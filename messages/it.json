@@ -434,7 +434,7 @@
     "regionInvalid": "Scegli una provincia o uno stato.",
     "acceptTerms": "Ho letto e accetto le",
     "termsLink": "Termini e condizioni",
-    "acceptTermsEnd": "incluso il diritto di recesso di 14 giorni.",
+    "acceptTermsEnd": "e la Politica di rimborso (vendite definitive, salvo quanto previsto dalla legge).",
     "acceptRequired": "Accetta le Condizioni di vendita per continuare.",
     "dutiesNote": "Prezzi in CAD. Fuori dal Canada il paese di destinazione può applicare tasse o dazi all'importazione alla consegna."
   },
@@ -695,7 +695,7 @@
   },
   "withdraw": {
     "title": "Recesso dal contratto",
-    "intro": "Hai cambiato idea? Puoi annullare entro 14 giorni e interrompere un pacchetto del Club in qualsiasi momento per i mesi non ancora spediti. Compila il modulo e ti confermeremo via email.",
+    "intro": "I clienti dell'Unione europea e della Turchia possono recedere entro 14 giorni, come prevede la legge. Altrove tutte le vendite sono definitive, salvo articoli difettosi, danneggiati, errati o smarriti. Compila il modulo e ti confermeremo via email.",
     "name": "Nome e cognome",
     "email": "Email per la conferma",
     "orderNumber": "Numero d'ordine",
@@ -703,7 +703,7 @@
     "itemsHint": "Lascia vuoto per l'intero ordine o indica gli articoli",
     "confirm": "Conferma il recesso",
     "sentTitle": "Abbiamo ricevuto il tuo recesso",
-    "sentBody": "Ti rimborseremo entro 14 giorni sul metodo di pagamento originale. La conferma sta arrivando via email.",
+    "sentBody": "Lo esamineremo secondo la nostra Politica di rimborso e risponderemo entro 5 giorni lavorativi. Se hai diritto a un rimborso, lo effettueremo entro 14 giorni sul metodo di pagamento originale. La conferma sta arrivando via email.",
     "receivedAt": "Ricevuto il",
     "noEmail": "Non è stato possibile inviare l'email di conferma. Conserva questa pagina o scrivici:",
     "invalid": "Inserisci nome, un'email valida e il numero d'ordine.",

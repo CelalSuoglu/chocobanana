@@ -27,9 +27,10 @@ function agreementLines(invoice: InvoiceDocument): string[] {
   return [
     `Order date: ${formatInvoiceDate(invoice.createdAt)}`,
     ...(address ? [`Delivery address: ${address}`] : []),
-    "Prices are in Canadian dollars (CAD). Delivery times and our 14-day cancellation policy are in our Terms of Sale:",
+    "Prices are in Canadian dollars (CAD). All sales are final except where the law says otherwise; delivery times and refund rules are in our Terms & Conditions and Refund Policy:",
     `${base}/en/terms`,
-    `To cancel, use: ${base}/en/withdraw`,
+    `Refund Policy: ${base}/en/refund-policy`,
+    `EU and Türkiye customers can withdraw within 14 days: ${base}/en/withdraw`,
     "",
     "Seller:",
     ...businessContactLines(),

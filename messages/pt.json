@@ -434,7 +434,7 @@
     "regionInvalid": "Escolhe uma província ou estado.",
     "acceptTerms": "Li e aceito as",
     "termsLink": "Termos e condições",
-    "acceptTermsEnd": "incluindo o direito de cancelamento de 14 dias.",
+    "acceptTermsEnd": "e a Política de reembolso (vendas finais, salvo disposição legal em contrário).",
     "acceptRequired": "Aceite as Condições de venda para continuar.",
     "dutiesNote": "Preços em CAD. Fora do Canadá, o país de destino pode cobrar impostos ou taxas de importação na entrega."
   },
@@ -695,7 +695,7 @@
   },
   "withdraw": {
     "title": "Desistir do contrato",
-    "intro": "Mudou de ideia? Você pode cancelar em 14 dias e interromper um pacote do Clube a qualquer momento pelos meses ainda não enviados. Preencha o formulário e confirmaremos por e-mail.",
+    "intro": "Clientes da União Europeia e da Turquia podem desistir em 14 dias, como a lei permite. Nos demais casos todas as vendas são finais, exceto itens com defeito, danificados, errados ou perdidos. Preencha o formulário e confirmaremos por e-mail.",
     "name": "Nome completo",
     "email": "E-mail para a confirmação",
     "orderNumber": "Número do pedido",
@@ -703,7 +703,7 @@
     "itemsHint": "Deixe vazio para o pedido inteiro ou indique os itens",
     "confirm": "Confirmar desistência",
     "sentTitle": "Recebemos a sua desistência",
-    "sentBody": "Reembolsaremos em até 14 dias no método de pagamento original. A confirmação está a caminho do seu e-mail.",
+    "sentBody": "Vamos analisar conforme nossa Política de reembolso e responder em até 5 dias úteis. Se tiver direito a reembolso, ele será feito em até 14 dias no método de pagamento original. A confirmação está a caminho do seu e-mail.",
     "receivedAt": "Recebido em",
     "noEmail": "Não foi possível enviar o e-mail de confirmação. Guarde esta página ou escreva para:",
     "invalid": "Informe seu nome, um e-mail válido e o número do pedido.",

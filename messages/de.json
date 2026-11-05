@@ -434,7 +434,7 @@
     "regionInvalid": "Wähle ein Bundesland oder einen Staat.",
     "acceptTerms": "Ich habe die",
     "termsLink": "AGB",
-    "acceptTermsEnd": "einschließlich des 14-tägigen Widerrufsrechts gelesen und akzeptiere sie.",
+    "acceptTermsEnd": "sowie die Rückerstattungsrichtlinie (Verkäufe endgültig, soweit gesetzlich zulässig) gelesen und akzeptiere sie.",
     "acceptRequired": "Bitte akzeptiere die Verkaufsbedingungen, um fortzufahren.",
     "dutiesNote": "Preise in CAD. Außerhalb Kanadas kann das Zielland bei Lieferung Einfuhrabgaben oder Zölle erheben."
   },
@@ -695,7 +695,7 @@
   },
   "withdraw": {
     "title": "Vertrag widerrufen",
-    "intro": "Meinung geändert? Du kannst innerhalb von 14 Tagen widerrufen und ein Club-Paket jederzeit für die noch nicht verschickten Monate beenden. Fülle das Formular aus, wir bestätigen per E-Mail.",
+    "intro": "Kundinnen und Kunden in der EU und der Türkei können gesetzlich innerhalb von 14 Tagen widerrufen. Sonst sind alle Verkäufe endgültig, außer bei fehlerhaften, beschädigten, falschen oder verlorenen Artikeln. Fülle das Formular aus, wir bestätigen per E-Mail.",
     "name": "Vollständiger Name",
     "email": "E-Mail für die Bestätigung",
     "orderNumber": "Bestellnummer",
@@ -703,7 +703,7 @@
     "itemsHint": "Leer lassen für die ganze Bestellung oder Artikel angeben",
     "confirm": "Widerruf bestätigen",
     "sentTitle": "Wir haben deinen Widerruf erhalten",
-    "sentBody": "Wir erstatten innerhalb von 14 Tagen über dein ursprüngliches Zahlungsmittel. Eine Bestätigung ist per E-Mail unterwegs.",
+    "sentBody": "Wir prüfen ihn gemäß unserer Rückerstattungsrichtlinie und antworten innerhalb von 5 Werktagen. Besteht ein Anspruch, erstatten wir innerhalb von 14 Tagen über dein ursprüngliches Zahlungsmittel. Eine Bestätigung ist per E-Mail unterwegs.",
     "receivedAt": "Eingegangen am",
     "noEmail": "Die Bestätigungs-E-Mail konnte gerade nicht gesendet werden. Bitte speichere diese Seite oder schreib uns:",
     "invalid": "Bitte gib deinen Namen, eine gültige E-Mail und deine Bestellnummer an.",

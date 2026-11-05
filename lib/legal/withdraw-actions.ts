@@ -89,7 +89,7 @@ export async function submitWithdrawal(input: {
       const text = [
         `Hi ${name},`,
         "",
-        "We received your withdrawal (cancellation) notice. This email confirms receipt; we will now process it under our Terms of Sale and refund you within 14 days.",
+        "We received your withdrawal (cancellation) notice. This email confirms receipt; we will review it under our Refund Policy and reply within 5 business days. If you are entitled to a refund, we refund within 14 days.",
         "",
         summary,
         "",
@@ -97,7 +97,7 @@ export async function submitWithdrawal(input: {
       ].join("\n");
       const html = `<div style="font-family:Georgia,serif;color:#4B281B;line-height:1.6">
 <p>Hi ${escapeHtml(name)},</p>
-<p>We received your withdrawal (cancellation) notice. This email confirms receipt; we will now process it under our Terms of Sale and refund you within 14 days.</p>
+<p>We received your withdrawal (cancellation) notice. This email confirms receipt; we will review it under our Refund Policy and reply within 5 business days. If you are entitled to a refund, we refund within 14 days.</p>
 <p>${summary.split("\n").map(escapeHtml).join("<br>")}</p>
 <p>${escapeHtml(BUSINESS.tradeName)} — ${escapeHtml(BUSINESS.email)}</p></div>`;
       await sendAppEmail({
