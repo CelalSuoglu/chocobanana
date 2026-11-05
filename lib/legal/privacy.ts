@@ -77,7 +77,7 @@ const en = (): PrivacyPolicy => ({
     {
       heading: "Where it is stored",
       body: [
-        "We are based in Canada and our service providers store data mainly in the United States and Canada. If you live in the EU, the UK or Türkiye, your information is therefore transferred outside your country. We rely on the safeguards these providers offer, such as the EU Standard Contractual Clauses and, where available, the EU–US Data Privacy Framework.",
+        "We are based in Canada and our service providers store data mainly in the United States and Canada. If you live in the EU, the UK or Türkiye, your information is therefore transferred outside your country. Before communicating personal information outside Quebec we assess whether it will be adequately protected, as Quebec's Law 25 requires, and we rely on the safeguards these providers offer, such as the EU Standard Contractual Clauses and, where available, the EU–US Data Privacy Framework.",
       ],
     },
     {
@@ -259,7 +259,7 @@ const fr = (): PrivacyPolicy => ({
     {
       heading: "Où ils sont conservés",
       body: [
-        "Nous sommes au Canada et nos fournisseurs conservent les données principalement aux États-Unis et au Canada. Vos renseignements peuvent donc être communiqués hors du Québec et hors de votre pays. Nous nous appuyons sur les garanties offertes par ces fournisseurs, comme les clauses contractuelles types de l'UE et, lorsqu'il est disponible, le cadre de protection des données UE–États-Unis.",
+        "Nous sommes au Canada et nos fournisseurs conservent les données principalement aux États-Unis et au Canada. Vos renseignements peuvent donc être communiqués hors du Québec et hors de votre pays. Avant toute communication hors du Québec, nous évaluons si les renseignements bénéficieront d'une protection adéquate, comme l'exige la Loi 25, et nous nous appuyons sur les garanties offertes par ces fournisseurs, comme les clauses contractuelles types de l'UE et, lorsqu'il est disponible, le cadre de protection des données UE–États-Unis.",
       ],
     },
     {

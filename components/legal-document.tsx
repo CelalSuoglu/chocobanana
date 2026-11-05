@@ -2,6 +2,7 @@ type LegalSection = { heading: string; body: string[] };
 
 /** Shared layout for Terms of Sale and the privacy policy. */
 export function LegalDocument({
+  path,
   lang,
   title,
   updated,
@@ -9,6 +10,8 @@ export function LegalDocument({
   sections,
   children,
 }: {
+  /** Page path without locale, e.g. "/terms". Used for the French/English links. */
+  path?: string;
   lang: string;
   title: string;
   updated: string;
@@ -21,6 +24,13 @@ export function LegalDocument({
       <article className="mx-auto max-w-2xl">
         <h1 className="page-title">{title}</h1>
         <p className="mt-2 text-xs text-chocolate-soft">{updated}</p>
+        {path ? (
+          <p className="mt-2 text-xs text-chocolate-soft">
+            <a href={`/fr${path}`} lang="fr" className="underline underline-offset-2">Version française</a>
+            {" · "}
+            <a href={`/en${path}`} lang="en" className="underline underline-offset-2">English version</a>
+          </p>
+        ) : null}
         <p className="mt-6 text-sm leading-relaxed text-chocolate-soft">{intro}</p>
         {children}
         {sections.map((section) => (

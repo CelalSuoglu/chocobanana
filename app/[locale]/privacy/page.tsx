@@ -24,6 +24,7 @@ export default async function PrivacyPage({
   const policy = getPrivacyPolicy(locale);
   return (
     <LegalDocument
+      path="/privacy"
       lang={policy.lang}
       title={policy.title}
       updated={policy.updated}

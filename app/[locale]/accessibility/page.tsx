@@ -24,6 +24,7 @@ export default async function Page({
   const doc = getAccessibilityStatement(locale);
   return (
     <LegalDocument
+      path="/accessibility"
       lang={doc.lang}
       title={doc.title}
       updated={doc.updated}

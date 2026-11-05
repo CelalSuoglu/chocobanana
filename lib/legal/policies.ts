@@ -205,7 +205,7 @@ const refund: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Tell us within 30 days of receiving it (or of the expected delivery), with a photo if you can. We replace it or refund you in full, including postage. These rights are in addition to your legal warranties.",
       ] },
       { heading: "Canada", body: [
-        "You may also cancel under provincial law, for example if the required information was not given to you before you ordered (within 7 days of receiving your copy), if you did not receive a copy of the agreement within 15 days (within 30 days), or if goods were not delivered within 30 days of the promised date. If we do not refund within 15 days of such a cancellation, you can ask your credit card issuer to reverse the charge.",
+        "We are based in Quebec. Under the Quebec Consumer Protection Act (distance contracts) and similar laws in other provinces, you may also cancel if the required information was not given to you before you ordered (within 7 days of receiving your copy of the contract), if you did not receive a copy of the contract within 15 days (within 30 days), or if goods were not delivered within 30 days of the promised date. We refund within 15 days of such a cancellation; if we do not, you can ask your credit card issuer to reverse the charge.",
       ] },
       { heading: "United States", body: [
         "This policy gives you more than US law requires. If we cannot ship on time we will offer you the choice to cancel for a prompt refund. You can also dispute a charge with your card issuer under the Fair Credit Billing Act.",
@@ -241,7 +241,7 @@ const refund: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Teslimden (veya beklenen teslimattan) sonraki 30 gün içinde, mümkünse fotoğrafla bildir. Yenisini göndeririz veya posta dahil tamamını iade ederiz. Bu hakların yasal garantilerine ektir.",
       ] },
       { heading: "Kanada", body: [
-        "Eyalet yasaları gereği de iptal edebilirsin: örneğin sipariş öncesinde gerekli bilgiler verilmediyse (kopyanı aldıktan sonraki 7 gün içinde), sözleşme kopyası 15 gün içinde gönderilmediyse (30 gün içinde) veya ürün söz verilen tarihten sonraki 30 gün içinde teslim edilmediyse. Böyle bir iptalden sonra 15 gün içinde iade etmezsek kart şirketinden ödemenin geri alınmasını isteyebilirsin.",
+        "Quebec merkezliyiz. Quebec Tüketiciyi Koruma Yasası (mesafeli sözleşmeler) ve diğer eyaletlerin benzer yasaları gereği de iptal edebilirsin: örneğin sipariş öncesinde gerekli bilgiler verilmediyse (kopyanı aldıktan sonraki 7 gün içinde), sözleşme kopyası 15 gün içinde gönderilmediyse (30 gün içinde) veya ürün söz verilen tarihten sonraki 30 gün içinde teslim edilmediyse. Böyle bir iptalden sonra 15 gün içinde iade etmezsek kart şirketinden ödemenin geri alınmasını isteyebilirsin.",
       ] },
       { heading: "ABD", body: [
         "Bu politika ABD yasasının istediğinden fazlasını verir. Zamanında gönderemezsek iptal edip hızlıca iade alma seçeneği sunarız. Ayrıca kart şirketine itiraz hakkın vardır.",
@@ -313,7 +313,7 @@ const refund: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Melde dich innerhalb von 30 Tagen nach Erhalt (oder erwarteter Lieferung), wenn möglich mit Foto. Wir ersetzen oder erstatten vollständig, inklusive Porto. Deine gesetzlichen Gewährleistungsrechte bleiben unberührt.",
       ] },
       { heading: "Kanada", body: [
-        "Nach provinziellem Recht kannst du zusätzlich stornieren, etwa wenn dir vorgeschriebene Informationen fehlten, du innerhalb von 15 Tagen keine Vertragskopie erhalten hast oder die Ware nicht innerhalb von 30 Tagen nach dem zugesagten Termin geliefert wurde.",
+        "Wir sitzen in Quebec. Nach dem Quebecer Verbraucherschutzgesetz (Fernabsatzverträge) und ähnlichen Gesetzen anderer Provinzen kannst du zusätzlich stornieren, etwa wenn dir vorgeschriebene Informationen fehlten, du innerhalb von 15 Tagen keine Vertragskopie erhalten hast oder die Ware nicht innerhalb von 30 Tagen nach dem zugesagten Termin geliefert wurde.",
       ] },
       { heading: "USA", body: [
         "Diese Richtlinie geht über das US-Recht hinaus. Können wir nicht rechtzeitig versenden, bieten wir dir die Stornierung mit schneller Erstattung an.",
@@ -354,7 +354,7 @@ const accessibility: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "We reply to accessibility feedback within 5 business days.",
       ] },
       { heading: "Laws we follow", body: [
-        "Canada: the Accessibility for Ontarians with Disabilities Act (AODA) customer service standard and Quebec accessibility expectations. USA: we aim for an accessible experience consistent with the Americans with Disabilities Act. EU: the European Accessibility Act principles. Türkiye: we welcome accessibility feedback in Turkish.",
+        "Canada: we are based in Quebec and follow the spirit of the Accessible Canada Act and Quebec's accessibility principles; Ontario customers are served in line with the AODA customer service standard. USA: we aim for an accessible experience consistent with the Americans with Disabilities Act. EU: the European Accessibility Act principles. Türkiye: we welcome accessibility feedback in Turkish.",
       ] },
     ],
   },
@@ -376,7 +376,7 @@ const accessibility: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Erişilebilirlik geri bildirimlerine 5 iş günü içinde yanıt veririz.",
       ] },
       { heading: "Uyduğumuz kurallar", body: [
-        "Kanada: Ontario AODA müşteri hizmetleri standardı. ABD: ADA ile uyumlu erişilebilir bir deneyim hedefliyoruz. AB: Avrupa Erişilebilirlik Yasası ilkeleri. Türkiye: Türkçe erişilebilirlik geri bildirimlerini memnuniyetle alırız.",
+        "Kanada: Quebec merkezliyiz; Kanada Erişilebilirlik Yasası ve Quebec ilkelerine, Ontario'daki müşteriler için AODA müşteri hizmetleri standardına uygun davranırız. ABD: ADA ile uyumlu erişilebilir bir deneyim hedefliyoruz. AB: Avrupa Erişilebilirlik Yasası ilkeleri. Türkiye: Türkçe erişilebilirlik geri bildirimlerini memnuniyetle alırız.",
       ] },
     ],
   },
@@ -398,7 +398,7 @@ const accessibility: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Nous répondons sous 5 jours ouvrables.",
       ] },
       { heading: "Cadre applicable", body: [
-        "Canada : norme de service à la clientèle de la LAPHO (Ontario) et attentes québécoises en matière d'accessibilité. États-Unis : expérience accessible conforme à l'esprit de l'ADA. UE : principes de l'Acte européen sur l'accessibilité.",
+        "Canada : nous sommes établis au Québec et suivons l'esprit de la Loi canadienne sur l'accessibilité et les principes québécois d'accessibilité ; la clientèle ontarienne est servie selon la norme de la LAPHO. États-Unis : expérience accessible conforme à l'esprit de l'ADA. UE : principes de l'Acte européen sur l'accessibilité.",
       ] },
     ],
   },

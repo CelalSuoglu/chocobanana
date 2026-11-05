@@ -2,7 +2,7 @@
  * Seller identity shown wherever the law asks for it: footer, contact page,
  * Terms of Sale, privacy policy, order emails and marketing emails.
  *
- * Ontario/Canadian consumer law, the EU and Turkey require the seller's name,
+ * Quebec/Canadian consumer law, the EU and Turkey require the seller's name,
  * a street or mailing address and a telephone number before a consumer buys.
  * Fill `mailingAddress` and `phone` before relying on the site being complete.
  */
@@ -16,7 +16,9 @@ export const BUSINESS = {
   phone: "+1 437 255 7464",
   email: "thechocobananaclub@gmail.com",
   country: "Canada",
-  governingLaw: "Ontario, Canada",
+  governingLaw: "Quebec, Canada",
+  /** Seller is based in Montreal, Quebec. */
+  province: "Quebec",
   /** Person accountable for personal information (PIPEDA / Quebec Law 25). */
   privacyOfficer: "Didem Keskin",
   termsVersion: "2026-11-05",

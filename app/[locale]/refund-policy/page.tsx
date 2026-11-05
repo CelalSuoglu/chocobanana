@@ -24,6 +24,7 @@ export default async function Page({
   const doc = getRefundPolicy(locale);
   return (
     <LegalDocument
+      path="/refund-policy"
       lang={doc.lang}
       title={doc.title}
       updated={doc.updated}

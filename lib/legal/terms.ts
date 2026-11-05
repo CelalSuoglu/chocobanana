@@ -1,6 +1,6 @@
 /**
  * Terms of Sale, including shipping, cancellation and refunds.
- * Written to meet Ontario/Canadian consumer law, the EU Consumer Rights
+ * Written to meet Quebec/Canadian consumer law, the EU Consumer Rights
  * Directive (14-day withdrawal) and Turkish distance-sales rules.
  * Not legal advice: have a lawyer review before relying on it.
  * Locales without a translation show English.

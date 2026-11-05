@@ -24,6 +24,7 @@ export default async function Page({
   const doc = getShippingPolicy(locale);
   return (
     <LegalDocument
+      path="/shipping"
       lang={doc.lang}
       title={doc.title}
       updated={doc.updated}

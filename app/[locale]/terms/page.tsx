@@ -24,6 +24,7 @@ export default async function TermsPage({
   const terms = getTerms(locale);
   return (
     <LegalDocument
+      path="/terms"
       lang={terms.lang}
       title={terms.title}
       updated={terms.updated}
