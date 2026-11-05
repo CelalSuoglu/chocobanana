@@ -79,7 +79,8 @@ const stationeryProducts: CatalogProduct[] = [
     amountCadCents: 1800,
     currency: baseCurrency,
     imageSrc: "/logo.jpg",
-    purchasable: true,
+    // Placeholder goods (no real photo or final price): hidden until real.
+    purchasable: false,
     cartEligible: true,
     family: "stationery",
   },
@@ -92,7 +93,8 @@ const stationeryProducts: CatalogProduct[] = [
     amountCadCents: 2200,
     currency: baseCurrency,
     imageSrc: "/logo.jpg",
-    purchasable: true,
+    // Placeholder goods (no real photo or final price): hidden until real.
+    purchasable: false,
     cartEligible: true,
     family: "stationery",
   },
@@ -105,7 +107,8 @@ const stationeryProducts: CatalogProduct[] = [
     amountCadCents: 1000,
     currency: baseCurrency,
     imageSrc: "/logo.jpg",
-    purchasable: true,
+    // Placeholder goods (no real photo or final price): hidden until real.
+    purchasable: false,
     cartEligible: true,
     family: "stationery",
   },

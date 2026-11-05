@@ -100,6 +100,9 @@ export default async function StickerSheetsPage({
                     <Link href={hrefFor(raw, `/sticker-sheets/${product.id}`)}>{product.nameEn}</Link>
                   </h2>
                   <p className="mt-1 font-serif text-lg text-chocolate">{priced.primary}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-chocolate-soft">
+                    {dict.stickerSheets.postageNote}
+                  </p>
                   <BuyButton
                     productId={product.id}
                     locale={raw}

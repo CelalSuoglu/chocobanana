@@ -130,7 +130,8 @@
     "decrease": "Diminuer la quantité",
     "increase": "Augmenter la quantité",
     "emptyCtaClub": "Voir le Snail Mail Club",
-    "emptyCtaInstagram": "Suivre sur Instagram"
+    "emptyCtaInstagram": "Suivre sur Instagram",
+    "postageNote": "Le prix affiché est pour le Canada. Au paiement, l'envoi ajoute CA$1 par planche vers les États-Unis et CA$2 par planche vers les autres pays."
   },
   "shop": {
     "eyebrow": "petits trésors",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "l'enveloppe du mois",
+    "insideTitle": "Ce que contient l'enveloppe de décembre",
+    "insideBody": "Chaque mois est un peu différent. Voici tout ce qui se glisse dans l'enveloppe de décembre.",
+    "insideAltEnvelope": "Une enveloppe ouverte débordant de cartes, d'une lettre et d'une planche de stickers du Mail Club de décembre",
+    "insideAltContents": "Tout le contenu de l'enveloppe du Mail Club de décembre, légendé"
   },
   "pastLetters": {
     "eyebrow": "dans les archives",

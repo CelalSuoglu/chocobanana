@@ -130,7 +130,8 @@
     "decrease": "Reducir cantidad",
     "increase": "Aumentar cantidad",
     "emptyCtaClub": "Ver el Snail Mail Club",
-    "emptyCtaInstagram": "Seguir en Instagram"
+    "emptyCtaInstagram": "Seguir en Instagram",
+    "postageNote": "El precio es para Canadá. Al pagar se suma CA$1 de envío por hoja a EE. UU. y CA$2 por hoja a otros países."
   },
   "shop": {
     "eyebrow": "pequeños tesoros",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "el sobre de este mes",
+    "insideTitle": "Qué trae el sobre de diciembre",
+    "insideBody": "Cada mes es un poco distinto. Aquí está todo lo que va en el sobre de diciembre.",
+    "insideAltEnvelope": "Un sobre abierto lleno de tarjetas, una carta y una hoja de stickers del Mail Club de diciembre",
+    "insideAltContents": "Todo lo que trae el sobre del Mail Club de diciembre, con etiquetas"
   },
   "pastLetters": {
     "eyebrow": "del archivo",

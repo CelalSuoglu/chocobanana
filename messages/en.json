@@ -130,7 +130,8 @@
     "decrease": "Decrease quantity",
     "increase": "Increase quantity",
     "emptyCtaClub": "See the Snail Mail Club",
-    "emptyCtaInstagram": "Follow on Instagram"
+    "emptyCtaInstagram": "Follow on Instagram",
+    "postageNote": "Price shown is for Canada. Postage adds CA$1 per sheet to the USA and CA$2 per sheet to other countries at checkout."
   },
   "shop": {
     "eyebrow": "little treasures",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "this month's envelope",
+    "insideTitle": "What's inside the December envelope",
+    "insideBody": "Every month is a little different. Here is everything tucked into December's envelope.",
+    "insideAltEnvelope": "An open envelope overflowing with December Mail Club cards, a letter and a sticker sheet",
+    "insideAltContents": "Every item in the December Mail Club envelope, labelled"
   },
   "pastLetters": {
     "eyebrow": "from the archive",

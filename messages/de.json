@@ -130,7 +130,8 @@
     "decrease": "Menge verringern",
     "increase": "Menge erhöhen",
     "emptyCtaClub": "Zum Snail Mail Club",
-    "emptyCtaInstagram": "Auf Instagram folgen"
+    "emptyCtaInstagram": "Auf Instagram folgen",
+    "postageNote": "Der Preis gilt für Kanada. An der Kasse kommen pro Bogen CA$1 Porto für die USA und CA$2 für andere Länder hinzu."
   },
   "shop": {
     "eyebrow": "kleine schätze",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "der Umschlag dieses Monats",
+    "insideTitle": "Das steckt im Dezember-Umschlag",
+    "insideBody": "Jeder Monat ist ein bisschen anders. Hier ist alles, was im Dezember-Umschlag steckt.",
+    "insideAltEnvelope": "Ein offener Umschlag voller Karten, einem Brief und einem Stickerbogen des Dezember Mail Club",
+    "insideAltContents": "Alle Teile im Dezember-Umschlag des Mail Club, beschriftet"
   },
   "pastLetters": {
     "eyebrow": "aus dem Archiv",

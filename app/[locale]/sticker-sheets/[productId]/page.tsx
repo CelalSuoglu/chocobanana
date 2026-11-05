@@ -90,6 +90,9 @@ export default async function StickerSheetProductPage({
           <p className="mt-3 text-sm leading-relaxed text-chocolate-soft">
             {dict.stickerSheets.intro}
           </p>
+          <p className="mt-3 text-sm leading-relaxed text-chocolate-soft">
+            {dict.stickerSheets.postageNote}
+          </p>
           <StickerAddToCart
             productId={product.id}
             label={dict.cart.addToCart}

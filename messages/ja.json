@@ -130,7 +130,8 @@
     "decrease": "数量を減らす",
     "increase": "数量を増やす",
     "emptyCtaClub": "Snail Mail Clubを見る",
-    "emptyCtaInstagram": "Instagramをフォロー"
+    "emptyCtaInstagram": "Instagramをフォロー",
+    "postageNote": "表示価格はカナダ向けです。お会計時に、アメリカへは1シートにつきCA$1、その他の国へは1シートにつきCA$2の送料が加算されます。"
   },
   "shop": {
     "eyebrow": "小さな宝物",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "今月の封筒",
+    "insideTitle": "12月の封筒の中身",
+    "insideBody": "毎月少しずつ違います。12月の封筒に入るものをすべてご紹介します。",
+    "insideAltEnvelope": "12月のメールクラブのカード、手紙、ステッカーシートがあふれる開いた封筒",
+    "insideAltContents": "12月のメールクラブの封筒に入るアイテム(ラベル付き)"
   },
   "pastLetters": {
     "eyebrow": "アーカイブより",

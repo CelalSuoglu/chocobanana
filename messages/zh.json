@@ -130,7 +130,8 @@
     "decrease": "减少数量",
     "increase": "增加数量",
     "emptyCtaClub": "了解 Snail Mail Club",
-    "emptyCtaInstagram": "关注 Instagram"
+    "emptyCtaInstagram": "关注 Instagram",
+    "postageNote": "显示价格适用于加拿大。结账时,寄往美国每张加收 CA$1 邮费,寄往其他国家每张加收 CA$2。"
   },
   "shop": {
     "eyebrow": "小小宝藏",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "本月的信封",
+    "insideTitle": "十二月信封里有什么",
+    "insideBody": "每个月都有些不同。这里是十二月信封里的全部内容。",
+    "insideAltEnvelope": "一个打开的信封,装满十二月 Mail Club 的卡片、一封信和一张贴纸",
+    "insideAltContents": "十二月 Mail Club 信封里的每件物品(附标签)"
   },
   "pastLetters": {
     "eyebrow": "来自档案",

@@ -28,12 +28,13 @@ export function isCheckoutShippingCountry(
 /** Free shipping on hosted Checkout. Address is still collected; no fee is charged. */
 export function getCheckoutShippingOptions(
   displayName = "Shipping",
+  amountCadCents = 0,
 ): Stripe.Checkout.SessionCreateParams.ShippingOption[] {
   return [
     {
       shipping_rate_data: {
         type: "fixed_amount",
-        fixed_amount: { amount: 0, currency: "cad" },
+        fixed_amount: { amount: Math.max(0, Math.round(amountCadCents)), currency: "cad" },
         display_name: displayName,
       },
     },

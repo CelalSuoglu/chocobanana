@@ -8,8 +8,10 @@ import {
 import {
   countriesForSnailMailRegion,
   snailMailPriceCadCents,
+  snailMailRegionForCountry,
   type SnailMailRegion,
 } from "@/lib/catalog/snail-mail";
+import { STICKER_POSTAGE_PER_SHEET_CAD_CENTS } from "@/lib/catalog/sticker-sheets";
 import type { Locale } from "@/lib/i18n/config";
 import { isLocale } from "@/lib/i18n/config";
 import { isDatabaseConfigured, requirePrisma } from "@/lib/db";
@@ -42,6 +44,20 @@ import {
   readWelcomeDiscount,
   releaseWelcomeReservation,
 } from "@/lib/welcome/discount";
+
+/** Per-sheet postage outside Canada, charged as the Checkout shipping line. */
+function stickerPostageCadCents(
+  lineProducts: { product: CatalogProduct; quantity: number }[],
+  country: string | null | undefined,
+): number {
+  const sheets = lineProducts
+    .filter((entry) => entry.product.family === "sticker")
+    .reduce((sum, entry) => sum + entry.quantity, 0);
+  if (sheets === 0) return 0;
+  // Unknown country: charge the international rate rather than undercharge.
+  const region = snailMailRegionForCountry(country) ?? "international";
+  return sheets * STICKER_POSTAGE_PER_SHEET_CAD_CENTS[region];
+}
 
 export type CreateCheckoutResult =
   | { ok: true; url: string; sessionId: string }
@@ -438,6 +454,7 @@ export async function createCheckoutSession(options: {
       : {
           shipping_options: getCheckoutShippingOptions(
             hasSticker ? "Sticker shipping" : "Shipping",
+            stickerPostageCadCents(lineProducts, delivery?.country),
           ),
         }),
     client_reference_id: options.userId ?? undefined,

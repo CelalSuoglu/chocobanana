@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import {
   Bebas_Neue,
   Caveat,
-  Cormorant_Garamond,
+  Gluten,
   Lora,
   Noto_Naskh_Arabic,
   Noto_Sans_JP,
@@ -20,10 +20,11 @@ import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { getNativeAppContext } from "@/lib/native/app-context";
 import "../globals.css";
 
-const serif = Cormorant_Garamond({
+/** Headings: soft, slightly curly retro serif (Didem's pick), in chocolate. */
+const serif = Gluten({
   variable: "--font-serif",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
 });
 
 const script = Caveat({
@@ -84,6 +85,19 @@ export async function generateMetadata({
       template: `%s · ${dict.meta.title}`,
     },
     description: dict.meta.description,
+    // Unique /icons/logo-* paths — Safari caches /favicon.ico aggressively.
+    icons: {
+      icon: [
+        { url: "/icons/logo-fav-32.png", sizes: "32x32", type: "image/png" },
+        { url: "/icons/logo-fav-16.png", sizes: "16x16", type: "image/png" },
+        { url: "/icons/logo-fav.ico", sizes: "48x48", type: "image/x-icon" },
+        { url: "/icons/logo-icon.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [
+        { url: "/icons/logo-apple.png", sizes: "180x180", type: "image/png" },
+      ],
+      shortcut: "/icons/logo-fav-32.png",
+    },
   };
 }
 

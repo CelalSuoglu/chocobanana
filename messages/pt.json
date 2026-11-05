@@ -130,7 +130,8 @@
     "decrease": "Diminuir quantidade",
     "increase": "Aumentar quantidade",
     "emptyCtaClub": "Ver o Snail Mail Club",
-    "emptyCtaInstagram": "Seguir no Instagram"
+    "emptyCtaInstagram": "Seguir no Instagram",
+    "postageNote": "O preço é para o Canadá. No pagamento, o envio acrescenta CA$1 por folha para os EUA e CA$2 por folha para outros países."
   },
   "shop": {
     "eyebrow": "pequenos tesouros",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "o envelope deste mês",
+    "insideTitle": "O que vem no envelope de dezembro",
+    "insideBody": "Cada mês é um pouco diferente. Aqui está tudo o que vai no envelope de dezembro.",
+    "insideAltEnvelope": "Um envelope aberto cheio de cartões, uma carta e uma folha de adesivos do Mail Club de dezembro",
+    "insideAltContents": "Tudo o que vem no envelope do Mail Club de dezembro, com legendas"
   },
   "pastLetters": {
     "eyebrow": "do arquivo",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BrandIllustration } from "@/components/brand-illustration";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { SnailMailPackagePicker } from "@/components/snail-mail-package-picker";
 import { isLocale } from "@/lib/i18n/config";
@@ -55,7 +55,15 @@ export default async function MailClubPage({
           <p className="kicker">{dict.mailClub.eyebrow}</p>
           <h1 className="page-title mt-2">{dict.mailClub.title}</h1>
           <p className="page-lead">{dict.mailClub.productLead}</p>
-          <BrandIllustration kind="envelope" className="mt-8 hidden aspect-[16/9] lg:block" />
+          <Image
+            src="/mail-club/december-envelope.jpg"
+            alt={dict.mailClub.insideAltEnvelope}
+            width={1080}
+            height={1350}
+            priority
+            sizes="(min-width: 1024px) 28rem, (min-width: 640px) 24rem, 90vw"
+            className="mx-auto mt-8 w-full max-w-sm rounded-[1.75rem] shadow-[0_18px_40px_-18px_rgba(75,40,27,0.45)] lg:mx-0 lg:max-w-md"
+          />
         </div>
 
         <aside className="lg:row-span-2">
@@ -69,7 +77,6 @@ export default async function MailClubPage({
               regionLabel: dict.mailClub.regionLabel,
               term1: dict.mailClub.term1,
               term3: dict.mailClub.term3,
-              term6: dict.mailClub.term6,
               term12: dict.mailClub.term12,
               regionCanada: dict.mailClub.regionCanada,
               regionUsa: dict.mailClub.regionUsa,
@@ -119,6 +126,24 @@ export default async function MailClubPage({
           </details>
         </div>
       </div>
+
+      <section className="mt-16 grid items-center gap-8 border-t border-line pt-12 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:gap-12">
+        <div>
+          <p className="kicker">{dict.mailClub.insideKicker}</p>
+          <h2 className="mt-2 font-serif text-3xl leading-tight text-chocolate md:text-4xl">
+            {dict.mailClub.insideTitle}
+          </h2>
+          <p className="body-copy mt-3">{dict.mailClub.insideBody}</p>
+        </div>
+        <Image
+          src="/mail-club/december-inside.jpg"
+          alt={dict.mailClub.insideAltContents}
+          width={1080}
+          height={1350}
+          sizes="(min-width: 768px) 55vw, 95vw"
+          className="mx-auto w-full max-w-xl rounded-[1.75rem] shadow-[0_18px_40px_-18px_rgba(75,40,27,0.45)]"
+        />
+      </section>
     </main>
   );
 }

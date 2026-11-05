@@ -130,7 +130,8 @@
     "decrease": "Diminuisci quantità",
     "increase": "Aumenta quantità",
     "emptyCtaClub": "Scopri lo Snail Mail Club",
-    "emptyCtaInstagram": "Seguici su Instagram"
+    "emptyCtaInstagram": "Seguici su Instagram",
+    "postageNote": "Il prezzo è per il Canada. Al pagamento la spedizione aggiunge CA$1 a foglio per gli USA e CA$2 a foglio per gli altri paesi."
   },
   "shop": {
     "eyebrow": "piccoli tesori",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "la busta di questo mese",
+    "insideTitle": "Cosa c'è nella busta di dicembre",
+    "insideBody": "Ogni mese è un po' diverso. Ecco tutto ciò che c'è nella busta di dicembre.",
+    "insideAltEnvelope": "Una busta aperta piena di cartoline, una lettera e un foglio di sticker del Mail Club di dicembre",
+    "insideAltContents": "Tutto il contenuto della busta del Mail Club di dicembre, con etichette"
   },
   "pastLetters": {
     "eyebrow": "dall'archivio",

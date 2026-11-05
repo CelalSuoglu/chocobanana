@@ -130,7 +130,8 @@
     "decrease": "Adedi azalt",
     "increase": "Adedi artır",
     "emptyCtaClub": "Snail Mail Club'a göz at",
-    "emptyCtaInstagram": "Instagram'da takip et"
+    "emptyCtaInstagram": "Instagram'da takip et",
+    "postageNote": "Gösterilen fiyat Kanada içindir. Ödeme sırasında ABD için sayfa başı CA$1, diğer ülkeler için sayfa başı CA$2 posta ücreti eklenir."
   },
   "shop": {
     "eyebrow": "küçük hazineler",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "bu ayın zarfı",
+    "insideTitle": "Aralık zarfında neler var",
+    "insideBody": "Her ay biraz farklı. Aralık zarfına giren her şey burada.",
+    "insideAltEnvelope": "Aralık Mail Club kartları, mektup ve sticker sayfasıyla dolu açık bir zarf",
+    "insideAltContents": "Aralık Mail Club zarfındaki her parça, etiketleriyle"
   },
   "pastLetters": {
     "eyebrow": "arşivden",

@@ -12,4 +12,23 @@ export type StickerSheetListing = {
   imageSrc: string;
 };
 
-export const stickerSheetListings: readonly StickerSheetListing[] = [];
+export const stickerSheetListings: readonly StickerSheetListing[] = [
+  {
+    id: "xmas-mug-sticker-sheet",
+    nameEn: "Xmas Mug Sticker Sheet",
+    descriptionEn:
+      "Cozy holiday mugs, candy canes, bows and bells on one pink striped sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/xmas-mug-sticker-sheet.jpg",
+  },
+];
+
+/**
+ * Extra postage per sticker sheet outside Canada (CAD cents), added as the
+ * Checkout shipping line: Canada CA$6, USA CA$7, elsewhere CA$8 per sheet.
+ */
+export const STICKER_POSTAGE_PER_SHEET_CAD_CENTS = {
+  canada: 0,
+  usa: 100,
+  international: 200,
+} as const;

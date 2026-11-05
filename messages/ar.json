@@ -130,7 +130,8 @@
     "decrease": "تقليل الكمية",
     "increase": "زيادة الكمية",
     "emptyCtaClub": "اكتشف Snail Mail Club",
-    "emptyCtaInstagram": "تابعنا على إنستغرام"
+    "emptyCtaInstagram": "تابعنا على إنستغرام",
+    "postageNote": "السعر المعروض لكندا. عند الدفع تُضاف أجرة بريد قدرها 1 دولار كندي لكل ورقة إلى الولايات المتحدة و2 دولار كندي لكل ورقة إلى الدول الأخرى."
   },
   "shop": {
     "eyebrow": "كنوز صغيرة",
@@ -300,7 +301,12 @@
       "Next send date",
       "Renewal, pause, and cancel rules",
       "Checkout opens when payments are turned on."
-    ]
+    ],
+    "insideKicker": "ظرف هذا الشهر",
+    "insideTitle": "ما الذي يحتويه ظرف ديسمبر",
+    "insideBody": "كل شهر مختلف قليلًا. هذا كل ما في ظرف ديسمبر.",
+    "insideAltEnvelope": "ظرف مفتوح مليء ببطاقات ورسالة وورقة ملصقات من نادي البريد لشهر ديسمبر",
+    "insideAltContents": "كل قطعة في ظرف نادي البريد لشهر ديسمبر مع أسمائها"
   },
   "pastLetters": {
     "eyebrow": "من الأرشيف",
