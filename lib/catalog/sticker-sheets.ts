@@ -19,7 +19,7 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     descriptionEn:
       "Cozy holiday mugs, candy canes, bows and bells on one pink striped sheet.",
     amountCadCents: 600,
-    imageSrc: "/stickers/xmas-mug-sticker-sheet.jpg",
+    imageSrc: "/stickers/xmas-mug-sticker-sheet-v2.jpg",
   },
   // Olivia Rodrigo and Tortured Poets sheets are off sale for now: they use
   // artist names, an album title and lyric lines (rights/trademark risk).
@@ -29,7 +29,7 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     descriptionEn:
       "To do, done, reminder and habit trackers to plan your week on a pink striped sheet.",
     amountCadCents: 600,
-    imageSrc: "/stickers/tiny-tasks-sticker-sheet.jpg",
+    imageSrc: "/stickers/tiny-tasks-sticker-sheet-v2.jpg",
   },
   {
     id: "starry-numbers-sticker-sheet",
@@ -37,7 +37,7 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     descriptionEn:
       "Pastel star numbers 0 to 9 with little symbols for dates and lists, on a sky blue sheet.",
     amountCadCents: 600,
-    imageSrc: "/stickers/starry-numbers-sticker-sheet.jpg",
+    imageSrc: "/stickers/starry-numbers-sticker-sheet-v2.jpg",
   },
 ];
 
