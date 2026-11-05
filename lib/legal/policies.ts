@@ -34,7 +34,7 @@ const shipping: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Snail Mail Club: envelopes are mailed during the first 10 days of each month. Orders paid by the 20th join that month's mailing; later orders start with the next month. One envelope per paid month.",
       ] },
       { heading: "How long it takes", body: [
-        "Usual delivery time after mailing: Canada 2–9 business days, United States 6–12 business days, Australia, France, Germany and Türkiye 10–25 business days. Postal delays can happen, especially in December.",
+        "Usual delivery time after mailing: Canada 2–9 business days, United States 10–20 days, Europe (France, Germany), Türkiye and Australia up to 1 month. Postal delays can happen, especially in December.",
       ] },
       { heading: "Shipping costs", body: [
         "Snail Mail Club prices include standard postage.",
@@ -72,7 +72,7 @@ const shipping: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Snail Mail Club: zarflar her ayın ilk 10 gününde postalanır. Ayın 20'sine kadar ödenen siparişler o ayın gönderimine katılır; sonrakiler bir sonraki aydan başlar. Ödenen her ay için bir zarf.",
       ] },
       { heading: "Ne kadar sürer", body: [
-        "Postalamadan sonra olağan süre: Kanada 2–9 iş günü, ABD 6–12 iş günü, Avustralya, Fransa, Almanya ve Türkiye 10–25 iş günü. Özellikle Aralık'ta gecikme olabilir.",
+        "Postalamadan sonra olağan süre: Kanada 2–9 iş günü, ABD 10–20 gün, Avrupa (Fransa, Almanya), Türkiye ve Avustralya 1 aya kadar. Özellikle Aralık'ta gecikme olabilir.",
       ] },
       { heading: "Gönderim ücreti", body: [
         "Snail Mail Club fiyatlarına standart posta dahildir.",
@@ -110,7 +110,7 @@ const shipping: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Snail Mail Club : les enveloppes sont postées pendant les 10 premiers jours du mois. Les commandes payées au plus tard le 20 rejoignent l'envoi du mois ; les suivantes commencent le mois suivant. Une enveloppe par mois payé.",
       ] },
       { heading: "Délais", body: [
-        "Délai habituel après l'envoi : Canada 2 à 9 jours ouvrables, États-Unis 6 à 12, Australie, France, Allemagne et Turquie 10 à 25. Des retards postaux sont possibles, surtout en décembre.",
+        "Délai habituel après l'envoi : Canada 2 à 9 jours ouvrables, États-Unis 10 à 20 jours, Europe (France, Allemagne), Turquie et Australie jusqu'à 1 mois. Des retards postaux sont possibles, surtout en décembre.",
       ] },
       { heading: "Frais de livraison", body: [
         "Les forfaits Snail Mail Club incluent l'affranchissement standard.",
@@ -148,7 +148,7 @@ const shipping: Record<Lang, Omit<LegalDoc, "lang" | "updated">> = {
         "Snail Mail Club: Umschläge gehen in den ersten 10 Tagen jedes Monats raus. Bis zum 20. bezahlte Bestellungen sind im selben Monat dabei; spätere beginnen im Folgemonat. Ein Umschlag pro bezahltem Monat.",
       ] },
       { heading: "Laufzeiten", body: [
-        "Übliche Laufzeit nach Versand: Kanada 2–9 Werktage, USA 6–12, Australien, Frankreich, Deutschland und Türkei 10–25. Postverzögerungen sind möglich, besonders im Dezember.",
+        "Übliche Laufzeit nach Versand: Kanada 2–9 Werktage, USA 10–20 Tage, Europa (Frankreich, Deutschland), Türkei und Australien bis zu 1 Monat. Postverzögerungen sind möglich, besonders im Dezember.",
       ] },
       { heading: "Versandkosten", body: [
         "Snail Mail Club Preise enthalten Standardporto.",

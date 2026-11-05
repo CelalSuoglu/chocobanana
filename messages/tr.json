@@ -660,7 +660,7 @@
     "postage": "Snail Mail Club fiyatlarına standart posta dahildir. Sticker sayfaları Kanada içinde ücretsiz; ABD için sayfa başı CA$1, diğer ülkeler için sayfa başı CA$2 eklenir.",
     "countries": "Kanada, ABD, Avustralya, Fransa, Almanya ve Türkiye'ye standart mektup postasıyla, genellikle takip numarasız gönderiyoruz.",
     "stickers": "Sticker sayfaları 5 iş günü içinde postalanır. Kulüp zarfları her ayın ilk 10 gününde postalanır; ayın 20'sine kadar ödenen siparişler o ayın gönderimine katılır.",
-    "timing": "Postalamadan sonra olağan süre: Kanada 2–9 iş günü, ABD 6–12, diğer ülkeler 10–25. 30 gün içinde (Kanada ve ABD dışında 45) ulaşmazsa veya hasarlı gelirse bize yaz; yenisini göndeririz ya da iade ederiz.",
+    "timing": "Postalamadan sonra olağan süre: Kanada 2–9 iş günü, ABD 10–20 gün, Avrupa, Türkiye ve Avustralya 1 aya kadar. 30 gün içinde (Kanada ve ABD dışında 45) ulaşmazsa veya hasarlı gelirse bize yaz; yenisini göndeririz ya da iade ederiz.",
     "duties": "Kanada dışında varış ülkesi teslimatta ithalat vergisi veya gümrük alabilir; bunu alıcı öder."
   },
   "app": {
