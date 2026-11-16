@@ -39,6 +39,14 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
     amountCadCents: 600,
     imageSrc: "/stickers/starry-numbers-sticker-sheet-v2.jpg",
   },
+  {
+    id: "grocery-run-sticker-pack",
+    nameEn: "Grocery Run Sticker Pack",
+    descriptionEn:
+      "A little grocery run for your journal, planner, or scrapbook! This 19-piece sticker pack includes 18 mini stickers of fruits, veggies and grocery favorites, plus 1 large shopping basket sticker. Fill your basket with avocados, bananas, milk, pasta and more.",
+    amountCadCents: 750,
+    imageSrc: "/stickers/grocery-run-sticker-pack.jpg",
+  },
 ];
 
 /**
