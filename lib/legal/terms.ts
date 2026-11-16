@@ -41,7 +41,7 @@ function en(): LegalDoc {
         heading: "What we sell",
         body: [
           "Sticker sheets: one printed sheet per item, sold once.",
-          "Snail Mail Club packages: you prepay for 1 month, 3 months or 1 year. We mail one envelope per paid month to the address you give at checkout. Contents change each month; photos show a sample month and the exact items can differ.",
+          "Snail Mail Club packages: you prepay for 1, 3, 6 or 12 months. We mail one envelope per paid month to the address you give at checkout. Contents change each month; photos show a sample month and the exact items can differ.",
           "Club packages do not renew and nothing is charged again automatically.",
           "Our products are paper goods for personal use and are not toys for young children.",
         ],
@@ -140,7 +140,7 @@ function tr(): LegalDoc {
         heading: "Ne satıyoruz",
         body: [
           "Sticker sayfaları: her ürün tek bir baskı sayfasıdır, bir kez satılır.",
-          "Snail Mail Club paketleri: 1 ay, 3 ay veya 1 yıl için peşin ödersin. Ödenen her ay için ödeme sırasında verdiğin adrese bir zarf göndeririz. İçerik her ay değişir; fotoğraflar örnek bir ayı gösterir, ürünler farklı olabilir.",
+          "Snail Mail Club paketleri: 1, 3, 6 veya 12 ay için peşin ödersin. Ödenen her ay için ödeme sırasında verdiğin adrese bir zarf göndeririz. İçerik her ay değişir; fotoğraflar örnek bir ayı gösterir, ürünler farklı olabilir.",
           "Kulüp paketleri yenilenmez ve otomatik olarak tekrar ücret alınmaz.",
           "Ürünlerimiz kişisel kullanım için kâğıt ürünlerdir, küçük çocuklar için oyuncak değildir.",
         ],
@@ -239,7 +239,7 @@ function fr(): LegalDoc {
         heading: "Ce que nous vendons",
         body: [
           "Planches de stickers : une planche imprimée par article, vendue une fois.",
-          "Forfaits Snail Mail Club : vous payez d'avance pour 1 mois, 3 mois ou 1 an. Nous postons une enveloppe par mois payé à l'adresse indiquée lors du paiement. Le contenu change chaque mois ; les photos montrent un mois exemple et les articles exacts peuvent varier.",
+          "Forfaits Snail Mail Club : vous payez d'avance pour 1, 3, 6 ou 12 mois. Nous postons une enveloppe par mois payé à l'adresse indiquée lors du paiement. Le contenu change chaque mois ; les photos montrent un mois exemple et les articles exacts peuvent varier.",
           "Les forfaits ne se renouvellent pas et aucun montant n'est prélevé automatiquement par la suite.",
           "Nos produits sont des articles en papier pour un usage personnel et ne sont pas des jouets pour jeunes enfants.",
         ],
@@ -338,7 +338,7 @@ function de(): LegalDoc {
         heading: "Was wir verkaufen",
         body: [
           "Stickerbögen: ein gedruckter Bogen pro Artikel, einmaliger Kauf.",
-          "Snail Mail Club Pakete: Du zahlst im Voraus für 1 Monat, 3 Monate oder 1 Jahr. Wir senden für jeden bezahlten Monat einen Umschlag an die beim Bezahlen angegebene Adresse. Der Inhalt wechselt jeden Monat; Fotos zeigen einen Beispielmonat, die genauen Teile können abweichen.",
+          "Snail Mail Club Pakete: Du zahlst im Voraus für 1, 3, 6 oder 12 Monate. Wir senden für jeden bezahlten Monat einen Umschlag an die beim Bezahlen angegebene Adresse. Der Inhalt wechselt jeden Monat; Fotos zeigen einen Beispielmonat, die genauen Teile können abweichen.",
           "Pakete verlängern sich nicht und es wird nichts automatisch erneut abgebucht.",
           "Unsere Produkte sind Papierwaren für den persönlichen Gebrauch und kein Spielzeug für kleine Kinder.",
         ],

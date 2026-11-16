@@ -76,6 +76,7 @@ export default async function MailClubPage({
               regionLabel: dict.mailClub.regionLabel,
               term1: dict.mailClub.term1,
               term3: dict.mailClub.term3,
+              term6: dict.mailClub.term6,
               term12: dict.mailClub.term12,
               regionCanada: dict.mailClub.regionCanada,
               regionUsa: dict.mailClub.regionUsa,

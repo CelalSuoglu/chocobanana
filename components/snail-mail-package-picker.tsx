@@ -23,6 +23,7 @@ type SnailMailPackagePickerProps = {
     regionLabel: string;
     term1: string;
     term3: string;
+    term6: string;
     term12: string;
     regionCanada: string;
     regionUsa: string;
@@ -43,6 +44,7 @@ type SnailMailPackagePickerProps = {
 const termLabels = {
   1: "term1",
   3: "term3",
+  6: "term6",
   12: "term12",
 } as const;
 
@@ -70,7 +72,7 @@ export function SnailMailPackagePicker({
     <div>
       <fieldset>
         <legend className="text-sm text-chocolate">{labels.termLabel}</legend>
-        <div className="mt-2 grid grid-cols-3 gap-2">
+        <div className="mt-2 grid grid-cols-2 gap-2">
           {SNAIL_MAIL_TERMS.map((option) => (
             <button
               key={option}

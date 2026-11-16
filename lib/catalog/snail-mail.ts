@@ -6,12 +6,12 @@ import { CHECKOUT_SHIPPING_COUNTRIES } from "@/lib/stripe/shipping";
  * One envelope is sent each month of the package.
  */
 export const SNAIL_MAIL_PRICE_CAD = {
-  canada: { 1: 12, 3: 34, 12: 130 },
-  usa: { 1: 13, 3: 37, 12: 140 },
-  international: { 1: 15, 3: 43, 12: 162 },
+  canada: { 1: 12, 3: 36, 6: 60, 12: 120 },
+  usa: { 1: 13, 3: 39, 6: 66, 12: 132 },
+  international: { 1: 15, 3: 45, 6: 78, 12: 156 },
 } as const;
 
-export const SNAIL_MAIL_TERMS = [1, 3, 12] as const;
+export const SNAIL_MAIL_TERMS = [1, 3, 6, 12] as const;
 export const SNAIL_MAIL_REGIONS = ["canada", "usa", "international"] as const;
 
 export type SnailMailTerm = (typeof SNAIL_MAIL_TERMS)[number];
@@ -54,7 +54,7 @@ export function snailMailProductId(
 export function parseSnailMailProductId(
   productId: string,
 ): { term: SnailMailTerm; region: SnailMailRegion } | null {
-  const match = /^snail-mail-(1|3|12)-(canada|usa|international)$/.exec(
+  const match = /^snail-mail-(1|3|6|12)-(canada|usa|international)$/.exec(
     productId,
   );
   if (!match) return null;
