@@ -10,6 +10,8 @@ export type StickerSheetListing = {
   /** CAD cents. Required before a sheet can be published. */
   amountCadCents: number;
   imageSrc: string;
+  /** Extra photos shown after imageSrc in the swipe gallery. */
+  moreImages?: string[];
 };
 
 export const stickerSheetListings: readonly StickerSheetListing[] = [
@@ -46,6 +48,16 @@ export const stickerSheetListings: readonly StickerSheetListing[] = [
       "A little grocery run for your journal, planner, or scrapbook! This 19-piece sticker pack includes 18 mini stickers of fruits, veggies and grocery favorites, plus 1 large shopping basket sticker. Fill your basket with avocados, bananas, milk, pasta and more.",
     amountCadCents: 750,
     imageSrc: "/stickers/grocery-run-sticker-pack.jpg",
+    moreImages: ["/stickers/grocery-run-sticker-pack-2.jpg"],
+  },
+  {
+    id: "little-bit-of-everything-sticker-sheet",
+    nameEn: "A Little Bit of Everything Sticker Sheet",
+    descriptionEn:
+      "Puzzle blocks, washi tape strips, scissors, an admit-one ticket, a cosy caterpillar, a colour cube and a \"keeping this forever\" rosette on a bright green sheet.",
+    amountCadCents: 600,
+    imageSrc: "/stickers/little-bit-of-everything-sticker-sheet.jpg",
+    moreImages: ["/stickers/little-bit-of-everything-sticker-sheet-2.jpg"],
   },
 ];
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductGallery } from "@/components/product-gallery";
 import { StickerAddToCart } from "@/components/sticker-add-to-cart";
 import {
   getCatalogProduct,
@@ -68,16 +68,10 @@ export default async function StickerSheetProductPage({
       </nav>
 
       <div className="mt-6 grid items-start gap-8 md:grid-cols-2">
-        <div className="store-card relative aspect-square overflow-hidden">
-          <Image
-            src={product.imageSrc}
-            alt={product.nameEn}
-            fill
-            priority
-            className="object-cover"
-            sizes="(min-width: 768px) 50vw, 100vw"
-          />
-        </div>
+        <ProductGallery
+          images={[product.imageSrc, ...(product.moreImages ?? [])]}
+          alt={product.nameEn}
+        />
         <div>
           <p className="text-xs uppercase tracking-[0.16em] text-chocolate-soft">
             {dict.cart.lineSticker}

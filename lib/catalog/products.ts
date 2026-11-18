@@ -46,6 +46,8 @@ export type CatalogProduct = {
   currency: typeof baseCurrency;
   /** Public image path under /public */
   imageSrc: string;
+  /** Extra photos for the product gallery. */
+  moreImages?: string[];
   /** Only for kind === "subscription" */
   interval?: "month";
   /** Offered in checkout when payments mode allows */
@@ -122,6 +124,7 @@ const stickerProducts: CatalogProduct[] = stickerSheetListings.map((sheet) => ({
   amountCadCents: sheet.amountCadCents,
   currency: baseCurrency,
   imageSrc: sheet.imageSrc,
+  moreImages: sheet.moreImages,
   purchasable: true,
   cartEligible: true,
   family: "sticker" as const,
